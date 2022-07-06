@@ -10,6 +10,15 @@ const Box = styled.div`
   left: 0px;
   top: 306.91px;
 `;
+const Button = styled.button`
+  position: absolute;
+  width: 380px;
+  height: 60px;
+  left: 23.86px;
+  top: 391.53px;
+  background: #ff7b72;
+  border-radius: 6px;
+`;
 const ShopMemberMyPage = () => {
   return (
     <div>
@@ -20,7 +29,7 @@ const ShopMemberMyPage = () => {
         <div>이미지 삽입</div>
       </div>
       <Box className="BottomPinkBackground">
-        <div className="WriteProposal">제안서 작성하기</div>
+        <Button>제안서 작성하기</Button>
         <div className="BottomProposal">
           <article>1</article>
           <article>2</article>
