@@ -15,7 +15,7 @@ const Welcome = styled.p`
   font-weight: 800;
   position: absolute;
   left: 10%;
-  top: 12%;
+  top: 10%;
 `;
 const CenterImg = styled.div`
   background: url(${LoginMainImg});
