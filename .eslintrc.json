@@ -12,7 +12,7 @@
 		"ecmaVersion": "latest",
 		"sourceType": "module"
 	},
-	"plugins": ["react"],
+	"plugins": ["react", "prettier"],
 	"rules": {
 		"linebreak-style": 0,
 		"no-array-constructor": "error",
