@@ -2,22 +2,32 @@
   background: url(../images/TopPinkBox.svg);
   width: 428px;
   height: 60px;
-  border: 1px solid black;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
 }
-/* TopBar에서 border을 빼면 틀이 깨져버리는데 어떻게 해결해야할지 모르겠음 */
 
 .TopLogo {
   background: url(../images/TopLogo.svg);
   width: 130.13px;
   height: 33px;
-  margin-left: 148.92px;
-  margin-top: 13.02px;
+  position: absolute;
+  left: 34.79%;
+  right: 34.8%;
+  top: 21.71%;
+  bottom: 23.29%;
 }
+
 .TopMenuBar {
   background: url(../images/TopMenuBar.svg);
   width: 20px;
   height: 21px;
   position: absolute;
-  left: 24px;
-  top: 21px;
+  position: absolute;
+  left: 5.61%;
+  right: 89.72%;
+  top: 35%;
+  bottom: 36.59%;
 }
