@@ -1,10 +1,11 @@
 import "./App.css";
 import TopBar from "./components/TopBar";
+import ShopMemberMyPage from "./pages/ShopMemberMyPage";
 
 function App() {
   return (
     <div className="App">
-      <TopBar></TopBar>
+      <ShopMemberMyPage></ShopMemberMyPage>
     </div>
   );
 }

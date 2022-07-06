@@ -1,5 +1,5 @@
 .TopBar {
-  background: url(../images/TopPinkBox.png);
+  background: url(../images/TopPinkBox.svg);
   width: 428px;
   height: 60px;
   border: 1px solid black;
@@ -7,14 +7,14 @@
 /* TopBar에서 border을 빼면 틀이 깨져버리는데 어떻게 해결해야할지 모르겠음 */
 
 .TopLogo {
-  background: url(../images/TopLogo.png);
+  background: url(../images/TopLogo.svg);
   width: 130.13px;
   height: 33px;
   margin-left: 148.92px;
   margin-top: 13.02px;
 }
 .TopMenuBar {
-  background: url(../images/TopMenuBar.png);
+  background: url(../images/TopMenuBar.svg);
   width: 20px;
   height: 21px;
   position: absolute;
