@@ -1,11 +1,11 @@
 import "./App.css";
 
-import ShopMypageStart from "./pages/ShopMyPageStart";
+import ShopInformationRegister from "./pages/ShopInformationRegister";
 
 function App() {
   return (
     <div className="App">
-      <ShopMypageStart />
+      <ShopInformationRegister />
     </div>
   );
 }
