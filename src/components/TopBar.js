@@ -39,7 +39,6 @@ const TopMenuBar = styled.div`
 const TopBar = () => {
   return (
     <div>
-      {" "}
       <TopBarPink>
         <TopLogo></TopLogo>
         <TopMenuBar></TopMenuBar>
