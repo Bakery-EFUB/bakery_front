@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import TopBar from '../components/TopBar';
 
+import SmallPinkButton from '../components/SmallPinkButton';
+import SmallWhiteButton from '../components/SmallWhiteButton';
 const Text1 = styled.p`
 	position: absolute;
 	/* width: 123.9px; */
@@ -89,57 +91,6 @@ const ImageBox = styled.div`
 	border-radius: 6px;
 `;
 
-const BackButton = styled.button`
-	background-color: white;
-	border: 2px solid var(--main-pink);
-	border-radius: 6px;
-	position: absolute;
-	width: 184px;
-	height: 60px;
-	left: 24px;
-	top: 806px;
-
-	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
-
-	color: var(--main-pink);
-
-	font-family: 'Apple SD Gothic Neo';
-	font-style: normal;
-	font-weight: 600;
-	font-size: 18px;
-	line-height: 22px;
-	text-align: center;
-	text-transform: uppercase;
-`;
-
-const NextButton = styled.button`
-	position: absolute;
-	width: 184px;
-	height: 60px;
-	left: 220px;
-	top: 806px;
-
-	/* main pink */
-
-	background: var(--main-pink);
-	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
-	border: none;
-	border-radius: 6px;
-
-	font-family: 'Apple SD Gothic Neo';
-	font-style: normal;
-	font-weight: 500;
-	font-size: 18px;
-	line-height: 22px;
-	/* identical to box height */
-
-	text-align: center;
-	text-transform: uppercase;
-
-	color: white;
-`;
-
 const Proposal6 = () => {
 	return (
 		<div>
@@ -149,8 +100,8 @@ const Proposal6 = () => {
 			<Text2>디자인 시안이 있다면 알려주세요.</Text2>
 			<Button>사진 업로드</Button>
 			<ImageBox />
-			<BackButton>이전</BackButton>
-			<NextButton>다음</NextButton>
+			<SmallWhiteButton>이전</SmallWhiteButton>
+			<SmallPinkButton>다음</SmallPinkButton>
 		</div>
 	);
 };
