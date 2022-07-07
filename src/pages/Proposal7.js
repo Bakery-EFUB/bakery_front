@@ -5,7 +5,7 @@ import TopBar from '../components/TopBar';
 import SmallWhiteButton from '../components/SmallWhiteButton';
 import SmallGrayButton from '../components/SmallGrayButton';
 
-import Calendar from '../components/Calendar';
+import CustomCalendar from '../components/CustomCalendar';
 
 const Text2 = styled.p`
 	font-family: 'Apple SD Gothic Neo';
@@ -85,7 +85,7 @@ const Proposal6 = () => {
 			{/* <Text1>제안서 작성하기</Text1> */}
 			<ProgessBar />
 			<Text2>픽업 날짜를 선택해주세요.</Text2>
-			<Calendar />
+			<CustomCalendar />
 			<SmallWhiteButton>이전</SmallWhiteButton>
 			<SmallGrayButton>완료</SmallGrayButton>
 		</div>
