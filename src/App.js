@@ -13,7 +13,7 @@ function App() {
 			<Routes>
 				<Route exact path="/loginhome" element={<LoginHome />} />
 				<Route exact path="/loading" element={<LoadingPage />} />
-				<Route exact path="/proposal" element={<Proposal6 />} />
+				<Route exact path="/proposal" element={<Proposal7 />} />
 				<Route exact path="/home" element={<MainHome />} />
 			</Routes>
 		</BrowserRouter>

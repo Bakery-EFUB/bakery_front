@@ -21,6 +21,8 @@ const Text2 = styled.p`
 	height: 26px;
 	left: 68px;
 	top: 264px;
+
+	margin: 0;
 `;
 
 const ProgessBar = styled.div`
@@ -78,7 +80,7 @@ const ImageBox = styled.div`
 	border-radius: 6px;
 `;
 
-const Proposal6 = () => {
+const Proposal7 = () => {
 	return (
 		<div>
 			<TopBar />
@@ -92,4 +94,4 @@ const Proposal6 = () => {
 	);
 };
 
-export default Proposal6;
+export default Proposal7;
