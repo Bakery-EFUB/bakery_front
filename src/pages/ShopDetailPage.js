@@ -5,6 +5,8 @@ import PageTitle from "../components/PageTitle";
 import mainImg from "../images/TempShopImage.png";
 import modifyImg from "../images/ModifyInfo.svg";
 import moreIcon from "../images/MoreIcon.svg";
+import { DetailInfoCard } from "../components/DetailInfoCard";
+import DetailInfoItem from "../components/DetailInfoItem";
 
 const PaddingBox = styled.div`
   padding: 0 24px 60px;
@@ -18,6 +20,13 @@ const MainImage = styled.div`
   height: ${(props) => props.height};
   background: ${(props) => `url(${props.imgUrl}) center/cover no-repeat`};
   border-radius: 6px;
+`;
+
+const SubTitle = styled.div`
+  width: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--main-pink);
 `;
 
 // 가게 이름, 등록 여부, 수정 버튼
@@ -62,40 +71,6 @@ const MoreIcon = styled.div`
   background: url(${moreIcon}) center/100% no-repeat;
 `;
 
-// 가게 세부 정보
-const ItemBox = styled.div`
-  display: flex;
-  font-size: 16px;
-  & + & {
-    margin-top: 30px;
-  }
-`;
-const Category = styled.div`
-  width: 100px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #ff7b72;
-`;
-const Content = styled.div`
-  width: 100%;
-  font-size: 16px;
-  color: #202020;
-  word-break: keep-all;
-`;
-const ShopInfo = styled.div`
-  background-color: #ffebea;
-  border-radius: 6px;
-  padding: 22px 16px;
-`;
-const ShopDetailItem = ({ category, content }) => {
-  return (
-    <ItemBox>
-      <Category>{category}</Category>
-      <Content>{content}</Content>
-    </ItemBox>
-  );
-};
-
 const CakeImages = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -131,7 +106,7 @@ const ShopDetailPage = () => {
           {/* 권한이 있을 때만 이 아이콘이 나타나도록 */}
         </ShopDetailHeader>
         <HorizonEmptySpace height="45px" />
-        <Category>소개</Category>
+        <SubTitle>소개</SubTitle>
         <HorizonEmptySpace height="12px" />
         <ShopDesc style={openMore[0]}>
           달다구리는 다양한 상황과 감정을 케이크로 표현할 수 있는 아이디어를 늘
@@ -143,14 +118,14 @@ const ShopDetailPage = () => {
           <MoreIcon style={openMore[1]} onClick={getMoreDesc} />
         </AlignCenterBox>
         <HorizonEmptySpace height="35px" />
-        <ShopInfo>
-          <ShopDetailItem category="전화번호" content="02-336-5856" />
-          <ShopDetailItem category="주소" content="서울 마포구 양화로18안길 22 2층 터틀힙" />
-          <ShopDetailItem category="운영시간" content="매일 12:00~20:00" />
-          <ShopDetailItem category="문의" content="카카오톡 | 인스타그램" />
-        </ShopInfo>
+        <DetailInfoCard>
+          <DetailInfoItem category="전화번호" content="02-336-5856" fontSize="16px" />
+          <DetailInfoItem category="주소" content="서울 마포구 양화로18안길 22 2층 터틀힙" fontSize="16px" />
+          <DetailInfoItem category="운영시간" content="매일 12:00~20:00" fontSize="16px" />
+          <DetailInfoItem category="문의" content="카카오톡 | 인스타그램" fontSize="16px" />
+        </DetailInfoCard>
         <HorizonEmptySpace height="48px" />
-        <Category>대표 케이크</Category>
+        <SubTitle>대표 케이크</SubTitle>
         <HorizonEmptySpace height="30px" />
         <CakeImages>
           <CakeProductImage imgUrl={mainImg} />
