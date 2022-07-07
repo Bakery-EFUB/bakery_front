@@ -1,8 +1,8 @@
 import TopBar from "../components/TopBar";
 import styled from "styled-components";
-import MoreViewimg from "../images/MoreView.svg";
 import UserLogoimg from "../images/UserLogo.svg";
 import CountManageimg from "../images/CountManage.svg";
+import Readingimg from "../images/Reading.svg";
 
 const Box = styled.div`
   background-color: #ffebea;
@@ -16,67 +16,20 @@ const Box = styled.div`
 const Button = styled.button`
   position: absolute;
   width: 380px;
-  height: 60px;
+  height: 100px;
   left: 23.86px;
-  top: 84.63px;
+  top: 148.53px;
   color: white;
   background: #ff7b72;
   border-radius: 6px;
-  border: 0.1px solid #ff7b72;
+  border: 0.1px solid #fffbef;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
-  font-weight: 700;
+  font-weight: bolder;
   font-size: 18px;
   line-height: 22px;
   text-align: center;
   text-transform: uppercase;
-`;
-
-const Button2 = styled.button`
-  position: absolute;
-  width: 380px;
-  height: 60px;
-  left: 23.86px;
-  top: 154.63px;
-  color: white;
-  background: #ff7b72;
-  border-radius: 6px;
-  border: 0.1px solid #ff7b72;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  text-align: center;
-  text-transform: uppercase;
-`;
-
-const BottomProposal = styled.div`
-  position: absolute;
-  width: 380.14px;
-  height: 253.21px;
-  left: 23.86px;
-  top: 297.57px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-
-const Article = styled.article`
-  width: 120px;
-  height: 120px;
-  border: 1px solid red;
-  display: inline-block;
-`;
-
-const MoreView = styled.div`
-  background: url(${MoreViewimg});
-  position: absolute;
-  width: 195.31px;
-  height: 30.31px;
-  top: 570.42px;
-  left: 195.31px;
-  background-repeat: no-repeat;
 `;
 
 const MypagePlace = styled.div`
@@ -135,6 +88,38 @@ const UserName = styled.div`
   line-height: 24px;
 `;
 
+const Completion = styled.div`
+  position: absolute;
+  width: 70px;
+  height: 19px;
+  left: 29px;
+  top: 108.53px;
+  z-index: 1;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+`;
+
+const Progress = styled.div`
+  position: absolute;
+  width: 70px;
+  height: 19px;
+  left: 112.26px;
+  top: 108.53px;
+  z-index: 1;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+
+  /* sub text */
+
+  color: #949494;
+`;
+
 const UserPlace = styled.h1`
   position: absolute;
   width: 195.31px;
@@ -150,21 +135,20 @@ const UserPlace = styled.h1`
   line-height: 17px;
 `;
 
-const CommitProposal = styled.div`
+const Reading = styled.div`
+  background: url(${Readingimg});
+  background-repeat: no-repeat;
+  box-sizing: border-box;
   position: absolute;
-  width: 137.05px;
-  height: 19px;
-  left: 24px;
-  top: 258.94px;
-  text-align: left;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
+  width: 280px;
+  height: 34px;
+  left: 73.9px;
+  top: 276.09px;
+  z-index: 1;
+  line-height: 17px;
 `;
 
-const ShopMemberMyPage = () => {
+const ShopMypageStart = () => {
   return (
     <div>
       <TopBar></TopBar>
@@ -174,21 +158,13 @@ const ShopMemberMyPage = () => {
       <UserPlace>Caker 가게 회원</UserPlace>
       <UserLogo></UserLogo>
       <Box className="BottomPinkBackground">
-        <Button>가게 정보 관리</Button>
-        <Button2>픽업 일정 관리</Button2>
-        <CommitProposal>댓글 단 제안서</CommitProposal>
-        <BottomProposal>
-          <Article></Article>
-          <Article></Article>
-          <Article></Article>
-          <Article></Article>
-          <Article></Article>
-          <Article></Article>
-        </BottomProposal>
-        <MoreView />
+        <Completion>가게 인증</Completion>
+        <Progress>미완료</Progress>
+        <Button>가게 정보 등록완료</Button>
+        <Reading></Reading>
       </Box>
     </div>
   );
 };
 
-export default ShopMemberMyPage;
+export default ShopMypageStart;
