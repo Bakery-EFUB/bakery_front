@@ -4,7 +4,7 @@ const PageTitleBox = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 60px;
-  padding: 60px 0 40px 0;
+  padding: 60px 0 63px 0;
 `;
 
 const Highlight = styled.div`
