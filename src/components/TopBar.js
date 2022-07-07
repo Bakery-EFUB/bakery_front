@@ -7,8 +7,7 @@ import '../styles/common.scss';
 const TopBarPink = styled.div`
 	background-color: var(--main-pink);
 
-	width: 100%;
-	overflow: hidden;
+	width: 428px;
 	height: 60px;
 
 	position: absolute;
