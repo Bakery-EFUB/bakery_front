@@ -5,15 +5,15 @@ import TopBar from '../components/TopBar';
 import Rectangle147 from '../images/Rectangle147.svg';
 import CommentLogo from '../images/CommentLogo.svg';
 
+import SmallPinkButton from '../components/SmallPinkButton';
+import SmallWhiteButton from '../components/SmallWhiteButton';
+
 const Highlight = styled.p`
-	margin: 0;
-	position: absolute;
+	margin: auto;
+	margin-top: 56px;
+
 	width: 186px;
 	height: 26px;
-	left: 121px;
-	top: 116px;
-
-	/* title */
 
 	font-family: 'Apple SD Gothic Neo';
 	font-style: normal;
@@ -24,24 +24,21 @@ const Highlight = styled.p`
 `;
 
 const ImageBox = styled.img`
-	margin: 0;
-	position: absolute;
+	margin: auto;
+	margin-top: 37px;
 	width: 380px;
 	height: 300px;
-	left: 24px;
-	top: 190px;
 
 	background: url(${Rectangle147});
 	border-radius: 6px;
 `;
 
 const Text = styled.p`
-	margin: 0;
-	position: absolute;
+	/* 상 우 하 좌 */
+	margin: 30px 0px 0px 30px;
+
 	width: 154.57px;
 	height: 32.73px;
-	left: 30px;
-	top: 520px;
 
 	font-family: 'Apple SD Gothic Neo';
 	font-style: normal;
@@ -52,14 +49,12 @@ const Text = styled.p`
 
 const PinkRectangle = styled.div`
 	box-sizing: border-box;
-	margin: 0;
+
+	margin: 25px 0px 0px 24px;
 	padding: 20px;
 
-	position: absolute;
 	width: 380px;
 	height: 320px;
-	left: 24px;
-	top: 580px;
 
 	background: var(--sub-pink);
 	border-radius: 6px;
@@ -95,13 +90,9 @@ const Option = styled.div`
 `;
 
 const Comment = styled.p`
-	position: absolute;
-
 	height: 29px;
-	left: 24px;
-	top: 960px;
 
-	margin: 0;
+	margin: 54px 0px 0px 24px;
 
 	font-family: 'Apple SD Gothic Neo';
 	font-style: normal;
@@ -113,10 +104,7 @@ const Comment = styled.p`
 `;
 
 const CommentSection = styled.div`
-	position: absolute;
-	left: 0px;
-	top: 996px;
-
+	margin-top: 13px;
 	height: auto;
 	padding-bottom: 70px;
 `;
@@ -132,11 +120,14 @@ const CommentYellowBox = styled.div`
 `;
 
 const CommentPinkBox = styled.div`
+	display: flex;
+
 	box-sizing: border-box;
 	width: 428px;
 	height: 100px;
 
 	background: var(--sub-pink);
+
 	padding: 24px;
 	padding-left: 42px;
 `;
@@ -148,9 +139,6 @@ const CommentInfo = styled.div`
 `;
 
 const Nickname = styled.p`
-	width: 83px;
-	height: 22px;
-
 	margin: 0;
 
 	font-family: 'Apple SD Gothic Neo';
@@ -163,10 +151,9 @@ const Nickname = styled.p`
 `;
 
 const CommentTime = styled.p`
-	width: 94px;
 	height: 14px;
 
-	margin: 0;
+	margin: 0 0 0 15px;
 
 	font-family: 'Apple SD Gothic Neo';
 	font-style: normal;
@@ -177,7 +164,7 @@ const CommentTime = styled.p`
 	color: #c4c4c4;
 `;
 
-const Delete = styled.p`
+const CommentToggle = styled.p`
 	width: 25px;
 	height: 17px;
 
@@ -266,11 +253,16 @@ const Input = styled.form`
 	}
 `;
 
-const Proposal = () => {
+const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
+const MyProposal = () => {
 	return (
-		<div>
+		<Wrapper>
 			<TopBar />
-			<Highlight>dfsd님의 제안서</Highlight>
+			<Highlight>내 제안서</Highlight>
 			<ImageBox />
 			<Text>레터링 케이크</Text>
 			<PinkRectangle>
@@ -299,6 +291,17 @@ const Proposal = () => {
 					<p className="content">2022.06.01</p>
 				</Option>
 			</PinkRectangle>
+			<div
+				style={{
+					width: '383px',
+					display: 'flex',
+					justifyContent: 'space-between',
+					margin: '36px auto 0 auto',
+				}}
+			>
+				<SmallPinkButton>수정</SmallPinkButton>
+				<SmallWhiteButton>삭제</SmallWhiteButton>
+			</div>
 
 			<Comment>댓글 2</Comment>
 			<CommentSection>
@@ -306,28 +309,36 @@ const Proposal = () => {
 					<CommentInfo>
 						<Nickname>터틀힙</Nickname>
 						<CommentTime>2022.05.10. 15:00</CommentTime>
-						<Delete>삭제</Delete>
+						<CommentToggle>삭제</CommentToggle>
 					</CommentInfo>
 
 					<CommentContent>
 						안녕하세요~ 4월 5일 2시부터 8시 사이 픽업 가능합니다~
 					</CommentContent>
 				</CommentYellowBox>
+
 				<CommentPinkBox>
-					<CommentInfo>
-						<img src={CommentLogo} style={{ marginRight: '12px' }} />
-						<Nickname>작성자</Nickname>
-						<CommentTime>2022.05.10. 15:00</CommentTime>
-						<Delete>답글</Delete>
-					</CommentInfo>
+					<img
+						src={CommentLogo}
+						style={{ marginRight: '12px', width: '10px', height: '10px' }}
+					/>
+					<div style={{ width: '100%' }}>
+						<CommentInfo>
+							<Nickname>작성자</Nickname>
+							<CommentTime>2022.05.10. 15:00</CommentTime>
+							<CommentToggle>답글</CommentToggle>
+						</CommentInfo>
+
+						<CommentContent>픽업 시간 5시로 하겠습니다!</CommentContent>
+					</div>
 				</CommentPinkBox>
 			</CommentSection>
 
 			<Input>
 				<input placeholder="댓글을 입력해주세요." /> <button>등록</button>
 			</Input>
-		</div>
+		</Wrapper>
 	);
 };
 
-export default Proposal;
+export default MyProposal;
