@@ -10,7 +10,7 @@ const CardDisplayContainer = styled.div`
 
 const Header = styled.div`
   display: flex;
-  margin: 10% 5% 3% 0;
+  margin: 13% 5% 3% 0;
   align-items: center;
   justify-content: space-between;
   color: var(--main-pink);

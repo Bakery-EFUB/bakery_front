@@ -4,9 +4,6 @@ import Mock from "../../images/Mock.svg";
 
 const CardComponent = styled.div`
   margin-right: 3%;
-  :last-child {
-    margin-right: 5%;
-  }
 `;
 const MockImg = styled.div`
   background: url(${Mock});
