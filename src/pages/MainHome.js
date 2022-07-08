@@ -4,6 +4,7 @@ import TopBar from "../components/TopBar";
 import MainBackground from "../images/MainBackground.svg";
 import CardDisplay from "../components/CardDisplay/CardDisplay.js";
 import styled from "styled-components";
+import Card from "../components/CardDisplay/Card";
 
 const HomeContainer = styled.div`
   margin: 0 5%;
