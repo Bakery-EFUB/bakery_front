@@ -1,9 +1,9 @@
 import "./App.css";
-import ProposalBox from "./components/WholeProposals/PropasalBox";
+import ProposalPage from "./pages/ProposalPage";
 
 function App() {
   return (
-  <ProposalBox/>
+    <ProposalPage/>
   );
 }
 
