@@ -6,8 +6,8 @@ button {
 	position: absolute;
 	width: 379px;
 	height: auto;
+
 	left: 25px;
-	top: 317px;
 
 	border: 1px solid var(--main-pink);
 	border-radius: 6px;
