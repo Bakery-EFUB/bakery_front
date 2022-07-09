@@ -8,6 +8,8 @@ import CommentLogo from '../images/CommentLogo.svg';
 import SmallPinkButton from '../components/SmallPinkButton';
 import SmallWhiteButton from '../components/SmallWhiteButton';
 
+import PageTitle from '../components/PageTitle';
+
 const Highlight = styled.p`
 	margin: auto;
 	margin-top: 56px;
@@ -262,7 +264,7 @@ const MyProposal = () => {
 	return (
 		<Wrapper>
 			<TopBar />
-			<Highlight>내 제안서</Highlight>
+			<PageTitle margin="56px auto 0 auto" title="내 제안서"></PageTitle>
 			<ImageBox />
 			<Text>레터링 케이크</Text>
 			<PinkRectangle>
