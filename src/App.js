@@ -1,11 +1,11 @@
 import "./App.css";
 
-import ShopMypageStart from "./pages/ShopMyPageStart";
+import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
 
 function App() {
   return (
     <div className="App">
-      <ShopMypageStart />
+      <ShopMyPageProgressive />
     </div>
   );
 }

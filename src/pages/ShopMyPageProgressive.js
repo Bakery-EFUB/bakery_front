@@ -19,8 +19,8 @@ const Button = styled.button`
   height: 100px;
   left: 23.86px;
   top: 148.53px;
-  color: white;
-  background: #ff7b72;
+  color: #ff7b72;
+  background: #fffbef;
   border-radius: 6px;
   border: 0.1px solid #fffbef;
   font-family: "Apple SD Gothic Neo";
@@ -148,7 +148,7 @@ const Reading = styled.div`
   line-height: 17px;
 `;
 
-const ShopMypageStart = () => {
+const ShopMyPageProgressive = () => {
   return (
     <div>
       <TopBar></TopBar>
@@ -159,7 +159,7 @@ const ShopMypageStart = () => {
       <UserLogo></UserLogo>
       <Box className="BottomPinkBackground">
         <Completion>가게 인증</Completion>
-        <Progress>미완료</Progress>
+        <Progress>진행중</Progress>
         <Button>가게 정보 등록완료</Button>
         <Reading></Reading>
       </Box>
@@ -167,4 +167,4 @@ const ShopMypageStart = () => {
   );
 };
 
-export default ShopMypageStart;
+export default ShopMyPageProgressive;
