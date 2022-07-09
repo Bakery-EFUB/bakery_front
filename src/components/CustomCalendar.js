@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import style from '../styles/calendar.css';
 import LeftVector from '../images/LeftVector.svg';
 import RightVector from '../images/RightVector.svg';
 
 import styled from 'styled-components';
+
 const cx = classNames.bind(style);
 
 const Left = styled.img`
@@ -80,25 +81,29 @@ const CustomCalendar = () => {
 		return weekArr;
 	}, []);
 
-	const returnDay = useCallback(() => {
+	const [num, setNum] = useState(1); // 선택된 날짜
+
+	const returnDay = () => {
 		//선택된 달의 날짜들 반환 함수
 		let dayArr = [];
 
 		for (const nowDay of week) {
+			// 몇 요일부터 시작하는가 구함
 			const day = new Date(selectedYear, selectedMonth - 1, 1).getDay();
+
 			if (week[day] === nowDay) {
 				for (let i = 0; i < dateTotalCount; i++) {
 					dayArr.push(
 						<div
 							key={i + 1}
+							id={i + 1}
+							onClick={e => setNum(parseInt(e.target.id))}
 							className={cx(
 								{
 									//오늘 날짜일 때 표시할 스타일 클라스네임
-									today:
-										today.year === selectedYear &&
-										today.month === selectedMonth &&
-										today.date === i + 1,
+									today: i + 1 === num,
 								},
+
 								{ weekday: true }, //전체 날짜 스타일
 								{
 									//전체 일요일 스타일
@@ -130,7 +135,10 @@ const CustomCalendar = () => {
 		}
 
 		return dayArr;
-	}, [selectedYear, selectedMonth, dateTotalCount]);
+	};
+
+	// 선택 된 날짜 출력 (test 코드)
+	console.log('년도 :', selectedYear, '월 :', selectedMonth, '날짜 : ', num);
 
 	return (
 		<div className="container">
