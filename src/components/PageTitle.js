@@ -10,7 +10,7 @@ const PageTitle = ({ title, margin }) => {
 
 	const Highlight = styled.div`
 		display: inline-block;
-		position: absolute;
+
 		height: 13px;
 		background-color: #ffebea;
 		vertical-align: center;
