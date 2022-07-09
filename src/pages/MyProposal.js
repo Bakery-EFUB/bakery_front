@@ -265,6 +265,7 @@ const MyProposal = () => {
 		<Wrapper>
 			<TopBar />
 			<PageTitle margin="56px auto 0 auto" title="내 제안서"></PageTitle>
+
 			<ImageBox />
 			<Text>레터링 케이크</Text>
 			<PinkRectangle>
@@ -293,6 +294,7 @@ const MyProposal = () => {
 					<p className="content">2022.06.01</p>
 				</Option>
 			</PinkRectangle>
+
 			<div
 				style={{
 					width: '383px',
