@@ -80,7 +80,7 @@ const ShopInstagram = styled.input`
   border: 1px solid #f0f0f0;
 `;
 
-const ShopPhoto = styled.div`
+const ShopPhoto = styled.input`
   position: absolute;
   width: 380px;
   height: 100px;
@@ -89,12 +89,13 @@ const ShopPhoto = styled.div`
   background: #f0f0f0;
   border-radius: 6px;
   border: 1px solid #f0f0f0;
+  text-align: center;
   &:hover {
     border: 2px dashed #333;
   }
 `;
 
-const ShopMenuPhoto = styled.div`
+const ShopMenuPhoto = styled.input`
   position: absolute;
   width: 380px;
   height: 100px;
@@ -103,6 +104,10 @@ const ShopMenuPhoto = styled.div`
   background: #f0f0f0;
   border-radius: 6px;
   border: 1px solid #f0f0f0;
+  text-align: center;
+  &:hover {
+    border: 2px dashed #333;
+  }
 `;
 
 const ShopMenuPhoto2 = styled.input`
@@ -114,6 +119,10 @@ const ShopMenuPhoto2 = styled.input`
   background: #f0f0f0;
   border-radius: 6px;
   border: 1px solid #f0f0f0;
+  text-align: center;
+  &:hover {
+    border: 2px dashed #333;
+  }
 `;
 
 const RegisterBtn = styled.button`
@@ -327,21 +336,19 @@ const ShopInformationRegister = () => {
         type="text"
         placeholder="     운영중인 인스타그램이 있다면 링크를 첨부해주세요."
       />
-      <ShopPhotoing>
-        가게 대표 사진
-        <Vector />
-      </ShopPhotoing>
+      <ShopPhotoing>가게 대표 사진</ShopPhotoing>
       <ShopPhoto
         id="holder"
         onDragOver={ondragover}
         onDragEnd={ondragend}
         onDrop={ondrop}
+        placeholder="➕"
       ></ShopPhoto>
 
       <ShopMenuPhotoing>케이크 대표 메뉴</ShopMenuPhotoing>
 
-      <ShopMenuPhoto />
-      <ShopMenuPhoto2 />
+      <ShopMenuPhoto placeholder="➕" />
+      <ShopMenuPhoto2 placeholder="➕" />
       <RegisterBtn>등록하기</RegisterBtn>
     </WrapBox>
   );
