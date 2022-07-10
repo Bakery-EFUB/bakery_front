@@ -29,7 +29,7 @@ const SubTitle = styled.div`
 const DropdownGroup = styled.div`
   margin-top: 23px;
   display: flex;
-  gap: 10px 53px;
+  gap: 10px 35px;
   flex-wrap: wrap;
 `;
 
@@ -77,14 +77,15 @@ const WhiteInputBox = styled.input`
   width: 100%;
   border: solid var(--black);
   border-width: 0 0 1px;
+  border-radius: 0;
   padding: 10px 0;
   font-size: 20px;
   outline: 0;
 `;
 
 const BigPinkButtonBottom = styled.button`
-  position: absolute;
-  bottom: 60px;
+  margin: 220px 0 40px;
+  position: relative;
   left: 23.5px;
   right: 23.5px;
   width: calc(100% - 47px);
