@@ -35,11 +35,15 @@ const DropdownGroup = styled.div`
 
 // 드롭박스
 const CustomSelect = styled.select`
+  position: relative;
   font-size: 20px;
   border: none;
   appearance: none;
   padding-right: 8px;
   z-index: 3;
+  background-color: rgba(0, 0, 0, 0);
+  color: var(--black);
+  text-decoration: none;
 `;
 const DropdownArrow = styled.span`
   width: 24px;
@@ -55,7 +59,7 @@ const DropdownArrow = styled.span`
 const Dropdown = ({ items }) => {
   return (
     <div>
-      <CustomSelect>
+      <CustomSelect autofocus>
         {items.map((item, idx) => (
           <option key={idx} value={item}>
             {item}
