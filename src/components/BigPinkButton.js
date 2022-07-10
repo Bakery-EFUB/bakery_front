@@ -1,35 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = styled.button`
-	position: absolute;
-	width: 380px;
-	height: 60px;
-	left: 24px;
-	top: 778px;
+const BigPinkButton = ({ children, margin }) => {
+	console.log(margin);
+	const Button = styled.button`
+		width: 380px;
+		height: 60px;
 
-	/* main pink */
+		margin: ${margin};
 
-	background: var(--main-pink);
+		/* main pink */
 
-	border: none;
-	border-radius: 6px;
+		background: var(--main-pink);
 
-	box-shadow: 0px 4px 62px rgba(153, 171, 198, 0.18);
+		border: none;
+		border-radius: 6px;
 
-	color: var(--sub-yellow);
-	font-family: 'Apple SD Gothic Neo';
-	font-style: normal;
-	font-weight: 500;
-	font-size: 18px;
-	line-height: 22px;
-	/* identical to box height */
+		box-shadow: 0px 4px 62px rgba(153, 171, 198, 0.18);
 
-	text-align: center;
-	text-transform: uppercase;
-`;
+		color: var(--sub-yellow);
+		font-family: 'Apple SD Gothic Neo';
+		font-style: normal;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 22px;
 
-const BigPinkButton = ({ children }) => {
+		text-align: center;
+		text-transform: uppercase;
+	`;
+
 	return <Button>{children}</Button>;
 };
 
