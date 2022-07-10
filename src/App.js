@@ -5,6 +5,7 @@ import LoadingPage from './pages/LoadingPage';
 import LoginHome from './pages/LoginHome';
 import MainHome from './pages/MainHome';
 import MyProposal from './pages/MyProposal';
+import ProposalDone from './pages/ProposalDone';
 
 function App() {
 	return (
@@ -12,7 +13,7 @@ function App() {
 			<Routes>
 				<Route exact path="/loginhome" element={<LoginHome />} />
 				<Route exact path="/loading" element={<LoadingPage />} />
-				<Route exact path="/proposal" element={<MyProposal />} />
+				<Route exact path="/proposal" element={<ProposalDone />} />
 				<Route exact path="/home" element={<MainHome />} />
 			</Routes>
 		</BrowserRouter>
