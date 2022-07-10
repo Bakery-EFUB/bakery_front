@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const BigPinkButton = ({ children, margin }) => {
-	console.log(margin);
 	const Button = styled.button`
 		width: 380px;
 		height: 60px;
