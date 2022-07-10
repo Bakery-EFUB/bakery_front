@@ -2,11 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
-	position: absolute;
 	width: 184px;
 	height: 60px;
-	left: 220px;
-	top: 806px;
 
 	/* main pink */
 
