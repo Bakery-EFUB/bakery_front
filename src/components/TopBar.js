@@ -5,7 +5,6 @@ import TopMenuBarimg from "../images/TopMenuBar.svg";
 import "../styles/common.scss";
 
 const TopBarPink = styled.div`
-
   background-color: var(--main-pink);
   width: 100%;
   overflow: hidden;
@@ -13,8 +12,6 @@ const TopBarPink = styled.div`
   position: sticky;
   top: 0;
   width: 100%;
-
-	
 `;
 
 const TopLogo = styled.div`
