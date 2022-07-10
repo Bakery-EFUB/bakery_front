@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Rectangle from '../../images/Rectangle.svg';
+
 const Oneproposal = styled.div`
 `;
 const Cakeimg = styled.div`

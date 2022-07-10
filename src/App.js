@@ -1,9 +1,11 @@
 import "./App.css";
 import ProposalPage from "./pages/ProposalPage";
-
+import ChooseBox from "./components/WholeProposals/ChooseBox";
 function App() {
   return (
-    <ProposalPage/>
+    <div>
+      <ChooseBox/>
+    </div>
   );
 }
 
