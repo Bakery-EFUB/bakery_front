@@ -1,17 +1,17 @@
 import styled from "styled-components";
-import TopPinkBoximg from "../images/TopPinkBox.svg";
 import TopLogoimg from "../images/TopLogo.svg";
 import TopMenuBarimg from "../images/TopMenuBar.svg";
 
+import "../styles/common.scss";
+
 const TopBarPink = styled.div`
-  background: url(${TopPinkBoximg});
-  width: 428px;
+  background-color: var(--main-pink);
+  width: 100%;
+  overflow: hidden;
   height: 60px;
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
+  position: sticky;
+  top: 0;
+  width: 100%;
 `;
 
 const TopLogo = styled.div`
