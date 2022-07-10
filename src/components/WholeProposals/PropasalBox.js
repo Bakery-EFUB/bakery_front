@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Rectangle from '../../images/Rectangle.svg';
 
 const Oneproposal = styled.div`
+    display: flex;
 `;
 const Cakeimg = styled.div`
     border-radius: 15%;
@@ -28,14 +29,16 @@ const Description = styled.div`
 const Hashtag = styled.div`
     color: #FF7B72;
     font-size: 10px;
-    margin-left: 10px;
+    margin-left: 5px;
 `;
 const HashtagBox = styled.div`
-    margin-top: 100px;
-    flex-direction: column;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
 `;
 const Timeshow = styled.div`
     color: #949494;
+    margin : 5px;
     font-size: 10px;
 `;
 const ProposalBox = ()=>{
