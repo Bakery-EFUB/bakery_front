@@ -5,6 +5,7 @@ import LoadingPage from './pages/LoadingPage';
 import LoginHome from './pages/LoginHome';
 import MainHome from './pages/MainHome';
 import MyProposal from './pages/MyProposal';
+import PickupSchedulePage from "./pages/PickupSchedulePage";
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 				<Route exact path="/loading" element={<LoadingPage />} />
 				<Route exact path="/proposal" element={<MyProposal />} />
 				<Route exact path="/home" element={<MainHome />} />
+				<Route exact path="/pickupSchedule" element={<PickupSchedulePage />} />
 			</Routes>
 		</BrowserRouter>
 	);
