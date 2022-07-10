@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, "AppleSDGothicNeo",
+  font-family: "AppleSDGothicNeo", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif,
     "Noto Sans KR", sans-serif;
   /* -apple-system, BlinkMacSystemFont, */
   -webkit-font-smoothing: antialiased;
@@ -14,6 +14,6 @@ code {
 }
 
 @font-face {
-  font-family: "Apple SD Gothic Neo";
+  font-family: "AppleSDGothicNeo";
   src: url("./styles/fonts/AppleSDGothicNeoM.ttf") format("truetype");
 }
