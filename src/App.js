@@ -5,6 +5,7 @@ import LoginHome from "./pages/LoginHome";
 import MainHome from "./pages/MainHome";
 import MyProposal from "./pages/MyProposal";
 import SearchPage from "./pages/SearchPage";
+import Recommend from "./pages/Recommend";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/proposal" element={<MyProposal />} />
         <Route exact path="/home" element={<MainHome />} />
         <Route exact path="/search" element={<SearchPage />} />
+        <Route exact path="/recommend" element={<Recommend />} />
       </Routes>
     </BrowserRouter>
   );
