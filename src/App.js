@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingPage from "./pages/LoadingPage";
 import LoginHome from "./pages/LoginHome";
 import MainHome from "./pages/MainHome";
-
 function App() {
   return (
     <BrowserRouter>
@@ -15,7 +14,7 @@ function App() {
         <Route exact path="/home" element={<MainHome />} />
       </Routes>
     </BrowserRouter>
+
   );
 }
-
 export default App;
