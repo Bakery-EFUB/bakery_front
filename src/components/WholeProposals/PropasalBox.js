@@ -4,6 +4,7 @@ import Rectangle from '../../images/Rectangle.svg';
 
 const Oneproposal = styled.div`
     display: flex;
+    flex-direction: row;
 `;
 const Cakeimg = styled.div`
     border-radius: 15%;
@@ -11,7 +12,7 @@ const Cakeimg = styled.div`
 `;
 const Textbox = styled.div`
     border-left: 15px;
-    flex-direction: row;
+    flex-direction: column;
     width: 250px;
     height: 100px;
 `;
@@ -19,26 +20,29 @@ const Title = styled.div`
     color: black;
     font-weight: bold;
     font-size: 20px;
-    margin : 5px;  
+    font-family: 'Apple SD Gothic Neo';
+    margin-top: 5%;  
 `;
 const Description = styled.div`
     color: black;
-    margin : 5px;
+    font-family: 'Apple SD Gothic Neo';
+    margin-bottom: 5%;
     font-size: 15px;
 `;
 const Hashtag = styled.div`
     color: #FF7B72;
+    font-family: 'Apple SD Gothic Neo';
     font-size: 10px;
-    margin-left: 5px;
 `;
 const HashtagBox = styled.div`
-    margin-top: 50px;
+    margin-top: 17%;
     display: flex;
     flex-direction: row;
 `;
 const Timeshow = styled.div`
     color: #949494;
-    margin : 5px;
+    font-family: 'Apple SD Gothic Neo';
+    margin: 1%;
     font-size: 10px;
 `;
 const ProposalBox = ()=>{
