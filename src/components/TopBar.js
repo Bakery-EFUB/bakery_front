@@ -74,28 +74,25 @@ const TopBar = () => {
     <div>
       <TopBarPink>
         <TopLogo></TopLogo>
-        <TopMenuBar onClick={showSidebar}>
-          <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-            <ul className="nav-menu-items" onClick={showSidebar}></ul>
-            <li className="navbar-toggle">
-              <Link to="#" className="menu-bars">
-                <CloseBtn></CloseBtn>
-              </Link>
-            </li>
-            <Profile>
-              <ProfileImg></ProfileImg>로그인해 주세요
-            </Profile>
-            <hr />
-            {SidebarDataCustomer.map((item, index) => {
-              return (
-                <li key={index} className="nav-text">
-                  <Link to={item.path}>{item.title}</Link>
-                </li>
-              );
-            })}
-            <ButtonSidebar text="로그인"></ButtonSidebar>
-          </nav>
-        </TopMenuBar>
+        <TopMenuBar onClick={showSidebar}></TopMenuBar>
+        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+          <ul className="nav-menu-items"></ul>
+          <li className="navbar-toggle">
+            <CloseBtn onClick={showSidebar}></CloseBtn>
+          </li>
+          <Profile>
+            <ProfileImg></ProfileImg>로그인해 주세요
+          </Profile>
+          <hr />
+          {SidebarDataCustomer.map((item, index) => {
+            return (
+              <li key={index} className="nav-text">
+                <Link to={item.path}>{item.title}</Link>
+              </li>
+            );
+          })}
+          <ButtonSidebar text="로그인"></ButtonSidebar>
+        </nav>
       </TopBarPink>
     </div>
   );
