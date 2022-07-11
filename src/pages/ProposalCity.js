@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TopBar from '../components/TopBar';
 
@@ -34,7 +34,7 @@ const ProgessBar = styled.div`
 const SmallText = styled.p`
 	font-family: 'Apple SD Gothic Neo';
 	font-style: normal;
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 16px;
 	line-height: 26px;
 	text-align: center;
@@ -52,23 +52,34 @@ const Wrapper = styled.div`
 	justify-content: space-between;
 `;
 
-const cityArray = [
-	{ city: '은평구', selected: true },
-	{ city: '종로구', selected: false },
-	{ city: '광진구', selected: false },
-	{ city: '서대문구', selected: true },
-	{ city: '강북구', selected: false },
-	{ city: '중랑구', selected: false },
-	{ city: '마포구', selected: false },
-	{ city: '성북구', selected: false },
-	{ city: '노원구', selected: false },
-	{ city: '용산구', selected: true },
-	{ city: '동대문구', selected: false },
-	{ city: '도봉구', selected: false },
-	{ city: '중구', selected: false },
-	{ city: '성동구', selected: false },
-];
 const Proposal6 = () => {
+	const [cityArray, setCityArray] = useState([
+		{ id: 1, city: '은평구', selected: true },
+		{ id: 2, city: '종로구', selected: false },
+		{ id: 3, city: '광진구', selected: false },
+		{ id: 4, city: '서대문구', selected: true },
+		{ id: 5, city: '강북구', selected: false },
+		{ id: 6, city: '중랑구', selected: false },
+		{ id: 7, city: '마포구', selected: false },
+		{ id: 8, city: '성북구', selected: false },
+		{ id: 9, city: '노원구', selected: false },
+		{ id: 10, city: '용산구', selected: true },
+		{ id: 11, city: '동대문구', selected: false },
+		{ id: 12, city: '도봉구', selected: false },
+		{ id: 13, city: '중구', selected: false },
+		{ id: 14, city: '성동구', selected: false },
+	]);
+
+	const onToggle = id => {
+		const selectedId = id;
+
+		setCityArray(
+			cityArray.map(city =>
+				city.id === selectedId ? { ...city, selected: !city.selected } : city
+			)
+		);
+	};
+
 	return (
 		<div>
 			<TopBar />
@@ -80,15 +91,22 @@ const Proposal6 = () => {
 			<Wrapper>
 				{cityArray.map(arr => {
 					if (arr.selected === true) {
-						console.log(arr.city, '참');
 						return (
-							<CityButton key={arr.city} selected>
+							<CityButton
+								selected
+								key={arr.id}
+								id={arr.id}
+								onClick={e => onToggle(e)}
+							>
 								{arr.city}
 							</CityButton>
 						);
 					} else {
-						console.log(arr.city, '거짓');
-						return <CityButton key={arr.city}>{arr.city}</CityButton>;
+						return (
+							<CityButton key={arr.id} id={arr.id} onClick={e => onToggle(e)}>
+								{arr.city}
+							</CityButton>
+						);
 					}
 				})}
 			</Wrapper>

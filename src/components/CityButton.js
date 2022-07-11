@@ -31,8 +31,12 @@ const Button = styled.button`
 			  `}
 `;
 
-const CityButton = ({ children, ...props }) => {
-	return <Button {...props}>{children}</Button>;
+const CityButton = ({ children, onClick, id, ...props }) => {
+	return (
+		<Button {...props} onClick={() => onClick(id)}>
+			{children}
+		</Button>
+	);
 };
 
 export default CityButton;
