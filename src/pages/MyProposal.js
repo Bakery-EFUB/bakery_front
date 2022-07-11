@@ -87,7 +87,7 @@ const Option = styled.div`
 		font-size: 18px;
 		line-height: 22px;
 
-		color: #202020;
+		color: var(--black-text);
 	}
 `;
 
@@ -102,7 +102,7 @@ const Comment = styled.p`
 	font-size: 24px;
 	line-height: 29px;
 
-	color: #202020;
+	color: var(--black-text);
 `;
 
 const CommentSection = styled.div`
@@ -181,7 +181,7 @@ const CommentToggle = styled.p`
 
 	text-align: right;
 
-	color: #949494;
+	color: var(--sub-darkgray);
 `;
 
 const CommentContent = styled.p`
@@ -196,7 +196,7 @@ const CommentContent = styled.p`
 	font-size: 14px;
 	line-height: 17px;
 
-	color: #202020;
+	color: var(--black-text);
 `;
 const Input = styled.form`
 	position: fixed;
@@ -208,7 +208,7 @@ const Input = styled.form`
 
 	width: 428px;
 	height: 70px;
-	background-color: #ffffff;
+	background-color: var(--white);
 
 	input {
 		border: solid 2px var(--background);
@@ -251,7 +251,7 @@ const Input = styled.form`
 		text-align: center;
 		text-transform: uppercase;
 
-		color: #ffffff;
+		color: var(--white);
 	}
 `;
 
