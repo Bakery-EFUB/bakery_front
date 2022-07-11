@@ -17,6 +17,7 @@ const BoxDrop = styled.span`
     border-radius: 20%;
 `;
 const CustomSelect = styled.select`
+  font-family: 'Apple SD Gothic Neo';
   position: relative;
   font-size: 20px;
   appearance: none;

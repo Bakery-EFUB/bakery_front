@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import Rectangle from '../../images/Rectangle.svg';
+import BoxLine from '../../images/BoxLine.svg';
 
+const Container = styled.div`
+
+`;
 const Oneproposal = styled.div`
     display: flex;
     flex-direction: row;
@@ -45,6 +49,8 @@ const Timeshow = styled.div`
     margin: 1%;
     font-size: 10px;
 `;
+const Line = styled.img`
+`
 const ProposalBox = ()=>{
     return(
         <Oneproposal>
