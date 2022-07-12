@@ -337,14 +337,7 @@ const ShopInformationRegister = () => {
         placeholder="     운영중인 인스타그램이 있다면 링크를 첨부해주세요."
       />
       <ShopPhotoing>가게 대표 사진</ShopPhotoing>
-      <ShopPhoto
-        id="holder"
-        onDragOver={ondragover}
-        onDragEnd={ondragend}
-        onDrop={ondrop}
-        placeholder="➕"
-      ></ShopPhoto>
-
+      <ShopPhoto placeholder="➕"></ShopPhoto>
       <ShopMenuPhotoing>케이크 대표 메뉴</ShopMenuPhotoing>
 
       <ShopMenuPhoto placeholder="➕" />
