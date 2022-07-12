@@ -4,7 +4,8 @@ import Rectangle from '../../images/Rectangle.svg';
 import BoxLine from '../../images/BoxLine.svg';
 
 const Container = styled.div`
-
+    display:flex;
+    flex-direction: column;
 `;
 const Oneproposal = styled.div`
     display: flex;
@@ -46,29 +47,34 @@ const HashtagBox = styled.div`
 const Timeshow = styled.div`
     color: #949494;
     font-family: 'Apple SD Gothic Neo';
-    margin: 1%;
+    margin: 3%;
     font-size: 10px;
 `;
 const Line = styled.img`
+    margin: 1%;
 `
 const ProposalBox = ()=>{
     return(
-        <Oneproposal>
-            <Cakeimg>
-                <img src={Rectangle}/>
-            </Cakeimg>
-            <Textbox>
-                <Title>cake1235</Title>
-                <Description>레터링케이크</Description>
-                <HashtagBox>
-                    <Hashtag>#서대문구</Hashtag>
-                    <Hashtag>#북아현동</Hashtag>
-                </HashtagBox>
-            </Textbox>
-            <Timeshow>
-                10분전
-            </Timeshow>
-        </Oneproposal>
+        <Container>
+            <Oneproposal>
+                <Cakeimg>
+                    <img src={Rectangle}/>
+                </Cakeimg>
+                <Textbox>
+                    <Title>cake1235</Title>
+                        <Description>레터링케이크</Description>
+                    <HashtagBox>
+                        <Hashtag>#서대문구</Hashtag>
+                        <Hashtag>#북아현동</Hashtag>
+                    </HashtagBox>
+                </Textbox>
+                <Timeshow>
+                    10분전
+                </Timeshow>
+            </Oneproposal>
+            <Line src={BoxLine}/>
+        </Container>
+        
     )
 };
 export default ProposalBox;

@@ -12,29 +12,36 @@ const DropdownGroup = styled.div`
   gap: 10px 53px;
   flex-wrap: wrap;
 `;
-const BoxDrop = styled.span`
-    border: #C4C4C4;
-    border-radius: 20%;
-`;
 const CustomSelect = styled.select`
   font-family: 'Apple SD Gothic Neo';
   position: relative;
-  font-size: 20px;
+  font-size: 17px;
   appearance: none;
   padding-right: 8px;
+  border: none;
   z-index: 3;
   background-color: rgba(0, 0, 0, 0);
   color: #949494;
   text-decoration: none;
+
+  option{
+    color: #949494;
+    border-radius: 10%;
+    border: none;
+    list-style: none;
+
+  }
 `;
 const DropdownArrow = styled.span`
   width: 24px;
   & > img {
+    color: #c4c4c4;
     width: 12px;
     margin-bottom: 4px;
     transition: transform 0.3s;
   }
   select:focus + & > img {
+    color: #c4c4c4;
     transform: rotate(180deg);
   }
 `;
@@ -55,8 +62,9 @@ const Dropdown = ({ items }) => {
     );
   };
 const ChooseBox = () =>{
-    const RegionGu = ['서대문구','종로구','마포구','은평구','중구','강북구','중랑구','노원구','성북구','용산구','동대문구','도봉구','성동구'];
-    const CakeType = ['레터링케이크', '생화케이크','미니(도시락 케이크)','플라워앙금 케이크','컵케이크','기타'];
+    const RegionGu = ['구 전체','서대문구','종로구','마포구','은평구','중구','강북구','중랑구','노원구','성북구','용산구','동대문구','도봉구','성동구'];
+
+    const CakeType = ['케이크 전체','레터링케이크', '생화케이크','미니(도시락 케이크)','플라워앙금 케이크','컵케이크','기타'];
     return(
         <div>
             <ContentBoxWithMargin>

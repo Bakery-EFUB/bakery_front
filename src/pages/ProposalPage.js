@@ -5,22 +5,19 @@ import ProposalBox from "../components/WholeProposals/PropasalBox";
 import ProposalTitle from "../images/ProposalTitle.svg";
 import ChooseBox from "../components/WholeProposals/ChooseBox";
 
-const TextProposal = styled.div`
-    margin-top: 100px;
-`;
-const ProposalBoxSet = styled.div`
-    margin-top: 50px;
+const TextProposal = styled.img`
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-top: 10%;
 `;
 const ProposalPage = ()=>{
-    <div>
-        <TopBar/>
-        <TextProposal>
-            <img src={ProposalTitle}/>
-        </TextProposal>
-        <ChooseBox></ChooseBox>
-        <ProposalBoxSet>
-            <ProposalBox></ProposalBox>
-        </ProposalBoxSet>
-    </div>
+    return(
+        <div>
+            <TopBar/>
+            <TextProposal src={ProposalTitle}/>
+            <ChooseBox></ChooseBox>
+            <ProposalBox/>
+        </div>        
+    )
 };
 export default ProposalPage;
