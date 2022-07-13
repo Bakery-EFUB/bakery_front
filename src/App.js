@@ -1,4 +1,3 @@
-
 import './App.css';
 
 import MyProposal from './pages/MyProposal';

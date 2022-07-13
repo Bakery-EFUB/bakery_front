@@ -5,12 +5,9 @@ const Button = styled.button`
 	background-color: white;
 	border: 2px solid var(--main-pink);
 	border-radius: 6px;
-	position: absolute;
+
 	width: 184px;
 	height: 60px;
-
-	left: 24px;
-	top: 806px;
 
 	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
 
@@ -25,8 +22,8 @@ const Button = styled.button`
 	text-transform: uppercase;
 `;
 
-const SmallWhiteButton = ({ children }) => {
-	return <Button>{children}</Button>;
+const SmallWhiteButton = ({ children, onClick }) => {
+	return <Button onClick={onClick}>{children}</Button>;
 };
 
 export default SmallWhiteButton;
