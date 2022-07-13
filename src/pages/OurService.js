@@ -5,7 +5,6 @@ import TopBar from "../components/TopBar"
 import WeAreCakers from "../images/WeAreCakers.svg";
 import ServiceTitle from "../images/ServiceTitle.svg";
 import DescriptionText from "../images/DescriptionText.svg";
-import BigPinkButton from "../components/BigPinkButton";
 
 const Container = styled.div`
     width: 100%;
@@ -54,7 +53,7 @@ const DescriptionBox1 = styled.div`
 `;
 const Description2 = styled.div`
     color: black;
-    font-size: 14px;
+    font-size: 16px;
     margin-top: 2%;
     font-family: 'Apple SD Gothic Neo';
     white-space: wrap;
@@ -77,7 +76,7 @@ const DescriptionBox2 = styled.div`
 `;
 const Description3 = styled.div`
     color: black;
-    font-size: 14px;
+    font-size: 16px;
     margin-top: 2%;
     font-family: 'Apple SD Gothic Neo';
     white-space: wrap;
@@ -85,12 +84,47 @@ const Description3 = styled.div`
 const LastImg = styled.img`
     position: absolute;
     top: 250%;
-    left: 10%;
+    left: 15%;
 `;
-const Button = styled.div`
+const ButtonContainer = styled.div`
     position: absolute;
     top: 140%;
-`
+    align-items: center;
+    size: 100%;
+`;
+const Button = styled.button`
+	position: absolute;
+	width: 380px;
+	height: 60px;
+	top: 778px;
+    left: 5px;
+    right: 5px;
+    
+    margin-bottom: 10px;
+	/* main pink */
+
+	background: var(--main-pink);
+
+	border: none;
+	border-radius: 6px;
+
+	box-shadow: 0px 4px 62px rgba(153, 171, 198, 0.18);
+
+	color: var(--sub-yellow);
+	font-family: 'Apple SD Gothic Neo';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 22px;
+	/* identical to box height */
+
+	text-align: center;
+	text-transform: uppercase;
+`;
+
+const BigPinkButton = ({ children }) => {
+	return <Button>{children}</Button>;
+};
 const OurService = () =>{
     return(
         <>
@@ -111,9 +145,9 @@ const OurService = () =>{
                 </DescriptionBox2>
                 <LastImg src={WeAreCakers}/>
             </Container>
-            <Button>
+            <ButtonContainer>
                 <BigPinkButton>제안서 작성하기</BigPinkButton>
-            </Button>
+            </ButtonContainer>
         </>
     )
 };
