@@ -1,10 +1,11 @@
 import './App.css';
-import Proposal6 from './pages/Proposal6';
+
+import MyProposal from './pages/MyProposal';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoadingPage from './pages/LoadingPage';
 import LoginHome from './pages/LoginHome';
 import MainHome from './pages/MainHome';
-import MyProposal from './pages/MyProposal';
 import PickupSchedulePage from "./pages/PickupSchedulePage";
 
 function App() {

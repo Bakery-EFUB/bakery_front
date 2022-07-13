@@ -12,7 +12,7 @@ const PageTitle = ({ title, margin }) => {
 		display: inline-block;
 
 		height: 13px;
-		background-color: #ffebea;
+		background-color: var(--sub-pink);
 		vertical-align: center;
 	`;
 
