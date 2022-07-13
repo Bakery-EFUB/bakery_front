@@ -15,7 +15,7 @@ const DropdownGroup = styled.div`
 const CustomSelect = styled.select`
   font-family: 'Apple SD Gothic Neo';
   position: relative;
-  font-size: 17px;
+  font-size: 12px;
   appearance: none;
   padding-right: 8px;
   border: none;
@@ -35,16 +35,17 @@ const CustomSelect = styled.select`
 const DropdownArrow = styled.span`
   width: 24px;
   & > img {
-    color: #c4c4c4;
     width: 12px;
     margin-bottom: 4px;
     transition: transform 0.3s;
   }
   select:focus + & > img {
-    color: #c4c4c4;
     transform: rotate(180deg);
   }
 `;
+const RegionGu = ['구 전체','서대문구','종로구','마포구','중구','용산구','성동구'];
+const Seodaemun = ['동 전체','북아현동','신촌동','연희동','홍제동','홍은동','남가좌동','북가좌동'];
+const CakeType = ['케이크 전체','레터링케이크', '생화케이크','미니(도시락 케이크)','플라워앙금 케이크','컵케이크','기타'];
 const Dropdown = ({ items }) => {
     return (
       <div>
@@ -62,14 +63,13 @@ const Dropdown = ({ items }) => {
     );
   };
 const ChooseBox = () =>{
-    const RegionGu = ['구 전체','서대문구','종로구','마포구','은평구','중구','강북구','중랑구','노원구','성북구','용산구','동대문구','도봉구','성동구'];
-
-    const CakeType = ['케이크 전체','레터링케이크', '생화케이크','미니(도시락 케이크)','플라워앙금 케이크','컵케이크','기타'];
     return(
         <div>
             <ContentBoxWithMargin>
                 <DropdownGroup>
                     <Dropdown items = {RegionGu}>
+                    </Dropdown>
+                    <Dropdown items = {Seodaemun}>
                     </Dropdown>
                     <Dropdown items = {CakeType}>
                     </Dropdown>
