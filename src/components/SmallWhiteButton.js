@@ -22,8 +22,8 @@ const Button = styled.button`
 	text-transform: uppercase;
 `;
 
-const SmallWhiteButton = ({ children }) => {
-	return <Button>{children}</Button>;
+const SmallWhiteButton = ({ children, onClick }) => {
+	return <Button onClick={onClick}>{children}</Button>;
 };
 
 export default SmallWhiteButton;

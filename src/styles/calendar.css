@@ -1,0 +1,111 @@
+button {
+  cursor: pointer;
+}
+
+.container {
+  position: absolute;
+  width: 379px;
+  height: auto;
+
+  left: 25px;
+
+  border: 1px solid var(--main-pink);
+  border-radius: 6px;
+}
+
+h3 {
+  height: 26px;
+  margin-left: 23px;
+  /* title */
+
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+}
+
+/* 위 파트 */
+.container .title {
+  display: flex;
+}
+
+/* 모르겠단 */
+.container .title > button {
+  border: none;
+  margin-left: 5px;
+  height: 20px;
+  align-self: center;
+  background: none;
+}
+
+/* 화살표 */
+.container .title .pagination {
+  margin-left: auto;
+  align-self: center;
+}
+/* 화살표 버튼 그 자체 */
+.container .title .pagination button {
+  color: var(--main-pink);
+  margin: 0;
+  border: none;
+  background: none;
+  line-height: 11px;
+}
+
+/* 요일 */
+.container .week {
+  color: var(--main-pink);
+  display: flex;
+}
+
+/* 요일 하나하나 */
+.container .week .weekday {
+  width: calc(379px / 7);
+
+  text-align: center;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+
+  align-items: center;
+  text-align: center;
+}
+
+.container .date {
+  margin-top: 26px;
+}
+
+/* 날짜 부분 */
+.container .date .weekday {
+  box-sizing: border-box;
+  width: calc(274px / 7);
+  height: 40px;
+
+  margin: 7px;
+
+  float: left;
+  text-align: center;
+  line-height: 40px;
+
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+
+  align-items: center;
+  text-align: center;
+}
+
+/* 오늘 날짜  */
+.container .date .today {
+  background-color: var(--main-pink);
+
+  font-family: "Apple SD Gothic Neo";
+
+  color: white;
+  font-weight: 700;
+  border-radius: 50%;
+}

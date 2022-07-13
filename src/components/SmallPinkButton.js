@@ -26,8 +26,8 @@ const Button = styled.button`
 	color: white;
 `;
 
-const SmallPinkButton = ({ children }) => {
-	return <Button>{children}</Button>;
+const SmallPinkButton = ({ children, onClick }) => {
+	return <Button onClick={onClick}>{children}</Button>;
 };
 
 export default SmallPinkButton;
