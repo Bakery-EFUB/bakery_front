@@ -183,7 +183,7 @@ const ProposalTaste = () => {
 
       <div
         style={{
-          margin: "154px 24px auto 24px",
+          margin: "95px 24px auto 24px",
           display: "flex",
           justifyContent: "space-between",
         }}
