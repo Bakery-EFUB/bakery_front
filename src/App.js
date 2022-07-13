@@ -5,6 +5,7 @@ import LoadingPage from "./pages/LoadingPage";
 import LoginHome from "./pages/LoginHome";
 import MainHome from "./pages/MainHome";
 import MyProposal from "./pages/MyProposal";
+import ShopInformationModify from "./pages/ShopInformationModify";
 
 function App() {
   return (
