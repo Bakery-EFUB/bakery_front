@@ -8,9 +8,9 @@ const ShopName = styled.input`
   height: 50px;
   left: 24px;
   top: 291.87px;
-  background: #f0f0f0;
+  background: var(--sub-lightgray);
   border-radius: 6px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--sub-lightgray);
 `;
 
 const ShopIntroduce = styled.input`
@@ -19,9 +19,9 @@ const ShopIntroduce = styled.input`
   height: 125px;
   left: 24px;
   top: 403.87px;
-  background: #f0f0f0;
+  background: var(--sub-lightgray);
   border-radius: 6px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--sub-lightgray);
   text-align: justify;
 `;
 
@@ -31,9 +31,9 @@ const ShopNumber = styled.input`
   height: 50px;
   left: 24px;
   top: 590.87px;
-  background: #f0f0f0;
+  background: var(--sub-lightgray);
   border-radius: 6px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--sub-lightgray);
 `;
 
 const ShopLocation = styled.input`
@@ -42,9 +42,9 @@ const ShopLocation = styled.input`
   height: 50px;
   left: 24px;
   top: 703px;
-  background: #f0f0f0;
+  background: var(--sub-lightgray);
   border-radius: 6px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--sub-lightgray);
 `;
 
 const ShopOperatingHours = styled.input`
@@ -53,9 +53,9 @@ const ShopOperatingHours = styled.input`
   height: 50px;
   left: 24px;
   top: 815px;
-  background: #f0f0f0;
+  background: var(--sub-lightgray);
   border-radius: 6px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--sub-lightgray);
 `;
 
 const ShopKaKao = styled.input`
@@ -64,9 +64,9 @@ const ShopKaKao = styled.input`
   height: 50px;
   left: 24px;
   top: 927px;
-  background: #f0f0f0;
+  background: var(--sub-lightgray);
   border-radius: 6px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--sub-lightgray);
 `;
 
 const ShopInstagram = styled.input`
@@ -75,9 +75,9 @@ const ShopInstagram = styled.input`
   height: 50px;
   left: 24px;
   top: 1039px;
-  background: #f0f0f0;
+  background: var(--sub-lightgray);
   border-radius: 6px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--sub-lightgray);
 `;
 
 const ShopPhoto = styled.input`
@@ -86,9 +86,9 @@ const ShopPhoto = styled.input`
   height: 100px;
   left: 24px;
   top: 1151px;
-  background: #f0f0f0;
+  background: var(--sub-lightgray);
   border-radius: 6px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--sub-lightgray);
   text-align: center;
   &:hover {
     border: 2px dashed #333;
@@ -101,9 +101,9 @@ const ShopMenuPhoto = styled.input`
   height: 100px;
   left: 24px;
   top: 1313px;
-  background: #f0f0f0;
+  background: var(--sub-lightgray);
   border-radius: 6px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--sub-lightgray);
   text-align: center;
   &:hover {
     border: 2px dashed #333;
@@ -116,9 +116,9 @@ const ShopMenuPhoto2 = styled.input`
   height: 100px;
   left: 24px;
   top: 1423px;
-  background: #f0f0f0;
+  background: var(--sub-lightgray);
   border-radius: 6px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--sub-lightgray);
   text-align: center;
   &:hover {
     border: 2px dashed #333;
@@ -131,9 +131,9 @@ const RegisterBtn = styled.button`
   height: 60px;
   left: 24px;
   top: 1593.19px;
-  background: #ff7b72;
+  background: var(--main-pink);
   border-radius: 6px;
-  border: 1px solid #ff7b72;
+  border: 1px solid var(--main-pink);
   color: white;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
