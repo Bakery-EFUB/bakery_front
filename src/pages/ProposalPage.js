@@ -4,11 +4,13 @@ import TopBar from "../components/TopBar";
 import ProposalBox from "../components/WholeProposals/PropasalBox";
 import ProposalTitle from "../images/ProposalTitle.svg";
 import ChooseBox from "../components/WholeProposals/ChooseBox";
-
+import NoProposal from "../components/WholeProposals/NoProposal";
 const TextProposal = styled.img`
-    margin-left: 40%;
-    margin-right: 40%;
-    margin-top: 10%;
+   position: absolute;
+    width: 177px;
+    height: 26px;
+    left: 126px;
+    top: 160px;
 `;
 const ProposalPage = ()=>{
     return(
@@ -16,7 +18,7 @@ const ProposalPage = ()=>{
             <TopBar/>
             <TextProposal src={ProposalTitle}/>
             <ChooseBox></ChooseBox>
-            <ProposalBox/>
+            <NoProposal/>
         </div>        
     )
 };

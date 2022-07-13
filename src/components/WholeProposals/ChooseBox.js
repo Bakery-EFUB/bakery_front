@@ -3,22 +3,25 @@ import styled from "styled-components";
 import DropdownArrow1 from "../../images/DropdownArrow1.svg";
 
 const ContentBoxWithMargin = styled.div`
-  padding: 0 23.5px;
-  margin-top: 70px;
+  position: absolute;
+  width: 381px;
+  height: 31px;
+  left: 24px;
+  top: 208px;
 `;
 const DropdownGroup = styled.div`
   margin-top: 23px;
   display: flex;
-  gap: 10px 53px;
+  gap: 10px 20px;
   flex-wrap: wrap;
 `;
 const CustomSelect = styled.select`
   font-family: 'Apple SD Gothic Neo';
   position: relative;
-  font-size: 12px;
+  font-size: 15px;
   appearance: none;
-  padding-right: 8px;
-  border: none;
+  padding-right: 2px;
+  border:none;
   z-index: 3;
   background-color: rgba(0, 0, 0, 0);
   color: #949494;
@@ -33,7 +36,6 @@ const CustomSelect = styled.select`
   }
 `;
 const DropdownArrow = styled.span`
-  width: 24px;
   & > img {
     width: 12px;
     margin-bottom: 4px;
@@ -56,9 +58,9 @@ const Dropdown = ({ items }) => {
             </option>
           ))}
         </CustomSelect>
-        <DropdownArrow>
-          <img src={DropdownArrow1} alt="dropdown" />
-        </DropdownArrow>
+          <DropdownArrow>
+            <img src={DropdownArrow1} alt="dropdown" />
+          </DropdownArrow>
       </div>
     );
   };
