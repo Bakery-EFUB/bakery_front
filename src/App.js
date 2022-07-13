@@ -9,15 +9,14 @@ import ShopInformationRegister from "./pages/ShopInformationRegister";
 
 function App() {
   return (
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route exact path="/loginhome" element={<LoginHome />} />
-    //     <Route exact path="/loading" element={<LoadingPage />} />
-    //     <Route exact path="/proposal" element={<MyProposal />} />
-    //     <Route exact path="/home" element={<MainHome />} />
-    //   </Routes>
-    // </BrowserRouter>
-    <ShopInformationRegister />
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/loginhome" element={<LoginHome />} />
+        <Route exact path="/loading" element={<LoadingPage />} />
+        <Route exact path="/proposal" element={<MyProposal />} />
+        <Route exact path="/home" element={<MainHome />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
