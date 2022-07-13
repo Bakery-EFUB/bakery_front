@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingPage from "./pages/LoadingPage";
 import LoginHome from "./pages/LoginHome";
 import MainHome from "./pages/MainHome";
+import ShopMypageStart from "./pages/ShopMyPageStart";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route exact path="/loading" element={<LoadingPage />} />
         <Route exact path="/proposal" element={<Proposal6 />} />
         <Route exact path="/home" element={<MainHome />} />
+        <Route exact path="/h" element={<ShopMypageStart />} />
       </Routes>
     </BrowserRouter>
   );

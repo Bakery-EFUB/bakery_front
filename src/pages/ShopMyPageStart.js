@@ -4,6 +4,9 @@ import UserLogoimg from "../images/UserLogo.svg";
 import CountManageimg from "../images/CountManage.svg";
 import Readingimg from "../images/Reading.svg";
 
+const WrapBox = styled.div`
+  width: 428px;
+`;
 const Box = styled.div`
   background-color: #ffebea;
   position: absolute;
@@ -150,7 +153,7 @@ const Reading = styled.div`
 
 const ShopMypageStart = () => {
   return (
-    <div>
+    <WrapBox>
       <TopBar></TopBar>
       <MypagePlace>마이페이지</MypagePlace>
       <UserName>터틀힙 님,</UserName>
@@ -163,7 +166,7 @@ const ShopMypageStart = () => {
         <Button>가게 정보 등록완료</Button>
         <Reading></Reading>
       </Box>
-    </div>
+    </WrapBox>
   );
 };
 
