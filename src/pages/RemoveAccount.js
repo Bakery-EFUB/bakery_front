@@ -8,33 +8,41 @@ const Container = styled.div`
     flex-direction: column;
 `;
 const Text = styled.div`
-    color: black;
+    position: absolute;
+    width: 152px;
+    height: 58px;
+    left: 24px;
+    top: 160px;
+
     font-family: 'Apple SD Gothic Neo';
-    font-size: 20px;
-    text-align: left;
-    margin-top: 20%;
-    margin-left: 10%;
-    font-weight: bold;
-    white-space: wrap;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+
+
+    color: #202020;
 `;
 const Background = styled.img`
-    margin-top:30%;
+    margin-top:296px;
+    margin-bottom: 214.3px;
     align-items: center;
 `;
 const ButtonBox = styled.div`
-    margin-top: 78%;
-    margin-left: 5%;
+    margin-top: 806px;
+    margin-left: 24.38px;
+    padding-bottom: 60px;
 `;
 const RemoveAccount = () => {
     return(
-        <div>
+        <Container>
             <TopBar/>
             <Text>회원 탈퇴가<br/>완료되었습니다.</Text>
             <Background src={RemoveBackground}/>
             <ButtonBox>
                 <BigPinkButton>메인 홈으로 돌아가기</BigPinkButton>
             </ButtonBox>
-        </div>
+        </Container>
     );
 };
 export default RemoveAccount;
