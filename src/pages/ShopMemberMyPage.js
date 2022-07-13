@@ -5,9 +5,9 @@ import UserLogoimg from "../images/UserLogo.svg";
 import CountManageimg from "../images/CountManage.svg";
 
 const Box = styled.div`
-  background-color: #ffebea;
+  background-color: var(--sub-pink);
   position: absolute;
-  width: 428px;
+  width: 100%;
   height: 619.09px;
   left: 0px;
   top: 306.91px;
@@ -15,14 +15,14 @@ const Box = styled.div`
 
 const Button = styled.button`
   position: absolute;
-  width: 380px;
+  width: calc(100% - 48px);
   height: 60px;
-  left: 23.86px;
+  left: 24px;
   top: 84.63px;
   color: white;
-  background: #ff7b72;
+  background: var(--main-pink);
   border-radius: 6px;
-  border: 0.1px solid #ff7b72;
+  border: 0.1px solid var(--main-pink);
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
@@ -34,14 +34,14 @@ const Button = styled.button`
 
 const Button2 = styled.button`
   position: absolute;
-  width: 380px;
+  width: calc(100% - 48px);
   height: 60px;
   left: 23.86px;
   top: 154.63px;
   color: white;
-  background: #ff7b72;
+  background: var(--main-pink);
   border-radius: 6px;
-  border: 0.1px solid #ff7b72;
+  border: 0.1px solid var(--main-pink);
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
@@ -53,7 +53,7 @@ const Button2 = styled.button`
 
 const BottomProposal = styled.div`
   position: absolute;
-  width: 380.14px;
+  width: calc(100% - 48px);
   height: 253.21px;
   left: 23.86px;
   top: 297.57px;
@@ -63,8 +63,8 @@ const BottomProposal = styled.div`
 `;
 
 const Article = styled.article`
-  width: 120px;
-  height: 120px;
+  width: 105px;
+  height: 105px;
   border: 1px solid red;
   display: inline-block;
 `;
@@ -72,18 +72,21 @@ const Article = styled.article`
 const MoreView = styled.div`
   background: url(${MoreViewimg});
   position: absolute;
-  width: 195.31px;
+  width: 32px;
   height: 30.31px;
   top: 570.42px;
-  left: 195.31px;
+  left: 50%;
+  text-align: center;
   background-repeat: no-repeat;
+
+  transform: translateX(-50%);
 `;
 
 const MypagePlace = styled.div`
   position: absolute;
-  left: 166px;
+  left: 50%;
   top: 160px;
-  bottom: 0%;
+  transform: translateX(-50%);
   text-align: left;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
@@ -99,7 +102,7 @@ const CountManager = styled.div`
   position: absolute;
   width: 54px;
   height: 14px;
-  left: 349.69px;
+  margin-left: 310px;
   top: 280.7px;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
@@ -169,11 +172,15 @@ const ShopMemberMyPage = () => {
     <div>
       <TopBar></TopBar>
       <MypagePlace>마이페이지</MypagePlace>
-      <UserName>터틀힙 님,</UserName>
-      <CountManager></CountManager>
+      <div>
+        {" "}
+        <UserName>터틀힙 님,</UserName>
+        <CountManager></CountManager>
+      </div>
+
       <UserPlace>Caker 가게 회원</UserPlace>
       <UserLogo></UserLogo>
-      <Box className="BottomPinkBackground">
+      <Box>
         <Button>가게 정보 관리</Button>
         <Button2>픽업 일정 관리</Button2>
         <CommitProposal>댓글 단 제안서</CommitProposal>
