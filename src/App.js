@@ -1,18 +1,24 @@
-import "./App.css";
-import ProposalPage from "./pages/ProposalPage";
-import TopBar from "./components/TopBar";
-import ProposalBox from "./components/WholeProposals/PropasalBox";
-import ChooseBox from "./components/WholeProposals/ChooseBox";
-import ProposalTitle from "./images/ProposalTitle.svg"
+
+import './App.css';
+
+import MyProposal from './pages/MyProposal';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LoadingPage from './pages/LoadingPage';
+import LoginHome from './pages/LoginHome';
+import MainHome from './pages/MainHome';
+
 function App() {
-  return (
-    <div>
-      <TopBar/>
-      <img src={ProposalTitle}/>
-      <ChooseBox/>
-      <ProposalBox/>
-    </div>
-  );
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route exact path="/loginhome" element={<LoginHome />} />
+				<Route exact path="/loading" element={<LoadingPage />} />
+				<Route exact path="/proposal" element={<MyProposal />} />
+				<Route exact path="/home" element={<MainHome />} />
+			</Routes>
+		</BrowserRouter>
+	);
 }
 
 export default App;
