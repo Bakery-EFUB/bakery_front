@@ -1,5 +1,6 @@
 import TopBar from "../components/TopBar";
 import styled from "styled-components";
+import React from "react";
 
 const AccountName = styled.input`
   position: absolute;
