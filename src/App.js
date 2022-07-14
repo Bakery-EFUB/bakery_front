@@ -1,3 +1,4 @@
+
 import "./App.css";
 
 import Proposal7 from "./pages/Proposal7";
@@ -18,6 +19,7 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
+
 }
 
 export default App;
