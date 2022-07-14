@@ -2,11 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
-	position: absolute;
 	width: 184px;
 	height: 60px;
-	left: 220px;
-	top: 806px;
 
 	/* main pink */
 
@@ -28,8 +25,8 @@ const Button = styled.button`
 	color: white;
 `;
 
-const SmallGrayButton = ({ children }) => {
-	return <Button>{children}</Button>;
+const SmallGrayButton = ({ children, onClick }) => {
+	return <Button onClick={onClick}>{children}</Button>;
 };
 
 export default SmallGrayButton;

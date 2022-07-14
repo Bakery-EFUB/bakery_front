@@ -11,13 +11,13 @@ import ButtonSidebar from "./ButtonSidebar";
 import "./Sidebar/Sidebar.css";
 
 const TopBarPink = styled.div`
+  margin: 0;
   background-color: var(--main-pink);
   width: 100%;
   overflow: hidden;
   height: 60px;
   position: sticky;
   top: 0;
-  width: 100%;
 `;
 
 const TopLogo = styled.div`
