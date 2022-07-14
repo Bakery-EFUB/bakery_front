@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import TopBar from "../components/TopBar";
+import TopBar from "../../components/TopBar";
 
-import SmallPinkButton from "../components/SmallPinkButton";
-import SmallWhiteButton from "../components/SmallWhiteButton";
+import SmallPinkButton from "../../components/SmallPinkButton";
+import SmallWhiteButton from "../../components/SmallWhiteButton";
 
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../../components/PageTitle";
 
 const Text = styled.p`
   font-family: "Apple SD Gothic Neo";
@@ -16,8 +16,7 @@ const Text = styled.p`
   text-align: center;
   width: 290px;
   height: 26px;
-
-  margin: ${props => props.margin};
+  margin: 44px auto 0 auto;
 `;
 
 const ProgessBar = styled.div`
@@ -57,7 +56,7 @@ const Circle = styled.div`
 
 const Option = styled.p`
   margin: auto 0 auto 23px;
-  width: 75px;
+  width: 150px;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 400;
@@ -68,64 +67,15 @@ const Option = styled.p`
   color: var(--black);
 `;
 
-const Exp = styled.p`
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 32px;
-  /* identical to box height */
+const ProposalPrice = () => {
+  const [isChecked, setIsChecked] = useState(3);
 
-  color: var(--sub-darkgray);
-`;
-
-const DesignInput = styled.div`
-  width: 380px;
-
-  min-height: 50px;
-  height: auto;
-
-  margin: 38px auto 0 auto;
-  background: var(--sub-lightgray);
-  border-radius: 6px;
-  border: none;
-  padding: auto;
-
-  textarea {
-    width: 346px;
-    height: 17px;
-
-    resize: none;
-    overflow: auto;
-
-    padding: 17px;
-
-    background: transparent;
-    border: none;
-    color: var(--sub-darkgray);
-
-    font-family: "Apple SD Gothic Neo";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-  }
-
-  textarea::placeholder {
-    color: var(--background);
-  }
-  textarea:focus {
-    outline: none;
-  }
-`;
-
-const ProposalTaste = () => {
-  const [isChecked, setIsChecked] = useState(1);
-
-  const [tastes, setTastes] = useState([
-    { id: 1, taste: "초코" },
-    { id: 2, taste: "바닐라" },
-    { id: 3, taste: "기타" },
+  const [prices, setPrices] = useState([
+    { id: 1, price: "1만원 미만" },
+    { id: 2, price: "1만원 이상 3만원 미만" },
+    { id: 3, price: "3만원 이상 7만원 미만" },
+    { id: 4, price: "7만원 이상 10만원 미만" },
+    { id: 5, price: "10만원 이상" },
   ]);
 
   const onToggle = id => {
@@ -137,53 +87,47 @@ const ProposalTaste = () => {
       <TopBar />
       <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
       <ProgessBar />
-      <Text margin="44px auto 0 auto">어떤 맛을 원하시나요?</Text>
+      <Text>케이크 사이즈를 선택해주세요.</Text>
 
       <Wrapper>
-        {tastes.map(taste => {
-          if (taste.id === isChecked) {
+        {prices.map(price => {
+          if (price.id === isChecked) {
             return (
               <div
-                onClick={() => onToggle(taste.id)}
+                onClick={() => onToggle(price.id)}
                 className="item"
-                key={taste.id}
+                key={price.id}
                 style={{
                   display: "flex",
                   height: "60px",
                 }}
               >
                 <Circle checked />
-                <Option>{taste.taste}</Option>
+                <Option>{price.price}</Option>
               </div>
             );
           } else {
             return (
               <div
-                onClick={() => onToggle(taste.id)}
+                onClick={() => onToggle(price.id)}
                 className="item"
-                key={taste.id}
+                key={price.id}
                 style={{
                   display: "flex",
                   height: "60px",
                 }}
               >
                 <Circle />
-                <Option>{taste.taste}</Option>
+                <Option>{price.price}</Option>
               </div>
             );
           }
         })}
       </Wrapper>
 
-      <Text margin="100px auto 0 auto">디자인에 대해 상세히 적어주세요!</Text>
-
-      <DesignInput>
-        <textarea placeholder="ex) 레터링을 ‘생일 축하해'로 해주세요!" />
-      </DesignInput>
-
       <div
         style={{
-          margin: "95px 24px auto 24px",
+          margin: "174px 24px auto 24px",
           display: "flex",
           justifyContent: "space-between",
         }}
@@ -195,4 +139,4 @@ const ProposalTaste = () => {
   );
 };
 
-export default ProposalTaste;
+export default ProposalPrice;
