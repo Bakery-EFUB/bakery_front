@@ -1,20 +1,21 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const PageTitle = ({ title, margin }) => {
-	const PageTitleBox = styled.div`
-		display: flex;
-		justify-content: center;
+  const PageTitleBox = styled.div`
+    display: flex;
+    justify-content: center;
 
-		margin: ${margin};
-	`;
+    margin: ${margin};
+  `;
 
-	const Highlight = styled.div`
-		display: inline-block;
+  const Highlight = styled.div`
+    display: inline-block;
 
-		height: 13px;
+  	height: 13px;
 		background-color: var(--sub-pink);
 		vertical-align: center;
-	`;
+  `;
+
 
 	const TitleText = styled.div`
 		width: fit-content;
@@ -30,16 +31,16 @@ const PageTitle = ({ title, margin }) => {
 		line-height: 26px;
 		text-align: center;
 
-		color: #202020;
+		color: var(--black-text);
 	`;
 
-	return (
-		<PageTitleBox>
-			<Highlight>
-				<TitleText>{title}</TitleText>
-			</Highlight>
-		</PageTitleBox>
-	);
+  return (
+    <PageTitleBox>
+      <Highlight>
+        <TitleText>{title}</TitleText>
+      </Highlight>
+    </PageTitleBox>
+  );
 };
 
 export default PageTitle;
