@@ -1,17 +1,23 @@
 import styled from "styled-components";
 import TopLogoimg from "../images/TopLogo.svg";
 import TopMenuBarimg from "../images/TopMenuBar.svg";
-
+import React, { useState } from "react";
 import "../styles/common.scss";
+import SidebarCloseBtn from "../images/SidebarCloseBtn.svg";
+import { Link } from "react-router-dom";
+import { SidebarDataCustomer } from "./Sidebar/SidebarData";
+import GuestProfile from "../images/Profile.svg";
+import ButtonSidebar from "./ButtonSidebar";
+import "./Sidebar/Sidebar.css";
 
 const TopBarPink = styled.div`
+  margin: 0;
   background-color: var(--main-pink);
   width: 100%;
   overflow: hidden;
   height: 60px;
   position: sticky;
   top: 0;
-  width: 100%;
 `;
 
 const TopLogo = styled.div`
@@ -36,12 +42,57 @@ const TopMenuBar = styled.div`
   bottom: 36.59%;
 `;
 
+const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 0 32px;
+`;
+const ProfileImg = styled.div`
+  background-repeat: no-repeat;
+  background-position: center center;
+  background: url(${GuestProfile});
+  width: 47px;
+  height: 47px;
+  margin-right: 10px;
+`;
+const CloseBtn = styled.div`
+  height: 19px;
+  width: 19px;
+  background: url(${SidebarCloseBtn});
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: absolute;
+  right: 30px;
+  margin-bottom: 10%;
+`;
+
 const TopBar = () => {
+  const [sidebar, setSidebar] = useState(false);
+  const showSidebar = () => setSidebar(!sidebar);
+
   return (
     <div>
       <TopBarPink>
         <TopLogo></TopLogo>
-        <TopMenuBar></TopMenuBar>
+        <TopMenuBar onClick={showSidebar}></TopMenuBar>
+        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+          <ul className="nav-menu-items"></ul>
+          <li className="navbar-toggle">
+            <CloseBtn onClick={showSidebar}></CloseBtn>
+          </li>
+          <Profile>
+            <ProfileImg></ProfileImg>로그인해 주세요
+          </Profile>
+          <hr />
+          {SidebarDataCustomer.map((item, index) => {
+            return (
+              <li key={index} className="nav-text">
+                <Link to={item.path}>{item.title}</Link>
+              </li>
+            );
+          })}
+          <ButtonSidebar text="로그인"></ButtonSidebar>
+        </nav>
       </TopBarPink>
     </div>
   );
