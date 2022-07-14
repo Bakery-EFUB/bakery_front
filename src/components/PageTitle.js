@@ -18,11 +18,19 @@ const PageTitle = ({ title, margin }) => {
 
 	const TitleText = styled.div`
 		width: fit-content;
-		font-size: 22px;
-		font-weight: bold;
+
 		margin: 0 3px;
 		position: relative;
 		bottom: 9px;
+
+		font-family: 'Apple SD Gothic Neo';
+		font-style: normal;
+		font-weight: 700;
+		font-size: 22px;
+		line-height: 26px;
+		text-align: center;
+
+		color: #202020;
 	`;
 
 	return (
