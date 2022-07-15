@@ -1,4 +1,5 @@
 body {
+
     margin: 0;
 }
 
@@ -19,4 +20,5 @@ code {
 @font-face {
     font-family: "Apple SD Gothic Neo";
     src: url("./styles/fonts/AppleSDGothicNeoM.ttf") format("truetype");
+
 }
