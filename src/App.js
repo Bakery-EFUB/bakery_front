@@ -1,5 +1,4 @@
 import "./App.css";
-import Proposal6 from "./pages/Proposal6";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingPage from "./pages/LoadingPage";
 import LoginHome from "./pages/LoginHome";
