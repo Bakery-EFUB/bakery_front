@@ -5,7 +5,6 @@ import SearchIcon from "../images/SearchIcon.svg";
 const SearchBar = ({ text }) => {
   const SearchBarContainer = styled.div`
     border-radius: 6px;
-    position: relative;
     width: 100%;
     height: 50px;
     background-color: var(--sub-lightpink);
