@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import TopBar from "../../components/TopBar";
+import { Link } from "react-router-dom";
 
 import SmallPinkButton from "../../components/SmallPinkButton";
 import SmallWhiteButton from "../../components/SmallWhiteButton";
@@ -82,7 +82,7 @@ const Exp = styled.p`
 `;
 
 const Size = () => {
-  const [isChecked, setIsChecked] = useState(3);
+  const [isChecked, setIsChecked] = useState(null);
 
   const [sizes, setSizes] = useState([
     { id: 1, size: "미니", exp: "지름 11cm, 1~2인분" },
@@ -96,8 +96,6 @@ const Size = () => {
   const onToggle = id => {
     setIsChecked(id);
   };
-
-  const [isDone, setIsDone] = useState(true);
 
   return (
     <div>
@@ -151,13 +149,15 @@ const Size = () => {
           justifyContent: "center",
         }}
       >
-        <SmallWhiteButton>이전</SmallWhiteButton>
+        <Link to="/proposal/cake">
+          <SmallWhiteButton>이전</SmallWhiteButton>
+        </Link>
 
         <div style={{ marginLeft: "6px" }}>
-          {isDone ? (
-            <SmallPinkButton onClick={() => setIsDone(!isDone)}>
-              완료
-            </SmallPinkButton>
+          {isChecked ? (
+            <Link to="/proposal/taste">
+              <SmallPinkButton>완료</SmallPinkButton>
+            </Link>
           ) : (
             <SmallGrayButton>완료</SmallGrayButton>
           )}

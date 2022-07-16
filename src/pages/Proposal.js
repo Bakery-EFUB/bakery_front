@@ -12,8 +12,6 @@ import Price from "./Proposal/Price";
 import Design from "./Proposal/Design";
 
 const Proposal = () => {
-  const [isDone, setIsDone] = useState(false);
-
   return (
     <div>
       <TopBar />

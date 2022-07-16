@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import TopBar from "../../components/TopBar";
 
 import SmallPinkButton from "../../components/SmallPinkButton";
 import SmallWhiteButton from "../../components/SmallWhiteButton";
@@ -54,16 +54,16 @@ const Wrapper = styled.div`
 
 const City = () => {
   const [cityArray, setCityArray] = useState([
-    { id: 1, city: "은평구", selected: true },
+    { id: 1, city: "은평구", selected: false },
     { id: 2, city: "종로구", selected: false },
     { id: 3, city: "광진구", selected: false },
-    { id: 4, city: "서대문구", selected: true },
+    { id: 4, city: "서대문구", selected: false },
     { id: 5, city: "강북구", selected: false },
     { id: 6, city: "중랑구", selected: false },
     { id: 7, city: "마포구", selected: false },
     { id: 8, city: "성북구", selected: false },
     { id: 9, city: "노원구", selected: false },
-    { id: 10, city: "용산구", selected: true },
+    { id: 10, city: "용산구", selected: false },
     { id: 11, city: "동대문구", selected: false },
     { id: 12, city: "도봉구", selected: false },
     { id: 13, city: "중구", selected: false },
@@ -81,6 +81,18 @@ const City = () => {
   };
 
   const [isDone, setIsDone] = useState(true);
+
+  useEffect(() => {
+    let city;
+    for (city of cityArray) {
+      if (city.selected == true) {
+        setIsDone(true);
+        break;
+      } else {
+        setIsDone(false);
+      }
+    }
+  }, [cityArray]);
 
   return (
     <div>
@@ -120,13 +132,15 @@ const City = () => {
           justifyContent: "center",
         }}
       >
-        <SmallWhiteButton>이전</SmallWhiteButton>
+        <Link to="/proposal">
+          <SmallWhiteButton>이전</SmallWhiteButton>
+        </Link>
 
         <div style={{ marginLeft: "6px" }}>
           {isDone ? (
-            <SmallPinkButton onClick={() => setIsDone(!isDone)}>
-              완료
-            </SmallPinkButton>
+            <Link to="/proposal/cake">
+              <SmallPinkButton>완료</SmallPinkButton>
+            </Link>
           ) : (
             <SmallGrayButton>완료</SmallGrayButton>
           )}

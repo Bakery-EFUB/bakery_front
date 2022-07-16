@@ -8,6 +8,7 @@ import SmallPinkButton from "../../components/SmallPinkButton";
 
 import CustomCalendar from "../../components/CustomCalendar";
 import PageTitle from "../../components/PageTitle";
+import ProposalText from "../../components/ProposalText";
 
 const ProgessBar = styled.div`
   height: 4px;
@@ -34,9 +35,9 @@ const Text = styled.p`
 
 const CalendarSection = styled.div`
   position: "relative";
-  margin-top: 27px;
 
-  width: 100%;
+  margin: 27px 24px 0 24px;
+
   height: 424px;
 `;
 
@@ -47,10 +48,11 @@ const PickUp = () => {
       <PageTitle margin="56px auto 0 auto" title="제안서 작성하기" />
 
       <ProgessBar />
-      <Text>픽업 날짜를 선택해주세요.</Text>
-      {/* <CalendarSection>
+      <ProposalText text="픽업 날짜를 선택해주세요." />
+
+      <CalendarSection>
         <CustomCalendar />
-      </CalendarSection> */}
+      </CalendarSection>
 
       <div
         style={{

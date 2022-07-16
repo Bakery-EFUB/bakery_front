@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import TopBar from "../../components/TopBar";
+import { Link } from "react-router-dom";
 
 import SmallPinkButton from "../../components/SmallPinkButton";
 import SmallWhiteButton from "../../components/SmallWhiteButton";
@@ -71,7 +71,7 @@ const Option = styled.p`
 `;
 
 const Price = () => {
-  const [isChecked, setIsChecked] = useState(3);
+  const [isChecked, setIsChecked] = useState(null);
 
   const [prices, setPrices] = useState([
     { id: 1, price: "1만원 미만" },
@@ -84,13 +84,12 @@ const Price = () => {
   const onToggle = id => {
     setIsChecked(id);
   };
-  const [isDone, setIsDone] = useState(true);
 
   return (
     <div>
       <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
       <ProgessBar />
-      <Text>케이크 사이즈를 선택해주세요.</Text>
+      <Text>원하는 가격대를 선택해주세요.</Text>
 
       <Wrapper>
         {prices.map(price => {
@@ -136,13 +135,15 @@ const Price = () => {
           justifyContent: "center",
         }}
       >
-        <SmallWhiteButton>이전</SmallWhiteButton>
+        <Link to="/proposal/taste">
+          <SmallWhiteButton>이전</SmallWhiteButton>
+        </Link>
 
         <div style={{ marginLeft: "6px" }}>
-          {isDone ? (
-            <SmallPinkButton onClick={() => setIsDone(!isDone)}>
-              완료
-            </SmallPinkButton>
+          {isChecked ? (
+            <Link to="/proposal/design">
+              <SmallPinkButton>완료</SmallPinkButton>
+            </Link>
           ) : (
             <SmallGrayButton>완료</SmallGrayButton>
           )}

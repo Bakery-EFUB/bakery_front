@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import SmallPinkButton from "../../components/SmallPinkButton";
 import SmallWhiteButton from "../../components/SmallWhiteButton";
 import SmallGrayButton from "../../components/SmallGrayButton";
-
+import PageTitle from "../../components/PageTitle";
+import ProposalText from "../../components/ProposalText";
 const Text = styled.p`
   font-family: "Apple SD Gothic Neo";
 
@@ -52,9 +54,8 @@ const Button = styled.button`
 `;
 
 const ImageBox = styled.div`
-  margin-top: 19px;
+  margin: 19px 24px 0 24px;
 
-  width: 380px;
   height: 256px;
 
   /* background */
@@ -69,8 +70,10 @@ const Design = () => {
 
   return (
     <div>
+      <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
+
       <ProgessBar />
-      <Text>디자인 시안이 있다면 알려주세요.</Text>
+      <ProposalText text="디자인 시안이 있다면 알려주세요." />
       <Button>사진 업로드</Button>
       <ImageBox />
       <div
@@ -81,16 +84,14 @@ const Design = () => {
           justifyContent: "center",
         }}
       >
-        <SmallWhiteButton>이전</SmallWhiteButton>
+        <Link to="/proposal/price">
+          <SmallWhiteButton>이전</SmallWhiteButton>
+        </Link>
 
         <div style={{ marginLeft: "6px" }}>
-          {isDone ? (
-            <SmallPinkButton onClick={() => setIsDone(!isDone)}>
-              완료
-            </SmallPinkButton>
-          ) : (
-            <SmallGrayButton>완료</SmallGrayButton>
-          )}
+          <Link to="/proposal/pickup">
+            <SmallPinkButton>완료</SmallPinkButton>
+          </Link>
         </div>
       </div>
     </div>
