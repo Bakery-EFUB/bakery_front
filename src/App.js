@@ -1,13 +1,11 @@
 import "./App.css";
-import Proposal6 from "./pages/Proposal6";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingPage from "./pages/LoadingPage";
 import LoginHome from "./pages/LoginHome";
 import MainHome from "./pages/MainHome";
-import MyProposal from "./pages/MyProposal";
 import SearchPage from "./pages/SearchPage";
 import Recommend from "./pages/Recommend";
-import ProposalCake "./pages/Proposal/ProposalCake"
+import ProposalCake from "./pages/Proposal/ProposalCake";
 
 function App() {
   return (
@@ -15,12 +13,10 @@ function App() {
       <Routes>
         <Route exact path="/loginhome" element={<LoginHome />} />
         <Route exact path="/loading" element={<LoadingPage />} />
-        <Route exact path="/proposal" element={<MyProposal />} />
         <Route exact path="/home" element={<MainHome />} />
         <Route exact path="/search" element={<SearchPage />} />
         <Route exact path="/recommend" element={<Recommend />} />
         <Route exact path="/proposal" element={<ProposalCake />} />
-
       </Routes>
     </BrowserRouter>
   );
