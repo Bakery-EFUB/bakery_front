@@ -91,7 +91,7 @@ h3 {
 
   box-sizing: border-box;
 
-  line-height: 35px;
+  line-height: 36px;
 
   vertical-align: center;
   align-items: center;
@@ -100,10 +100,25 @@ h3 {
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 400;
-  font-size: 22px;
+  font-size: 20px;
 }
 
-/* 오늘 날짜  */
+/*일정 있는 날짜 : 연한 핑크 */
+
+.container .date .test .exist {
+  margin: auto;
+  width: 35px;
+  height: 35px;
+  background-color: var(--sub-pink);
+
+  font-family: "Apple SD Gothic Neo";
+
+  color: var(--black);
+  font-weight: 500;
+  border-radius: 50%;
+}
+
+/* 선택된 날짜 : 진한 핑크*/
 .container .date .test .today {
   margin: auto;
   width: 35px;

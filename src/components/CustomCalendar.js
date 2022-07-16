@@ -81,7 +81,42 @@ const CustomCalendar = () => {
     return weekArr;
   }, []);
 
-  const [num, setNum] = useState(1); // 선택된 날짜
+  const [selected, setSelected] = useState(1); // 선택된 날짜
+
+  const [existArr, setExistArr] = useState([
+    { id: 0, exist: false, reservation: "예약 정보" },
+    { id: 1, exist: false, reservation: "예약 정보" },
+    { id: 2, exist: false, reservation: "예약 정보" },
+    { id: 3, exist: false, reservation: "예약 정보" },
+    { id: 4, exist: false, reservation: "예약 정보" },
+    { id: 5, exist: false, reservation: "예약 정보" },
+    { id: 6, exist: false, reservation: "예약 정보" },
+    { id: 7, exist: true, reservation: "예약 정보" },
+    { id: 8, exist: false, reservation: "예약 정보" },
+    { id: 9, exist: false, reservation: "예약 정보" },
+    { id: 10, exist: false, reservation: "예약 정보" },
+    { id: 11, exist: false, reservation: "예약 정보" },
+    { id: 12, exist: false, reservation: "예약 정보" },
+    { id: 13, exist: false, reservation: "예약 정보" },
+    { id: 14, exist: false, reservation: "예약 정보" },
+    { id: 15, exist: false, reservation: "예약 정보" },
+    { id: 16, exist: false, reservation: "예약 정보" },
+    { id: 17, exist: false, reservation: "예약 정보" },
+    { id: 18, exist: false, reservation: "예약 정보" },
+    { id: 19, exist: false, reservation: "예약 정보" },
+    { id: 20, exist: false, reservation: "예약 정보" },
+    { id: 21, exist: false, reservation: "예약 정보" },
+    { id: 22, exist: false, reservation: "예약 정보" },
+    { id: 23, exist: false, reservation: "예약 정보" },
+    { id: 24, exist: false, reservation: "예약 정보" },
+    { id: 25, exist: false, reservation: "예약 정보" },
+    { id: 26, exist: false, reservation: "예약 정보" },
+    { id: 27, exist: false, reservation: "예약 정보" },
+    { id: 28, exist: false, reservation: "예약 정보" },
+    { id: 29, exist: false, reservation: "예약 정보" },
+    { id: 30, exist: false, reservation: "예약 정보" },
+    { id: 31, exist: false, reservation: "예약 정보" },
+  ]);
 
   const returnDay = () => {
     //선택된 달의 날짜들 반환 함수
@@ -98,14 +133,17 @@ const CustomCalendar = () => {
               <div
                 key={i + 1}
                 id={i + 1}
-                onClick={e => setNum(parseInt(e.target.id))}
+                onClick={e => setSelected(parseInt(e.target.id))}
                 className={cx(
+                  { weekday: true }, //전체 날짜 스타일
                   {
                     //오늘 날짜일 때 표시할 스타일 클라스네임
-                    today: i + 1 === num,
+                    today: i + 1 === selected,
+                  },
+                  {
+                    exist: existArr[i + 1].exist,
                   },
 
-                  { weekday: true }, //전체 날짜 스타일
                   {
                     //전체 일요일 스타일
                     sunday:
@@ -140,7 +178,14 @@ const CustomCalendar = () => {
   };
 
   // 선택 된 날짜 출력 (test 코드)
-  console.log("년도 :", selectedYear, "월 :", selectedMonth, "날짜 : ", num);
+  console.log(
+    "년도 :",
+    selectedYear,
+    "월 :",
+    selectedMonth,
+    "날짜 : ",
+    selected
+  );
 
   return (
     <div className="container">
