@@ -3,7 +3,7 @@ button {
 }
 
 .container {
-  position: absolute;
+  position: relative;
   width: 379px;
   height: auto;
 
@@ -76,6 +76,8 @@ h3 {
 
 .container .date {
   margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /* 날짜 부분 */
@@ -86,9 +88,9 @@ h3 {
 
   margin: 7px;
 
-  float: left;
+  /*float: left;*/
   text-align: center;
-  line-height: 40px;
+  line-height: 43px;
 
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
@@ -106,6 +108,6 @@ h3 {
   font-family: "Apple SD Gothic Neo";
 
   color: white;
-  font-weight: 700;
+  font-weight: 500;
   border-radius: 50%;
 }
