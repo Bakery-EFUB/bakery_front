@@ -94,38 +94,40 @@ const CustomCalendar = () => {
       if (week[day] === nowDay) {
         for (let i = 0; i < dateTotalCount; i++) {
           dayArr.push(
-            <div
-              key={i + 1}
-              id={i + 1}
-              onClick={e => setNum(parseInt(e.target.id))}
-              className={cx(
-                {
-                  //오늘 날짜일 때 표시할 스타일 클라스네임
-                  today: i + 1 === num,
-                },
+            <div className="test">
+              <div
+                key={i + 1}
+                id={i + 1}
+                onClick={e => setNum(parseInt(e.target.id))}
+                className={cx(
+                  {
+                    //오늘 날짜일 때 표시할 스타일 클라스네임
+                    today: i + 1 === num,
+                  },
 
-                { weekday: true }, //전체 날짜 스타일
-                {
-                  //전체 일요일 스타일
-                  sunday:
-                    new Date(
-                      selectedYear,
-                      selectedMonth - 1,
-                      i + 1
-                    ).getDay() === 0,
-                },
-                {
-                  //전체 토요일 스타일
-                  saturday:
-                    new Date(
-                      selectedYear,
-                      selectedMonth - 1,
-                      i + 1
-                    ).getDay() === 6,
-                }
-              )}
-            >
-              {i + 1}
+                  { weekday: true }, //전체 날짜 스타일
+                  {
+                    //전체 일요일 스타일
+                    sunday:
+                      new Date(
+                        selectedYear,
+                        selectedMonth - 1,
+                        i + 1
+                      ).getDay() === 0,
+                  },
+                  {
+                    //전체 토요일 스타일
+                    saturday:
+                      new Date(
+                        selectedYear,
+                        selectedMonth - 1,
+                        i + 1
+                      ).getDay() === 6,
+                  }
+                )}
+              >
+                {i + 1}
+              </div>
             </div>
           );
         }
