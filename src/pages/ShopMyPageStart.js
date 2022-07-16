@@ -5,8 +5,11 @@ import CountManageimg from "../images/CountManage.svg";
 import Readingimg from "../images/Reading.svg";
 import PageTitle from "../components/PageTitle";
 
+const WrapBox = styled.div`
+  width: 428px;
+`;
 const Box = styled.div`
-  background-color: #ffebea;
+  background-color: var(--sub-pink);
   position: absolute;
   width: 428px;
   height: 619.09px;
@@ -21,9 +24,9 @@ const Button = styled.button`
   left: 23.86px;
   top: 148.53px;
   color: white;
-  background: #ff7b72;
+  background: var(--main-pink);
   border-radius: 6px;
-  border: 0.1px solid #fffbef;
+  border: 0.1px solid var(--main-pink);
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: bolder;
@@ -137,7 +140,7 @@ const Reading = styled.div`
 
 const ShopMypageStart = () => {
   return (
-    <div>
+    <WrapBox>
       <TopBar></TopBar>
       <PageTitle>마이페이지</PageTitle>
       <UserName>터틀힙 님,</UserName>
@@ -150,7 +153,7 @@ const ShopMypageStart = () => {
         <Button>가게 정보 등록완료</Button>
         <Reading></Reading>
       </Box>
-    </div>
+    </WrapBox>
   );
 };
 

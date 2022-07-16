@@ -3,11 +3,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingPage from "./pages/LoadingPage";
 import LoginHome from "./pages/LoginHome";
 import MainHome from "./pages/MainHome";
+import ProposalPrice from "./pages/Proposal/ProposalPrice";
 import ShopDetailPage from "./pages/ShopDetailPage";
 import AddSchedulePage from "./pages/AddSchedulePage";
 import SearchPage from "./pages/SearchPage";
 import Recommend from "./pages/Recommend";
 import ProposalCake from "./pages/Proposal/ProposalCake"
+
 
 function App() {
   return (
