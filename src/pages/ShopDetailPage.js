@@ -35,13 +35,13 @@ const ShopDetailHeader = styled.div`
   justify-content: space-between;
 `;
 const ShopName = styled.span`
-  color: #202020;
+  color: var(--black);
   font-size: 28px;
   font-weight: bold;
   margin: 0 10px 0 0;
 `;
 const IsRegistered = styled.span`
-  color: #949494;
+  color: var(--sub-darkgray);
   font-size: 14px;
 `;
 const ModifyIcon = styled.span`
@@ -93,7 +93,7 @@ const ShopDetailPage = () => {
   return (
     <div>
       <TopBar />
-      <PageTitle title="가게 상세정보" />
+      <PageTitle title="가게 상세정보" margin="60px 0 63px 0" />
       <PaddingBox>
         <MainImage imgUrl={mainImg} height="300px" />
         <HorizonEmptySpace height="30px" />

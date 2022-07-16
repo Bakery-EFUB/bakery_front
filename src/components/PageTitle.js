@@ -1,30 +1,39 @@
 import styled from "styled-components";
 
-const PageTitleBox = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 60px;
-  padding: 60px 0 63px 0;
-`;
+const PageTitle = ({ title, margin }) => {
+  const PageTitleBox = styled.div`
+    display: flex;
+    justify-content: center;
 
-const Highlight = styled.div`
-  display: inline-block;
-  position: absolute;
-  height: 13px;
-  background-color: #ffebea;
-  vertical-align: center;
-`;
+    margin: ${margin};
+  `;
 
-const TitleText = styled.div`
-  width: fit-content;
-  font-size: 22px;
-  font-weight: bold;
-  margin: 0 3px;
-  position: relative;
-  bottom: 9px;
-`;
+  const Highlight = styled.div`
+    display: inline-block;
 
-const PageTitle = ({ title }) => {
+  	height: 13px;
+		background-color: var(--sub-pink);
+		vertical-align: center;
+  `;
+
+
+	const TitleText = styled.div`
+		width: fit-content;
+
+		margin: 0 3px;
+		position: relative;
+		bottom: 9px;
+
+		font-family: 'Apple SD Gothic Neo';
+		font-style: normal;
+		font-weight: 700;
+		font-size: 22px;
+		line-height: 26px;
+		text-align: center;
+
+		color: var(--black-text);
+	`;
+
   return (
     <PageTitleBox>
       <Highlight>
