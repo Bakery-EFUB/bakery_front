@@ -10,7 +10,6 @@ const BackgroundImg = styled.div`
   background-position: center center;
   margin-top: 23px;
   border-radius: 6px;
-  position: relative;
 `;
 
 const TextContainer = styled.div`
