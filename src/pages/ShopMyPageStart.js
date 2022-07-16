@@ -3,6 +3,7 @@ import styled from "styled-components";
 import UserLogoimg from "../images/UserLogo.svg";
 import CountManageimg from "../images/CountManage.svg";
 import Readingimg from "../images/Reading.svg";
+import PageTitle from "../components/PageTitle";
 
 const WrapBox = styled.div`
   width: 428px;
@@ -33,20 +34,6 @@ const Button = styled.button`
   line-height: 22px;
   text-align: center;
   text-transform: uppercase;
-`;
-
-const MypagePlace = styled.div`
-  position: absolute;
-  left: 166px;
-  top: 160px;
-  bottom: 0%;
-  text-align: left;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 26px;
-  text-align: center;
 `;
 
 const CountManager = styled.div`
@@ -155,7 +142,7 @@ const ShopMypageStart = () => {
   return (
     <WrapBox>
       <TopBar></TopBar>
-      <MypagePlace>마이페이지</MypagePlace>
+      <PageTitle>마이페이지</PageTitle>
       <UserName>터틀힙 님,</UserName>
       <CountManager></CountManager>
       <UserPlace>Caker 가게 회원</UserPlace>
