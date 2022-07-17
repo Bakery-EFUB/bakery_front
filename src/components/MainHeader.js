@@ -30,8 +30,7 @@ const ServiceIntro = styled.button`
   background-color: transparent;
   width: 120px;
   height: 40px;
-  position: absolute;
-  bottom: 10%;
+  margin-top: 7%;
 `;
 function MainHeader() {
   return (
