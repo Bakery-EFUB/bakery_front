@@ -1,6 +1,7 @@
 import TopBar from "../components/TopBar";
 import styled from "styled-components";
 import vectorimg from "../images/Vector.svg";
+import Dropzone from "dropzone";
 
 const ShopName = styled.input`
   position: absolute;
@@ -336,10 +337,12 @@ const ShopInformationRegister = () => {
         type="text"
         placeholder="     운영중인 인스타그램이 있다면 링크를 첨부해주세요."
       />
-      <ShopPhotoing>가게 대표 사진</ShopPhotoing>
-      <ShopPhoto placeholder="➕"></ShopPhoto>
-      <ShopMenuPhotoing>케이크 대표 메뉴</ShopMenuPhotoing>
+      <div className="dropzone" id="my-dropzone">
+        <ShopPhotoing>가게 대표 사진</ShopPhotoing>
+        <ShopPhoto placeholder="➕"></ShopPhoto>
+      </div>
 
+      <ShopMenuPhotoing>케이크 대표 메뉴</ShopMenuPhotoing>
       <ShopMenuPhoto placeholder="➕" />
       <ShopMenuPhoto2 placeholder="➕" />
       <RegisterBtn>등록하기</RegisterBtn>

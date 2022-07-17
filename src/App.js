@@ -15,6 +15,7 @@ function App() {
         <Route exact path="/loading" element={<LoadingPage />} />
         <Route exact path="/proposal" element={<MyProposal />} />
         <Route exact path="/home" element={<MainHome />} />
+        <Route exact path="/h" element={<ShopInformationRegister />} />
       </Routes>
     </BrowserRouter>
   );
