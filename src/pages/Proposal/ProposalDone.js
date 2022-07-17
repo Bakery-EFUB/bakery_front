@@ -29,7 +29,7 @@ const BigText = styled.p`
 
   /* black text */
 
-  color: #202020;
+  color: var(--black-text);
 `;
 
 const SmallText = styled.p`
@@ -45,7 +45,7 @@ const SmallText = styled.p`
 
   /* black text */
 
-  color: #202020;
+  color: var(--black-text);
 `;
 
 const UnderScoreText = styled.p`
