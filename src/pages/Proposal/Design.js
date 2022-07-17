@@ -6,29 +6,9 @@ import SmallPinkButton from "../../components/SmallPinkButton";
 import SmallWhiteButton from "../../components/SmallWhiteButton";
 import SmallGrayButton from "../../components/SmallGrayButton";
 import PageTitle from "../../components/PageTitle";
-import ProposalText from "../../components/ProposalText";
-const Text = styled.p`
-  font-family: "Apple SD Gothic Neo";
+import ProposalText from "../../components/Proposal/ProposalText";
 
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 26px;
-  text-align: center;
-
-  height: 26px;
-
-  margin: 57px auto 0 auto;
-`;
-
-const ProgessBar = styled.div`
-  height: 4px;
-
-  margin: 11px 24px 0 24px;
-
-  background-color: var(--main-pink);
-  border: none;
-`;
+import ProgessBar from "../../components/Proposal/ProgressBar";
 
 const Button = styled.button`
   height: 60px;
@@ -65,14 +45,16 @@ const ImageBox = styled.div`
   border-radius: 6px;
 `;
 
-const Design = () => {
+const Design = ({ history, setHistory }) => {
   const [isDone, setIsDone] = useState(true);
+  const ThisStep = 90;
 
   return (
     <div>
       <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
 
-      <ProgessBar />
+      <ProgessBar step={ThisStep} before={history} />
+
       <ProposalText text="디자인 시안이 있다면 알려주세요." />
       <Button>사진 업로드</Button>
       <ImageBox />
@@ -85,12 +67,16 @@ const Design = () => {
         }}
       >
         <Link to="/proposal/price">
-          <SmallWhiteButton>이전</SmallWhiteButton>
+          <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
+            이전
+          </SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
           <Link to="/proposal/pickup">
-            <SmallPinkButton>완료</SmallPinkButton>
+            <SmallPinkButton onClick={() => setHistory(ThisStep)}>
+              완료
+            </SmallPinkButton>
           </Link>
         </div>
       </div>

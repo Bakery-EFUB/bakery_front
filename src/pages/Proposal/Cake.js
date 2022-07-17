@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import SmallPinkButton from "../../components/SmallPinkButton";
@@ -6,16 +6,9 @@ import SmallWhiteButton from "../../components/SmallWhiteButton";
 import SmallGrayButton from "../../components/SmallGrayButton";
 
 import PageTitle from "../../components/PageTitle";
-import ProposalText from "../../components/ProposalText";
+import ProposalText from "../../components/Proposal/ProposalText";
+import ProgessBar from "../../components/Proposal/ProgressBar";
 
-const ProgessBar = styled.div`
-  height: 4px;
-
-  margin: 11px 24px 0 24px;
-
-  background-color: var(--main-pink);
-  border: none;
-`;
 const Wrapper = styled.div`
   height: auto;
 
@@ -55,9 +48,8 @@ const Option = styled.p`
   color: var(--black);
 `;
 
-const Cake = () => {
+const Cake = ({ history, setHistory }) => {
   const [isChecked, setIsChecked] = useState(null);
-  const [isDone, setIsDone] = useState(true);
 
   const [cakes, setCakes] = useState([
     { id: 1, cake: "레터링 케이크" },
@@ -72,11 +64,13 @@ const Cake = () => {
     setIsChecked(id);
   };
 
+  const ThisStep = 30;
+
   return (
     <div>
       <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
-      <ProgessBar />
-      <ProposalText text="원하는 가격대를 선택해주세요." />
+      <ProgessBar step={ThisStep} before={history} />
+      <ProposalText text="어떤 케이크를 원하시나요?" />
 
       <Wrapper>
         {cakes.map(cake => {
@@ -122,13 +116,17 @@ const Cake = () => {
         }}
       >
         <Link to="/proposal/city">
-          <SmallWhiteButton>이전</SmallWhiteButton>
+          <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
+            이전
+          </SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
           {isChecked ? (
             <Link to="/proposal/size">
-              <SmallPinkButton>완료</SmallPinkButton>
+              <SmallPinkButton onClick={() => setHistory(ThisStep)}>
+                완료
+              </SmallPinkButton>
             </Link>
           ) : (
             <SmallGrayButton>완료</SmallGrayButton>

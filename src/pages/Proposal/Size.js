@@ -7,29 +7,8 @@ import SmallWhiteButton from "../../components/SmallWhiteButton";
 import SmallGrayButton from "../../components/SmallGrayButton";
 
 import PageTitle from "../../components/PageTitle";
-
-const Text = styled.p`
-  font-family: "Apple SD Gothic Neo";
-
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 26px;
-  text-align: center;
-
-  height: 26px;
-
-  margin: 57px auto 0 auto;
-`;
-
-const ProgessBar = styled.div`
-  height: 4px;
-
-  margin: 11px 24px 0 24px;
-
-  background-color: var(--main-pink);
-  border: none;
-`;
+import ProposalText from "../../components/Proposal/ProposalText";
+import ProgessBar from "../../components/Proposal/ProgressBar";
 
 const Wrapper = styled.div`
   height: auto;
@@ -81,7 +60,7 @@ const Exp = styled.p`
   color: var(--sub-darkgray);
 `;
 
-const Size = () => {
+const Size = ({ history, setHistory }) => {
   const [isChecked, setIsChecked] = useState(null);
 
   const [sizes, setSizes] = useState([
@@ -97,11 +76,13 @@ const Size = () => {
     setIsChecked(id);
   };
 
+  const ThisStep = 45;
+
   return (
     <div>
       <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
-      <ProgessBar />
-      <Text>케이크 사이즈를 선택해주세요.</Text>
+      <ProgessBar step={ThisStep} before={history} />
+      <ProposalText text="케이크 사이즈를 선택해주세요." />
 
       <Wrapper>
         {sizes.map(size => {
@@ -150,13 +131,17 @@ const Size = () => {
         }}
       >
         <Link to="/proposal/cake">
-          <SmallWhiteButton>이전</SmallWhiteButton>
+          <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
+            이전
+          </SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
           {isChecked ? (
             <Link to="/proposal/taste">
-              <SmallPinkButton>완료</SmallPinkButton>
+              <SmallPinkButton onClick={() => setHistory(ThisStep)}>
+                완료
+              </SmallPinkButton>
             </Link>
           ) : (
             <SmallGrayButton>완료</SmallGrayButton>

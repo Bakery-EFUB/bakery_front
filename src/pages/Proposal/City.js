@@ -8,29 +8,8 @@ import SmallGrayButton from "../../components/SmallGrayButton";
 
 import PageTitle from "../../components/PageTitle";
 import CityButton from "../../components/CityButton";
-
-const Text = styled.p`
-  font-family: "Apple SD Gothic Neo";
-
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 26px;
-  text-align: center;
-
-  height: 26px;
-
-  margin: 57px auto 0 auto;
-`;
-
-const ProgessBar = styled.div`
-  height: 4px;
-
-  margin: 11px 24px 0 24px;
-
-  background-color: var(--main-pink);
-  border: none;
-`;
+import ProposalText from "../../components/Proposal/ProposalText";
+import ProgessBar from "../../components/Proposal/ProgressBar";
 
 const SmallText = styled.p`
   font-family: "Apple SD Gothic Neo";
@@ -52,7 +31,7 @@ const Wrapper = styled.div`
   column-gap: 10px;
 `;
 
-const City = () => {
+const City = ({ history, setHistory }) => {
   const [cityArray, setCityArray] = useState([
     { id: 1, city: "은평구", selected: false },
     { id: 2, city: "종로구", selected: false },
@@ -94,11 +73,13 @@ const City = () => {
     }
   }, [cityArray]);
 
+  const ThisStep = 15;
+
   return (
     <div>
       <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
-      <ProgessBar />
-      <Text>원하시는 지역을 선택해주세요</Text>
+      <ProgessBar step={ThisStep} before={history} />
+      <ProposalText text="원하시는 지역을 선택해주세요" />
       <SmallText>(복수선택가능)</SmallText>
 
       <Wrapper>
@@ -133,13 +114,17 @@ const City = () => {
         }}
       >
         <Link to="/proposal">
-          <SmallWhiteButton>이전</SmallWhiteButton>
+          <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
+            이전
+          </SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
           {isDone ? (
             <Link to="/proposal/cake">
-              <SmallPinkButton>완료</SmallPinkButton>
+              <SmallPinkButton onClick={() => setHistory(ThisStep)}>
+                완료
+              </SmallPinkButton>
             </Link>
           ) : (
             <SmallGrayButton>완료</SmallGrayButton>

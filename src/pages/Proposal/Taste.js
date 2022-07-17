@@ -7,28 +7,8 @@ import SmallWhiteButton from "../../components/SmallWhiteButton";
 import SmallGrayButton from "../../components/SmallGrayButton";
 import PageTitle from "../../components/PageTitle";
 
-const Text = styled.p`
-  font-family: "Apple SD Gothic Neo";
-
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 26px;
-  text-align: center;
-
-  height: 26px;
-
-  margin: 57px auto 0 auto;
-`;
-
-const ProgessBar = styled.div`
-  height: 4px;
-
-  margin: 11px 24px 0 24px;
-
-  background-color: var(--main-pink);
-  border: none;
-`;
+import ProposalText from "../../components/Proposal/ProposalText";
+import ProgessBar from "../../components/Proposal/ProgressBar";
 
 const Wrapper = styled.div`
   height: auto;
@@ -118,7 +98,7 @@ const DesignInput = styled.div`
   }
 `;
 
-const Taste = () => {
+const Taste = ({ history, setHistory }) => {
   const [isChecked, setIsChecked] = useState(null);
 
   const [tastes, setTastes] = useState([
@@ -133,11 +113,14 @@ const Taste = () => {
 
   const [isDone, setIsDone] = useState(true);
 
+  const ThisStep = 60;
+
   return (
     <div>
       <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
-      <ProgessBar />
-      <Text margin="44px auto 0 auto">어떤 맛을 원하시나요?</Text>
+      <ProgessBar step={ThisStep} before={history} />
+
+      <ProposalText text="어떤 맛을 원하시나요?" />
 
       <Wrapper>
         {tastes.map(taste => {
@@ -175,7 +158,7 @@ const Taste = () => {
         })}
       </Wrapper>
 
-      <Text margin="100px auto 0 auto">디자인에 대해 상세히 적어주세요!</Text>
+      <ProposalText text="디자인에 대해 상세히 적어주세요!"></ProposalText>
 
       <DesignInput>
         <textarea placeholder="ex) 레터링을 ‘생일 축하해'로 해주세요!" />
@@ -190,13 +173,18 @@ const Taste = () => {
         }}
       >
         <Link to="/proposal/size">
-          <SmallWhiteButton>이전</SmallWhiteButton>
+          <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
+            {" "}
+            이전
+          </SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
           {isChecked ? (
             <Link to="/proposal/price">
-              <SmallPinkButton>완료</SmallPinkButton>
+              <SmallPinkButton onClick={() => setHistory(ThisStep)}>
+                완료
+              </SmallPinkButton>
             </Link>
           ) : (
             <SmallGrayButton>완료</SmallGrayButton>
