@@ -8,14 +8,14 @@ const Container = styled.div`
   width: 100%;
   margin: 10%;
 `;
-const Welcome = styled.p`
+const Welcome = styled.div`
   color: var(--black);
-  font-size: 24px;
+  font-size: 22px;
   font-family: "AppleSDGothicNeo";
   font-weight: 800;
   position: absolute;
   left: 10%;
-  top: 10%;
+  top: 12%;
 `;
 const CenterImg = styled.div`
   background: url(${LoginMainImg});

@@ -11,6 +11,7 @@ const WrapBox = styled.div`
 
 const Box = styled.div`
   background-color: var(--sub-pink);
+
   width: 428px;
   height: 619.09px;
   left: 0px;
