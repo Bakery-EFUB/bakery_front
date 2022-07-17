@@ -17,7 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route exact path="/loginhome" element={<LoginHome />} />
+        <Route exact path="/loginhome" element={<LoginHome />} />
         <Route exact path="/loading" element={<LoadingPage />} />
         <Route exact path="/" element={<MainHome />} />
         <Route exact path="/ShopDetailPage" element={<ShopDetailPage />} />
@@ -28,8 +28,7 @@ function App() {
         <Route exact path="/serviceinfo" element={<OurService />} />
         <Route exact path="/mypagehost" element={<ShopMemberMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
-        <Route exact path="/shopdetail" element={<ShopDetailPage />} /> */}
-        <Route exact path="/ah" element={<ShopInformationModify />} />
+        <Route exact path="/shopdetail" element={<ShopDetailPage />} />
       </Routes>
     </BrowserRouter>
   );
