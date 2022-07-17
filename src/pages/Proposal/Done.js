@@ -72,7 +72,7 @@ const Done = () => {
       <BigText>제안서 작성하기 완료!</BigText>
       <SmallText>곧 있으면 사장님들이 연락을 드릴거에요</SmallText>
 
-      <Link to="/">
+      <Link to="/" style={{ textDecoration: "none" }}>
         <BigPinkButton margin="68px 24px 0px 24px">
           내 제안서 보러가기
         </BigPinkButton>

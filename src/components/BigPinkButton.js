@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const BigPinkButton = ({ children, margin }) => {
   const Button = styled.div`
+    text-decoration: none;
     height: 60px;
 
     margin: ${margin};
