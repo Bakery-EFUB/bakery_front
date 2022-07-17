@@ -20,7 +20,7 @@ const Text = styled.div`
   font-size: 24px;
   line-height: 29px;
 
-  color: #202020;
+  color: var(--black-text);
 `;
 const Background = styled.img`
   margin-top: 296px;

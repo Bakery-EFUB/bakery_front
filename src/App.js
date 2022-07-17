@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route exact path="/loginhome" element={<LoginHome />} />
         <Route exact path="/loading" element={<LoadingPage />} />
-        <Route exact path="/home" element={<MainHome />} />
+        <Route exact path="/" element={<MainHome />} />
         <Route exact path="/ShopDetailPage" element={<ShopDetailPage />} />
         <Route exact path="/AddSchedulePage" element={<AddSchedulePage />} />
         <Route exact path="/search" element={<SearchPage />} />

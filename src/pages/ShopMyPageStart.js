@@ -107,7 +107,7 @@ const Progress = styled.div`
 
   /* sub text */
 
-  color: #949494;
+  color: var(--main-pink);
 `;
 
 const UserPlace = styled.h1`

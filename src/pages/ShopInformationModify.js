@@ -191,7 +191,7 @@ const ShopNameing = styled.div`
   font-size: 18px;
   line-height: 22px;
   text-transform: uppercase;
-  color: #202020;
+  color: var(--black-text);
   z-index: 1;
 `;
 
@@ -207,7 +207,7 @@ const ShopIntroducing = styled.div`
   font-size: 18px;
   line-height: 22px;
   text-transform: uppercase;
-  color: #202020;
+  color: var(--black-text);
   z-index: 1;
 `;
 

@@ -17,13 +17,13 @@ const SearchBar = ({ text }) => {
     border-style: none;
     color: var(--main-pink);
     background-color: var(--sub-lightpink);
-    font-size:18px;
+    font-size: 18px;
     :focus {
       outline: none;
     }
-    ::placeholder{
-      color:var(--main-pink)
-      font-size:18px
+    ::placeholder {
+      color: var(--main-pink);
+      font-size: 18px;
     }
   `;
 
