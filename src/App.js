@@ -11,6 +11,8 @@ import ProposalCake from "./pages/Proposal/ProposalCake";
 import OurService from "./pages/OurService";
 import ShopMemberMyPage from "./pages/ShopMemberMyPage";
 import AllProposal from "./pages/AllProposal";
+import ShopInformationRegister from "./pages/ShopInformationRegister";
+import ShopMypageStart from "./pages/ShopMyPageStart";
 
 import ShopInformationModify from "./pages/ShopInformationModify";
 
@@ -30,7 +32,12 @@ function App() {
         <Route exact path="/mypagehost" element={<ShopMemberMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
         <Route exact path="/shopdetail" element={<ShopDetailPage />} />
-        <Route exact path="/shopmodify" element={<ShopInformationModify />} />
+        <Route exact path="/shopmypagestart" element={<ShopMypageStart />} />
+        <Route
+          exact
+          path="/shopregister"
+          element={<ShopInformationRegister />}
+        />
       </Routes>
     </BrowserRouter>
   );

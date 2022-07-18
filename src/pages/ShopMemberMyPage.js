@@ -204,10 +204,9 @@ const ShopMemberMyPage = () => {
       </Back>
 
       <Box>
-        <Link to="/shopmodify">
+        <Link to="/shopregister">
           <Button>가게 정보 관리</Button>
         </Link>
-
         <Button2>픽업 일정 관리</Button2>
         <CommitProposal>댓글 단 제안서</CommitProposal>
         <BottomProposal>
