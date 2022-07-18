@@ -11,7 +11,12 @@ import Recommend from "./pages/Recommend";
 import OurService from "./pages/OurService";
 import ShopMemberMyPage from "./pages/ShopMemberMyPage";
 import AllProposal from "./pages/AllProposal";
+
 import Proposal from "./pages/Proposal";
+
+import ShopInformationRegister from "./pages/ShopInformationRegister";
+import ShopMypageStart from "./pages/ShopMyPageStart";
+
 
 function App() {
   return (
@@ -31,6 +36,12 @@ function App() {
         <Route exact path="/mypagehost" element={<ShopMemberMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
         <Route exact path="/shopdetail" element={<ShopDetailPage />} />
+        <Route exact path="/shopmypagestart" element={<ShopMypageStart />} />
+        <Route
+          exact
+          path="/shopregister"
+          element={<ShopInformationRegister />}
+        />
       </Routes>
     </BrowserRouter>
   );
