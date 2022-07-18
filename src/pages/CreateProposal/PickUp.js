@@ -41,14 +41,14 @@ const PickUp = ({ history, setHistory }) => {
           justifyContent: "center",
         }}
       >
-        <Link to="/proposal/design">
+        <Link to="/create/design">
           <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
             이전
           </SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
-          <Link to="/proposal/done">
+          <Link to="/create/done">
             <SmallPinkButton onClick={() => setHistory(ThisStep)}>
               완료
             </SmallPinkButton>

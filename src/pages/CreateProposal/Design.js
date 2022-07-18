@@ -66,14 +66,14 @@ const Design = ({ history, setHistory }) => {
           justifyContent: "center",
         }}
       >
-        <Link to="/proposal/price">
+        <Link to="/create/price">
           <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
             이전
           </SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
-          <Link to="/proposal/pickup">
+          <Link to="/create/pickup">
             <SmallPinkButton onClick={() => setHistory(ThisStep)}>
               완료
             </SmallPinkButton>

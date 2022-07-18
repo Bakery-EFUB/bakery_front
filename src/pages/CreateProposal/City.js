@@ -113,7 +113,7 @@ const City = ({ history, setHistory }) => {
           justifyContent: "center",
         }}
       >
-        <Link to="/proposal">
+        <Link to="/create">
           <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
             이전
           </SmallWhiteButton>
@@ -121,7 +121,7 @@ const City = ({ history, setHistory }) => {
 
         <div style={{ marginLeft: "6px" }}>
           {isDone ? (
-            <Link to="/proposal/cake">
+            <Link to="/create/cake">
               <SmallPinkButton onClick={() => setHistory(ThisStep)}>
                 완료
               </SmallPinkButton>

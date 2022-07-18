@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import SmallPinkButton from "../../components/SmallPinkButton";
 import SmallWhiteButton from "../../components/SmallWhiteButton";
 import SmallGrayButton from "../../components/SmallGrayButton";
-
 import PageTitle from "../../components/PageTitle";
+
 import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
@@ -60,67 +60,109 @@ const Exp = styled.p`
   color: var(--sub-darkgray);
 `;
 
-const Size = ({ history, setHistory }) => {
+const DesignInput = styled.div`
+  min-height: 50px;
+  height: auto;
+
+  margin: 38px 24px 0 24px;
+  background: var(--sub-lightgray);
+  border-radius: 6px;
+  border: none;
+  padding: auto;
+
+  textarea {
+    width: 346px;
+    height: 17px;
+
+    resize: none;
+    overflow: auto;
+
+    padding: 17px;
+
+    background: transparent;
+    border: none;
+    color: var(--sub-darkgray);
+
+    font-family: "Apple SD Gothic Neo";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  textarea::placeholder {
+    color: var(--background);
+  }
+  textarea:focus {
+    outline: none;
+  }
+`;
+
+const Taste = ({ history, setHistory }) => {
   const [isChecked, setIsChecked] = useState(null);
 
-  const [sizes, setSizes] = useState([
-    { id: 1, size: "미니", exp: "지름 11cm, 1~2인분" },
-    { id: 2, size: "1호", exp: "지름 15cm, 2~4인분" },
-    { id: 3, size: "2호", exp: "지름 13cm, 4~6인분" },
-    { id: 4, size: "3호", exp: "지름 21cm, 6~8인분" },
-    { id: 5, size: "3호 이상", exp: "" },
-    { id: 6, size: "컵케이크", exp: "" },
+  const [tastes, setTastes] = useState([
+    { id: 1, taste: "초코" },
+    { id: 2, taste: "바닐라" },
+    { id: 3, taste: "기타" },
   ]);
 
   const onToggle = id => {
     setIsChecked(id);
   };
 
-  const ThisStep = 45;
+  const [isDone, setIsDone] = useState(true);
+
+  const ThisStep = 60;
 
   return (
     <div>
       <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
       <ProgessBar step={ThisStep} before={history} />
-      <ProposalText text="케이크 사이즈를 선택해주세요." />
+
+      <ProposalText text="어떤 맛을 원하시나요?" />
 
       <Wrapper>
-        {sizes.map(size => {
-          if (size.id === isChecked) {
+        {tastes.map(taste => {
+          if (taste.id === isChecked) {
             return (
               <div
-                onClick={() => onToggle(size.id)}
+                onClick={() => onToggle(taste.id)}
                 className="item"
-                key={size.id}
+                key={taste.id}
                 style={{
                   display: "flex",
                   height: "60px",
                 }}
               >
                 <Circle checked />
-                <Option>{size.size}</Option>
-                <Exp>{size.exp}</Exp>
+                <Option>{taste.taste}</Option>
               </div>
             );
           } else {
             return (
               <div
-                onClick={() => onToggle(size.id)}
+                onClick={() => onToggle(taste.id)}
                 className="item"
-                key={size.id}
+                key={taste.id}
                 style={{
                   display: "flex",
                   height: "60px",
                 }}
               >
                 <Circle />
-                <Option>{size.size}</Option>
-                <Exp>{size.exp}</Exp>
+                <Option>{taste.taste}</Option>
               </div>
             );
           }
         })}
       </Wrapper>
+
+      <ProposalText text="디자인에 대해 상세히 적어주세요!"></ProposalText>
+
+      <DesignInput>
+        <textarea placeholder="ex) 레터링을 ‘생일 축하해'로 해주세요!" />
+      </DesignInput>
 
       <div
         style={{
@@ -130,15 +172,16 @@ const Size = ({ history, setHistory }) => {
           justifyContent: "center",
         }}
       >
-        <Link to="/proposal/cake">
+        <Link to="/create/size">
           <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
+            {" "}
             이전
           </SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
           {isChecked ? (
-            <Link to="/proposal/taste">
+            <Link to="/create/price">
               <SmallPinkButton onClick={() => setHistory(ThisStep)}>
                 완료
               </SmallPinkButton>
@@ -152,4 +195,4 @@ const Size = ({ history, setHistory }) => {
   );
 };
 
-export default Size;
+export default Taste;

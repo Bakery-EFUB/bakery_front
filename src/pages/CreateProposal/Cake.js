@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
 import SmallPinkButton from "../../components/SmallPinkButton";
 import SmallWhiteButton from "../../components/SmallWhiteButton";
 import SmallGrayButton from "../../components/SmallGrayButton";
@@ -38,7 +37,7 @@ const Circle = styled.div`
 
 const Option = styled.p`
   margin: auto 0 auto 23px;
-  width: 150px;
+
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 400;
@@ -49,66 +48,65 @@ const Option = styled.p`
   color: var(--black);
 `;
 
-const Price = ({ history, setHistory }) => {
+const Cake = ({ history, setHistory }) => {
   const [isChecked, setIsChecked] = useState(null);
 
-  const [prices, setPrices] = useState([
-    { id: 1, price: "1만원 미만" },
-    { id: 2, price: "1만원 이상 3만원 미만" },
-    { id: 3, price: "3만원 이상 7만원 미만" },
-    { id: 4, price: "7만원 이상 10만원 미만" },
-    { id: 5, price: "10만원 이상" },
+  const [cakes, setCakes] = useState([
+    { id: 1, cake: "레터링 케이크" },
+    { id: 2, cake: "미니(도시락) 케이크" },
+    { id: 3, cake: "생화 케이크" },
+    { id: 4, cake: "플라워앙금 케이크" },
+    { id: 5, cake: "컵 케이크" },
+    { id: 6, cake: "기타 케이크" },
   ]);
 
   const onToggle = id => {
     setIsChecked(id);
   };
 
-  const ThisStep = 75;
+  const ThisStep = 30;
 
   return (
     <div>
       <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
       <ProgessBar step={ThisStep} before={history} />
-
-      <ProposalText text="원하는 가격대를 선택해주세요." />
+      <ProposalText text="어떤 케이크를 원하시나요?" />
 
       <Wrapper>
-        {prices.map(price => {
-          if (price.id === isChecked) {
+        {cakes.map(cake => {
+          if (cake.id === isChecked) {
             return (
               <div
-                onClick={() => onToggle(price.id)}
+                onClick={() => onToggle(cake.id)}
                 className="item"
-                key={price.id}
+                key={cake.id}
                 style={{
                   display: "flex",
                   height: "60px",
                 }}
               >
                 <Circle checked />
-                <Option>{price.price}</Option>
+                <Option>{cake.cake}</Option>
               </div>
             );
           } else {
             return (
               <div
-                onClick={() => onToggle(price.id)}
+                onClick={() => onToggle(cake.id)}
                 className="item"
-                key={price.id}
+                key={cake.id}
                 style={{
                   display: "flex",
                   height: "60px",
                 }}
               >
                 <Circle />
-                <Option>{price.price}</Option>
+                <Option>{cake.cake}</Option>
               </div>
             );
           }
         })}
       </Wrapper>
-
       <div
         style={{
           width: "100%",
@@ -117,7 +115,7 @@ const Price = ({ history, setHistory }) => {
           justifyContent: "center",
         }}
       >
-        <Link to="/proposal/taste">
+        <Link to="/create/city">
           <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
             이전
           </SmallWhiteButton>
@@ -125,7 +123,7 @@ const Price = ({ history, setHistory }) => {
 
         <div style={{ marginLeft: "6px" }}>
           {isChecked ? (
-            <Link to="/proposal/design">
+            <Link to="/create/size">
               <SmallPinkButton onClick={() => setHistory(ThisStep)}>
                 완료
               </SmallPinkButton>
@@ -139,4 +137,4 @@ const Price = ({ history, setHistory }) => {
   );
 };
 
-export default Price;
+export default Cake;

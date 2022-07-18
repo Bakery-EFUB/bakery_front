@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
 import SmallPinkButton from "../../components/SmallPinkButton";
 import SmallWhiteButton from "../../components/SmallWhiteButton";
 import SmallGrayButton from "../../components/SmallGrayButton";
@@ -37,7 +38,7 @@ const Circle = styled.div`
 
 const Option = styled.p`
   margin: auto 0 auto 23px;
-
+  width: 75px;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 400;
@@ -48,65 +49,79 @@ const Option = styled.p`
   color: var(--black);
 `;
 
-const Cake = ({ history, setHistory }) => {
+const Exp = styled.p`
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 32px;
+  /* identical to box height */
+
+  color: var(--sub-darkgray);
+`;
+
+const Size = ({ history, setHistory }) => {
   const [isChecked, setIsChecked] = useState(null);
 
-  const [cakes, setCakes] = useState([
-    { id: 1, cake: "레터링 케이크" },
-    { id: 2, cake: "미니(도시락) 케이크" },
-    { id: 3, cake: "생화 케이크" },
-    { id: 4, cake: "플라워앙금 케이크" },
-    { id: 5, cake: "컵 케이크" },
-    { id: 6, cake: "기타 케이크" },
+  const [sizes, setSizes] = useState([
+    { id: 1, size: "미니", exp: "지름 11cm, 1~2인분" },
+    { id: 2, size: "1호", exp: "지름 15cm, 2~4인분" },
+    { id: 3, size: "2호", exp: "지름 13cm, 4~6인분" },
+    { id: 4, size: "3호", exp: "지름 21cm, 6~8인분" },
+    { id: 5, size: "3호 이상", exp: "" },
+    { id: 6, size: "컵케이크", exp: "" },
   ]);
 
   const onToggle = id => {
     setIsChecked(id);
   };
 
-  const ThisStep = 30;
+  const ThisStep = 45;
 
   return (
     <div>
       <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
       <ProgessBar step={ThisStep} before={history} />
-      <ProposalText text="어떤 케이크를 원하시나요?" />
+      <ProposalText text="케이크 사이즈를 선택해주세요." />
 
       <Wrapper>
-        {cakes.map(cake => {
-          if (cake.id === isChecked) {
+        {sizes.map(size => {
+          if (size.id === isChecked) {
             return (
               <div
-                onClick={() => onToggle(cake.id)}
+                onClick={() => onToggle(size.id)}
                 className="item"
-                key={cake.id}
+                key={size.id}
                 style={{
                   display: "flex",
                   height: "60px",
                 }}
               >
                 <Circle checked />
-                <Option>{cake.cake}</Option>
+                <Option>{size.size}</Option>
+                <Exp>{size.exp}</Exp>
               </div>
             );
           } else {
             return (
               <div
-                onClick={() => onToggle(cake.id)}
+                onClick={() => onToggle(size.id)}
                 className="item"
-                key={cake.id}
+                key={size.id}
                 style={{
                   display: "flex",
                   height: "60px",
                 }}
               >
                 <Circle />
-                <Option>{cake.cake}</Option>
+                <Option>{size.size}</Option>
+                <Exp>{size.exp}</Exp>
               </div>
             );
           }
         })}
       </Wrapper>
+
       <div
         style={{
           width: "100%",
@@ -115,7 +130,7 @@ const Cake = ({ history, setHistory }) => {
           justifyContent: "center",
         }}
       >
-        <Link to="/proposal/city">
+        <Link to="/create/cake">
           <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
             이전
           </SmallWhiteButton>
@@ -123,7 +138,7 @@ const Cake = ({ history, setHistory }) => {
 
         <div style={{ marginLeft: "6px" }}>
           {isChecked ? (
-            <Link to="/proposal/size">
+            <Link to="/create/taste">
               <SmallPinkButton onClick={() => setHistory(ThisStep)}>
                 완료
               </SmallPinkButton>
@@ -137,4 +152,4 @@ const Cake = ({ history, setHistory }) => {
   );
 };
 
-export default Cake;
+export default Size;
