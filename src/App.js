@@ -12,6 +12,8 @@ import OurService from "./pages/OurService";
 import ShopMemberMyPage from "./pages/ShopMemberMyPage";
 import AllProposal from "./pages/AllProposal";
 
+import ShopInformationModify from "./pages/ShopInformationModify";
+
 function App() {
   return (
     <BrowserRouter>
@@ -28,6 +30,7 @@ function App() {
         <Route exact path="/mypagehost" element={<ShopMemberMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
         <Route exact path="/shopdetail" element={<ShopDetailPage />} />
+        <Route exact path="/shopmodify" element={<ShopInformationModify />} />
       </Routes>
     </BrowserRouter>
   );
