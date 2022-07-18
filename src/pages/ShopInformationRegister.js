@@ -1,7 +1,8 @@
 import TopBar from "../components/TopBar";
 import styled from "styled-components";
 import vectorimg from "../images/Vector.svg";
-import Dropzone from "dropzone";
+import React, { useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
 
 const ShopName = styled.input`
   width: 380px;
@@ -69,7 +70,7 @@ const ShopInstagram = styled.input`
   border: 1px solid var(--sub-lightgray);
 `;
 
-const ShopPhoto = styled.input`
+const ShopPhoto = styled.p`
   margin: 10px 0px 0px 24px;
   width: 380px;
   height: 100px;
@@ -77,6 +78,9 @@ const ShopPhoto = styled.input`
   border-radius: 6px;
   border: 1px solid var(--sub-lightgray);
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:hover {
     border: 2px dashed #333;
   }
@@ -127,7 +131,7 @@ const RegisterBtn = styled.button`
 
 const WrapBox = styled.div`
   width: 428px;
-  height: 1713px;
+  height: 1800px;
 `;
 
 const ShopRegistering = styled.div`
@@ -266,8 +270,75 @@ const Vector = styled.div`
   z-index: 1;
 `;
 
+const thumbsContainer = {
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap",
+  marginTop: 16,
+};
+
+const thumb = {
+  display: "inline-flex",
+  borderRadius: 2,
+
+  marginBottom: 3,
+  marginRight: 2,
+  width: 90,
+  height: 90,
+  padding: 4,
+  boxSizing: "border-box",
+};
+
+const thumbInner = {
+  display: "flex",
+  minWidth: 0,
+  overflow: "hidden",
+};
+
+const img = {
+  display: "block",
+  width: "auto",
+  height: "100%",
+};
+
 //ui 구현
 const ShopInformationRegister = () => {
+  const [files, setFiles] = useState([]); //업로드 하려는 파일의 url을 새생성하고 파일의 정보를 파일즈에 담아준다.
+  const { getRootProps, getInputProps } = useDropzone({
+    //허용하는 파일 형식
+    accept: {
+      "image/*": [],
+    },
+    onDrop: (acceptedFiles) => {
+      setFiles(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+    },
+  });
+  //업로드 하려고 선택한 파일의 이미지를 미리보기로 보여준다.
+  const thumbs = files.map((file) => (
+    <div style={thumb} key={file.name}>
+      <div style={thumbInner}>
+        <img
+          src={file.preview}
+          style={img} // createObjectURL 로 생성한 후 업로드 시, URL 메모리 공간을 revokeObjectURL 로 제거 해준다.
+          onLoad={() => {
+            URL.revokeObjectURL(file.preview);
+          }}
+        />
+      </div>
+    </div>
+  ));
+
+  useEffect(() => {
+    // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
+    return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
+  }, []);
+
   return (
     <WrapBox>
       <TopBar />
@@ -298,11 +369,15 @@ const ShopInformationRegister = () => {
         type="text"
         placeholder="     운영중인 인스타그램이 있다면 링크를 첨부해주세요."
       />
-      <div className="dropzone" id="my-dropzone">
-        <ShopPhotoing>가게 대표 사진</ShopPhotoing>
-        <ShopPhoto placeholder="➕"></ShopPhoto>
-      </div>
 
+      <ShopPhotoing>가게 대표 사진</ShopPhotoing>
+      <section className="container">
+        <div {...getRootProps({ className: "dropzone" })}>
+          <input {...getInputProps()} />
+          <ShopPhoto>➕</ShopPhoto>
+        </div>
+        <ShopPhoto>{thumbs}</ShopPhoto>
+      </section>
       <ShopMenuPhotoing>케이크 대표 메뉴</ShopMenuPhotoing>
       <ShopMenuPhoto placeholder="➕" />
       <ShopMenuPhoto2 placeholder="➕" />
