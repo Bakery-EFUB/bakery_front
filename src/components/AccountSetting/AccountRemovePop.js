@@ -1,27 +1,26 @@
 import styled from "styled-components";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const PopupBox = styled.div`
    /* Rectangle 1549 */
 
-    display: felx;
+    display: flex;
     flex-direction: column;
-    position: absolute;
     width: 330px;
     height: 264px;
-    left: 50px;
-    top: 368px;
-
+    margin-left: 50px;
+    margin-top:-567px;
     background: #FFFFFF;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+    z-index: 1000;
 `; 
 const PopupText = styled.div`
-    position: absolute;
-    width: 149px;
+    width: 160px;
     height: 26px;
-    left: 141px;
-    top: 410px;
+    margin-left: 91px;
+    margin-top: 42px;
 
     /* title */
 
@@ -37,11 +36,10 @@ const PopupText = styled.div`
     color: #202020;
 `;
 const PopupDescription = styled.div`
-    position: absolute;
     width: 219px;
     height: 46px;
-    left: 106px;
-    top: 466px;
+    margin-left: 56px;
+    margin-top: 38px;
     white-space: wrap;
     font-family: 'Apple SD Gothic Neo';
     font-style: normal; 
@@ -54,14 +52,18 @@ const PopupDescription = styled.div`
 
     color: #202020;
 `;
+const BtnContatiner = styled.div`
+    margin-top: 55px;
+    display: flex;
+    flex-direction: row;
+`;
 const GoToBackBtn = styled.button`
   	background-color: white;
 	border: 2px solid var(--main-pink);
 	border-radius: 6px;
     width: 140px;
     height: 48px;
-    left: 71px;
-    top: 560px;
+    margin-left: 21px;
 	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
 
 	color: var(--main-pink);
@@ -78,8 +80,7 @@ const OkayBtn = styled.button`
     position: absolute;
     width: 140px;
     height: 48px;
-    left: 220px;
-    top: 560px;
+    margin-left: 15px;
     
 	background: var(--main-pink);
 	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -99,13 +100,16 @@ const OkayBtn = styled.button`
 
 	color: white;
 `;
-const AccountRemovePop = ()=>{
+const AccountRemovePop = (props)=>{
+    const {onClose} = props;
     return(
         <PopupBox>
             <PopupText>정말 탈퇴하세요?</PopupText>
             <PopupDescription>제안서는 삭제되지 않으며<br/>탈퇴 후 계정을 복구할 수 없습니다. </PopupDescription>
-            <GoToBackBtn>취소</GoToBackBtn>
-            <OkayBtn>탈퇴</OkayBtn>
+            <BtnContatiner>
+                <GoToBackBtn onClick={() => {onClose(false);}}>취소</GoToBackBtn>
+                <Link to = "/accountremove"><OkayBtn onClick={() => {onClose(false);}}>탈퇴</OkayBtn></Link>
+            </BtnContatiner>
         </PopupBox>
     );
 };
