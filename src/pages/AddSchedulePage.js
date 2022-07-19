@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import arrowImg from "../images/DropdownArrow.svg";
 
@@ -99,6 +99,15 @@ const BigPinkButtonBottom = styled.button`
 `;
 
 const AddSchedulePage = () => {
+  const [scheduleInfo, setScheduleInfo] = useState(() => {
+    return {
+      year: new Date().getFullYear(),
+      month: new Date().getMonth() + 1,
+      day: new Date().getDate(),
+      hour: new Date().getHours(),
+      desc: "",
+    };
+  });
   const month = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
   const day = [];
   const time = [];

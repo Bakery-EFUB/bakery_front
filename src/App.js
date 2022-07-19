@@ -1,5 +1,4 @@
 import "./App.css";
-import Proposal6 from "./pages/Proposal6";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingPage from "./pages/LoadingPage";
 import LoginHome from "./pages/LoginHome";
@@ -8,7 +7,7 @@ import ShopDetailPage from "./pages/ShopDetailPage";
 import AddSchedulePage from "./pages/AddSchedulePage";
 import SearchPage from "./pages/SearchPage";
 import Recommend from "./pages/Recommend";
-import ProposalCake from "./pages/Proposal/ProposalCake"
+import ProposalCake from "./pages/Proposal/ProposalCake";
 
 function App() {
   return (
