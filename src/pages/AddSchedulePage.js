@@ -56,10 +56,16 @@ const DropdownArrow = styled.span`
     transform: rotate(180deg);
   }
 `;
-const Dropdown = ({ items }) => {
+const Dropdown = ({ value, category, items, forChange }) => {
+  const handleOnChange = value => {
+    forChange.setScheduleInfo({
+      ...forChange.scheduleInfo,
+      [category]: items.indexOf(value),
+    });
+  };
   return (
     <div>
-      <CustomSelect autofocus>
+      <CustomSelect value={value} onChange={() => handleOnChange(this)}>
         {items.map((item, idx) => (
           <option key={idx} value={item}>
             {item}
@@ -123,16 +129,35 @@ const AddSchedulePage = () => {
       <ContentBoxWithMargin>
         <SubTitle>날짜 선택</SubTitle>
         <DropdownGroup>
-          <Dropdown items={["2022년", "2023년"]} />
-          <Dropdown items={month} />
-          <Dropdown items={day} />
+          <Dropdown
+            value={scheduleInfo.year + "년"}
+            category="year"
+            items={["2022년", "2023년"]}
+            forChange={{ scheduleInfo, setScheduleInfo }}
+          />
+          <Dropdown
+            value={scheduleInfo.month + "월"}
+            category="month"
+            items={month}
+            forChange={{ scheduleInfo, setScheduleInfo }}
+          />
+          <Dropdown
+            value={scheduleInfo.day + "일"}
+            category="day"
+            items={day}
+            forChange={{ scheduleInfo, setScheduleInfo }}
+          />
         </DropdownGroup>
       </ContentBoxWithMargin>
       <ContentBoxWithMargin>
         <SubTitle>시간 선택</SubTitle>
         <DropdownGroup>
           <Dropdown items={["AM", "PM"]} />
-          <Dropdown items={time} />
+          <Dropdown
+            category="time"
+            items={time}
+            forChange={{ scheduleInfo, setScheduleInfo }}
+          />
         </DropdownGroup>
       </ContentBoxWithMargin>
       <ContentBoxWithMargin>
