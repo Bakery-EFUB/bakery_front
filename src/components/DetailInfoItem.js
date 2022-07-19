@@ -15,7 +15,7 @@ const Category = styled.div`
 `;
 const Content = styled.div`
   width: 100%;
-  color: #202020;
+  color: var(--black-text);
   word-break: keep-all;
 `;
 const DetailInfoItem = ({ category, content, fontSize }) => {
