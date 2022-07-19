@@ -1,38 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import TopBar from "../../components/TopBar";
+import { Link } from "react-router-dom";
 
 import SmallPinkButton from "../../components/SmallPinkButton";
 import SmallWhiteButton from "../../components/SmallWhiteButton";
-
+import SmallGrayButton from "../../components/SmallGrayButton";
 import PageTitle from "../../components/PageTitle";
 
-const Text = styled.p`
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 26px;
-  text-align: center;
-  width: 290px;
-  height: 26px;
-
-  margin: ${props => props.margin};
-`;
-
-const ProgessBar = styled.div`
-  width: 380px;
-  height: 4px;
-  margin: 20px auto 0 auto;
-  background-color: var(--main-pink);
-  border: none;
-`;
+import ProposalText from "../../components/Proposal/ProposalText";
+import ProgessBar from "../../components/Proposal/ProgressBar";
 
 const Wrapper = styled.div`
-  width: 380px;
   height: auto;
 
-  margin: 47px auto 0 auto;
+  margin: 47px 24px 0 24px;
 
   border: solid 1px var(--sub-pink);
   border-radius: 5px;
@@ -80,12 +61,10 @@ const Exp = styled.p`
 `;
 
 const DesignInput = styled.div`
-  width: 380px;
-
   min-height: 50px;
   height: auto;
 
-  margin: 38px auto 0 auto;
+  margin: 38px 24px 0 24px;
   background: var(--sub-lightgray);
   border-radius: 6px;
   border: none;
@@ -119,8 +98,8 @@ const DesignInput = styled.div`
   }
 `;
 
-const ProposalTaste = () => {
-  const [isChecked, setIsChecked] = useState(1);
+const Taste = ({ history, setHistory }) => {
+  const [isChecked, setIsChecked] = useState(null);
 
   const [tastes, setTastes] = useState([
     { id: 1, taste: "초코" },
@@ -132,12 +111,16 @@ const ProposalTaste = () => {
     setIsChecked(id);
   };
 
+  const [isDone, setIsDone] = useState(true);
+
+  const ThisStep = 60;
+
   return (
     <div>
-      <TopBar />
       <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
-      <ProgessBar />
-      <Text margin="44px auto 0 auto">어떤 맛을 원하시나요?</Text>
+      <ProgessBar step={ThisStep} before={history} />
+
+      <ProposalText text="어떤 맛을 원하시나요?" />
 
       <Wrapper>
         {tastes.map(taste => {
@@ -175,7 +158,7 @@ const ProposalTaste = () => {
         })}
       </Wrapper>
 
-      <Text margin="100px auto 0 auto">디자인에 대해 상세히 적어주세요!</Text>
+      <ProposalText text="디자인에 대해 상세히 적어주세요!"></ProposalText>
 
       <DesignInput>
         <textarea placeholder="ex) 레터링을 ‘생일 축하해'로 해주세요!" />
@@ -183,16 +166,33 @@ const ProposalTaste = () => {
 
       <div
         style={{
-          margin: "95px 24px auto 24px",
+          width: "100%",
+          margin: "105px  auto 0 auto",
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "center",
         }}
       >
-        <SmallWhiteButton>이전</SmallWhiteButton>
-        <SmallPinkButton>다음</SmallPinkButton>
+        <Link to="/create/size">
+          <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
+            {" "}
+            이전
+          </SmallWhiteButton>
+        </Link>
+
+        <div style={{ marginLeft: "6px" }}>
+          {isChecked ? (
+            <Link to="/create/price">
+              <SmallPinkButton onClick={() => setHistory(ThisStep)}>
+                완료
+              </SmallPinkButton>
+            </Link>
+          ) : (
+            <SmallGrayButton>완료</SmallGrayButton>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
-export default ProposalTaste;
+export default Taste;
