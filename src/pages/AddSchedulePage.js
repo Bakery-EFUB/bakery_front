@@ -122,6 +122,14 @@ const AddSchedulePage = () => {
     time.push(i + ":00");
     time.push(i + ":30");
   }
+  console.log(scheduleInfo);
+
+  const onChangeDesc = e => {
+    setScheduleInfo({
+      ...scheduleInfo,
+      desc: e.target.value,
+    });
+  };
 
   return (
     <div>
@@ -162,7 +170,12 @@ const AddSchedulePage = () => {
       </ContentBoxWithMargin>
       <ContentBoxWithMargin>
         <SubTitle>내용</SubTitle>
-        <WhiteInputBox type="text" placeholder="ex. 성함 / 케이크 종류" />
+        <WhiteInputBox
+          type="text"
+          placeholder="ex. 성함 / 케이크 종류"
+          value={scheduleInfo.desc}
+          onChange={onChangeDesc}
+        />
       </ContentBoxWithMargin>
       <BigPinkButtonBottom>추가하기</BigPinkButtonBottom>
     </div>
