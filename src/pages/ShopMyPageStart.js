@@ -3,9 +3,13 @@ import styled from "styled-components";
 import UserLogoimg from "../images/UserLogo.svg";
 import CountManageimg from "../images/CountManage.svg";
 import Readingimg from "../images/Reading.svg";
+import PageTitle from "../components/PageTitle";
 
+const WrapBox = styled.div`
+  width: 428px;
+`;
 const Box = styled.div`
-  background-color: #ffebea;
+  background-color: var(--sub-pink);
   position: absolute;
   width: 428px;
   height: 619.09px;
@@ -20,9 +24,9 @@ const Button = styled.button`
   left: 23.86px;
   top: 148.53px;
   color: white;
-  background: #ff7b72;
+  background: var(--main-pink);
   border-radius: 6px;
-  border: 0.1px solid #fffbef;
+  border: 0.1px solid var(--main-pink);
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: bolder;
@@ -30,20 +34,6 @@ const Button = styled.button`
   line-height: 22px;
   text-align: center;
   text-transform: uppercase;
-`;
-
-const MypagePlace = styled.div`
-  position: absolute;
-  left: 166px;
-  top: 160px;
-  bottom: 0%;
-  text-align: left;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 26px;
-  text-align: center;
 `;
 
 const CountManager = styled.div`
@@ -117,7 +107,7 @@ const Progress = styled.div`
 
   /* sub text */
 
-  color: #949494;
+  color: var(--main-pink);
 `;
 
 const UserPlace = styled.h1`
@@ -150,9 +140,9 @@ const Reading = styled.div`
 
 const ShopMypageStart = () => {
   return (
-    <div>
+    <WrapBox>
       <TopBar></TopBar>
-      <MypagePlace>마이페이지</MypagePlace>
+      <PageTitle>마이페이지</PageTitle>
       <UserName>터틀힙 님,</UserName>
       <CountManager></CountManager>
       <UserPlace>Caker 가게 회원</UserPlace>
@@ -163,7 +153,7 @@ const ShopMypageStart = () => {
         <Button>가게 정보 등록완료</Button>
         <Reading></Reading>
       </Box>
-    </div>
+    </WrapBox>
   );
 };
 

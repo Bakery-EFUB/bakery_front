@@ -3,40 +3,43 @@ import styled from "styled-components";
 import SearchIcon from "../images/SearchIcon.svg";
 
 const SearchBar = ({ text }) => {
-  const SearchBarContainer = styled.div`
-    border-radius: 6px;
+  const SearchContainer = styled.div`
+    display: flex;
     width: 100%;
     height: 50px;
     background-color: var(--sub-lightpink);
+    margin-top: 5%;
+    border-radius: 6px;
+    align-items: center;
   `;
 
-  const Content = styled.div`
-    display: flex;
-    align-items: center;
-    margin: 20px;
-    p {
+  const SearchBarContainer = styled.input`
+    border-style: none;
+    color: var(--main-pink);
+    background-color: var(--sub-lightpink);
+    font-size: 18px;
+    :focus {
+      outline: none;
+    }
+    ::placeholder {
       color: var(--main-pink);
-      font-weight: 500;
-      font-family: "AppleSDGothicNeo";
+      font-size: 18px;
     }
   `;
 
-  const SearchLogo = styled.div`
+  const Search = styled.button`
     background: url(${SearchIcon});
     width: 21.29px;
     height: 21.29px;
     margin-right: 15px;
+    border-style: none;
+    margin-left: 5%;
   `;
-
   return (
-    <div>
-      <SearchBarContainer>
-        <Content>
-          <SearchLogo></SearchLogo>
-          <p>{text}</p>
-        </Content>
-      </SearchBarContainer>
-    </div>
+    <SearchContainer>
+      <Search></Search>
+      <SearchBarContainer placeholder={text} />
+    </SearchContainer>
   );
 };
 
