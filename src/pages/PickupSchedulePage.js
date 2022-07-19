@@ -72,6 +72,7 @@ const BigPinkButtonBottom = styled.button`
 `;
 
 const PickupSchedulePage = () => {
+  const navigator = useNavigate();
   return (
     <div>
       <TopBar />
@@ -85,7 +86,9 @@ const PickupSchedulePage = () => {
         <CreateScheduleCard pickupTime="15:00" pickupInfo="000님/ 레터링 케이크" />
         <CreateScheduleCard pickupTime="16:30" pickupInfo="000님/ 꽃다발 케이크" />
       </ScheduleCardList>
-      <BigPinkButtonBottom>일정 추가</BigPinkButtonBottom>
+      <BigPinkButtonBottom onClick={() => navigator("/addschedule")}>
+        일정 추가
+      </BigPinkButtonBottom>
     </div>
   );
 };

@@ -18,7 +18,6 @@ import ShopInformationRegister from "./pages/ShopInformationRegister";
 import ShopMypageStart from "./pages/ShopMyPageStart";
 import PickupSchedulePage from "./pages/PickupSchedulePage";
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -44,6 +43,7 @@ function App() {
           element={<ShopInformationRegister />}
         />
         <Route exact path="/pickupschedule" element={<PickupSchedulePage />} />
+        <Route exact path="/addschedule" element={<AddSchedulePage />} />
       </Routes>
     </BrowserRouter>
   );
