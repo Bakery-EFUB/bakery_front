@@ -2,8 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import TopBar from "../components/TopBar";
 import PageTitle from "../components/PageTitle";
+import CustomCalendar from "../components/CustomCalendar";
+import { useNavigate } from "react-router-dom";
 
 const SelectedDay = styled.div`
+  margin: 40px 0 0;
   padding: 0 24px;
   font-size: 22px;
   font-weight: bold;
@@ -11,6 +14,10 @@ const SelectedDay = styled.div`
 `;
 const ScheduleCardList = styled.div`
   padding: 15px 24px 40px;
+`;
+
+const CalendarContainer = styled.div`
+  padding: 0 24px;
 `;
 
 const ScheduleCard = styled.div`
@@ -69,6 +76,9 @@ const PickupSchedulePage = () => {
     <div>
       <TopBar />
       <PageTitle title="픽업 일정" margin="60px 0 63px 0" />
+      <CalendarContainer>
+        <CustomCalendar />
+      </CalendarContainer>
       <SelectedDay>2022.06.05</SelectedDay>
       <ScheduleCardList>
         <CreateScheduleCard pickupTime="13:00" pickupInfo="000님/ 도시락 케이크" />
