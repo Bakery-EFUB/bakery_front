@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import TopBar from "../components/TopBar";
 import PageTitle from "../components/PageTitle";
@@ -73,14 +73,22 @@ const BigPinkButtonBottom = styled.button`
 
 const PickupSchedulePage = () => {
   const navigator = useNavigate();
+  const [selectedDay, setSelectedDay] = useState(() => {
+    const today = new Date();
+    return {
+      year: today.getFullYear(),
+      month: today.getMonth() + 1,
+      day: today.getDate(),
+    };
+  });
   return (
     <div>
       <TopBar />
       <PageTitle title="픽업 일정" margin="60px 0 63px 0" />
       <CalendarContainer>
-        <CustomCalendar />
+        <CustomCalendar setClickedDay={setSelectedDay} />
       </CalendarContainer>
-      <SelectedDay>2022.06.05</SelectedDay>
+      <SelectedDay>{`${selectedDay.year}.${selectedDay.month}.${selectedDay.day}`}</SelectedDay>
       <ScheduleCardList>
         <CreateScheduleCard pickupTime="13:00" pickupInfo="000님/ 도시락 케이크" />
         <CreateScheduleCard pickupTime="15:00" pickupInfo="000님/ 레터링 케이크" />
