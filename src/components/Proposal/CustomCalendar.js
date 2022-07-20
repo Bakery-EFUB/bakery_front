@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import classNames from "classnames/bind";
 import style from "../../styles/calendar.css";
 import LeftVector from "../../images/LeftVector.svg";
@@ -195,13 +195,6 @@ const CustomCalendar = ({ setClickedDay, original, setOriginal }) => {
   useEffect(() => {
     setOriginal({ ...original, pickUp: pickUpDate });
   }, [pickUpDate]);
-
-  console.log(
-    "테스트",
-    Number(selectedYear),
-    Number(selectedMonth),
-    Number(i + 1),
-  );
 
   return (
     <div className="container">

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import TopBar from "../components/TopBar";
 import PageTitle from "../components/PageTitle";
-import CustomCalendar from "../components/CustomCalendar";
+import CustomCalendar from "../components/Proposal/CustomCalendar";
 import { useNavigate } from "react-router-dom";
 
 const SelectedDay = styled.div`
@@ -90,9 +90,18 @@ const PickupSchedulePage = () => {
       </CalendarContainer>
       <SelectedDay>{`${selectedDay.year}.${selectedDay.month}.${selectedDay.day}`}</SelectedDay>
       <ScheduleCardList>
-        <CreateScheduleCard pickupTime="13:00" pickupInfo="000님/ 도시락 케이크" />
-        <CreateScheduleCard pickupTime="15:00" pickupInfo="000님/ 레터링 케이크" />
-        <CreateScheduleCard pickupTime="16:30" pickupInfo="000님/ 꽃다발 케이크" />
+        <CreateScheduleCard
+          pickupTime="13:00"
+          pickupInfo="000님/ 도시락 케이크"
+        />
+        <CreateScheduleCard
+          pickupTime="15:00"
+          pickupInfo="000님/ 레터링 케이크"
+        />
+        <CreateScheduleCard
+          pickupTime="16:30"
+          pickupInfo="000님/ 꽃다발 케이크"
+        />
       </ScheduleCardList>
       <BigPinkButtonBottom onClick={() => navigator("/addschedule")}>
         일정 추가
