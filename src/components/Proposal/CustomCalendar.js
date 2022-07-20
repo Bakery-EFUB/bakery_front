@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import classNames from "classnames/bind";
 import style from "../../styles/calendar.css";
 import LeftVector from "../../images/LeftVector.svg";
@@ -21,7 +21,7 @@ const Right = styled.img`
   margin-right: 13px;
 `;
 
-const CustomCalendar = ({ original, setOriginal }) => {
+const CustomCalendar = ({ setClickedDay, original, setOriginal }) => {
   const today = {
     year: new Date().getFullYear(), //오늘 연도
     month: new Date().getMonth() + 1, //오늘 월
@@ -81,7 +81,7 @@ const CustomCalendar = ({ original, setOriginal }) => {
     return weekArr;
   }, []);
 
-  const [selected, setSelected] = useState(1); // 선택된 날짜
+  const [selected, setSelected] = useState(today.date); // 선택된 날짜
 
   const [existArr, setExistArr] = useState([
     { id: 0, exist: false, reservation: "예약 정보" },
@@ -133,7 +133,16 @@ const CustomCalendar = ({ original, setOriginal }) => {
               <div
                 key={i + 1}
                 id={i + 1}
-                onClick={e => setSelected(parseInt(e.target.id))}
+                onClick={e => {
+                  setSelected(parseInt(e.target.id));
+                  // 상위 컴포넌트에서 날짜 setState 함수를 pro장s로 넘겨준 경우
+                  setClickedDay &&
+                    setClickedDay({
+                      year: Number(selectedYear),
+                      month: Number(selectedMonth),
+                      day: Number(i + 1),
+                    });
+                }}
                 className={cx(
                   { weekday: true }, //전체 날짜 스타일
                   {
@@ -183,11 +192,16 @@ const CustomCalendar = ({ original, setOriginal }) => {
   const pickUpDate =
     selectedYear.toString() + selectedMonth.toString() + selected.toString();
 
-  console.log(pickUpDate);
-
   useEffect(() => {
     setOriginal({ ...original, pickUp: pickUpDate });
   }, [pickUpDate]);
+
+  console.log(
+    "테스트",
+    Number(selectedYear),
+    Number(selectedMonth),
+    Number(i + 1),
+  );
 
   return (
     <div className="container">
