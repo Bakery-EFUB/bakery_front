@@ -17,6 +17,7 @@ import Proposal from "./pages/Proposal";
 import ShopInformationRegister from "./pages/ShopInformationRegister";
 import ShopMypageStart from "./pages/ShopMyPageStart";
 import PickupSchedulePage from "./pages/PickupSchedulePage";
+import ShopInformationModify from "./pages/ShopInformationModify";
 
 function App() {
   return (
@@ -26,8 +27,8 @@ function App() {
         <Route exact path="/loading" element={<LoadingPage />} />
 
         <Route exact path="/" element={<MainHome />} />
-        <Route exact path="/ShopDetailPage" element={<ShopDetailPage />} />
-        <Route exact path="/AddSchedulePage" element={<AddSchedulePage />} />
+        <Route exact path="/shopdetail" element={<ShopDetailPage />} />
+        <Route exact path="/addschedule" element={<AddSchedulePage />} />
         <Route exact path="/search" element={<SearchPage />} />
         <Route exact path="/recommend" element={<Recommend />} />
         <Route path="/create/*" element={<CreateProposal />} />
@@ -42,6 +43,7 @@ function App() {
           path="/shopregister"
           element={<ShopInformationRegister />}
         />
+        <Route exact path="/shopmodify" element={<ShopInformationModify />} />
         <Route exact path="/pickupschedule" element={<PickupSchedulePage />} />
         <Route exact path="/addschedule" element={<AddSchedulePage />} />
       </Routes>

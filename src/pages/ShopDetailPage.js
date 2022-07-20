@@ -7,6 +7,7 @@ import modifyImg from "../images/ModifyInfo.svg";
 import moreIcon from "../images/MoreIcon.svg";
 import { DetailInfoCard } from "../components/DetailInfoCard";
 import DetailInfoItem from "../components/DetailInfoItem";
+import { useNavigate } from "react-router-dom";
 
 const PaddingBox = styled.div`
   padding: 0 24px 60px;
@@ -84,6 +85,7 @@ const CakeProductImage = styled.div`
 `;
 
 const ShopDetailPage = () => {
+  const navigator = useNavigate();
   const [openMore, setOpenMore] = useState([{}, {}]);
   const getMoreDesc = () => {
     if (Object.keys(openMore[0]).length === 0) {
@@ -102,13 +104,16 @@ const ShopDetailPage = () => {
             <ShopName>달다구리</ShopName>
             <IsRegistered>등록가게</IsRegistered>
           </div>
-          <ModifyIcon className="modify-info" />{" "}
+          <ModifyIcon
+            className="modify-info"
+            onClick={() => navigator("/shopmodify")}
+          />
           {/* 권한이 있을 때만 이 아이콘이 나타나도록 */}
         </ShopDetailHeader>
         <HorizonEmptySpace height="45px" />
         <SubTitle>소개</SubTitle>
         <HorizonEmptySpace height="12px" />
-        <ShopDesc style={openMore[0]}>
+        <ShopDesc style={openMore[0]} onClick={getMoreDesc}>
           달다구리는 다양한 상황과 감정을 케이크로 표현할 수 있는 아이디어를 늘
           상상하고 고민합니다. 다양한 상황에 전하고 싶은 메시지를 찾아
           디자인하고자 하는 달다구리는 벌써 고객님들과 함께한지 10년이
