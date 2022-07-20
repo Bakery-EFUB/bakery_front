@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -10,58 +10,10 @@ import PageTitle from "../../components/PageTitle";
 import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
-const Wrapper = styled.div`
-  height: auto;
+const Size = ({ history, setHistory, original, setOriginal }) => {
+  const [isChecked, setIsChecked] = useState(original.sizeId);
 
-  margin: 47px 24px 0 24px;
-
-  border: solid 1px var(--sub-pink);
-  border-radius: 5px;
-
-  grid-template-rows: repeat(2, 60px);
-
-  .item:not(:last-child) {
-    border-bottom: 1px solid var(--sub-pink);
-  }
-`;
-
-const Circle = styled.div`
-  width: 22px;
-  height: 22px;
-  border: 1px solid var(--main-pink);
-  border-radius: 50%;
-
-  background-color: ${props => (props.checked ? "var(--main-pink)" : "none")};
-
-  margin: auto 0 auto 20px;
-`;
-
-const Option = styled.p`
-  margin: auto 0 auto 23px;
-  width: 75px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-
-  line-height: 14px;
-
-  color: var(--black);
-`;
-
-const Exp = styled.p`
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 32px;
-  /* identical to box height */
-
-  color: var(--sub-darkgray);
-`;
-
-const Size = ({ history, setHistory }) => {
-  const [isChecked, setIsChecked] = useState(null);
+  const ThisStep = 45;
 
   const [sizes, setSizes] = useState([
     { id: 1, size: "미니", exp: "지름 11cm, 1~2인분" },
@@ -76,7 +28,13 @@ const Size = ({ history, setHistory }) => {
     setIsChecked(id);
   };
 
-  const ThisStep = 45;
+  const Back = () => {
+    setHistory(ThisStep);
+  };
+  const Next = () => {
+    setHistory(ThisStep);
+    setOriginal({ ...original, sizeId: isChecked });
+  };
 
   return (
     <div>
@@ -131,17 +89,13 @@ const Size = ({ history, setHistory }) => {
         }}
       >
         <Link to="/create/cake">
-          <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
-            이전
-          </SmallWhiteButton>
+          <SmallWhiteButton onClick={() => Back()}>이전</SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
           {isChecked ? (
             <Link to="/create/taste">
-              <SmallPinkButton onClick={() => setHistory(ThisStep)}>
-                완료
-              </SmallPinkButton>
+              <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
             </Link>
           ) : (
             <SmallGrayButton>완료</SmallGrayButton>
@@ -153,3 +107,53 @@ const Size = ({ history, setHistory }) => {
 };
 
 export default Size;
+
+const Wrapper = styled.div`
+  height: auto;
+
+  margin: 47px 24px 0 24px;
+
+  border: solid 1px var(--sub-pink);
+  border-radius: 5px;
+
+  grid-template-rows: repeat(2, 60px);
+
+  .item:not(:last-child) {
+    border-bottom: 1px solid var(--sub-pink);
+  }
+`;
+
+const Circle = styled.div`
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--main-pink);
+  border-radius: 50%;
+
+  background-color: ${props => (props.checked ? "var(--main-pink)" : "none")};
+
+  margin: auto 0 auto 20px;
+`;
+
+const Option = styled.p`
+  margin: auto 0 auto 23px;
+  width: 75px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+
+  line-height: 14px;
+
+  color: var(--black);
+`;
+
+const Exp = styled.p`
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 32px;
+  /* identical to box height */
+
+  color: var(--sub-darkgray);
+`;

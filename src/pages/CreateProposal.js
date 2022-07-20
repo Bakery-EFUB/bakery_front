@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import TopBar from "../components/TopBar";
 import PickUp from "./CreateProposal/PickUp";
@@ -16,17 +16,29 @@ import AIP from "../components/API";
 
 const CreateProposal = () => {
   const [history, setHistory] = useState(0);
-  const [oriCity, setOriCity] = useState([3]);
+  const [oriCity, setOriCity] = useState([]);
   const [oriCake, setOriCake] = useState(null);
+  const [oriSize, setOriSize] = useState(null);
+
+  const [original, setOriginal] = useState({
+    cityId: [],
+    cakeId: null,
+    sizeId: null,
+    tasteId: null,
+    design: "",
+    priceId: null,
+    pickUp: null,
+  });
 
   useEffect(() => {
-    console.log("됏다", oriCity);
-  }, [oriCity]);
+    console.log("됏다", original);
+  }, [original]);
 
-  // const CreateProposal = () => {
+  const navigate = useNavigate();
+  // const postProposal = () => {
   //   const response = await API.post("/orders",{city:city, })
   //   .then( (response) => {
-  //     console.log(response);
+  //      navigate("/create/done")
   //   })
   //   .catch( (error)=> {
   //     console.log(error);
@@ -43,8 +55,8 @@ const CreateProposal = () => {
             <City
               history={history}
               setHistory={setHistory}
-              oriCity={oriCity}
-              setOriCity={setOriCity}
+              original={original}
+              setOriginal={setOriginal}
             />
           }
         />
@@ -54,30 +66,65 @@ const CreateProposal = () => {
             <Cake
               history={history}
               setHistory={setHistory}
-              oriCake={oriCake}
-              setOriCake={setOriCake}
+              original={original}
+              setOriginal={setOriginal}
             />
           }
         />
         <Route
           path="/size"
-          element={<Size history={history} setHistory={setHistory} />}
+          element={
+            <Size
+              history={history}
+              setHistory={setHistory}
+              original={original}
+              setOriginal={setOriginal}
+            />
+          }
         />
         <Route
           path="/taste"
-          element={<Taste history={history} setHistory={setHistory} />}
+          element={
+            <Taste
+              history={history}
+              setHistory={setHistory}
+              original={original}
+              setOriginal={setOriginal}
+            />
+          }
         />
         <Route
           path="/price"
-          element={<Price history={history} setHistory={setHistory} />}
+          element={
+            <Price
+              history={history}
+              setHistory={setHistory}
+              original={original}
+              setOriginal={setOriginal}
+            />
+          }
         />
         <Route
           path="/design"
-          element={<Design history={history} setHistory={setHistory} />}
+          element={
+            <Design
+              history={history}
+              setHistory={setHistory}
+              original={original}
+              setOriginal={setOriginal}
+            />
+          }
         />
         <Route
           path="/pickup"
-          element={<PickUp history={history} setHistory={setHistory} />}
+          element={
+            <PickUp
+              history={history}
+              setHistory={setHistory}
+              original={original}
+              setOriginal={setOriginal}
+            />
+          }
         />
         <Route path="/done" element={<Done />} />
       </Routes>

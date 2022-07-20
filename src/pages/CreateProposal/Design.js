@@ -10,6 +10,50 @@ import ProposalText from "../../components/Proposal/ProposalText";
 
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
+const Design = ({ history, setHistory, original, setOriginal }) => {
+  const ThisStep = 90;
+
+  const Back = () => {
+    setHistory(ThisStep);
+  };
+  const Next = () => {
+    setHistory(ThisStep);
+    // setOriginal({...original, })
+  };
+
+  return (
+    <div>
+      <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
+
+      <ProgessBar step={ThisStep} before={history} />
+
+      <ProposalText text="디자인 시안이 있다면 알려주세요." />
+      <Button>사진 업로드</Button>
+      <ImageBox />
+      <div
+        style={{
+          width: "100%",
+          margin: "105px  auto 0 auto",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Link to="/create/price">
+          <SmallWhiteButton onClick={() => Back()}>이전</SmallWhiteButton>
+        </Link>
+
+        <div style={{ marginLeft: "6px" }}>
+          <Link to="/create/pickup">
+            <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Design;
+
 const Button = styled.button`
   height: 60px;
   width: calc(100% - 48px);
@@ -44,44 +88,3 @@ const ImageBox = styled.div`
   box-shadow: 0px 4px 62px rgba(153, 171, 198, 0.18);
   border-radius: 6px;
 `;
-
-const Design = ({ history, setHistory }) => {
-  const [isDone, setIsDone] = useState(true);
-  const ThisStep = 90;
-
-  return (
-    <div>
-      <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
-
-      <ProgessBar step={ThisStep} before={history} />
-
-      <ProposalText text="디자인 시안이 있다면 알려주세요." />
-      <Button>사진 업로드</Button>
-      <ImageBox />
-      <div
-        style={{
-          width: "100%",
-          margin: "105px  auto 0 auto",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <Link to="/create/price">
-          <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
-            이전
-          </SmallWhiteButton>
-        </Link>
-
-        <div style={{ marginLeft: "6px" }}>
-          <Link to="/create/pickup">
-            <SmallPinkButton onClick={() => setHistory(ThisStep)}>
-              완료
-            </SmallPinkButton>
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Design;

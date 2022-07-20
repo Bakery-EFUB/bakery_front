@@ -11,7 +11,7 @@ import CityButton from "../../components/CityButton";
 import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
-const City = ({ history, setHistory, oriCity, setOriCity }) => {
+const City = ({ history, setHistory, original, setOriginal }) => {
   const [cityArray, setCityArray] = useState([
     { id: 1, city: "은평구", selected: false },
     { id: 2, city: "종로구", selected: false },
@@ -37,12 +37,11 @@ const City = ({ history, setHistory, oriCity, setOriCity }) => {
   useEffect(() => {
     setCityArray(
       cityArray.map(city =>
-        oriCity.includes(city.id)
+        original.cityId.includes(city.id)
           ? { ...city, selected: true }
           : { ...city, selected: false },
       ),
     );
-    console.log("왜안돼", oriCity);
   }, []);
 
   // 도시 선택하기
@@ -79,7 +78,7 @@ const City = ({ history, setHistory, oriCity, setOriCity }) => {
         temp.push(city.id);
       }
     });
-    setOriCity(temp);
+    setOriginal({ ...original, cityId: temp });
     setHistory(ThisStep);
   };
 
