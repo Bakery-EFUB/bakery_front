@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import arrowImg from "../images/DropdownArrow.svg";
+import { useNavigate } from "react-router-dom";
 
 const TopBar = styled.div`
   display: flex;
@@ -57,15 +58,15 @@ const DropdownArrow = styled.span`
   }
 `;
 const Dropdown = ({ value, category, items, forChange }) => {
-  const handleOnChange = value => {
+  const handleOnChange = (e) => {
     forChange.setScheduleInfo({
       ...forChange.scheduleInfo,
-      [category]: items.indexOf(value),
+      [category]: e.target.value,
     });
   };
   return (
     <div>
-      <CustomSelect value={value} onChange={() => handleOnChange(this)}>
+      <CustomSelect value={value} onChange={handleOnChange}>
         {items.map((item, idx) => (
           <option key={idx} value={item}>
             {item}
@@ -105,12 +106,14 @@ const BigPinkButtonBottom = styled.button`
 `;
 
 const AddSchedulePage = () => {
+  const navigator = useNavigate();
   const [scheduleInfo, setScheduleInfo] = useState(() => {
+    const today = new Date();
     return {
-      year: new Date().getFullYear(),
-      month: new Date().getMonth() + 1,
-      day: new Date().getDate(),
-      hour: new Date().getHours(),
+      year: today.getFullYear() + "년",
+      month: today.getMonth() + 1 + "월",
+      day: today.getDate() + "일",
+      time: "13:00",
       desc: "",
     };
   });
@@ -122,13 +125,23 @@ const AddSchedulePage = () => {
     time.push(i + ":00");
     time.push(i + ":30");
   }
-  console.log(scheduleInfo);
-
-  const onChangeDesc = e => {
+  const onChangeDesc = (e) => {
     setScheduleInfo({
       ...scheduleInfo,
       desc: e.target.value,
     });
+  };
+  const getDayArrayDependOnMonth = (month) => {
+    switch (month) {
+      case "2월": return day.slice(0,28);
+      case "1월": case "3월": case "5월": case "7월": case "8월": case "10월": case "12월": return day.slice();
+      case "4월": case "6월": case "9월": case "11월": return day.slice(0,30);
+    }
+  };
+  const addScheduleOnClick = () => {
+    console.log(scheduleInfo);
+    // 값 처리
+    navigator("/pickupschedule");
   };
 
   return (
@@ -138,21 +151,21 @@ const AddSchedulePage = () => {
         <SubTitle>날짜 선택</SubTitle>
         <DropdownGroup>
           <Dropdown
-            value={scheduleInfo.year + "년"}
+            value={scheduleInfo.year}
             category="year"
             items={["2022년", "2023년"]}
             forChange={{ scheduleInfo, setScheduleInfo }}
           />
           <Dropdown
-            value={scheduleInfo.month + "월"}
+            value={scheduleInfo.month}
             category="month"
             items={month}
             forChange={{ scheduleInfo, setScheduleInfo }}
           />
           <Dropdown
-            value={scheduleInfo.day + "일"}
+            value={scheduleInfo.day}
             category="day"
-            items={day}
+            items={getDayArrayDependOnMonth(scheduleInfo.month)}
             forChange={{ scheduleInfo, setScheduleInfo }}
           />
         </DropdownGroup>
@@ -160,8 +173,8 @@ const AddSchedulePage = () => {
       <ContentBoxWithMargin>
         <SubTitle>시간 선택</SubTitle>
         <DropdownGroup>
-          <Dropdown items={["AM", "PM"]} />
           <Dropdown
+            value={scheduleInfo.time}
             category="time"
             items={time}
             forChange={{ scheduleInfo, setScheduleInfo }}
@@ -177,7 +190,9 @@ const AddSchedulePage = () => {
           onChange={onChangeDesc}
         />
       </ContentBoxWithMargin>
-      <BigPinkButtonBottom>추가하기</BigPinkButtonBottom>
+      <BigPinkButtonBottom onClick={addScheduleOnClick}>
+        추가하기
+      </BigPinkButtonBottom>
     </div>
   );
 };
