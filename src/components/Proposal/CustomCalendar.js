@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import classNames from "classnames/bind";
-import style from "../styles/calendar.css";
-import LeftVector from "../images/LeftVector.svg";
-import RightVector from "../images/RightVector.svg";
+import style from "../../styles/calendar.css";
+import LeftVector from "../../images/LeftVector.svg";
+import RightVector from "../../images/RightVector.svg";
 
 import styled from "styled-components";
 
@@ -21,7 +21,7 @@ const Right = styled.img`
   margin-right: 13px;
 `;
 
-const CustomCalendar = () => {
+const CustomCalendar = ({ original, setOriginal }) => {
   const today = {
     year: new Date().getFullYear(), //오늘 연도
     month: new Date().getMonth() + 1, //오늘 월
@@ -71,11 +71,11 @@ const CustomCalendar = () => {
           className={cx(
             { weekday: true },
             { sunday: v === "일" },
-            { saturday: v === "토" }
+            { saturday: v === "토" },
           )}
         >
           {v}
-        </div>
+        </div>,
       );
     });
     return weekArr;
@@ -141,6 +141,7 @@ const CustomCalendar = () => {
                     today: i + 1 === selected,
                   },
                   {
+                    // 예약 정보가 있을 때
                     exist: existArr[i + 1].exist,
                   },
 
@@ -150,7 +151,7 @@ const CustomCalendar = () => {
                       new Date(
                         selectedYear,
                         selectedMonth - 1,
-                        i + 1
+                        i + 1,
                       ).getDay() === 0,
                   },
                   {
@@ -159,14 +160,14 @@ const CustomCalendar = () => {
                       new Date(
                         selectedYear,
                         selectedMonth - 1,
-                        i + 1
+                        i + 1,
                       ).getDay() === 6,
-                  }
+                  },
                 )}
               >
                 {i + 1}
               </div>
-            </div>
+            </div>,
           );
         }
       } else {
@@ -178,14 +179,15 @@ const CustomCalendar = () => {
   };
 
   // 선택 된 날짜 출력 (test 코드)
-  console.log(
-    "년도 :",
-    selectedYear,
-    "월 :",
-    selectedMonth,
-    "날짜 : ",
-    selected
-  );
+
+  const pickUpDate =
+    selectedYear.toString() + selectedMonth.toString() + selected.toString();
+
+  console.log(pickUpDate);
+
+  useEffect(() => {
+    setOriginal({ ...original, pickUp: pickUpDate });
+  }, [pickUpDate]);
 
   return (
     <div className="container">
