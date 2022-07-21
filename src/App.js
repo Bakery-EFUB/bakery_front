@@ -18,6 +18,8 @@ import ShopInformationRegister from "./pages/ShopInformationRegister";
 import ShopMypageStart from "./pages/ShopMyPageStart";
 import PickupSchedulePage from "./pages/PickupSchedulePage";
 
+import ShopInformationModify from "./pages/ShopInformationModify";
+
 function App() {
   return (
     <BrowserRouter>

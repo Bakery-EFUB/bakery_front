@@ -71,11 +71,11 @@ const CustomCalendar = ({ setClickedDay }) => {
           className={cx(
             { weekday: true },
             { sunday: v === "일" },
-            { saturday: v === "토" }
+            { saturday: v === "토" },
           )}
         >
           {v}
-        </div>
+        </div>,
       );
     });
     return weekArr;
@@ -159,7 +159,7 @@ const CustomCalendar = ({ setClickedDay }) => {
                       new Date(
                         selectedYear,
                         selectedMonth - 1,
-                        i + 1
+                        i + 1,
                       ).getDay() === 0,
                   },
                   {
@@ -168,14 +168,14 @@ const CustomCalendar = ({ setClickedDay }) => {
                       new Date(
                         selectedYear,
                         selectedMonth - 1,
-                        i + 1
+                        i + 1,
                       ).getDay() === 6,
-                  }
+                  },
                 )}
               >
                 {i + 1}
               </div>
-            </div>
+            </div>,
           );
         }
       } else {
@@ -193,7 +193,7 @@ const CustomCalendar = ({ setClickedDay }) => {
     "월 :",
     selectedMonth,
     "날짜 : ",
-    selected
+    selected,
   );
 
   return (
