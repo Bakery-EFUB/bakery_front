@@ -70,11 +70,11 @@ const Proposal6 = () => {
     { id: 14, city: "성동구", selected: false },
   ]);
 
-  const onToggle = id => {
+  const onToggle = (id) => {
     const selectedId = id;
 
     setCityArray(
-      cityArray.map(city =>
+      cityArray.map((city) =>
         city.id === selectedId ? { ...city, selected: !city.selected } : city
       )
     );
@@ -89,21 +89,21 @@ const Proposal6 = () => {
       <SmallText>(복수선택가능)</SmallText>
 
       <Wrapper>
-        {cityArray.map(arr => {
+        {cityArray.map((arr) => {
           if (arr.selected === true) {
             return (
               <CityButton
                 selected
                 key={arr.id}
                 id={arr.id}
-                onClick={e => onToggle(e)}
+                onClick={(e) => onToggle(e)}
               >
                 {arr.city}
               </CityButton>
             );
           } else {
             return (
-              <CityButton key={arr.id} id={arr.id} onClick={e => onToggle(e)}>
+              <CityButton key={arr.id} id={arr.id} onClick={(e) => onToggle(e)}>
                 {arr.city}
               </CityButton>
             );

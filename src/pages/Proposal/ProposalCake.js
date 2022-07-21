@@ -49,7 +49,7 @@ const Circle = styled.div`
   border: 1px solid var(--main-pink);
   border-radius: 50%;
 
-  background-color: ${props => (props.checked ? "var(--main-pink)" : "none")};
+  background-color: ${(props) => (props.checked ? "var(--main-pink)" : "none")};
 
   margin: auto 0 auto 20px;
 `;
@@ -79,7 +79,7 @@ const ProposalCake = () => {
     { id: 6, cake: "기타 케이크" },
   ]);
 
-  const onToggle = id => {
+  const onToggle = (id) => {
     setIsChecked(id);
   };
 
@@ -91,7 +91,7 @@ const ProposalCake = () => {
       <Text>원하는 가격대를 선택해주세요.</Text>
 
       <Wrapper>
-        {cakes.map(cake => {
+        {cakes.map((cake) => {
           if (cake.id === isChecked) {
             return (
               <div

@@ -131,6 +131,7 @@ const UserLogo = styled.div`
   left: 24.21px;
   top: 261.91px;
   background-repeat: no-repeat;
+  position: relative;
 `;
 
 const UserName = styled.div`

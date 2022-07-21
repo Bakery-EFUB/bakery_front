@@ -18,6 +18,7 @@ const TopBarPink = styled.div`
   height: 60px;
   position: sticky;
   top: 0;
+  z-index: 5;
 `;
 
 const TopLogo = styled.div`
