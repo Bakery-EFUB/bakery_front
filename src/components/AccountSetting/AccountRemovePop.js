@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const PopupBox = styled.div`
    /* Rectangle 1549 */
-
+    position: fixed;
     display: flex;
     flex-direction: column;
     width: 330px;
