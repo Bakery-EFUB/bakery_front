@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBar from "../components/SearchBar";
 import TopBar from "../components/TopBar";
-import CardDisplay from "../components/CardDisplay/CardDisplay.js";
+import CardDisplay from "../components/HomeCardDisplay/CardDisplay.js";
 import styled from "styled-components";
 import MainHeader from "../components/MainHeader";
 

@@ -1,0 +1,133 @@
+button {
+  cursor: pointer;
+}
+
+.container {
+  position: relative;
+  min-height: 384px;
+  height: auto;
+
+  border: 1px solid var(--main-pink);
+  border-radius: 6px;
+}
+
+h3 {
+  height: 26px;
+  margin-left: 23px;
+  /* title */
+
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+}
+
+/* 위 파트 */
+.container .title {
+  display: flex;
+}
+
+/* 모르겠단 */
+.container .title > button {
+  border: none;
+  margin-left: 5px;
+  height: 20px;
+  align-self: center;
+  background: none;
+}
+
+/* 화살표 */
+.container .title .pagination {
+  margin-left: auto;
+  align-self: center;
+}
+/* 화살표 버튼 그 자체 */
+.container .title .pagination button {
+  color: var(--main-pink);
+  margin: 0;
+  border: none;
+  background: none;
+  line-height: 11px;
+}
+
+/* 요일 */
+.container .week {
+  color: var(--main-pink);
+  display: flex;
+
+  margin-left: 7px;
+  margin-right: 7px;
+}
+
+/* 요일 하나하나 */
+.container .week .weekday {
+  width: calc(100% / 7);
+
+  text-align: center;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+
+  align-items: center;
+  text-align: center;
+}
+
+/* 날짜 부분 전체 */
+.container .date {
+  margin: 20px 7px 7px 7px;
+
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-gap: 7px;
+}
+
+/* 날짜 하나하나 */
+.container .date .test .weekday {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  line-height: 36px;
+
+  vertical-align: center;
+  align-items: center;
+  text-align: center;
+
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+/*일정 있는 날짜 : 연한 핑크 */
+
+.container .date .test .exist {
+  margin: auto;
+  width: 35px;
+  height: 35px;
+  background-color: var(--sub-pink);
+
+  font-family: "Apple SD Gothic Neo";
+
+  color: var(--black);
+  font-weight: 500;
+  border-radius: 50%;
+}
+
+/* 선택된 날짜 : 진한 핑크*/
+.container .date .test .today {
+  margin: auto;
+  width: 35px;
+  height: 35px;
+  background-color: var(--main-pink);
+
+  font-family: "Apple SD Gothic Neo";
+
+  color: white;
+  font-weight: 500;
+  border-radius: 50%;
+}
