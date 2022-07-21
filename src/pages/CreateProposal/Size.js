@@ -1,37 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import TopBar from "../../components/TopBar";
+import { Link } from "react-router-dom";
 
 import SmallPinkButton from "../../components/SmallPinkButton";
 import SmallWhiteButton from "../../components/SmallWhiteButton";
+import SmallGrayButton from "../../components/SmallGrayButton";
 
 import PageTitle from "../../components/PageTitle";
-
-const Text = styled.p`
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 26px;
-  text-align: center;
-  width: 290px;
-  height: 26px;
-  margin: 44px auto 0 auto;
-`;
-
-const ProgessBar = styled.div`
-  width: 380px;
-  height: 4px;
-  margin: 20px auto 0 auto;
-  background-color: var(--main-pink);
-  border: none;
-`;
+import ProposalText from "../../components/Proposal/ProposalText";
+import ProgessBar from "../../components/Proposal/ProgressBar";
 
 const Wrapper = styled.div`
-  width: 380px;
   height: auto;
 
-  margin: 47px auto 0 auto;
+  margin: 47px 24px 0 24px;
 
   border: solid 1px var(--sub-pink);
   border-radius: 5px;
@@ -78,8 +60,8 @@ const Exp = styled.p`
   color: var(--sub-darkgray);
 `;
 
-const ProposalSize = () => {
-  const [isChecked, setIsChecked] = useState(3);
+const Size = ({ history, setHistory }) => {
+  const [isChecked, setIsChecked] = useState(null);
 
   const [sizes, setSizes] = useState([
     { id: 1, size: "미니", exp: "지름 11cm, 1~2인분" },
@@ -94,12 +76,13 @@ const ProposalSize = () => {
     setIsChecked(id);
   };
 
+  const ThisStep = 45;
+
   return (
     <div>
-      <TopBar />
       <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
-      <ProgessBar />
-      <Text>케이크 사이즈를 선택해주세요.</Text>
+      <ProgessBar step={ThisStep} before={history} />
+      <ProposalText text="케이크 사이즈를 선택해주세요." />
 
       <Wrapper>
         {sizes.map(size => {
@@ -141,16 +124,32 @@ const ProposalSize = () => {
 
       <div
         style={{
-          margin: "154px 24px auto 24px",
+          width: "100%",
+          margin: "105px  auto 0 auto",
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "center",
         }}
       >
-        <SmallWhiteButton>이전</SmallWhiteButton>
-        <SmallPinkButton>다음</SmallPinkButton>
+        <Link to="/create/cake">
+          <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
+            이전
+          </SmallWhiteButton>
+        </Link>
+
+        <div style={{ marginLeft: "6px" }}>
+          {isChecked ? (
+            <Link to="/create/taste">
+              <SmallPinkButton onClick={() => setHistory(ThisStep)}>
+                완료
+              </SmallPinkButton>
+            </Link>
+          ) : (
+            <SmallGrayButton>완료</SmallGrayButton>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
-export default ProposalSize;
+export default Size;

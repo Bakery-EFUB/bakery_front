@@ -11,6 +11,7 @@ import ButtonSidebar from "./ButtonSidebar";
 import "./Sidebar/Sidebar.css";
 
 const TopBarPink = styled.div`
+  z-index: 5;
   margin: 0;
   background-color: var(--main-pink);
   width: 100%;
@@ -18,7 +19,6 @@ const TopBarPink = styled.div`
   height: 60px;
   position: sticky;
   top: 0;
-  z-index: 5;
 `;
 
 const TopLogo = styled.div`
