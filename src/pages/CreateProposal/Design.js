@@ -1,17 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import SmallPinkButton from "../../components/SmallPinkButton";
 import SmallWhiteButton from "../../components/SmallWhiteButton";
-import SmallGrayButton from "../../components/SmallGrayButton";
 import PageTitle from "../../components/PageTitle";
 import ProposalText from "../../components/Proposal/ProposalText";
 
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
+import { useDropzone } from "react-dropzone";
+
 const Design = ({ history, setHistory, original, setOriginal }) => {
   const ThisStep = 90;
+
+  const [files, setFiles] = useState([]); //업로드 하려는 파일의 url을 새생성하고 파일의 정보를 파일즈에 담아준다.
+  const { getRootProps, getInputProps } = useDropzone({
+    //허용하는 파일 형식
+    accept: {
+      "image/*": [],
+    },
+    onDrop: acceptedFiles => {
+      setFiles(
+        acceptedFiles.map(file =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          }),
+        ),
+      );
+    },
+  });
+
+  //업로드 하려고 선택한 파일의 이미지를 미리보기로 보여준다.
+  const thumbs = files.map(file => (
+    <div style={thumb} key={file.name}>
+      <div style={thumbInner}>
+        <img
+          src={file.preview}
+          style={img} // createObjectURL 로 생성한 후 업로드 시, URL 메모리 공간을 revokeObjectURL 로 제거 해준다.
+          onLoad={() => {
+            URL.revokeObjectURL(file.preview);
+          }}
+        />
+      </div>
+    </div>
+  ));
+
+  useEffect(() => {
+    // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
+    return () => files.forEach(file => URL.revokeObjectURL(file.preview));
+  }, []);
 
   const Back = () => {
     setHistory(ThisStep);
@@ -28,8 +66,14 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
       <ProgessBar step={ThisStep} before={history} />
 
       <ProposalText text="디자인 시안이 있다면 알려주세요." />
-      <Button>사진 업로드</Button>
-      <ImageBox />
+
+      <div {...getRootProps({ className: "dropzone" })}>
+        <input {...getInputProps()} />
+        <Button>사진 업로드</Button>
+      </div>
+      {thumbs}
+      {/* <ImageBox></ImageBox> */}
+
       <div
         style={{
           width: "100%",
@@ -88,3 +132,27 @@ const ImageBox = styled.div`
   box-shadow: 0px 4px 62px rgba(153, 171, 198, 0.18);
   border-radius: 6px;
 `;
+
+const thumb = {
+  margin: "19px 24px 0 24px",
+  height: "auto",
+
+  borderRadius: "6px",
+
+  display: "flex",
+  justifyContent: "center",
+};
+
+const thumbInner = {
+  height: "256px",
+
+  borderRadius: "6px",
+
+  overflow: "hidden",
+};
+
+const img = {
+  display: "block",
+  width: "auto",
+  height: "100%",
+};

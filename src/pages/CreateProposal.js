@@ -25,7 +25,7 @@ const CreateProposal = () => {
     cakeId: null,
     sizeId: null,
     tasteId: null,
-    design: "",
+    design: [],
     priceId: null,
     pickUp: null,
   });
