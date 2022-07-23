@@ -3,13 +3,13 @@ import styled from "styled-components";
 import MoreViewimg from "../images/MoreView.svg";
 import UserLogoimg from "../images/UserLogo.svg";
 import CountManageimg from "../images/CountManage.svg";
+import Mock from "../images/Mock.svg";
 
 const WrapBox = styled.div`
   width: 428px;
 `;
-
 const Box = styled.div`
-  background-color: var(--sub-pink);
+  background-color: #ffebea;
   position: absolute;
   width: 428px;
   height: 619.09px;
@@ -24,9 +24,9 @@ const Button = styled.button`
   left: 23.86px;
   top: 84.63px;
   color: white;
-  background: var(--main-pink);
+  background: #ff7b72;
   border-radius: 6px;
-  border: 0.1px solid var(--main-pink);
+  border: 0.1px solid #ff7b72;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
@@ -43,9 +43,9 @@ const Button2 = styled.button`
   left: 23.86px;
   top: 154.63px;
   color: white;
-  background: var(--main-pink);
+  background: #ff7b72;
   border-radius: 6px;
-  border: 0.1px solid var(--main-pink);
+  border: 0.1px solid #ff7b72;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
@@ -67,10 +67,13 @@ const BottomProposal = styled.div`
 `;
 
 const Article = styled.article`
+  background: url(${Mock});
   width: 120px;
   height: 120px;
-  border: 1px solid red;
   display: inline-block;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 6px;
 `;
 
 const MoreView = styled.div`
@@ -79,7 +82,7 @@ const MoreView = styled.div`
   width: 195.31px;
   height: 30.31px;
   top: 570.42px;
-  left: 199.31px;
+  left: 195.31px;
   background-repeat: no-repeat;
 `;
 
@@ -177,7 +180,7 @@ const ShopMemberMyPage = () => {
       <CountManager></CountManager>
       <UserPlace>Caker 가게 회원</UserPlace>
       <UserLogo></UserLogo>
-      <Box>
+      <Box className="BottomPinkBackground">
         <Button>가게 정보 관리</Button>
         <Button2>픽업 일정 관리</Button2>
         <CommitProposal>댓글 단 제안서</CommitProposal>
