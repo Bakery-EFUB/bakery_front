@@ -9,47 +9,8 @@ import PageTitle from "../../components/PageTitle";
 import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
-const Wrapper = styled.div`
-  height: auto;
-
-  margin: 47px 24px 0 24px;
-
-  border: solid 1px var(--sub-pink);
-  border-radius: 5px;
-
-  grid-template-rows: repeat(2, 60px);
-
-  .item:not(:last-child) {
-    border-bottom: 1px solid var(--sub-pink);
-  }
-`;
-
-const Circle = styled.div`
-  width: 22px;
-  height: 22px;
-  border: 1px solid var(--main-pink);
-  border-radius: 50%;
-
-  background-color: ${(props) => (props.checked ? "var(--main-pink)" : "none")};
-
-  margin: auto 0 auto 20px;
-`;
-
-const Option = styled.p`
-  margin: auto 0 auto 23px;
-
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-
-  line-height: 14px;
-
-  color: var(--black);
-`;
-
-const Cake = ({ history, setHistory }) => {
-  const [isChecked, setIsChecked] = useState(null);
+const Cake = ({ history, setHistory, original, setOriginal }) => {
+  const [isChecked, setIsChecked] = useState(original.cakeId);
 
   const [cakes, setCakes] = useState([
     { id: 1, cake: "레터링 케이크" },
@@ -60,11 +21,20 @@ const Cake = ({ history, setHistory }) => {
     { id: 6, cake: "기타 케이크" },
   ]);
 
-  const onToggle = (id) => {
+  const onToggle = id => {
     setIsChecked(id);
   };
 
   const ThisStep = 30;
+
+  const Back = () => {
+    setHistory(ThisStep);
+  };
+
+  const Next = () => {
+    setHistory(ThisStep);
+    setOriginal({ ...original, cakeId: isChecked });
+  };
 
   return (
     <div>
@@ -73,7 +43,7 @@ const Cake = ({ history, setHistory }) => {
       <ProposalText text="어떤 케이크를 원하시나요?" />
 
       <Wrapper>
-        {cakes.map((cake) => {
+        {cakes.map(cake => {
           if (cake.id === isChecked) {
             return (
               <div
@@ -116,17 +86,13 @@ const Cake = ({ history, setHistory }) => {
         }}
       >
         <Link to="/create/city">
-          <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
-            이전
-          </SmallWhiteButton>
+          <SmallWhiteButton onClick={() => Back()}>이전</SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
           {isChecked ? (
             <Link to="/create/size">
-              <SmallPinkButton onClick={() => setHistory(ThisStep)}>
-                완료
-              </SmallPinkButton>
+              <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
             </Link>
           ) : (
             <SmallGrayButton>완료</SmallGrayButton>
@@ -138,3 +104,42 @@ const Cake = ({ history, setHistory }) => {
 };
 
 export default Cake;
+
+const Wrapper = styled.div`
+  height: auto;
+
+  margin: 47px 24px 0 24px;
+
+  border: solid 1px var(--sub-pink);
+  border-radius: 5px;
+
+  grid-template-rows: repeat(2, 60px);
+
+  .item:not(:last-child) {
+    border-bottom: 1px solid var(--sub-pink);
+  }
+`;
+
+const Circle = styled.div`
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--main-pink);
+  border-radius: 50%;
+
+  background-color: ${props => (props.checked ? "var(--main-pink)" : "none")};
+
+  margin: auto 0 auto 20px;
+`;
+
+const Option = styled.p`
+  margin: auto 0 auto 23px;
+
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+
+  line-height: 14px;
+
+  color: var(--black);
+`;

@@ -11,27 +11,7 @@ import CityButton from "../../components/CityButton";
 import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
-const SmallText = styled.p`
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 26px;
-  text-align: center;
-  color: var(--sub-darkgray);
-  margin: 0 auto 0 auto;
-`;
-
-const Wrapper = styled.div`
-  height: 314px;
-  margin: 32px 24px 0 24px;
-
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 10px;
-`;
-
-const City = ({ history, setHistory }) => {
+const City = ({ history, setHistory, original, setOriginal }) => {
   const [cityArray, setCityArray] = useState([
     { id: 1, city: "은평구", selected: false },
     { id: 2, city: "종로구", selected: false },
@@ -49,18 +29,31 @@ const City = ({ history, setHistory }) => {
     { id: 14, city: "성동구", selected: false },
   ]);
 
-  const onToggle = (id) => {
-    const selectedId = id;
+  const [isDone, setIsDone] = useState(true);
 
+  const ThisStep = 15;
+
+  // 맨 처음에 한번만 처리하는 부분
+  useEffect(() => {
     setCityArray(
-      cityArray.map((city) =>
-        city.id === selectedId ? { ...city, selected: !city.selected } : city
-      )
+      cityArray.map(city =>
+        original.cityId.includes(city.id)
+          ? { ...city, selected: true }
+          : { ...city, selected: false },
+      ),
+    );
+  }, []);
+
+  // 도시 선택하기
+  const onToggle = id => {
+    setCityArray(
+      cityArray.map(city =>
+        city.id === id ? { ...city, selected: !city.selected } : city,
+      ),
     );
   };
 
-  const [isDone, setIsDone] = useState(true);
-
+  // 완료 버튼 렌더링
   useEffect(() => {
     let city;
     for (city of cityArray) {
@@ -73,7 +66,21 @@ const City = ({ history, setHistory }) => {
     }
   }, [cityArray]);
 
-  const ThisStep = 15;
+  const Back = () => {
+    setHistory(ThisStep);
+  };
+
+  // 선택한 id 저장 (부모에 전달)
+  const Next = () => {
+    let temp = [];
+    cityArray.map(city => {
+      if (city.selected == true) {
+        temp.push(city.id);
+      }
+    });
+    setOriginal({ ...original, cityId: temp });
+    setHistory(ThisStep);
+  };
 
   return (
     <div>
@@ -114,17 +121,13 @@ const City = ({ history, setHistory }) => {
         }}
       >
         <Link to="/create">
-          <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
-            이전
-          </SmallWhiteButton>
+          <SmallWhiteButton onClick={() => Back()}>이전</SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
           {isDone ? (
             <Link to="/create/cake">
-              <SmallPinkButton onClick={() => setHistory(ThisStep)}>
-                완료
-              </SmallPinkButton>
+              <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
             </Link>
           ) : (
             <SmallGrayButton>완료</SmallGrayButton>
@@ -136,3 +139,23 @@ const City = ({ history, setHistory }) => {
 };
 
 export default City;
+
+const SmallText = styled.p`
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  text-align: center;
+  color: var(--sub-darkgray);
+  margin: 0 auto 0 auto;
+`;
+
+const Wrapper = styled.div`
+  height: 314px;
+  margin: 32px 24px 0 24px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
+`;

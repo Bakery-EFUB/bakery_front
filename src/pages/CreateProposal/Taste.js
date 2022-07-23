@@ -10,6 +10,115 @@ import PageTitle from "../../components/PageTitle";
 import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
+const Taste = ({ history, setHistory, original, setOriginal }) => {
+  const [isChecked, setIsChecked] = useState(original.tasteId);
+  const [design, setDesign] = useState(original.design);
+
+  const [tastes, setTastes] = useState([
+    { id: 1, taste: "초코" },
+    { id: 2, taste: "바닐라" },
+    { id: 3, taste: "기타" },
+  ]);
+
+  const ThisStep = 60;
+
+  const onToggle = id => {
+    setIsChecked(id);
+  };
+
+  const Back = () => {
+    setHistory(ThisStep);
+  };
+
+  const Next = () => {
+    setHistory(ThisStep);
+    setOriginal({
+      tasteId: isChecked,
+      design: design,
+    });
+  };
+
+  return (
+    <div>
+      <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
+      <ProgessBar step={ThisStep} before={history} />
+
+      <ProposalText text="어떤 맛을 원하시나요?" />
+
+      <Wrapper>
+        {tastes.map(taste => {
+          if (taste.id === isChecked) {
+            return (
+              <div
+                onClick={() => onToggle(taste.id)}
+                className="item"
+                key={taste.id}
+                style={{
+                  display: "flex",
+                  height: "60px",
+                }}
+              >
+                <Circle checked />
+                <Option>{taste.taste}</Option>
+              </div>
+            );
+          } else {
+            return (
+              <div
+                onClick={() => onToggle(taste.id)}
+                className="item"
+                key={taste.id}
+                style={{
+                  display: "flex",
+                  height: "60px",
+                }}
+              >
+                <Circle />
+                <Option>{taste.taste}</Option>
+              </div>
+            );
+          }
+        })}
+      </Wrapper>
+
+      <ProposalText text="디자인에 대해 상세히 적어주세요!"></ProposalText>
+
+      <DesignInput>
+        <textarea
+          value={design}
+          onChange={e => setDesign(e.target.value)}
+          placeholder="ex) 레터링을 ‘생일 축하해'로 해주세요!"
+        />
+      </DesignInput>
+
+      <div
+        style={{
+          width: "100%",
+          margin: "105px  auto 0 auto",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Link to="/create/size">
+          <SmallWhiteButton onClick={() => Back()}> 이전</SmallWhiteButton>
+        </Link>
+
+        <div style={{ marginLeft: "6px" }}>
+          {isChecked ? (
+            <Link to="/create/price">
+              <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
+            </Link>
+          ) : (
+            <SmallGrayButton>완료</SmallGrayButton>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Taste;
+
 const Wrapper = styled.div`
   height: auto;
 
@@ -60,7 +169,7 @@ const Exp = styled.p`
   color: var(--sub-darkgray);
 `;
 
-const DesignInput = styled.div`
+const DesignInput = styled.form`
   min-height: 50px;
   height: auto;
 
@@ -97,102 +206,3 @@ const DesignInput = styled.div`
     outline: none;
   }
 `;
-
-const Taste = ({ history, setHistory }) => {
-  const [isChecked, setIsChecked] = useState(null);
-
-  const [tastes, setTastes] = useState([
-    { id: 1, taste: "초코" },
-    { id: 2, taste: "바닐라" },
-    { id: 3, taste: "기타" },
-  ]);
-
-  const onToggle = id => {
-    setIsChecked(id);
-  };
-
-  const [isDone, setIsDone] = useState(true);
-
-  const ThisStep = 60;
-
-  return (
-    <div>
-      <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
-      <ProgessBar step={ThisStep} before={history} />
-
-      <ProposalText text="어떤 맛을 원하시나요?" />
-
-      <Wrapper>
-        {tastes.map(taste => {
-          if (taste.id === isChecked) {
-            return (
-              <div
-                onClick={() => onToggle(taste.id)}
-                className="item"
-                key={taste.id}
-                style={{
-                  display: "flex",
-                  height: "60px",
-                }}
-              >
-                <Circle checked />
-                <Option>{taste.taste}</Option>
-              </div>
-            );
-          } else {
-            return (
-              <div
-                onClick={() => onToggle(taste.id)}
-                className="item"
-                key={taste.id}
-                style={{
-                  display: "flex",
-                  height: "60px",
-                }}
-              >
-                <Circle />
-                <Option>{taste.taste}</Option>
-              </div>
-            );
-          }
-        })}
-      </Wrapper>
-
-      <ProposalText text="디자인에 대해 상세히 적어주세요!"></ProposalText>
-
-      <DesignInput>
-        <textarea placeholder="ex) 레터링을 ‘생일 축하해'로 해주세요!" />
-      </DesignInput>
-
-      <div
-        style={{
-          width: "100%",
-          margin: "105px  auto 0 auto",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <Link to="/create/size">
-          <SmallWhiteButton onClick={() => setHistory(ThisStep)}>
-            {" "}
-            이전
-          </SmallWhiteButton>
-        </Link>
-
-        <div style={{ marginLeft: "6px" }}>
-          {isChecked ? (
-            <Link to="/create/price">
-              <SmallPinkButton onClick={() => setHistory(ThisStep)}>
-                완료
-              </SmallPinkButton>
-            </Link>
-          ) : (
-            <SmallGrayButton>완료</SmallGrayButton>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Taste;
