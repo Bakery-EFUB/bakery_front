@@ -34,7 +34,12 @@ function App() {
         <Route exact path="/allproposal" element={<AllProposal />} />
         <Route exact path="/shopdetail" element={<ShopDetailPage />} />
         <Route exact path="/shopmypagestart" element={<ShopMypageStart />} />
-        <Route exact path="/shopregister" element={<ShopInformationModify />} />
+        <Route
+          exact
+          path="/shopregister"
+          element={<ShopInformationRegister />}
+        />
+        <Route exact path="/shopmodify" element={<ShopInformationModify />} />
         <Route
           exact
           path="/shopprogressive"
