@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import TopBar from "../components/TopBar";
 import PageTitle from "../components/PageTitle";
 import CustomCalendar from "../components/CustomCalendar";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SelectedDay = styled.div`
   margin: 40px 0 0;
@@ -72,6 +73,27 @@ const BigPinkButtonBottom = styled.button`
 `;
 
 const PickupSchedulePage = () => {
+  // const [pickupSchedules, setPickupSchedules] = useState([]);
+  // const loadPickupScheduleData = async () => {
+  //   const response = await axios
+  //     .get("/store/{store_id}/events")
+  //     .then(res => {
+  //       setPickupSchedules(
+  //         res.data.map(pickup => {
+  //           return {
+  //             content: pickup.content,
+  //             pickupDate: pickup.pickupDate,
+  //             pickupTime: pickup.pickupTime,
+  //             // 이후 이벤트 아이디도 추가해야함
+  //           };
+  //         }),
+  //       );
+  //     })
+  //     .catch(e => console.error(e));
+  // };
+  // useEffect(() => {
+  //   loadPickupScheduleData();
+  // }, []);
   const navigator = useNavigate();
   const [selectedDay, setSelectedDay] = useState(() => {
     const today = new Date();
