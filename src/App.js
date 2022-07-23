@@ -15,6 +15,7 @@ import ShopInformationRegister from "./pages/ShopInformationRegister";
 import ShopMypageStart from "./pages/ShopMyPageStart";
 
 import ShopInformationModify from "./pages/ShopInformationModify";
+import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
 
 function App() {
   return (
@@ -37,6 +38,11 @@ function App() {
           exact
           path="/shopregister"
           element={<ShopInformationRegister />}
+        />
+        <Route
+          exact
+          path="/shopprogressive"
+          element={<ShopMyPageProgressive />}
         />
       </Routes>
     </BrowserRouter>
