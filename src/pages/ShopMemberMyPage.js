@@ -3,31 +3,30 @@ import styled from "styled-components";
 import MoreViewimg from "../images/MoreView.svg";
 import UserLogoimg from "../images/UserLogo.svg";
 import CountManageimg from "../images/CountManage.svg";
-import PageTitle from "../components/PageTitle";
+import Mock from "../images/Mock.svg";
 
 const WrapBox = styled.div`
   width: 428px;
 `;
-
 const Box = styled.div`
-  background-color: var(--sub-pink);
+  background-color: #ffebea;
+  position: absolute;
   width: 428px;
   height: 619.09px;
   left: 0px;
   top: 306.91px;
-  display: flex;
-  flex-direction: column;
 `;
 
 const Button = styled.button`
+  position: absolute;
   width: 380px;
   height: 60px;
-  margin-left: 23.86px;
-  margin: 84.63px 0px 0px 23.86px;
+  left: 23.86px;
+  top: 84.63px;
   color: white;
-  background: var(--main-pink);
+  background: #ff7b72;
   border-radius: 6px;
-  border: 0.1px solid var(--main-pink);
+  border: 0.1px solid #ff7b72;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
@@ -38,15 +37,15 @@ const Button = styled.button`
 `;
 
 const Button2 = styled.button`
+  position: absolute;
   width: 380px;
   height: 60px;
-  /* margin-left: 23.86px; */
-  margin: 10px 0px 0px 23.86px;
+  left: 23.86px;
   top: 154.63px;
   color: white;
-  background: var(--main-pink);
+  background: #ff7b72;
   border-radius: 6px;
-  border: 0.1px solid var(--main-pink);
+  border: 0.1px solid #ff7b72;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
@@ -57,9 +56,10 @@ const Button2 = styled.button`
 `;
 
 const BottomProposal = styled.div`
+  position: absolute;
   width: 380.14px;
   height: 253.21px;
-  margin: 19.64px 0px 0px 23.86px;
+  left: 23.86px;
   top: 297.57px;
   display: flex;
   flex-wrap: wrap;
@@ -67,22 +67,29 @@ const BottomProposal = styled.div`
 `;
 
 const Article = styled.article`
+  background: url(${Mock});
   width: 120px;
   height: 120px;
-  border: 1px solid red;
   display: inline-block;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 6px;
 `;
 
 const MoreView = styled.div`
   background: url(${MoreViewimg});
+  position: absolute;
   width: 195.31px;
   height: 30.31px;
-  margin: 19.64px 0px 0px 199.31px;
+  top: 570.42px;
+  left: 195.31px;
   background-repeat: no-repeat;
 `;
 
 const MypagePlace = styled.div`
-  margin: 60px 0 63px 0;
+  position: absolute;
+  left: 166px;
+  top: 160px;
   bottom: 0%;
   text-align: left;
   font-family: "Apple SD Gothic Neo";
@@ -92,17 +99,15 @@ const MypagePlace = styled.div`
   line-height: 26px;
   text-align: center;
 `;
-const ShopDetailHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
 
 const CountManager = styled.div`
   background: url(${CountManageimg});
   background-repeat: no-repeat;
+  position: absolute;
   width: 54px;
   height: 14px;
-  margin: 96.12px 24.31px 0px 0px;
+  left: 349.69px;
+  top: 280.7px;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
@@ -114,7 +119,7 @@ const CountManager = styled.div`
 const UserLogo = styled.div`
   background: url(${UserLogoimg});
   box-sizing: border-box;
-  margin: 42.79px 0px 0px 24.21px;
+  position: absolute;
   width: 99px;
   height: 99px;
   left: 24.21px;
@@ -124,9 +129,11 @@ const UserLogo = styled.div`
 `;
 
 const UserName = styled.div`
+  position: absolute;
   width: 114.57px;
   height: 24px;
-  margin: 93.7px 0px 0px 139px;
+  left: 139px;
+  top: 273.7px;
   text-align: left;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
@@ -136,6 +143,7 @@ const UserName = styled.div`
 `;
 
 const UserPlace = styled.h1`
+  position: absolute;
   width: 195.31px;
   height: 30.31px;
   left: 139px;
@@ -150,10 +158,11 @@ const UserPlace = styled.h1`
 `;
 
 const CommitProposal = styled.div`
+  position: absolute;
   width: 137.05px;
   height: 19px;
-  margin: 44.31px 0px 0px 24px;
-
+  left: 24px;
+  top: 258.94px;
   text-align: left;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
@@ -162,24 +171,16 @@ const CommitProposal = styled.div`
   line-height: 19px;
 `;
 
-//margin : 위 오른 아래 왼
 const ShopMemberMyPage = () => {
   return (
     <WrapBox>
       <TopBar></TopBar>
-      {/* <PageTitle title="마이페이지" margin="60px 0 63px 0" /> */}
       <MypagePlace>마이페이지</MypagePlace>
-      <ShopDetailHeader>
-        <div>
-          {" "}
-          <UserName>터틀힙 님,</UserName>
-          <CountManager></CountManager>
-          <UserPlace>Caker 가게 회원</UserPlace>
-          <UserLogo></UserLogo>
-        </div>
-      </ShopDetailHeader>
-
-      <Box>
+      <UserName>터틀힙 님,</UserName>
+      <CountManager></CountManager>
+      <UserPlace>Caker 가게 회원</UserPlace>
+      <UserLogo></UserLogo>
+      <Box className="BottomPinkBackground">
         <Button>가게 정보 관리</Button>
         <Button2>픽업 일정 관리</Button2>
         <CommitProposal>댓글 단 제안서</CommitProposal>
