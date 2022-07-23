@@ -23,15 +23,10 @@ const Button = styled.button`
   height: 100px;
   left: 23.86px;
   top: 148.53px;
-<<<<<<< HEAD:src/pages/ShopMyPageProgressive.js
-  color: #ff7b72;
-  background: #fffbef;
-=======
-  color: white;
-  background: var(--main-pink);
->>>>>>> 2e6f61b6c1014f77d54505687e8fa04c114deed4:src/pages/ShopMyPageStart.js
+  color: var(--main-pink);
+  background: var(--sub-yellow);
   border-radius: 6px;
-  border: 0.1px solid var(--main-pink);
+  border: 0.1px solid var(--sub-yellow);
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: bolder;
