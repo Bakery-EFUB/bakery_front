@@ -3,6 +3,7 @@ import styled from "styled-components";
 import vectorimg from "../images/Vector.svg";
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import FileUpload from "../components/FileUpload";
 
 const ShopName = styled.input`
   width: 380px;
@@ -260,30 +261,13 @@ const ShopMenuPhotoing = styled.div`
   text-transform: uppercase;
 `;
 
-const Vector = styled.div`
-  background: url(${vectorimg});
-  height: 19.69px;
-  width: 20px;
-  position: absolute;
-  left: 177.52px;
-  top: 73.16px;
-  z-index: 1;
-`;
-
-const thumbsContainer = {
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  marginTop: 16,
-};
-
 const thumb = {
-  display: "inline-flex",
+  display: "flex",
+  justifyContent: "center",
   borderRadius: 2,
-
   marginBottom: 3,
   marginRight: 2,
-  width: 90,
+  width: 380,
   height: 90,
   padding: 4,
   boxSizing: "border-box",
@@ -291,6 +275,8 @@ const thumb = {
 
 const thumbInner = {
   display: "flex",
+  width: 300,
+  justifyContent: "center",
   minWidth: 0,
   overflow: "hidden",
 };
@@ -388,6 +374,7 @@ const ShopInformationRegister = () => {
           <ShopPhoto>{thumbs}</ShopPhoto>
         </section>
         <ShopMenuPhotoing>케이크 대표 메뉴</ShopMenuPhotoing>
+
         <ShopMenuPhoto placeholder="➕" />
         <ShopMenuPhoto2 placeholder="➕" />
         <RegisterBtn>등록하기</RegisterBtn>
