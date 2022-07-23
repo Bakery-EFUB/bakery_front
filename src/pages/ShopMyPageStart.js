@@ -141,7 +141,7 @@ const ShopMypageStart = () => {
   return (
     <WrapBox>
       <TopBar></TopBar>
-      <PageTitle>마이페이지</PageTitle>
+      <PageTitle title="마이페이지" margin="56px 0px 0px 0px" />
       <UserName>터틀힙 님,</UserName>
       <CountManager></CountManager>
       <UserPlace>Caker 가게 회원</UserPlace>
