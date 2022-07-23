@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import arrowImg from "../images/DropdownArrow.svg";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const TopBar = styled.div`
   display: flex;
@@ -58,7 +59,7 @@ const DropdownArrow = styled.span`
   }
 `;
 const Dropdown = ({ value, category, items, forChange }) => {
-  const handleOnChange = (e) => {
+  const handleOnChange = e => {
     forChange.setScheduleInfo({
       ...forChange.scheduleInfo,
       [category]: e.target.value,
@@ -125,22 +126,41 @@ const AddSchedulePage = () => {
     time.push(i + ":00");
     time.push(i + ":30");
   }
-  const onChangeDesc = (e) => {
+  const onChangeDesc = e => {
     setScheduleInfo({
       ...scheduleInfo,
       desc: e.target.value,
     });
   };
-  const getDayArrayDependOnMonth = (month) => {
+  const getDayArrayDependOnMonth = month => {
     switch (month) {
       case "2월": return day.slice(0,28);
       case "1월": case "3월": case "5월": case "7월": case "8월": case "10월": case "12월": return day.slice();
       case "4월": case "6월": case "9월": case "11월": return day.slice(0,30);
     }
   };
-  const addScheduleOnClick = () => {
-    console.log(scheduleInfo);
-    // 값 처리
+  const sendPickupSchedule = async () => {
+    if (scheduleInfo.desc.trim() === "") {
+      console.log("내용이 비어있습니다.");
+      return;
+    }
+    const [hour, minute] = scheduleInfo.time.split(":").map(Number);
+    const pickupDate = new Date(
+      Number(scheduleInfo.year.slice(0, -1)),
+      Number(scheduleInfo.month.slice(0, -1)),
+      Number(scheduleInfo.day.slice(0, -1)),
+      hour,
+      minute,
+    );
+    const pickupTime = pickupDate;
+    console.log(pickupDate.toISOString().slice(0, -5), scheduleInfo.desc);
+    const response = await axios
+      .post("/events", {
+        content: scheduleInfo.desc,
+        pickupDate: pickupDate.toISOString().slice(0, -5),
+        pickupTime: pickupTime.toISOString().slice(0, -5),
+      })
+      .catch(error => console.log(error, response));
     navigator("/pickupschedule");
   };
 
@@ -190,7 +210,7 @@ const AddSchedulePage = () => {
           onChange={onChangeDesc}
         />
       </ContentBoxWithMargin>
-      <BigPinkButtonBottom onClick={addScheduleOnClick}>
+      <BigPinkButtonBottom onClick={sendPickupSchedule}>
         추가하기
       </BigPinkButtonBottom>
     </div>
