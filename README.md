@@ -1,6 +1,6 @@
 # EFUB Bakery
 
-이화여자대학교 2022 EFUB SWS(Summer Web Surf) 여름 프로젝트
+이화여자대학교 2022 EFUB SWS(Summer Web Surf) 여름 프로젝트<br/>
 레터링 케이크 주문/판매 플랫폼
 
 ### Client
