@@ -14,8 +14,7 @@ import AllProposal from "./pages/AllProposal";
 import ShopInformationRegister from "./pages/ShopInformationRegister";
 import ShopMypageStart from "./pages/ShopMyPageStart";
 
-import Proposal from "./pages/Proposal";
-
+import ShopInformationModify from "./pages/ShopInformationModify";
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
 
 function App() {
@@ -29,7 +28,7 @@ function App() {
         <Route exact path="/AddSchedulePage" element={<AddSchedulePage />} />
         <Route exact path="/search" element={<SearchPage />} />
         <Route exact path="/recommend" element={<Recommend />} />
-        <Route exact path="/proposal" element={<Proposal />} />
+
         <Route exact path="/serviceinfo" element={<OurService />} />
         <Route exact path="/mypagehost" element={<ShopMemberMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
@@ -40,6 +39,7 @@ function App() {
           path="/shopregister"
           element={<ShopInformationRegister />}
         />
+        <Route exact path="/shopmodify" element={<ShopInformationModify />} />
         <Route
           exact
           path="/shopprogressive"
