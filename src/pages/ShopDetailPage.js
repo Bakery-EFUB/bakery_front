@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import TopBar from "../components/TopBar";
 import PageTitle from "../components/PageTitle";
@@ -8,18 +8,46 @@ import moreIcon from "../images/MoreIcon.svg";
 import { DetailInfoCard } from "../components/DetailInfoCard";
 import DetailInfoItem from "../components/DetailInfoItem";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+/////////////// 테스트를 위한 객체 -> 이후 삭제 예정 /////////////
+const shopDetail = {
+  id: 1, //store db id(long)
+  owner: {
+    //사장 프로필
+    memberId: 2,
+    kakaoId: 2996125025,
+    nickname: "bakery",
+    email: "efub@kakao.com",
+    image: "mainImg",
+    authority: "BAKER",
+    deleteFlag: false,
+  },
+  ownerName: "bakery", //사장 이름(string)
+  name: "가게 이름", //(string)
+  mainImg: mainImg, //(string)
+  readme:
+    "달다구리는 다양한 상황과 감정을 케이크로 표현할 수 있는 아이디어를 늘 상상하고 고민합니다. 다양한 상황에 전하고 싶은 메시지를 찾아 디자인하고자 하는 달다구리는 벌써 고객님들과 함께한지 10년이 되었습니다.", //string
+  address: "가게 주소", //string
+  kakaoUrl: "가게 카카오 프로필 링크", //string
+  instagram: "인스타그램 주소", //string
+  certifyFlag: true, //가게 인증 여부 (boolean)
+  openTime: "가게 오픈 시간", //string
+  phoneNumber: "전화번호", //string
+  menuImg: [mainImg, mainImg],
+};
 
 const PaddingBox = styled.div`
   padding: 0 24px 60px;
 `;
 const HorizonEmptySpace = styled.div`
-  height: ${(props) => props.height};
+  height: ${props => props.height};
 `;
 
 // 이미지
 const MainImage = styled.div`
-  height: ${(props) => props.height};
-  background: ${(props) => `url(${props.imgUrl}) center/cover no-repeat`};
+  height: ${props => props.height};
+  background: ${props => `url(${props.imgUrl}) center/cover no-repeat`};
   border-radius: 6px;
 `;
 
@@ -79,12 +107,33 @@ const CakeImages = styled.div`
 `;
 const CakeProductImage = styled.div`
   width: 32%;
-  height: 120px;
-  background: ${(props) => `url(${props.imgUrl}) center/cover no-repeat`};
+  height: 110px;
+  background: ${props => `url(${props.imgUrl}) center/cover no-repeat`};
   border-radius: 6px;
 `;
 
 const ShopDetailPage = () => {
+  // const [shopDetail, setShopDetail] = useState({});
+  // const loadShopDetailData = async () => {
+  //   const store_id = 'MyStore'; // 수정 필요
+  //   const response = await axios
+  //     .get(`/stores/${store_id}`)
+  //     .then((res) => setShopDetail(res.data))
+  //     .catch(e => console.error(e));
+  // };
+  // useEffect(() => {
+  //   //loadShopDetailData();
+  // }, []);
+
+  const getMoreInfoSNSLinkElement = (kakao, insta) => {
+    return (
+      <>
+        <a href={kakao}>카카오톡 채널</a>
+        &nbsp;|&nbsp;
+        <a href={insta}>인스타그램</a>
+      </>
+    );
+  };
   const navigator = useNavigate();
   const [openMore, setOpenMore] = useState([{}, {}]);
   const getMoreDesc = () => {
@@ -97,48 +146,52 @@ const ShopDetailPage = () => {
       <TopBar />
       <PageTitle title="가게 상세정보" margin="60px 0 63px 0" />
       <PaddingBox>
-        <MainImage imgUrl={mainImg} height="300px" />
+        <MainImage imgUrl={shopDetail.mainImg} height="300px" />
         <HorizonEmptySpace height="30px" />
         <ShopDetailHeader>
           <div>
-            <ShopName>달다구리</ShopName>
-            <IsRegistered>등록가게</IsRegistered>
+            <ShopName>{shopDetail.name}</ShopName>
+            <IsRegistered>
+              {shopDetail.certifyFlag ? "등록가게" : "미등록가게"}
+            </IsRegistered>
           </div>
           <ModifyIcon
             className="modify-info"
             onClick={() => navigator("/shopmodify")}
           />
-          {/* 권한이 있을 때만 이 아이콘이 나타나도록 */}
+          {/*
+            멤버를 일반 멤버와 사장멤버를 따로 관리하는건가?
+            그게 아니라면 현재 접속한 가게 주인의 멤버 id와 지금 로그인된 내 id만 비교해서
+            위의 아이콘 보여주면 될 것 같음
+           */}
         </ShopDetailHeader>
         <HorizonEmptySpace height="45px" />
         <SubTitle>소개</SubTitle>
         <HorizonEmptySpace height="12px" />
         <ShopDesc style={openMore[0]} onClick={getMoreDesc}>
-          달다구리는 다양한 상황과 감정을 케이크로 표현할 수 있는 아이디어를 늘
-          상상하고 고민합니다. 다양한 상황에 전하고 싶은 메시지를 찾아
-          디자인하고자 하는 달다구리는 벌써 고객님들과 함께한지 10년이
-          되었습니다.
+          {shopDetail.readme}
         </ShopDesc>
         <AlignCenterBox>
           <MoreIcon style={openMore[1]} onClick={getMoreDesc} />
         </AlignCenterBox>
         <HorizonEmptySpace height="35px" />
         <DetailInfoCard>
-          <DetailInfoItem category="전화번호" content="02-336-5856" fontSize="16px" />
-          <DetailInfoItem category="주소" content="서울 마포구 양화로18안길 22 2층 터틀힙" fontSize="16px" />
-          <DetailInfoItem category="운영시간" content="매일 12:00~20:00" fontSize="16px" />
-          <DetailInfoItem category="문의" content="카카오톡 | 인스타그램" fontSize="16px" />
+          <DetailInfoItem category="전화번호" content={shopDetail.phoneNumber} fontSize="16px" />
+          <DetailInfoItem category="주소" content={shopDetail.address} fontSize="16px" />
+          <DetailInfoItem category="운영시간" content={shopDetail.openTime} fontSize="16px" />
+          <DetailInfoItem
+            category="문의"
+            content={getMoreInfoSNSLinkElement( shopDetail.kakaoUrl, shopDetail.instagram )}
+            fontSize="16px"
+          />
         </DetailInfoCard>
         <HorizonEmptySpace height="48px" />
         <SubTitle>대표 케이크</SubTitle>
         <HorizonEmptySpace height="30px" />
         <CakeImages>
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
+          {shopDetail.menuImg.map((imgUrl, idx) => (
+            <CakeProductImage imgUrl={imgUrl} key={idx} />
+          ))}
         </CakeImages>
       </PaddingBox>
     </div>
