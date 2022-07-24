@@ -2,13 +2,10 @@
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
 
 ## Directory Structure 
+```
 📦bakery_front
  ┣ 📂.git
- 
  ┣ 📂public
- ┃ ┣ 📜index.html
- ┃ ┣ 📜manifest.json
- ┃ ┗ 📜robots.txt
  ┣ 📂src
  ┃ ┣ 📂components
  ┃ ┃ ┣ 📂AccountSetting
@@ -57,9 +54,6 @@
  ┃ ┃ ┣ 📜ShopMyPageProgressive.js
  ┃ ┃ ┗ 📜ShopMyPageStart.js
  ┃ ┣ 📂styles
- ┃ ┃ ┣ 📂fonts
- ┃ ┃ ┣ 📜calendar.css
- ┃ ┃ ┗ 📜common.scss
  ┃ ┣ 📜App.css
  ┃ ┣ 📜App.js
  ┃ ┣ 📜index.css
@@ -69,7 +63,7 @@
  ┣ 📜.prettierrc.json
  ┣ 📜package-lock.json
  ┣ 📜package.json
- ┗ 📜README.md
+ ┗ 📜README.md```
 
 ## Tech Stack 
 - js
