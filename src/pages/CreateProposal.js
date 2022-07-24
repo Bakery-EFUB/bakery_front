@@ -18,8 +18,8 @@ const CreateProposal = () => {
   const [history, setHistory] = useState(0);
 
   const [original, setOriginal] = useState({
-    cityId: [],
-    city: [],
+    cityId: null,
+    city: null,
     cakeId: null,
     cake: null,
     sizeId: null,

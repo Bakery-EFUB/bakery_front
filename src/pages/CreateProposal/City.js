@@ -37,7 +37,7 @@ const City = ({ history, setHistory, original, setOriginal }) => {
   useEffect(() => {
     setCityArray(
       cityArray.map(city =>
-        original.cityId.includes(city.id)
+        original.cityId == city.id
           ? { ...city, selected: true }
           : { ...city, selected: false },
       ),
@@ -48,7 +48,9 @@ const City = ({ history, setHistory, original, setOriginal }) => {
   const onToggle = id => {
     setCityArray(
       cityArray.map(city =>
-        city.id === id ? { ...city, selected: !city.selected } : city,
+        city.id === id
+          ? { ...city, selected: true }
+          : { ...city, selected: false },
       ),
     );
   };
