@@ -14,11 +14,11 @@ const Price = ({ history, setHistory, original, setOriginal }) => {
   const [isChecked, setIsChecked] = useState(original.priceId);
 
   const [prices, setPrices] = useState([
-    { id: 1, price: "1만원 미만" },
-    { id: 2, price: "1만원 이상 3만원 미만" },
-    { id: 3, price: "3만원 이상 7만원 미만" },
-    { id: 4, price: "7만원 이상 10만원 미만" },
-    { id: 5, price: "10만원 이상" },
+    { id: 1, price: "1만원 미만", min: 0, max: 10000 },
+    { id: 2, price: "1만원 이상 3만원 미만", min: 10000, max: 30000 },
+    { id: 3, price: "3만원 이상 7만원 미만", min: 30000, max: 70000 },
+    { id: 4, price: "7만원 이상 10만원 미만", min: 70000, max: 100000 },
+    { id: 5, price: "10만원 이상", min: 100000, max: 1000000 },
   ]);
 
   const ThisStep = 75;
@@ -33,7 +33,12 @@ const Price = ({ history, setHistory, original, setOriginal }) => {
 
   const Next = () => {
     setHistory(ThisStep);
-    setOriginal({ ...original, priceId: isChecked });
+    setOriginal({
+      ...original,
+      priceId: isChecked,
+      min: prices[isChecked - 1].min,
+      max: prices[isChecked - 1].max,
+    });
   };
 
   return (

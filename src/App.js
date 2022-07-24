@@ -13,7 +13,7 @@ import ShopMemberMyPage from "./pages/ShopMemberMyPage";
 import AllProposal from "./pages/AllProposal";
 import ShopInformationRegister from "./pages/ShopInformationRegister";
 import ShopMypageStart from "./pages/ShopMyPageStart";
-
+import Proposal from "./pages/Proposal";
 import ShopInformationModify from "./pages/ShopInformationModify";
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
 

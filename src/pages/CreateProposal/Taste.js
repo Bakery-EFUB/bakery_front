@@ -33,7 +33,9 @@ const Taste = ({ history, setHistory, original, setOriginal }) => {
   const Next = () => {
     setHistory(ThisStep);
     setOriginal({
+      ...original,
       tasteId: isChecked,
+      taste: tastes[isChecked - 1].taste,
       design: design,
     });
   };

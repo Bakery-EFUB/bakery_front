@@ -33,7 +33,11 @@ const Cake = ({ history, setHistory, original, setOriginal }) => {
 
   const Next = () => {
     setHistory(ThisStep);
-    setOriginal({ ...original, cakeId: isChecked });
+    setOriginal({
+      ...original,
+      cakeId: isChecked,
+      cake: cakes[isChecked - 1].cake,
+    });
   };
 
   return (

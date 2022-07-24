@@ -19,8 +19,11 @@ const PickUp = ({ history, setHistory, original, setOriginal }) => {
 
   const Next = () => {
     setHistory(ThisStep);
+    setOriginal({ ...original, PickUp });
     // api 함수 호출 postProposal()
   };
+
+  const [isChecked, setIsChecked] = useState(0);
 
   const [existArr, setExistArr] = useState([
     { id: 0, exist: false, reservation: "예약 정보" },

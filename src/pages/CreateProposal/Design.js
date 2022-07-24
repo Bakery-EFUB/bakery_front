@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import SmallPinkButton from "../../components/SmallPinkButton";
 import SmallWhiteButton from "../../components/SmallWhiteButton";
@@ -10,10 +10,10 @@ import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
 import { useDropzone } from "react-dropzone";
+import API from "../../components/API";
 
 const Design = ({ history, setHistory, original, setOriginal }) => {
   const ThisStep = 90;
-
   const [files, setFiles] = useState([]); //업로드 하려는 파일의 url을 새생성하고 파일의 정보를 파일즈에 담아준다.
   const { getRootProps, getInputProps } = useDropzone({
     //허용하는 파일 형식
@@ -54,9 +54,12 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
   const Back = () => {
     setHistory(ThisStep);
   };
+
+  const navigate = useNavigate();
+
   const Next = () => {
     setHistory(ThisStep);
-    // setOriginal({...original, })
+    setOriginal({ ...original, file: files });
   };
 
   return (
@@ -68,7 +71,7 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
       <ProposalText text="디자인 시안이 있다면 알려주세요." />
 
       <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} />
+        <input type="file" {...getInputProps()} />
         <Button>사진 업로드</Button>
       </div>
       {thumbs}

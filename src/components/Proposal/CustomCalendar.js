@@ -106,7 +106,7 @@ const CustomCalendar = ({
                 id={i + 1}
                 onClick={e => {
                   setSelected(parseInt(e.target.id));
-                  // 상위 컴포넌트에서 날짜 setState 함수를 pro장s로 넘겨준 경우
+                  // 상위 컴포넌트에서 날짜 setState 함수를 props로 넘겨준 경우
                   setClickedDay &&
                     setClickedDay({
                       year: Number(selectedYear),
@@ -158,11 +158,16 @@ const CustomCalendar = ({
     return dayArr;
   };
 
-  // 선택 된 날짜 출력 (test 코드)
-
+  // 선택 된 날짜 string으로 변환
   const pickUpDate =
-    selectedYear.toString() + selectedMonth.toString() + selected.toString();
+    selectedYear.toString() +
+    "-" +
+    selectedMonth.toString() +
+    "-" +
+    selected.toString() +
+    "T00:00:00.00";
 
+  // 상위 컴포넌트로 선택된 날짜 전달
   useEffect(() => {
     setOriginal({ ...original, pickUp: pickUpDate });
   }, [pickUpDate]);

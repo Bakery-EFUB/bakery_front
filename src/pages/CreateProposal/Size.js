@@ -33,7 +33,11 @@ const Size = ({ history, setHistory, original, setOriginal }) => {
   };
   const Next = () => {
     setHistory(ThisStep);
-    setOriginal({ ...original, sizeId: isChecked });
+    setOriginal({
+      ...original,
+      sizeId: isChecked,
+      size: sizes[isChecked - 1].size,
+    });
   };
 
   return (
