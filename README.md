@@ -1,9 +1,9 @@
 ## 🔨 Tool 🔨
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
 
-## Directory Structure 
+## 📦 Directory Structure 📦
 ```
-📦bakery_front
+🍞 bakery_front
  ┣ 📂.git
  ┣ 📂public
  ┣ 📂src
@@ -63,14 +63,16 @@
  ┣ 📜.prettierrc.json
  ┣ 📜package-lock.json
  ┣ 📜package.json
- ┗ 📜README.md```
+ ┗ 📜README.md
+ ```
 
-## Tech Stack 
+
+## ✈️ Tech Stack ✈️
 - js
 - css
 - scss
 
-## Library
+## 📚 Library 📚
 - axios : "^0.27.2",
 - classnames : "^2.3.1",
 - moment: "^2.29.4",
@@ -81,6 +83,6 @@
 - react-scripts : "5.0.1",
 -styled-components: "^5.3.5",
 
-## code formmater
+## ✔️ code formmater ✔️
 - eslint
 - prettier
