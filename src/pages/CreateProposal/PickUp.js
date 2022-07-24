@@ -22,6 +22,41 @@ const PickUp = ({ history, setHistory, original, setOriginal }) => {
     // api 함수 호출 postProposal()
   };
 
+  const [existArr, setExistArr] = useState([
+    { id: 0, exist: false, reservation: "예약 정보" },
+    { id: 1, exist: false, reservation: "예약 정보" },
+    { id: 2, exist: false, reservation: "예약 정보" },
+    { id: 3, exist: false, reservation: "예약 정보" },
+    { id: 4, exist: false, reservation: "예약 정보" },
+    { id: 5, exist: false, reservation: "예약 정보" },
+    { id: 6, exist: false, reservation: "예약 정보" },
+    { id: 7, exist: false, reservation: "예약 정보" },
+    { id: 8, exist: false, reservation: "예약 정보" },
+    { id: 9, exist: false, reservation: "예약 정보" },
+    { id: 10, exist: false, reservation: "예약 정보" },
+    { id: 11, exist: false, reservation: "예약 정보" },
+    { id: 12, exist: false, reservation: "예약 정보" },
+    { id: 13, exist: false, reservation: "예약 정보" },
+    { id: 14, exist: false, reservation: "예약 정보" },
+    { id: 15, exist: false, reservation: "예약 정보" },
+    { id: 16, exist: false, reservation: "예약 정보" },
+    { id: 17, exist: false, reservation: "예약 정보" },
+    { id: 18, exist: false, reservation: "예약 정보" },
+    { id: 19, exist: false, reservation: "예약 정보" },
+    { id: 20, exist: false, reservation: "예약 정보" },
+    { id: 21, exist: false, reservation: "예약 정보" },
+    { id: 22, exist: false, reservation: "예약 정보" },
+    { id: 23, exist: false, reservation: "예약 정보" },
+    { id: 24, exist: false, reservation: "예약 정보" },
+    { id: 25, exist: false, reservation: "예약 정보" },
+    { id: 26, exist: false, reservation: "예약 정보" },
+    { id: 27, exist: false, reservation: "예약 정보" },
+    { id: 28, exist: false, reservation: "예약 정보" },
+    { id: 29, exist: false, reservation: "예약 정보" },
+    { id: 30, exist: false, reservation: "예약 정보" },
+    { id: 31, exist: false, reservation: "예약 정보" },
+  ]);
+
   return (
     <div>
       <PageTitle margin="56px auto 0 auto" title="제안서 작성하기" />
@@ -31,7 +66,11 @@ const PickUp = ({ history, setHistory, original, setOriginal }) => {
       <ProposalText text="픽업 날짜를 선택해주세요." />
 
       <CalendarSection>
-        <CustomCalendar original={original} setOriginal={setOriginal} />
+        <CustomCalendar
+          original={original}
+          setOriginal={setOriginal}
+          existArr={existArr}
+        />
       </CalendarSection>
 
       <div

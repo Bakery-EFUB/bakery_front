@@ -16,9 +16,6 @@ import AIP from "../components/API";
 
 const CreateProposal = () => {
   const [history, setHistory] = useState(0);
-  const [oriCity, setOriCity] = useState([]);
-  const [oriCake, setOriCake] = useState(null);
-  const [oriSize, setOriSize] = useState(null);
 
   const [original, setOriginal] = useState({
     cityId: [],
@@ -29,10 +26,6 @@ const CreateProposal = () => {
     priceId: null,
     pickUp: null,
   });
-
-  useEffect(() => {
-    console.log("됏다", original);
-  }, [original]);
 
   const navigate = useNavigate();
   // const postProposal = () => {
