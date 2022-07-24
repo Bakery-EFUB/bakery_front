@@ -4,6 +4,7 @@
 ## Directory Structure 
 📦bakery_front
  ┣ 📂.git
+ 
  ┣ 📂public
  ┃ ┣ 📜index.html
  ┃ ┣ 📜manifest.json
