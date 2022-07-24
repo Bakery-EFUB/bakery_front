@@ -12,10 +12,9 @@ import OurService from "./pages/OurService";
 import ShopMemberMyPage from "./pages/ShopMemberMyPage";
 import AllProposal from "./pages/AllProposal";
 import ShopInformationRegister from "./pages/ShopInformationRegister";
-// import ShopMypageStart from "./pages/ShopMyPageStart";
+import ShopMypageStart from "./pages/ShopMyPageStart";
 
-import Proposal from "./pages/Proposal";
-
+import ShopInformationModify from "./pages/ShopInformationModify";
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
 
 function App() {
@@ -35,12 +34,13 @@ function App() {
         <Route exact path="/mypagehost" element={<ShopMemberMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
         <Route exact path="/shopdetail" element={<ShopDetailPage />} />
-        {/* <Route exact path="/shopmypagestart" element={<ShopMypageStart />} /> */}
+        <Route exact path="/shopmypagestart" element={<ShopMypageStart />} />
         <Route
           exact
           path="/shopregister"
           element={<ShopInformationRegister />}
         />
+        <Route exact path="/shopmodify" element={<ShopInformationModify />} />
         <Route
           exact
           path="/shopprogressive"
