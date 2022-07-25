@@ -3,6 +3,7 @@ import styled from "styled-components";
 import vectorimg from "../images/Vector.svg";
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import FileUpload from "../components/FileUpload";
 
 const ShopName = styled.input`
   width: 380px;
@@ -260,30 +261,13 @@ const ShopMenuPhotoing = styled.div`
   text-transform: uppercase;
 `;
 
-const Vector = styled.div`
-  background: url(${vectorimg});
-  height: 19.69px;
-  width: 20px;
-  position: absolute;
-  left: 177.52px;
-  top: 73.16px;
-  z-index: 1;
-`;
-
-const thumbsContainer = {
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  marginTop: 16,
-};
-
 const thumb = {
-  display: "inline-flex",
+  display: "flex",
+  justifyContent: "center",
   borderRadius: 2,
-
   marginBottom: 3,
   marginRight: 2,
-  width: 90,
+  width: 380,
   height: 90,
   padding: 4,
   boxSizing: "border-box",
@@ -291,6 +275,8 @@ const thumb = {
 
 const thumbInner = {
   display: "flex",
+  width: 300,
+  justifyContent: "center",
   minWidth: 0,
   overflow: "hidden",
 };
@@ -309,18 +295,18 @@ const ShopInformationRegister = () => {
     accept: {
       "image/*": [],
     },
-    onDrop: (acceptedFiles) => {
+    onDrop: acceptedFiles => {
       setFiles(
-        acceptedFiles.map((file) =>
+        acceptedFiles.map(file =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
-          })
-        )
+          }),
+        ),
       );
     },
   });
   //업로드 하려고 선택한 파일의 이미지를 미리보기로 보여준다.
-  const thumbs = files.map((file) => (
+  const thumbs = files.map(file => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
         <img
@@ -336,52 +322,63 @@ const ShopInformationRegister = () => {
 
   useEffect(() => {
     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-    return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
+    return () => files.forEach(file => URL.revokeObjectURL(file.preview));
   }, []);
 
+  //form - action: /save페이지로 데이터 전송
   return (
     <WrapBox>
       <TopBar />
-      <ShopRegistering>가게 정보 등록</ShopRegistering>
-      <ShopNameing>가게 이름</ShopNameing>
-      <ShopName type="text" placeholder="     정확한 상호명을 입력해주세요." />
-      <ShopIntroducing>가게 소개</ShopIntroducing>
-      <ShopIntroduce
-        type="text"
-        placeholder="     자신의 가게를 자유롭게 소개해주세요! (최대 300자)"
-      />
-      <ShopNumbering>전화번호</ShopNumbering>
-      <ShopNumber type="text" placeholder="     ex. 02-0000-0000" />
-      <ShopLocating>주소</ShopLocating>
-      <ShopLocation
-        type="text"
-        placeholder="     ex. 서울특별시 서대문구 대현동 11-11층"
-      />
-      <ShopOperatingHouring>운영 시간</ShopOperatingHouring>
-      <ShopOperatingHours type="text" placeholder="     ex. 매일 12:00~20:00" />
-      <ShopKaKaoing>카카오톡 채널</ShopKaKaoing>
-      <ShopKaKao
-        type="text"
-        placeholder="     운영중인 카카오톡 채널이 있다면 링크를 첨부해주세요."
-      />
-      <ShopInstagraming>인스타그램</ShopInstagraming>
-      <ShopInstagram
-        type="text"
-        placeholder="     운영중인 인스타그램이 있다면 링크를 첨부해주세요."
-      />
 
-      <ShopPhotoing>가게 대표 사진</ShopPhotoing>
-      <section className="container">
-        <div {...getRootProps({ className: "dropzone" })}>
-          <input {...getInputProps()} />
-          <ShopPhoto>➕</ShopPhoto>
-        </div>
-        <ShopPhoto>{thumbs}</ShopPhoto>
-      </section>
-      <ShopMenuPhotoing>케이크 대표 메뉴</ShopMenuPhotoing>
-      <ShopMenuPhoto placeholder="➕" />
-      <ShopMenuPhoto2 placeholder="➕" />
-      <RegisterBtn>등록하기</RegisterBtn>
+      <form action="/save" method="post" encType="multipart/form-data">
+        <ShopRegistering>가게 정보 등록</ShopRegistering>
+        <ShopNameing>가게 이름</ShopNameing>
+        <ShopName
+          type="text"
+          placeholder="     정확한 상호명을 입력해주세요."
+        />
+        <ShopIntroducing>가게 소개</ShopIntroducing>
+        <ShopIntroduce
+          type="text"
+          placeholder="     자신의 가게를 자유롭게 소개해주세요! (최대 300자)"
+        />
+        <ShopNumbering>전화번호</ShopNumbering>
+        <ShopNumber type="text" placeholder="     ex. 02-0000-0000" />
+        <ShopLocating>주소</ShopLocating>
+        <ShopLocation
+          type="text"
+          placeholder="     ex. 서울특별시 서대문구 대현동 11-11층"
+        />
+        <ShopOperatingHouring>운영 시간</ShopOperatingHouring>
+        <ShopOperatingHours
+          type="text"
+          placeholder="     ex. 매일 12:00~20:00"
+        />
+        <ShopKaKaoing>카카오톡 채널</ShopKaKaoing>
+        <ShopKaKao
+          type="text"
+          placeholder="     운영중인 카카오톡 채널이 있다면 링크를 첨부해주세요."
+        />
+        <ShopInstagraming>인스타그램</ShopInstagraming>
+        <ShopInstagram
+          type="text"
+          placeholder="     운영중인 인스타그램이 있다면 링크를 첨부해주세요."
+        />
+
+        <ShopPhotoing>가게 대표 사진</ShopPhotoing>
+        <section>
+          <div {...getRootProps({ className: "dropzone" })}>
+            <input {...getInputProps()} />
+            <ShopPhoto>➕</ShopPhoto>
+          </div>
+          <ShopPhoto>{thumbs}</ShopPhoto>
+        </section>
+        <ShopMenuPhotoing>케이크 대표 메뉴</ShopMenuPhotoing>
+
+        <ShopMenuPhoto placeholder="➕" />
+        <ShopMenuPhoto2 placeholder="➕" />
+        <RegisterBtn>등록하기</RegisterBtn>
+      </form>
     </WrapBox>
   );
 };

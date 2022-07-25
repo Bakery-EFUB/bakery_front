@@ -8,48 +8,53 @@ import DescriptionText from "../images/DescriptionText.svg";
 
 const Container = styled.div`
   width: 100%;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
 `;
 const BackGroundImg = styled.div`
   background: url(${ServiceBackground});
   background-repeat: no-repeat;
   width: 100%;
-  top: 23%;
+  margin-top: 23%;
   height: 1379.12px;
-  position: absolute;
+  z-index: -1
 `;
 const StartText = styled.div`
   color: var(--main-pink);
   font-size: 20px;
-  position: absolute;
   margin-left: 5%;
-  top: 27%;
+  margin-top: -1400px;
   font-family: "Apple SD Gothic Neo";
+  z-index: 0;
 `;
 const StartLogo = styled.img`
-  position: absolute;
   margin-left: 5%;
-  top: 32%;
+  margin-top: 5%;
+  z-index: 0;
+  width: 181.29px;
+  height: 45.98px;
 `;
 const Description1 = styled.img`
-  position: absolute;
   margin-left: 5%;
-  top: 42%;
+  margin-top: 5%;
+  z-index: 0;
+  width: 230px;
+  height: 73px;
 `;
 const TitleText1 = styled.div`
   color: black;
-  position: absolute;
   font-weight: 10%;
   font-size: 40px;
   margin-left: 5%;
-  top: 62%;
+  margin-top: 20%;
   font-family: "Apple SD Gothic Neo";
+  z-index: 0;
 `;
 const DescriptionBox1 = styled.div`
-  position: absolute;
-  top: 71%;
+  margin-top: 9%;
   margin-left: 5%;
   display: flex;
+  z-index: 0;
 `;
 const Description2 = styled.div`
   color: black;
@@ -57,22 +62,25 @@ const Description2 = styled.div`
   margin-top: 2%;
   font-family: "Apple SD Gothic Neo";
   white-space: wrap;
+  z-index: 0;
 `;
 const TitleText2 = styled.div`
   color: black;
-  position: absolute;
   font-weight: 10%;
-  font-size: 40px;
-  right: 5%;
-  top: 150%;
+  font-size: 37px;
+  margin-right: 3%;
+  margin-top: 80%;
+  margin-left: 15%;
   font-family: "Apple SD Gothic Neo";
+  z-index: 0;
 `;
 const DescriptionBox2 = styled.div`
-  position: absolute;
-  top: 159%;
-  right: 5%;
+  margin-top: 9%;
+  margin-right: 5%;
+  margin-left: 20%;
   display: flex;
   text-align: right;
+  z-index: 0;
 `;
 const Description3 = styled.div`
   color: black;
@@ -80,25 +88,25 @@ const Description3 = styled.div`
   margin-top: 2%;
   font-family: "Apple SD Gothic Neo";
   white-space: wrap;
+  z-index: 0;
 `;
 const LastImg = styled.img`
-  position: absolute;
-  top: 250%;
-  left: 15%;
+  margin-top: 120%;
+  margin-left: 12%;
+  width: 300px;
+  height: 48px;
 `;
 const ButtonContainer = styled.div`
-  position: absolute;
-  top: 140%;
+  margin-top: 15%;
   align-items: center;
   size: 100%;
 `;
 const Button = styled.button`
-  position: absolute;
   width: 380px;
   height: 60px;
-  top: 778px;
-  left: 5px;
-  right: 5px;
+  margin-top:10%;
+  margin-left: 5px;
+  margin-right: 5px;
 
   margin-bottom: 10px;
   /* main pink */
