@@ -304,6 +304,7 @@ const img = {
 //ui 구현
 const ShopInformationRegister = () => {
   const [files, setFiles] = useState([]); //업로드 하려는 파일의 url을 새생성하고 파일의 정보를 파일즈에 담아준다.
+  //객체 요소
   const { getRootProps, getInputProps } = useDropzone({
     //허용하는 파일 형식
     accept: {

@@ -5,6 +5,9 @@ import CountManageimg from "../images/CountManage.svg";
 import Readingimg from "../images/Reading.svg";
 import PageTitle from "../components/PageTitle";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const WrapBox = styled.div`
   width: 428px;
@@ -54,7 +57,7 @@ const CountManager = styled.div`
 `;
 
 const UserLogo = styled.div`
-  background: url(${UserLogoimg});
+  background: ${props => `url(${props.img}) center/cover no-repeat`};
   box-sizing: border-box;
   position: absolute;
   width: 99px;
@@ -138,11 +141,31 @@ const Reading = styled.div`
 `;
 
 const ShopMypageStart = () => {
+  const [Mydatas, setMyData] = useState([]);
+  const getData = () => {
+    axios
+      .get("https://caker.shop/stores")
+      .then(Response => {
+        console.log("받아오기 성공", Response.data);
+        setMyData(Response.data);
+      })
+      .catch(Error => {
+        console.log(Error);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <WrapBox>
       <TopBar></TopBar>
       <PageTitle title="마이페이지" margin="56px 0px 0px 0px" />
-      <UserName>터틀힙 님,</UserName>
+      <UserName>
+        {Mydatas.map(Mydata => (
+          <div key={Mydata.id}>{Mydata.owner.nickname}</div>
+        ))}
+      </UserName>
       <CountManager></CountManager>
       <UserPlace>Caker 가게 회원</UserPlace>
       <UserLogo></UserLogo>
