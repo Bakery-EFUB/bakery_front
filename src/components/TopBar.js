@@ -11,6 +11,7 @@ import ButtonSidebar from "./ButtonSidebar";
 import "./Sidebar/Sidebar.css";
 
 const TopBarPink = styled.div`
+  z-index: 5;
   margin: 0;
   background-color: var(--main-pink);
   width: 100%;
@@ -73,7 +74,9 @@ const TopBar = () => {
   return (
     <div>
       <TopBarPink>
-        <TopLogo></TopLogo>
+        <Link to="/home">
+          <TopLogo></TopLogo>
+        </Link>
         <TopMenuBar onClick={showSidebar}></TopMenuBar>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items"></ul>
@@ -91,7 +94,9 @@ const TopBar = () => {
               </li>
             );
           })}
-          <ButtonSidebar text="로그인"></ButtonSidebar>
+          <Link to="/loginhome">
+            <ButtonSidebar text="로그인"></ButtonSidebar>
+          </Link>
         </nav>
       </TopBarPink>
     </div>

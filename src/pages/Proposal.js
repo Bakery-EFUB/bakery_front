@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import TopBar from "../components/TopBar";
 
@@ -10,24 +11,124 @@ import SmallWhiteButton from "../components/SmallWhiteButton";
 
 import PageTitle from "../components/PageTitle";
 
-const Highlight = styled.p`
-  margin: auto;
-  margin-top: 56px;
+const Proposal = () => {
+  const [comments, setComments] = useState([
+    { author: "작성자", content: "픽업 시간 5시로 하겠습니다!" },
+  ]);
+  const [newComment, setNewComment] = useState("");
 
-  width: 186px;
-  height: 26px;
+  const onSubmit = e => {
+    e.preventDefault();
 
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 26px;
-  text-align: center;
-`;
+    setComments([...comments, { author: "작성자", content: newComment }]);
+
+    setNewComment("");
+  };
+
+  return (
+    <div style={{ width: "100%" }}>
+      <TopBar />
+      <PageTitle margin="56px auto 0 auto" title="내 제안서"></PageTitle>
+      <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <ImageBox />
+      </div>
+
+      <Text>레터링 케이크</Text>
+      <PinkRectangle>
+        <Option>
+          <p className="option">작성일</p>
+          <p className="content">2022.05.01</p>
+        </Option>
+        <Option>
+          <p className="option">사이즈</p>
+          <p className="content">1호</p>
+        </Option>
+        <Option>
+          <p className="option">맛</p>
+          <p className="content">초코</p>
+        </Option>
+        <Option>
+          <p className="option">디자인</p>
+          <p className="content">레터링 생일축하해로 해주세요!</p>
+        </Option>
+        <Option>
+          <p className="option">가격대</p>
+          <p className="content">3만원 이상 7만원 미만</p>
+        </Option>
+        <Option>
+          <p className="option">픽업 날짜</p>
+          <p className="content">2022.06.01</p>
+        </Option>
+      </PinkRectangle>
+      <div
+        style={{
+          width: "383px",
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "36px auto 0 auto",
+        }}
+      >
+        <Link to="/create/city">
+          <SmallPinkButton>수정</SmallPinkButton>
+        </Link>
+
+        <SmallWhiteButton>삭제</SmallWhiteButton>
+      </div>
+
+      <Comment>댓글 {comments.length}</Comment>
+      <CommentSection>
+        {comments.map(comment => {
+          if (true) {
+            return (
+              <CommentYellowBox key={comment.content}>
+                <CommentInfo>
+                  <Nickname>터틀힙</Nickname>
+                  <CommentTime>2022.05.10. 15:00</CommentTime>
+                  <CommentToggle>삭제</CommentToggle>
+                </CommentInfo>
+
+                <CommentContent>
+                  안녕하세요~ 4월 5일 2시부터 8시 사이 픽업 가능합니다~
+                </CommentContent>
+              </CommentYellowBox>
+            );
+          } else {
+            return (
+              <CommentPinkBox key={comment.content}>
+                <img
+                  src={CommentLogo}
+                  style={{ marginRight: "12px", width: "10px", height: "10px" }}
+                />
+                <div style={{ width: "100%" }}>
+                  <CommentInfo>
+                    <Nickname>{comment.author}</Nickname>
+                    <CommentTime>2022.05.10. 15:00</CommentTime>
+                    <CommentToggle>답글</CommentToggle>
+                  </CommentInfo>
+
+                  <CommentContent>{comment.content}</CommentContent>
+                </div>
+              </CommentPinkBox>
+            );
+          }
+        })}
+      </CommentSection>
+      <Input onSubmit={onSubmit}>
+        <input
+          placeholder="댓글을 입력해주세요."
+          value={newComment}
+          onChange={e => setNewComment(e.target.value)}
+        />
+        <button type="submit">등록</button>
+      </Input>
+    </div>
+  );
+};
+
+export default Proposal;
 
 const ImageBox = styled.img`
-  margin: auto;
-  margin-top: 37px;
+  margin: 37px auto 0 auto;
   width: 380px;
   height: 300px;
 
@@ -36,11 +137,9 @@ const ImageBox = styled.img`
 `;
 
 const Text = styled.p`
-  /* 상 우 하 좌 */
-  margin: 30px 0px 0px 30px;
+  margin: 30px auto 0px 30px;
 
-  width: 154.57px;
-  height: 32.73px;
+  height: 33px;
 
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
@@ -52,10 +151,9 @@ const Text = styled.p`
 const PinkRectangle = styled.div`
   box-sizing: border-box;
 
-  margin: 25px 0px 0px 24px;
+  margin: 25px 24px 0px 24px;
   padding: 20px;
 
-  width: 380px;
   height: 320px;
 
   background: var(--sub-pink);
@@ -113,7 +211,7 @@ const CommentSection = styled.div`
 
 const CommentYellowBox = styled.div`
   box-sizing: border-box;
-  width: 428px;
+
   height: 100px;
 
   background: var(--sub-yellow);
@@ -125,7 +223,7 @@ const CommentPinkBox = styled.div`
   display: flex;
 
   box-sizing: border-box;
-  width: 428px;
+
   height: 100px;
 
   background: var(--sub-pink);
@@ -202,12 +300,11 @@ const Input = styled.form`
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: 70px;
 
   display: flex;
   justify-content: flex-end;
 
-  width: 428px;
-  height: 70px;
   background-color: var(--white);
 
   input {
@@ -217,7 +314,7 @@ const Input = styled.form`
     background: transparent;
 
     color: var(--background);
-    width: 332px;
+    width: 100%;
     height: 70px;
 
     font-family: "Apple SD Gothic Neo";
@@ -254,93 +351,3 @@ const Input = styled.form`
     color: var(--white);
   }
 `;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const MyProposal = () => {
-  return (
-    <Wrapper>
-      <TopBar />
-      <PageTitle margin="56px auto 0 auto" title="내 제안서"></PageTitle>
-      <ImageBox />
-      <Text>레터링 케이크</Text>
-      <PinkRectangle>
-        <Option>
-          <p className="option">작성일</p>
-          <p className="content">2022.05.01</p>
-        </Option>
-        <Option>
-          <p className="option">사이즈</p>
-          <p className="content">1호</p>
-        </Option>
-        <Option>
-          <p className="option">맛</p>
-          <p className="content">초코</p>
-        </Option>
-        <Option>
-          <p className="option">디자인</p>
-          <p className="content">레터링 생일축하해로 해주세요!</p>
-        </Option>
-        <Option>
-          <p className="option">가격대</p>
-          <p className="content">3만원 이상 7만원 미만</p>
-        </Option>
-        <Option>
-          <p className="option">픽업 날짜</p>
-          <p className="content">2022.06.01</p>
-        </Option>
-      </PinkRectangle>
-      <div
-        style={{
-          width: "383px",
-          display: "flex",
-          justifyContent: "space-between",
-          margin: "36px auto 0 auto",
-        }}
-      >
-        <SmallPinkButton>수정</SmallPinkButton>
-        <SmallWhiteButton>삭제</SmallWhiteButton>
-      </div>
-
-      <Comment>댓글 2</Comment>
-      <CommentSection>
-        <CommentYellowBox>
-          <CommentInfo>
-            <Nickname>터틀힙</Nickname>
-            <CommentTime>2022.05.10. 15:00</CommentTime>
-            <CommentToggle>삭제</CommentToggle>
-          </CommentInfo>
-
-          <CommentContent>
-            안녕하세요~ 4월 5일 2시부터 8시 사이 픽업 가능합니다~
-          </CommentContent>
-        </CommentYellowBox>
-
-        <CommentPinkBox>
-          <img
-            src={CommentLogo}
-            style={{ marginRight: "12px", width: "10px", height: "10px" }}
-          />
-          <div style={{ width: "100%" }}>
-            <CommentInfo>
-              <Nickname>작성자</Nickname>
-              <CommentTime>2022.05.10. 15:00</CommentTime>
-              <CommentToggle>답글</CommentToggle>
-            </CommentInfo>
-
-            <CommentContent>픽업 시간 5시로 하겠습니다!</CommentContent>
-          </div>
-        </CommentPinkBox>
-      </CommentSection>
-
-      <Input>
-        <input placeholder="댓글을 입력해주세요." /> <button>등록</button>
-      </Input>
-    </Wrapper>
-  );
-};
-
-export default MyProposal;

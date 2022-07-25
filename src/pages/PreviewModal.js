@@ -113,10 +113,26 @@ const PreviewModal = () => {
         </ShopDesc>
         <HorizonEmptySpace height="35px" />
         <DetailInfoCard>
-          <DetailInfoItem category="전화번호" content="02-336-5856" fontSize="14px" />
-          <DetailInfoItem category="주소" content="서울 마포구 양화로18안길 22 2층 터틀힙" fontSize="14px" />
-          <DetailInfoItem category="운영시간" content="매일 12:00~20:00" fontSize="14px" />
-          <DetailInfoItem category="문의" content="카카오톡 | 인스타그램" fontSize="14px" />
+          <DetailInfoItem
+            category="전화번호"
+            content="02-336-5856"
+            fontSize="14px"
+          />
+          <DetailInfoItem
+            category="주소"
+            content="서울 마포구 양화로18안길 22 2층 터틀힙"
+            fontSize="14px"
+          />
+          <DetailInfoItem
+            category="운영시간"
+            content="매일 12:00~20:00"
+            fontSize="14px"
+          />
+          <DetailInfoItem
+            category="문의"
+            content="카카오톡 | 인스타그램"
+            fontSize="14px"
+          />
         </DetailInfoCard>
         <HorizonEmptySpace height="48px" />
         <SubTitle>대표 케이크</SubTitle>

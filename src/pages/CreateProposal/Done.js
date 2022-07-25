@@ -1,10 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import TopBar from "../../components/TopBar";
 
-import DoneImage from "../images/DoneImage.svg";
-
 import BigPinkButton from "../../components/BigPinkButton";
+import DoneImage from "../../images/DoneImage.svg";
 
 const Image = styled.div`
   background: url(${DoneImage});
@@ -29,7 +29,7 @@ const BigText = styled.p`
 
   /* black text */
 
-  color: #202020;
+  color: var(--black-text);
 `;
 
 const SmallText = styled.p`
@@ -45,7 +45,7 @@ const SmallText = styled.p`
 
   /* black text */
 
-  color: #202020;
+  color: var(--black-text);
 `;
 
 const UnderScoreText = styled.p`
@@ -64,21 +64,25 @@ const UnderScoreText = styled.p`
 
   color: var(--main-pink);
 `;
-const ProposalDone = () => {
+const Done = () => {
   return (
     <div>
-      <TopBar />
       <Image />
 
       <BigText>제안서 작성하기 완료!</BigText>
       <SmallText>곧 있으면 사장님들이 연락을 드릴거에요</SmallText>
-      <BigPinkButton margin="68px 24px 0px 24px">
-        내 제안서 보러가기
-      </BigPinkButton>
 
-      <UnderScoreText>메인 홈으로 가기</UnderScoreText>
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <BigPinkButton margin="68px 24px 0px 24px">
+          내 제안서 보러가기
+        </BigPinkButton>
+      </Link>
+
+      <Link to="/">
+        <UnderScoreText>메인 홈으로 가기</UnderScoreText>
+      </Link>
     </div>
   );
 };
 
-export default ProposalDone;
+export default Done;
