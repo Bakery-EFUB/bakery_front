@@ -16,6 +16,7 @@ import ShopMypageStart from "./pages/ShopMyPageStart";
 
 import ShopInformationModify from "./pages/ShopInformationModify";
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
+import PickupSchedulePage from "./pages/PickupSchedulePage";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           path="/shopprogressive"
           element={<ShopMyPageProgressive />}
         />
+        <Route exact path="/pickupschedule" element={<PickupSchedulePage />} />
       </Routes>
     </BrowserRouter>
   );

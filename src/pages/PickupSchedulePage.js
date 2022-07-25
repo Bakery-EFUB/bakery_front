@@ -4,7 +4,31 @@ import TopBar from "../components/TopBar";
 import PageTitle from "../components/PageTitle";
 import CustomCalendar from "../components/Proposal/CustomCalendar";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import API from "../components/API";
+
+const TEMP_DATA_FOR_CALENDAR = [
+  {
+    content: "테스트 자료",
+    pickupDate: "2022-07-01T14:30:00",
+    pickupTime: "2022-07-01T14:30:00",
+  },
+  {
+    content: "통신 상태 원활",
+    pickupDate: "2022-07-15T16:00:00",
+    pickupTime: "2022-07-15T16:00:00",
+  },
+  {
+    content: "근데 이제 값이없는",
+    pickupDate: "2022-07-21T13:30:00",
+    pickupTime: "2022-07-21T13:30:00",
+  },
+  {
+    content: "그렇습니다",
+    pickupDate: "2022-07-30T19:00:00",
+    pickupTime: "2022-07-30T19:00:00",
+  },
+];
+const TEMP_STORE_ID = 1;
 
 const SelectedDay = styled.div`
   margin: 40px 0 0;
@@ -45,6 +69,12 @@ const ScheduleDelete = styled.div`
   color: var(--sub-darkgray);
 `;
 
+const EmptyDayMsg = styled.div`
+  font-size: 14px;
+  text-align: center;
+  color: var(--sub-darkgray);
+`;
+
 const CreateScheduleCard = ({ pickupTime, pickupInfo }) => {
   return (
     <ScheduleCard>
@@ -73,11 +103,30 @@ const BigPinkButtonBottom = styled.button`
 `;
 
 const PickupSchedulePage = () => {
-  // const [pickupSchedules, setPickupSchedules] = useState([]);
+  const [pickupOnSelectedDay, setPickupOnSelectedDay] = useState([]);
+  const [pickupSchedules, setPickupSchedules] = useState([]);
+  const [selectedDay, setSelectedDay] = useState({
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    date: new Date().getDate(),
+  });
+  const onClickDay = date => {
+    setSelectedDay(date);
+    setPickupOnSelectedDay(
+      pickupSchedules.filter(
+        schedule =>
+          schedule.pickupDate.slice(0, 10) ===
+          new Date(date.year, date.month - 1, date.date + 1)
+            .toISOString()
+            .slice(0, 10),
+      ),
+    );
+  };
+  // API 통신
   // const loadPickupScheduleData = async () => {
-  //   const response = await axios
-  //     .get("/store/{store_id}/events")
+  //   const response = await API({ url: `/store/${TEMP_STORE_ID}/events` })
   //     .then(res => {
+  //       // console.log(res);
   //       setPickupSchedules(
   //         res.data.map(pickup => {
   //           return {
@@ -91,16 +140,21 @@ const PickupSchedulePage = () => {
   //     })
   //     .catch(e => console.error(e));
   // };
-  // useEffect(() => {
-  //   loadPickupScheduleData();
-  // }, []);
+  useEffect(() => {
+    // loadPickupScheduleData();
+    // console.log(pickupSchedules);
+    setPickupSchedules(TEMP_DATA_FOR_CALENDAR); //test
+  }, []);
   const navigator = useNavigate();
-  const [selectedDay, setSelectedDay] = useState(() => {
-    const today = new Date();
+  const allDaysHavingSchedule = pickupSchedules.map(schedule => {
+    const [pickupYear, pickupMonth, pickupDate] = schedule.pickupDate
+      .split("T")[0]
+      .split("-")
+      .map(Number);
     return {
-      year: today.getFullYear(),
-      month: today.getMonth() + 1,
-      day: today.getDate(),
+      year: pickupYear,
+      month: pickupMonth,
+      date: pickupDate,
     };
   });
   return (
@@ -108,22 +162,24 @@ const PickupSchedulePage = () => {
       <TopBar />
       <PageTitle title="픽업 일정" margin="60px 0 63px 0" />
       <CalendarContainer>
-        <CustomCalendar setClickedDay={setSelectedDay} />
+        <CustomCalendar
+          setClickedDay={onClickDay}
+          allDaysHavingSchedule={allDaysHavingSchedule}
+        />
       </CalendarContainer>
-      <SelectedDay>{`${selectedDay.year}.${selectedDay.month}.${selectedDay.day}`}</SelectedDay>
+      <SelectedDay>{`${selectedDay.year}.${selectedDay.month}.${selectedDay.date}`}</SelectedDay>
       <ScheduleCardList>
-        <CreateScheduleCard
-          pickupTime="13:00"
-          pickupInfo="000님/ 도시락 케이크"
-        />
-        <CreateScheduleCard
-          pickupTime="15:00"
-          pickupInfo="000님/ 레터링 케이크"
-        />
-        <CreateScheduleCard
-          pickupTime="16:30"
-          pickupInfo="000님/ 꽃다발 케이크"
-        />
+        {pickupOnSelectedDay.length === 0 ? (
+          <EmptyDayMsg> 일정이 없습니다. </EmptyDayMsg>
+        ) : (
+          pickupOnSelectedDay.map((schedule, idx) => (
+            <CreateScheduleCard
+              key={idx}
+              pickupTime={schedule.pickupTime.slice(11, 16)}
+              pickupInfo={schedule.content}
+            />
+          ))
+        )}
       </ScheduleCardList>
       <BigPinkButtonBottom onClick={() => navigator("/addschedule")}>
         일정 추가

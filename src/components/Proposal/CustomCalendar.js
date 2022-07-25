@@ -21,7 +21,7 @@ const Right = styled.img`
   margin-right: 13px;
 `;
 
-const CustomCalendar = ({ setClickedDay, original, setOriginal }) => {
+const CustomCalendar = ({ setClickedDay, original, setOriginal, allDaysHavingSchedule }) => {
   const today = {
     year: new Date().getFullYear(), //오늘 연도
     month: new Date().getMonth() + 1, //오늘 월
@@ -83,7 +83,7 @@ const CustomCalendar = ({ setClickedDay, original, setOriginal }) => {
 
   const [selected, setSelected] = useState(today.date); // 선택된 날짜
 
-  const [existArr, setExistArr] = useState([
+  let existArr = [
     { id: 0, exist: false, reservation: "예약 정보" },
     { id: 1, exist: false, reservation: "예약 정보" },
     { id: 2, exist: false, reservation: "예약 정보" },
@@ -91,7 +91,7 @@ const CustomCalendar = ({ setClickedDay, original, setOriginal }) => {
     { id: 4, exist: false, reservation: "예약 정보" },
     { id: 5, exist: false, reservation: "예약 정보" },
     { id: 6, exist: false, reservation: "예약 정보" },
-    { id: 7, exist: true, reservation: "예약 정보" },
+    { id: 7, exist: false, reservation: "예약 정보" },
     { id: 8, exist: false, reservation: "예약 정보" },
     { id: 9, exist: false, reservation: "예약 정보" },
     { id: 10, exist: false, reservation: "예약 정보" },
@@ -116,8 +116,24 @@ const CustomCalendar = ({ setClickedDay, original, setOriginal }) => {
     { id: 29, exist: false, reservation: "예약 정보" },
     { id: 30, exist: false, reservation: "예약 정보" },
     { id: 31, exist: false, reservation: "예약 정보" },
-  ]);
+  ];
 
+  // allDaysHavingSchedule은
+  // { year: , month: , date: }인 객체를 가지는 배열
+  // 해당 파라미터 생략하여 캘린더 사용하면 아래 조건문 실행 X
+  if (allDaysHavingSchedule) {
+    const dateHavingSchedule = allDaysHavingSchedule
+      .filter(
+        day => day["year"] === selectedYear && day["month"] === selectedMonth,
+      )
+      .map(day => day["date"]);
+    existArr = existArr.map(exist => {
+      return {
+        ...exist,
+        exist: dateHavingSchedule.includes(exist.id),
+      };
+    });
+  }
   const returnDay = () => {
     //선택된 달의 날짜들 반환 함수
     let dayArr = [];
@@ -140,7 +156,7 @@ const CustomCalendar = ({ setClickedDay, original, setOriginal }) => {
                     setClickedDay({
                       year: Number(selectedYear),
                       month: Number(selectedMonth),
-                      day: Number(i + 1),
+                      date: Number(i + 1),
                     });
                 }}
                 className={cx(
@@ -193,7 +209,7 @@ const CustomCalendar = ({ setClickedDay, original, setOriginal }) => {
     selectedYear.toString() + selectedMonth.toString() + selected.toString();
 
   useEffect(() => {
-    setOriginal({ ...original, pickUp: pickUpDate });
+    setOriginal && setOriginal({ ...original, pickUp: pickUpDate });
   }, [pickUpDate]);
 
   return (
