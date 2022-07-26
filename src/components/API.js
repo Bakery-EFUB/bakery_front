@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "~~미정~~.com",
+  baseURL: "https://caker.shop",
 });
 
 export default API;
