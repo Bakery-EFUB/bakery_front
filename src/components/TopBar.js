@@ -74,7 +74,7 @@ const TopBar = () => {
   return (
     <div>
       <TopBarPink>
-        <Link to="/home">
+        <Link to="/">
           <TopLogo></TopLogo>
         </Link>
         <TopMenuBar onClick={showSidebar}></TopMenuBar>

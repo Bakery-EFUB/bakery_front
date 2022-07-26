@@ -47,7 +47,7 @@ const SeeAll = styled.div`
   justify-content: center;
 `;
 
-const CardDisplay = ({ title }) => {
+const ShopDisplay = ({ title }) => {
   const [allShopInfo, setAllShopInfo] = useState([]);
 
   useEffect(() => {
@@ -69,7 +69,7 @@ const CardDisplay = ({ title }) => {
     <CardDisplayContainer>
       <Header>
         <Menu>{title}</Menu>
-        <Link to="/allproposal">
+        <Link to="/recommend">
           <SeeAll>
             전체보기<MoreInfoIcon></MoreInfoIcon>
           </SeeAll>
@@ -81,10 +81,9 @@ const CardDisplay = ({ title }) => {
             <Card key={shop.id} title={shop.name} image={shop.mainImg}></Card>
           );
         })}
-        <Card title="북아현동" subtitle="#스승의날"></Card>
       </Body>
     </CardDisplayContainer>
   );
 };
 
-export default CardDisplay;
+export default ShopDisplay;

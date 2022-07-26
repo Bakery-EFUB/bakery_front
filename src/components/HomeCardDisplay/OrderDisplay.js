@@ -7,7 +7,7 @@ import Card from "./Card";
 import { GetRecommend } from "../../api/home";
 import { useEffect, useState } from "react";
 //axios 적용 전 임시
-import recommend from "../../_mock/recommendShopList";
+import orderList from "../../_mock/orderList";
 import { Link } from "react-router-dom";
 
 const CardDisplayContainer = styled.div`
@@ -47,18 +47,18 @@ const SeeAll = styled.div`
   justify-content: center;
 `;
 
-const CardDisplay = ({ title }) => {
-  const [allShopInfo, setAllShopInfo] = useState([]);
+const OrderDisplay = ({ title }) => {
+  const [allOrderInfo, setAllOrderInfo] = useState([]);
 
   useEffect(() => {
-    console.log(recommend);
-    setAllShopInfo(recommend);
+    console.log(orderList);
+    setAllOrderInfo(orderList["sheetResponseDTOs"]);
 
     /* GetRecommend()
       .then(data => {
         console.log(data);
         console.log(recommend);
-        setAllShopInfo();
+        setAllorderInfo();
       })
       .catch(e => {
         console.log(e);
@@ -76,15 +76,19 @@ const CardDisplay = ({ title }) => {
         </Link>
       </Header>
       <Body>
-        {allShopInfo.map(shop => {
+        {allOrderInfo.map(order => {
           return (
-            <Card key={shop.id} title={shop.name} image={shop.mainImg}></Card>
+            <Card
+              key={order.sheetId}
+              title={order.locationDong}
+              image={order.imageUrl}
+              subtitle={order.hashtag}
+            ></Card>
           );
         })}
-        <Card title="북아현동" subtitle="#스승의날"></Card>
       </Body>
     </CardDisplayContainer>
   );
 };
 
-export default CardDisplay;
+export default OrderDisplay;
