@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import TopBar from "../components/TopBar";
 import PageTitle from "../components/PageTitle";
@@ -7,10 +7,10 @@ import modifyImg from "../images/ModifyInfo.svg";
 import moreIcon from "../images/MoreIcon.svg";
 import { DetailInfoCard } from "../components/DetailInfoCard";
 import DetailInfoItem from "../components/DetailInfoItem";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import {useNavigate, useParams} from "react-router-dom";
 
 /////////////// 테스트를 위한 객체 -> 이후 삭제 예정 /////////////
+const TEMP_USER_ID = 3;
 const shopDetail = {
   id: 1, //store db id(long)
   owner: {
@@ -113,11 +113,12 @@ const CakeProductImage = styled.div`
 `;
 
 const ShopDetailPage = () => {
+  const { storeId } = useParams();
   // const [shopDetail, setShopDetail] = useState({});
   // const loadShopDetailData = async () => {
   //   const store_id = 'MyStore'; // 수정 필요
   //   const response = await axios
-  //     .get(`/stores/${store_id}`)
+  //     .get(`/stores/${storeId}`)
   //     .then((res) => setShopDetail(res.data))
   //     .catch(e => console.error(e));
   // };
@@ -155,15 +156,12 @@ const ShopDetailPage = () => {
               {shopDetail.certifyFlag ? "등록가게" : "미등록가게"}
             </IsRegistered>
           </div>
-          <ModifyIcon
-            className="modify-info"
-            onClick={() => navigator("/shopmodify")}
-          />
-          {/*
-            멤버를 일반 멤버와 사장멤버를 따로 관리하는건가?
-            그게 아니라면 현재 접속한 가게 주인의 멤버 id와 지금 로그인된 내 id만 비교해서
-            위의 아이콘 보여주면 될 것 같음
-           */}
+          {shopDetail.owner.memberId === TEMP_USER_ID &&
+            <ModifyIcon
+              className="modify-info"
+              onClick={() => navigator("/shopmodify")}
+            />
+          }
         </ShopDetailHeader>
         <HorizonEmptySpace height="45px" />
         <SubTitle>소개</SubTitle>
