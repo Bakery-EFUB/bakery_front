@@ -1,63 +1,232 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import TopBar from "../components/TopBar";
 
-import Rectangle147 from "../images/Rectangle147.svg";
 import CommentLogo from "../images/CommentLogo.svg";
 
 import SmallPinkButton from "../components/SmallPinkButton";
 import SmallWhiteButton from "../components/SmallWhiteButton";
 
 import PageTitle from "../components/PageTitle";
+import API from "../components/API";
+import axios from "axios";
+import CommentToggle from "../components/Proposal/CommentToggle";
 
 const Proposal = () => {
-  const [comments, setComments] = useState([
-    { author: "작성자", content: "픽업 시간 5시로 하겠습니다!" },
-  ]);
+  // url에서 id 뽑기
+  const navigate = useNavigate();
+  const { id } = useParams();
+  window.localStorage.setItem("order_id", id);
+
+  const [commentId, setCommentId] = useState(null);
+  const [recommentId, setRecommentId] = useState(null);
+  // 대댓글 선택 여부
+  const [reply, setReply] = useState(false);
+
+  // 댓글 정보 여기에 저장
+  const [comments, setComments] = useState([]);
+
+  let commentsLength = comments.length;
+
+  for (let i = 0; i < comments.length; i++) {
+    commentsLength += comments[i].recomments.length;
+  }
+
+  // 제안서 정보 받아 저장할 state
+  const [option, setOption] = useState({
+    date: "",
+    size: "",
+    taste: "",
+    design: "",
+    min: "",
+    max: "",
+    pickUp: "",
+    image: "",
+  });
+
+  // 새로운 코멘트
   const [newComment, setNewComment] = useState("");
 
+  // 제안서 정보 Get api
+  const getProposal = async () => {
+    const response = await API.get(`/orders/${id}`)
+      .then(response => {
+        console.log(response.data, "이겅");
+        const data = response.data;
+
+        //console.log("제안서", response.data);
+
+        setOption({
+          date: data.createdAt.substr(0, 10),
+          size: data.size,
+          taste: data.flavor,
+          design: data.description,
+          min: data.priceMin,
+          max: data.priceMax,
+          pickUp: data.pickupDate.substr(0, 10),
+          image: data.imageUrl,
+        });
+      })
+      .catch(error => {
+        console.log("실패", error);
+      });
+  };
+
+  // 제안서 수정하러 가기 버튼
+  const EditProposal = () => {
+    navigate("/edit/city");
+  };
+
+  // 제안서 Delete
+  const DeleteProposal = async () => {
+    const response = await API.delete(`/orders/${id}`)
+      .then(function (response) {
+        console.log("제안서 삭제", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // 댓글/대댓글 Get api
+  const getComment = async () => {
+    const response = await API.get(`/orders/${id}/comments`)
+      .then(response => {
+        console.log("댓글 => ", response.data.commentDTOs);
+        setComments(response.data.commentDTOs);
+      })
+      .catch(error => {
+        console.log("실패", error);
+      });
+  };
+
+  // 댓글 post api
+  const postComment = async () => {
+    const response = await API.post(`/orders/${id}/comments`, {
+      contents: newComment,
+    })
+      .then(function (response) {
+        console.log("댓글 작성 성공", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // 대댓글 post api
+  const postRecomment = async () => {
+    const response = await API.post(
+      `/orders/${id}/comments/${commentId}/recomments`,
+      {
+        contents: newComment,
+      },
+    )
+      .then(function (response) {
+        console.log("대댓글 작성 성공", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // 댓글 삭제
+  const DeleteComment = async comment_id => {
+    const response = await API.delete(`/orders/${id}/comments/${comment_id}`)
+      .then(function (response) {
+        console.log("댓글 삭제 성공", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // 대댓글 삭제
+  const DeleteReComment = async () => {
+    const response = await API.delete(
+      `/orders/${id}/comments/${comment_id}/recomments/${recomments_id}`,
+    )
+      .then(function (response) {
+        console.log("대댓글 삭제 성공", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // 댓글 작성 공통
   const onSubmit = e => {
     e.preventDefault();
 
-    setComments([...comments, { author: "작성자", content: newComment }]);
+    if (reply) {
+      postRecomment();
+    } else {
+      postComment();
+    }
 
     setNewComment("");
   };
+
+  // (대댓글) 댓글, 대댓글 id 얻기 // 답글 버튼 누를 때
+  const getCommentId = (comment, re) => {
+    if (
+      commentId == comment.comment.commentId &&
+      recommentId == re.recommentId
+    ) {
+      setReply(false);
+      setCommentId(null);
+      setRecommentId(null);
+    } else {
+      setReply(true);
+      setCommentId(comment.comment.commentId);
+      setRecommentId(re.recommentId);
+    }
+  };
+
+  useEffect(() => {
+    getProposal();
+    getComment();
+  }, []);
+
+  console.log(comments);
+
+  console.log(commentId, recommentId, reply);
 
   return (
     <div style={{ width: "100%" }}>
       <TopBar />
       <PageTitle margin="56px auto 0 auto" title="내 제안서"></PageTitle>
       <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-        <ImageBox />
+        <ImageBox src={option.image} />
       </div>
 
       <Text>레터링 케이크</Text>
       <PinkRectangle>
         <Option>
           <p className="option">작성일</p>
-          <p className="content">2022.05.01</p>
+          <p className="content">{option.date}</p>
         </Option>
         <Option>
           <p className="option">사이즈</p>
-          <p className="content">1호</p>
+          <p className="content">{option.size}</p>
         </Option>
         <Option>
           <p className="option">맛</p>
-          <p className="content">초코</p>
+          <p className="content">{option.taste}</p>
         </Option>
         <Option>
           <p className="option">디자인</p>
-          <p className="content">레터링 생일축하해로 해주세요!</p>
+          <p className="content">{option.design}</p>
         </Option>
         <Option>
           <p className="option">가격대</p>
-          <p className="content">3만원 이상 7만원 미만</p>
+          <p className="content">
+            {option.min}만원 이상 {option.max}만원 미만
+          </p>
         </Option>
         <Option>
           <p className="option">픽업 날짜</p>
-          <p className="content">2022.06.01</p>
+          <p className="content">{option.pickUp}</p>
         </Option>
       </PinkRectangle>
       <div
@@ -68,51 +237,80 @@ const Proposal = () => {
           margin: "36px auto 0 auto",
         }}
       >
-        <Link to="/create/city">
-          <SmallPinkButton>수정</SmallPinkButton>
-        </Link>
+        {/* <Link to="/create/city"> */}
+        <SmallPinkButton onClick={() => EditProposal()}>수정</SmallPinkButton>
+        {/* </Link> */}
 
-        <SmallWhiteButton>삭제</SmallWhiteButton>
+        <SmallWhiteButton onClick={() => DeleteProposal()}>
+          삭제
+        </SmallWhiteButton>
       </div>
 
-      <Comment>댓글 {comments.length}</Comment>
+      <Comment>댓글 {commentsLength}</Comment>
+
       <CommentSection>
         {comments.map(comment => {
-          if (true) {
+          const recommentsList = comment.recomments.map(re => {
             return (
-              <CommentYellowBox key={comment.content}>
-                <CommentInfo>
-                  <Nickname>터틀힙</Nickname>
-                  <CommentTime>2022.05.10. 15:00</CommentTime>
-                  <CommentToggle>삭제</CommentToggle>
-                </CommentInfo>
-
-                <CommentContent>
-                  안녕하세요~ 4월 5일 2시부터 8시 사이 픽업 가능합니다~
-                </CommentContent>
-              </CommentYellowBox>
-            );
-          } else {
-            return (
-              <CommentPinkBox key={comment.content}>
+              <CommentPinkBox key={re.createdAt}>
                 <img
                   src={CommentLogo}
-                  style={{ marginRight: "12px", width: "10px", height: "10px" }}
+                  style={{
+                    marginRight: "12px",
+                    width: "10px",
+                    height: "10px",
+                  }}
                 />
                 <div style={{ width: "100%" }}>
                   <CommentInfo>
-                    <Nickname>{comment.author}</Nickname>
+                    <Nickname>{re.nickname}</Nickname>
                     <CommentTime>2022.05.10. 15:00</CommentTime>
-                    <CommentToggle>답글</CommentToggle>
+
+                    {commentId == comment.comment.commentId &&
+                    recommentId == re.recommentId ? (
+                      <CommentToggle
+                        selected
+                        onClick={() => getCommentId(comment, re)}
+                      >
+                        답글
+                      </CommentToggle>
+                    ) : (
+                      <CommentToggle onClick={() => getCommentId(comment, re)}>
+                        답글
+                      </CommentToggle>
+                    )}
                   </CommentInfo>
 
-                  <CommentContent>{comment.content}</CommentContent>
+                  <CommentContent>{re.contents}</CommentContent>
                 </div>
               </CommentPinkBox>
             );
-          }
+          });
+
+          return (
+            <>
+              <CommentYellowBox key={comment.comment.contents}>
+                <CommentInfo>
+                  <Nickname>{comment.comment.nickname}</Nickname>
+                  <CommentTime>
+                    {comment.comment.createdAt.substr(0, 10)}{" "}
+                    {comment.comment.createdAt.substr(12, 4)}
+                  </CommentTime>
+                  <CommentToggle
+                    onClick={() => DeleteComment(comment.comment.commentId)}
+                  >
+                    삭제
+                  </CommentToggle>
+                </CommentInfo>
+
+                <CommentContent>{comment.comment.contents}</CommentContent>
+              </CommentYellowBox>
+              {recommentsList}
+            </>
+          );
         })}
       </CommentSection>
+
       <Input onSubmit={onSubmit}>
         <input
           placeholder="댓글을 입력해주세요."
@@ -129,10 +327,9 @@ export default Proposal;
 
 const ImageBox = styled.img`
   margin: 37px auto 0 auto;
-  width: 380px;
+
   height: 300px;
 
-  background: url(${Rectangle147});
   border-radius: 6px;
 `;
 
@@ -262,24 +459,6 @@ const CommentTime = styled.p`
   line-height: 22px;
 
   color: var(--background);
-`;
-
-const CommentToggle = styled.p`
-  width: 25px;
-  height: 17px;
-
-  margin: 0;
-  margin-left: auto;
-
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 22px;
-
-  text-align: right;
-
-  color: var(--sub-darkgray);
 `;
 
 const CommentContent = styled.p`
