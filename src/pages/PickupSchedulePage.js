@@ -11,6 +11,8 @@ const TEMP_DATA_FOR_CALENDAR = [
     content: "테스트 자료",
     pickupDate: "2022-07-01T14:30:00",
     pickupTime: "2022-07-01T14:30:00",
+    eventId: 2,
+    storeId: 3,
   },
   {
     content: "통신 상태 원활",
@@ -64,9 +66,11 @@ const ScheduleContent = styled.div`
     margin: 6px 0 0;
   }
 `;
-const ScheduleDelete = styled.div`
+const ScheduleDelete = styled.button`
   font-size: 14px;
   color: var(--sub-darkgray);
+  background-color: transparent;
+  border: none;
 `;
 
 const EmptyDayMsg = styled.div`
@@ -75,14 +79,18 @@ const EmptyDayMsg = styled.div`
   color: var(--sub-darkgray);
 `;
 
-const CreateScheduleCard = ({ pickupTime, pickupInfo }) => {
+const CreateScheduleCard = ({ pickupTime, pickupInfo, eventId, storeId }) => {
+  const deleteSchedule = async () => {
+    const response = await API({url : `/store/${storeId}/events/${eventId}`, method: "delete"})
+      .catch((e)=>console.error(e));
+  };
   return (
     <ScheduleCard>
       <div>
-        <ScheduleContent>{pickupTime}</ScheduleContent>
+        <ScheduleContent>{pickupTime.slice(11, 16)}</ScheduleContent>
         <ScheduleContent>{pickupInfo}</ScheduleContent>
       </div>
-      <ScheduleDelete>삭제</ScheduleDelete>
+      <ScheduleDelete onClick={deleteSchedule}>삭제</ScheduleDelete>
     </ScheduleCard>
   );
 };
@@ -130,9 +138,11 @@ const PickupSchedulePage = () => {
   //       setPickupSchedules(
   //         res.data.map(pickup => {
   //           return {
+  //             storeId: pickup.store.id,
   //             content: pickup.content,
   //             pickupDate: pickup.pickupDate,
   //             pickupTime: pickup.pickupTime,
+  //             eventId: pickup.eventId,
   //             // 이후 이벤트 아이디도 추가해야함
   //           };
   //         }),
@@ -175,8 +185,10 @@ const PickupSchedulePage = () => {
           pickupOnSelectedDay.map((schedule, idx) => (
             <CreateScheduleCard
               key={idx}
-              pickupTime={schedule.pickupTime.slice(11, 16)}
+              pickupTime={schedule.pickupTime}
               pickupInfo={schedule.content}
+              eventId={schedule.eventId}
+              storeId={schedule.storeId}
             />
           ))
         )}
