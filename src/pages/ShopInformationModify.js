@@ -3,9 +3,9 @@ import styled from "styled-components";
 import vectorimg from "../images/Vector.svg";
 
 const ShopName = styled.input`
-  position: absolute;
   width: 380px;
   height: 50px;
+  margin: 10px 0px 0px 24px;
   left: 24px;
   top: 291.87px;
   background: var(--sub-lightgray);
@@ -14,11 +14,9 @@ const ShopName = styled.input`
 `;
 
 const ShopIntroduce = styled.input`
-  position: absolute;
   width: 380px;
   height: 125px;
-  left: 24px;
-  top: 403.87px;
+  margin: 10px 0px 0px 24px;
   background: var(--sub-lightgray);
   border-radius: 6px;
   border: 1px solid var(--sub-lightgray);
@@ -26,66 +24,54 @@ const ShopIntroduce = styled.input`
 `;
 
 const ShopNumber = styled.input`
-  position: absolute;
   width: 380px;
   height: 50px;
-  left: 24px;
-  top: 590.87px;
+  margin: 10px 0px 0px 24px;
   background: var(--sub-lightgray);
   border-radius: 6px;
   border: 1px solid var(--sub-lightgray);
 `;
 
 const ShopLocation = styled.input`
-  position: absolute;
   width: 380px;
   height: 50px;
-  left: 24px;
-  top: 703px;
+  margin: 10px 0px 0px 24px;
   background: var(--sub-lightgray);
   border-radius: 6px;
   border: 1px solid var(--sub-lightgray);
 `;
 
 const ShopOperatingHours = styled.input`
-  position: absolute;
   width: 380px;
   height: 50px;
-  left: 24px;
-  top: 815px;
+  margin: 10px 0px 0px 24px;
   background: var(--sub-lightgray);
   border-radius: 6px;
   border: 1px solid var(--sub-lightgray);
 `;
 
 const ShopKaKao = styled.input`
-  position: absolute;
   width: 380px;
   height: 50px;
-  left: 24px;
-  top: 927px;
+  margin: 10px 0px 0px 24px;
   background: var(--sub-lightgray);
   border-radius: 6px;
   border: 1px solid var(--sub-lightgray);
 `;
 
 const ShopInstagram = styled.input`
-  position: absolute;
   width: 380px;
   height: 50px;
-  left: 24px;
-  top: 1039px;
+  margin: 10px 0px 0px 24px;
   background: var(--sub-lightgray);
   border-radius: 6px;
   border: 1px solid var(--sub-lightgray);
 `;
 
 const ShopPhoto = styled.input`
-  position: absolute;
+  margin: 10px 0px 0px 24px;
   width: 380px;
   height: 100px;
-  left: 24px;
-  top: 1151px;
   background: var(--sub-lightgray);
   border-radius: 6px;
   border: 1px solid var(--sub-lightgray);
@@ -96,11 +82,9 @@ const ShopPhoto = styled.input`
 `;
 
 const ShopMenuPhoto = styled.input`
-  position: absolute;
+  margin: 10px 0px 0px 24px;
   width: 380px;
   height: 100px;
-  left: 24px;
-  top: 1313px;
   background: var(--sub-lightgray);
   border-radius: 6px;
   border: 1px solid var(--sub-lightgray);
@@ -111,11 +95,9 @@ const ShopMenuPhoto = styled.input`
 `;
 
 const ShopMenuPhoto2 = styled.input`
-  position: absolute;
+  margin: 10px 0px 0px 24px;
   width: 380px;
   height: 100px;
-  left: 24px;
-  top: 1423px;
   background: var(--sub-lightgray);
   border-radius: 6px;
   border: 1px solid var(--sub-lightgray);
@@ -125,6 +107,163 @@ const ShopMenuPhoto2 = styled.input`
   }
 `;
 
+const RegisterBtn = styled.button`
+  margin: 70px 0px 0px 24px;
+  width: 380.47px;
+  height: 60px;
+  left: 24px;
+  top: 1593.19px;
+  background: var(--main-pink);
+  border-radius: 6px;
+  border: 1px solid var(--main-pink);
+  color: white;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+`;
+
+const WrapBox = styled.div`
+  width: 428px;
+  height: 1713px;
+`;
+
+const ShopRegistering = styled.div`
+  width: 162px;
+  height: 29px;
+  margin: 56px 0px 0px 24px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  z-index: 1;
+`;
+
+const ShopNameing = styled.div`
+  width: 80px;
+  height: 22px;
+  margin: 70px 0px 0px 24px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-transform: uppercase;
+  color: #202020;
+  z-index: 1;
+`;
+
+const ShopIntroducing = styled.div`
+  width: 80px;
+  height: 22px;
+  margin: 30px 0px 0px 24px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-transform: uppercase;
+  color: #202020;
+  z-index: 1;
+`;
+
+const ShopNumbering = styled.div`
+  width: 73px;
+  height: 22px;
+  margin: 30px 0px 0px 24px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-transform: uppercase;
+  z-index: 1;
+`;
+
+const ShopLocating = styled.div`
+  width: 40px;
+  height: 22px;
+  margin: 30px 0px 0px 24px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-transform: uppercase;
+  z-index: 1;
+`;
+
+const ShopOperatingHouring = styled.div`
+  width: 80px;
+  height: 22px;
+  margin: 30px 0px 0px 24px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-transform: uppercase;
+`;
+
+const ShopKaKaoing = styled.div`
+  width: 115px;
+  height: 22px;
+  margin: 30px 0px 0px 24px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-transform: uppercase;
+`;
+
+const ShopInstagraming = styled.div`
+  width: 90px;
+  height: 22px;
+  margin: 30px 0px 0px 24px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-transform: uppercase;
+`;
+
+const ShopPhotoing = styled.div`
+  width: 125px;
+  height: 22px;
+  margin: 30px 0px 0px 24px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-transform: uppercase;
+`;
+
+const ShopMenuPhotoing = styled.div`
+  width: 140px;
+  height: 22px;
+  margin: 30px 0px 0px 24px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-transform: uppercase;
+`;
+
+const Vector = styled.div`
+  background: url(${vectorimg});
+  height: 19.69px;
+  width: 20px;
+  position: absolute;
+  left: 177.52px;
+  top: 73.16px;
+  z-index: 1;
+`;
 const ModifyBtn = styled.button`
   position: absolute;
   width: 182px;
@@ -158,169 +297,6 @@ const BeforeShowBtn = styled.button`
   font-size: 16px;
   line-height: 19px;
 `;
-
-const WrapBox = styled.div`
-  position: relative;
-  width: 428px;
-  height: 1713px;
-`;
-
-const ShopRegistering = styled.div`
-  position: absolute;
-  width: 162px;
-  height: 29px;
-  left: 24px;
-  top: 160px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 29px;
-  z-index: 1;
-`;
-
-const ShopNameing = styled.div`
-  position: absolute;
-  width: 80px;
-  height: 22px;
-  left: 24px;
-  top: 259.87px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  text-transform: uppercase;
-  color: var(--black-text);
-  z-index: 1;
-`;
-
-const ShopIntroducing = styled.div`
-  position: absolute;
-  width: 80px;
-  height: 22px;
-  left: 24px;
-  top: 371.87px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  text-transform: uppercase;
-  color: var(--black-text);
-  z-index: 1;
-`;
-
-const ShopNumbering = styled.div`
-  position: absolute;
-  width: 73px;
-  height: 22px;
-  left: 24px;
-  top: 558.87px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  text-transform: uppercase;
-  z-index: 1;
-`;
-
-const ShopLocating = styled.div`
-  position: absolute;
-  width: 40px;
-  height: 22px;
-  left: 24px;
-  top: 671px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  text-transform: uppercase;
-  z-index: 1;
-`;
-
-const ShopOperatingHouring = styled.div`
-  position: absolute;
-  width: 80px;
-  height: 22px;
-  left: 24px;
-  top: 783px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  text-transform: uppercase;
-`;
-
-const ShopKaKaoing = styled.div`
-  position: absolute;
-  width: 115px;
-  height: 22px;
-  left: 24px;
-  top: 895px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  text-transform: uppercase;
-`;
-
-const ShopInstagraming = styled.div`
-  position: absolute;
-  width: 90px;
-  height: 22px;
-  left: 24px;
-  top: 1007px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  text-transform: uppercase;
-`;
-
-const ShopPhotoing = styled.div`
-  position: absolute;
-  width: 125px;
-  height: 22px;
-  left: 24px;
-  top: 1119px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  text-transform: uppercase;
-`;
-
-const ShopMenuPhotoing = styled.div`
-  position: absolute;
-  width: 140px;
-  height: 22px;
-  left: 24px;
-  top: 1281px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  text-transform: uppercase;
-`;
-
-const Vector = styled.div`
-  background: url(${vectorimg});
-  height: 19.69px;
-  width: 20px;
-  position: absolute;
-  left: 177.52px;
-  top: 73.16px;
-  z-index: 1;
-`;
-
 //ui 구현
 const ShopInformationModify = () => {
   return (
