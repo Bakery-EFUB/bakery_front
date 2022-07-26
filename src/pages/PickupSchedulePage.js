@@ -3,34 +3,42 @@ import styled from "styled-components";
 import TopBar from "../components/TopBar";
 import PageTitle from "../components/PageTitle";
 import CustomCalendar from "../components/Proposal/CustomCalendar";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import API from "../components/API";
 
+const TEMP_USER_ROLE = 'BAKER';
+const TEMP_USER_STORE_ID = 1;
+const TEMP_STORE_ID = 1;
 const TEMP_DATA_FOR_CALENDAR = [
   {
     content: "테스트 자료",
     pickupDate: "2022-07-01T14:30:00",
     pickupTime: "2022-07-01T14:30:00",
     eventId: 2,
-    storeId: 3,
+    storeId: TEMP_STORE_ID,
   },
   {
     content: "통신 상태 원활",
     pickupDate: "2022-07-15T16:00:00",
     pickupTime: "2022-07-15T16:00:00",
+    eventId: 3,
+    storeId: TEMP_STORE_ID,
   },
   {
     content: "근데 이제 값이없는",
     pickupDate: "2022-07-21T13:30:00",
     pickupTime: "2022-07-21T13:30:00",
+    eventId: 4,
+    storeId: TEMP_STORE_ID,
   },
   {
     content: "그렇습니다",
     pickupDate: "2022-07-30T19:00:00",
     pickupTime: "2022-07-30T19:00:00",
+    eventId: 5,
+    storeId: TEMP_STORE_ID,
   },
 ];
-const TEMP_STORE_ID = 1;
 
 const SelectedDay = styled.div`
   margin: 40px 0 0;
@@ -80,6 +88,7 @@ const EmptyDayMsg = styled.div`
 `;
 
 const CreateScheduleCard = ({ pickupTime, pickupInfo, eventId, storeId }) => {
+  // 사실 storeId는 페이지 쿼리로
   const deleteSchedule = async () => {
     const response = await API({url : `/store/${storeId}/events/${eventId}`, method: "delete"})
       .catch((e)=>console.error(e));
@@ -111,6 +120,7 @@ const BigPinkButtonBottom = styled.button`
 `;
 
 const PickupSchedulePage = () => {
+  const { storeId } = useParams();
   const [pickupOnSelectedDay, setPickupOnSelectedDay] = useState([]);
   const [pickupSchedules, setPickupSchedules] = useState([]);
   const [selectedDay, setSelectedDay] = useState({
@@ -168,6 +178,7 @@ const PickupSchedulePage = () => {
     };
   });
   return (
+    TEMP_USER_ROLE === 'BAKER' && TEMP_USER_STORE_ID === Number(storeId) ?
     <div>
       <TopBar />
       <PageTitle title="픽업 일정" margin="60px 0 63px 0" />
@@ -197,6 +208,8 @@ const PickupSchedulePage = () => {
         일정 추가
       </BigPinkButtonBottom>
     </div>
+      :
+    <div>권한이 없습니다</div>
   );
 };
 

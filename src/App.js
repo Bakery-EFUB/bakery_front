@@ -46,7 +46,7 @@ function App() {
           path="/shopprogressive"
           element={<ShopMyPageProgressive />}
         />
-        <Route exact path="/pickupschedule" element={<PickupSchedulePage />} />
+        <Route exact path="/pickupschedule/:storeId" element={<PickupSchedulePage />} />
       </Routes>
     </BrowserRouter>
   );
