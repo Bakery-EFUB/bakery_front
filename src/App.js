@@ -16,7 +16,7 @@ import ShopMypageStart from "./pages/ShopMyPageStart";
 import Proposal from "./pages/Proposal";
 import ShopInformationModify from "./pages/ShopInformationModify";
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
-
+import EditProposal from "./pages/EditProposal";
 function App() {
   return (
     <BrowserRouter>
@@ -29,6 +29,7 @@ function App() {
         <Route exact path="/search" element={<SearchPage />} />
         <Route exact path="/recommend" element={<Recommend />} />
         <Route path="/create/*" element={<CreateProposal />} />
+        <Route path="/edit/*" element={<EditProposal />} />
         <Route path="/proposal/:id" element={<Proposal />} />
         <Route exact path="/serviceinfo" element={<OurService />} />
         <Route exact path="/mypagehost" element={<ShopMemberMyPage />} />
