@@ -1,10 +1,10 @@
 import React from "react";
-import SearchBar from "../components/SearchBar";
-import TopBar from "../components/TopBar";
 import styled from "styled-components";
-import MainHeader from "../components/MainHeader";
-import ShopDisplay from "../components/HomeCardDisplay/ShopDisplay";
-import OrderDisplay from "../components/HomeCardDisplay/OrderDisplay";
+import SearchBar from "../../components/Common/SearchBar";
+import TopBar from "../../components/Common/Sidebar/TopBar";
+import MainHeader from "../../components/MainHeader";
+import ShopDisplay from "../../components/HomeCardDisplay/ShopDisplay";
+import OrderDisplay from "../../components/HomeCardDisplay/OrderDisplay";
 
 const HomeContainer = styled.div`
   margin: 0 5%;

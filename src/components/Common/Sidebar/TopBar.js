@@ -1,15 +1,13 @@
 import styled from "styled-components";
-import TopLogoimg from "../images/TopLogo.svg";
-import TopMenuBarimg from "../images/TopMenuBar.svg";
 import React, { useState } from "react";
-import "../styles/common.scss";
-import SidebarCloseBtn from "../images/SidebarCloseBtn.svg";
+import TopLogoimg from "../../../images/TopLogo.svg";
+import GuestProfile from "../../../images/Profile.svg";
+import TopMenuBarimg from "../../../images/TopMenuBar.svg";
+import SidebarCloseBtn from "../../../images/SidebarCloseBtn.svg";
 import { Link } from "react-router-dom";
-import { SidebarDataCustomer } from "./Sidebar/SidebarData";
-import GuestProfile from "../images/Profile.svg";
+import { SidebarDataCustomer } from "../Sidebar/SidebarData";
 import ButtonSidebar from "./ButtonSidebar";
-import "./Sidebar/Sidebar.css";
-
+import "./Sidebar.css";
 const TopBarPink = styled.div`
   z-index: 5;
   margin: 0;
