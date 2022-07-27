@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { SidebarDataCustomer } from "../Sidebar/SidebarData";
 import ButtonSidebar from "./ButtonSidebar";
 import "./Sidebar.css";
+import "../../../styles/common.scss";
+
 const TopBarPink = styled.div`
   z-index: 5;
   margin: 0;
