@@ -129,7 +129,7 @@ const City = ({ history, setHistory, original, setOriginal }) => {
           justifyContent: "center",
         }}
       >
-        <Link to="/create">
+        <Link to="/">
           <SmallWhiteButton onClick={() => Back()}>이전</SmallWhiteButton>
         </Link>
 

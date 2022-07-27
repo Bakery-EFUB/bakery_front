@@ -12,6 +12,9 @@ import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
 const City = ({ history, setHistory, original, setOriginal }) => {
+  const order_id = window.localStorage.getItem("order_id");
+  const before_url = `/proposal/${order_id}`;
+
   const [cityArray, setCityArray] = useState([
     { id: 1, city: "북아현동", selected: false },
     { id: 2, city: "충현동", selected: false },
@@ -141,7 +144,7 @@ const City = ({ history, setHistory, original, setOriginal }) => {
           justifyContent: "center",
         }}
       >
-        <Link to="/create">
+        <Link to={before_url}>
           <SmallWhiteButton onClick={() => Back()}>이전</SmallWhiteButton>
         </Link>
 
