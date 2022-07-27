@@ -43,7 +43,7 @@ const Price = ({ history, setHistory, original, setOriginal }) => {
 
   return (
     <div>
-      <PageTitle title="제안서 수정" margin="56px auto 0 auto" />
+      <PageTitle title="제안서 수정하기" margin="56px auto 0 auto" />
       <ProgessBar step={ThisStep} before={history} />
 
       <ProposalText text="원하는 가격대를 선택해주세요." />
