@@ -11,11 +11,12 @@ import Recommend from "./pages/Recommend";
 import OurService from "./pages/OurService";
 import ShopMemberMyPage from "./pages/ShopMemberMyPage";
 import AllProposal from "./pages/AllProposal";
-import ShopInformationRegister from "./pages/ShopInformationRegister";
+
 import ShopMypageStart from "./pages/ShopMyPageStart";
 
 import ShopInformationModify from "./pages/ShopInformationModify";
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
+import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
 
 function App() {
   return (
