@@ -109,10 +109,26 @@ const PreviewModal = ({ storeData, mainImg, menuImg, onClick }) => {
         </ShopDesc>
         <HorizonEmptySpace height="35px" />
         <DetailInfoCard>
-          <DetailInfoItem category="전화번호" content={storeData.phoneNumber} fontSize="14px" />
-          <DetailInfoItem category="주소" content={storeData.address} fontSize="14px" />
-          <DetailInfoItem category="운영시간" content={storeData.openTime} fontSize="14px" />
-          <DetailInfoItem category="문의" content="카카오톡 | 인스타그램" fontSize="14px" />
+          <DetailInfoItem
+            category="전화번호"
+            content={storeData.phoneNumber}
+            fontSize="14px"
+          />
+          <DetailInfoItem
+            category="주소"
+            content="{storeData.address}
+            fontSize="14px"
+          />
+          <DetailInfoItem
+            category="운영시간"
+            content={storeData.openTime}
+            fontSize="14px"
+          />
+          <DetailInfoItem
+            category="문의"
+            content="카카오톡 | 인스타그램"
+            fontSize="14px"
+          />
         </DetailInfoCard>
         <HorizonEmptySpace height="48px" />
         <SubTitle>대표 케이크</SubTitle>

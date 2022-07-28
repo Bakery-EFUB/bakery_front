@@ -1,8 +1,11 @@
 body {
   margin: 0;
-  font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, "AppleSDGothicNeo",
-    "Noto Sans KR", sans-serif;
+}
+
+* {
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   /* -apple-system, BlinkMacSystemFont, */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
