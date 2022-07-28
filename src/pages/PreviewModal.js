@@ -88,16 +88,17 @@ const HorizonEmptySpace = styled.div`
   height: ${(props) => props.height};
 `;
 
-const PreviewModal = ({ storeData, mainImg, menuImg, onClick }) => {
+const PreviewModal = ({ body, onClick }) => {
+  const { storedata, mainImage, menuImage } = body;
   return (
     <>
       <PreventClickBackground />
       <WhiteModal>
-        <MainImage imgUrl={mainImg} height="300px" />
+        <MainImage imgUrl={window.URL.createObjectURL(mainImage)} height="300px" />
         <HorizonEmptySpace height="30px" />
         <ShopDetailHeader>
           <div>
-            <ShopName>{storeData.name}</ShopName>
+            <ShopName>{storedata.name}</ShopName>
             <IsRegistered>등록가게</IsRegistered>
           </div>
         </ShopDetailHeader>
@@ -105,37 +106,21 @@ const PreviewModal = ({ storeData, mainImg, menuImg, onClick }) => {
         <SubTitle>소개</SubTitle>
         <HorizonEmptySpace height="12px" />
         <ShopDesc>
-          {storeData.readme}
+          {storedata.readme}
         </ShopDesc>
         <HorizonEmptySpace height="35px" />
         <DetailInfoCard>
-          <DetailInfoItem
-            category="전화번호"
-            content={storeData.phoneNumber}
-            fontSize="14px"
-          />
-          <DetailInfoItem
-            category="주소"
-            content="{storeData.address}
-            fontSize="14px"
-          />
-          <DetailInfoItem
-            category="운영시간"
-            content={storeData.openTime}
-            fontSize="14px"
-          />
-          <DetailInfoItem
-            category="문의"
-            content="카카오톡 | 인스타그램"
-            fontSize="14px"
-          />
+          <DetailInfoItem category="전화번호" content={storedata.phoneNumber} fontSize="14px" />
+          <DetailInfoItem category="주소" content={storedata.address} fontSize="14px" />
+          <DetailInfoItem category="운영시간" content={storedata.openTime} fontSize="14px" />
+          <DetailInfoItem category="문의" content="카카오톡 | 인스타그램" fontSize="14px" />
         </DetailInfoCard>
         <HorizonEmptySpace height="48px" />
         <SubTitle>대표 케이크</SubTitle>
         <HorizonEmptySpace height="30px" />
         <CakeImages>
-          {menuImg.map((img, idx)=>
-            <CakeProductImage key={idx} imgUrl={img} />
+          {menuImage.map((img, idx)=>
+            <CakeProductImage key={idx} imgUrl={window.URL.createObjectURL(img)} />
           )}
         </CakeImages>
         <HorizonEmptySpace height="60px" />
