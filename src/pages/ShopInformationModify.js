@@ -1,4 +1,4 @@
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
 import vectorimg from "../images/Vector.svg";
 
