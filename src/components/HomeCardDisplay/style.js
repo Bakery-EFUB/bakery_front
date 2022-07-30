@@ -1,8 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-//임시
 import MoreIcon from "../../images/MoreInfo.svg";
-import Card from "./Card";
 
 const CardDisplayContainer = styled.div`
   margin-left: 5%;
@@ -41,22 +38,4 @@ const SeeAll = styled.div`
   justify-content: center;
 `;
 
-const CardDisplay = ({ title }) => {
-  return (
-    <CardDisplayContainer>
-      <Header>
-        <Menu>{title}</Menu>
-        <SeeAll>
-          전체보기<MoreInfoIcon></MoreInfoIcon>
-        </SeeAll>
-      </Header>
-      <Body>
-        <Card title="북아현동" subtitle="#스승의날"></Card>
-        <Card title="북아현동" subtitle="#스승의날"></Card>
-        <Card title="북아현동" subtitle="#스승의날"></Card>
-      </Body>
-    </CardDisplayContainer>
-  );
-};
-
-export default CardDisplay;
+export { CardDisplayContainer, Header, Menu, Body, MoreInfoIcon, SeeAll };
