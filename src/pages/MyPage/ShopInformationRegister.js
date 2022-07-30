@@ -70,7 +70,6 @@ const RegisterBtn = styled.button`
 
 //ui 구현
 const ShopInformationRegister = () => {
-  const [registerDatas, setRegisterDatas] = useState([]);
   const [Name, setName] = useState("");
   const [Readme, setReadme] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
@@ -78,8 +77,25 @@ const ShopInformationRegister = () => {
   const [OpenTime, setOpenTime] = useState("");
   const [KakaoUrl, setKakaoUrl] = useState("");
   const [Instagram, setInstagram] = useState("");
-  const [ShopFile, setShopFile] = useState([]);
+  const [MainFile, setMainFile] = useState([]);
   const [MenuFile, setMenuFile] = useState([]);
+
+  console.log(MainFile);
+  console.log(MenuFile);
+
+  let body = {
+    storedata: {
+      name: Name,
+      readme: Readme,
+      phoneNumber: PhoneNumber,
+      address: Address,
+      openTime: OpenTime,
+      kakaoUrl: KakaoUrl,
+      instagram: Instagram,
+    },
+    mainImage: MainFile,
+    menuImage: MenuFile,
+  };
 
   const NameHandler = e => {
     e.preventDefault();
@@ -109,7 +125,7 @@ const ShopInformationRegister = () => {
     e.preventDefault();
     setInstagram(e.target.value);
   };
-  const ShopFileHandler = e => {
+  const MainFileHandler = e => {
     e.preventDefault();
     setShopFile(e.tartget.value);
   };
@@ -118,22 +134,9 @@ const ShopInformationRegister = () => {
     setMenuFile(e.tartget.value);
   };
 
+  //제출 -> 백엔드로 post
   const submitHandler = e => {
     e.preventDefault();
-
-    let body = {
-      storedata: {
-        name: Name,
-        readme: Readme,
-        phoneNumber: PhoneNumber,
-        address: Address,
-        openTime: OpenTime,
-        kakaoUrl: KakaoUrl,
-        instagram: Instagram,
-      },
-      mainImage: MainImage,
-      menuImage: MenuImage,
-    };
 
     FormData.append("data", JSON.stringify(body));
 
@@ -150,22 +153,6 @@ const ShopInformationRegister = () => {
     console.log(postSurvey);
   };
 
-  const getData = () => {
-    axios
-      .get("https://caker.shop/stores/myStore")
-      .then(Response => {
-        console.log("받아오기 성공", Response.data);
-        setRegisterDatas(Response.data);
-      })
-      .catch(Error => {
-        console.log(Error);
-      });
-  };
-  useEffect(() => {
-    getData();
-  }, []);
-
-  //form - action: /save페이지로 데이터 전송
   return (
     <WrapBox>
       <TopBar />
@@ -230,9 +217,9 @@ const ShopInformationRegister = () => {
 
         {/* 드래그앤 드롭 파일 컴포넌트 2개 */}
         <ShopImgUpload
-          ShopFile={ShopFile}
-          setShopFile={setShopFile}
-          ShopFileHandler={ShopFileHandler}
+          MainFile={MainFile}
+          setMainFile={setMainFile}
+          MainFileHandler={MainFileHandler}
         />
         <ShopMenuUpload
           MenuFile={MenuFile}
@@ -240,7 +227,7 @@ const ShopInformationRegister = () => {
           MenuFileHandler={MenuFileHandler}
         />
 
-        <RegisterBtn>등록하기</RegisterBtn>
+        <RegisterBtn type="submit">등록하기</RegisterBtn>
       </form>
     </WrapBox>
   );

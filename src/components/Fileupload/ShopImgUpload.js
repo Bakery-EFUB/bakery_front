@@ -63,33 +63,16 @@ const img = {
 };
 
 //ui 구현
-const ShopImgUpload = () => {
-  const [registerDatas, setRegisterDatas] = useState([]);
-  const getData = () => {
-    axios
-      .get("https://caker.shop/stores/myStore")
-      .then(Response => {
-        console.log("받아오기 성공", Response.data);
-        setRegisterDatas(Response.data);
-      })
-      .catch(Error => {
-        console.log(Error);
-      });
-  };
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const [files, setFiles] = useState([]); //업로드 하려는 파일의 url을 새생성하고 파일의 정보를 파일즈에 담아준다.
+const ShopImgUpload = ({ setMainFile, MainFile }) => {
   //객체 요소
-  console.log(files);
+  console.log(MainFile);
   const { getRootProps, getInputProps } = useDropzone({
     //허용하는 파일 형식
     accept: {
       "image/*": [],
     },
     onDrop: acceptedFiles => {
-      setFiles(
+      setMainFile(
         acceptedFiles.map(file =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
@@ -100,7 +83,7 @@ const ShopImgUpload = () => {
   });
 
   //업로드 하려고 선택한 파일의 이미지를 미리보기로 보여준다.
-  const thumbs = files.map(file => (
+  const thumbs = MainFile.map(file => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
         <img
@@ -116,7 +99,7 @@ const ShopImgUpload = () => {
 
   useEffect(() => {
     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-    return () => files.forEach(file => URL.revokeObjectURL(file.preview));
+    return () => MainFile.forEach(file => URL.revokeObjectURL(file.preview));
   }, []);
 
   //form - action: /save페이지로 데이터 전송
@@ -131,7 +114,7 @@ const ShopImgUpload = () => {
         <ShopPhoto>
           {" "}
           {thumbs}
-          {files.map(file => (
+          {MainFile.map(file => (
             <div key={file.id}>
               {file.name}
               <br />

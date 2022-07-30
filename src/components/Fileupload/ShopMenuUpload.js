@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
+import { Menu } from "antd";
 
 //이름
 const ShopIntroduceName = styled.div`
@@ -64,17 +65,16 @@ const img = {
 };
 
 //ui 구현
-const ShopMenuUpload = () => {
-  const [files, setFiles] = useState([]); //업로드 하려는 파일의 url을 새생성하고 파일의 정보를 파일즈에 담아준다.
+const ShopMenuUpload = ({ MenuFile, setMenuFile }) => {
   //객체 요소
-
+  console.log(MenuFile);
   const { getRootProps, getInputProps } = useDropzone({
     //허용하는 파일 형식
     accept: {
       "image/*": [],
     },
     onDrop: acceptedFiles => {
-      setFiles(
+      setMenuFile(
         acceptedFiles.map(file =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
@@ -85,7 +85,7 @@ const ShopMenuUpload = () => {
   });
 
   //업로드 하려고 선택한 파일의 이미지를 미리보기로 보여준다.
-  const thumbs = files.map(file => (
+  const thumbs = MenuFile.map(file => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
         <img
@@ -101,7 +101,7 @@ const ShopMenuUpload = () => {
 
   useEffect(() => {
     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-    return () => files.forEach(file => URL.revokeObjectURL(file.preview));
+    return () => MenuFile.forEach(file => URL.revokeObjectURL(file.preview));
   }, []);
 
   //form - action: /save페이지로 데이터 전송
@@ -116,7 +116,7 @@ const ShopMenuUpload = () => {
         <ShopMenuPhoto>
           {" "}
           {thumbs}
-          {files.map(file => (
+          {MenuFile.map(file => (
             <div key={file.id}>
               {file.name}
               <br />
