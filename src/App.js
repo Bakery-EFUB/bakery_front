@@ -14,6 +14,7 @@ import ShopInformationRegister from "./pages/ShopInformationRegister";
 import ShopMypageStart from "./pages/ShopMyPageStart";
 import ShopInformationModify from "./pages/ShopInformationModify";
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
+import LoginLoading from "./pages/Auth/LoginLoading";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           path="/shopprogressive"
           element={<ShopMyPageProgressive />}
         />
+        <Route exact path="/kakaologin" element={<LoginLoading />} />
       </Routes>
     </BrowserRouter>
   );

@@ -10,7 +10,6 @@ const Container = styled.div`
 const Welcome = styled.div`
   color: var(--black);
   font-size: 22px;
-  font-family: "AppleSDGothicNeo";
   font-weight: 800;
   position: absolute;
   left: 10%;
@@ -45,7 +44,11 @@ const LoginHome = () => {
       </Welcome>
       <CenterImg></CenterImg>
       <LoginButtons>
-        <Button text={"가게 회원 로그인"}></Button>
+        <Button
+          onClick={()=>{
+            location.href='https://caker.shop/oauth2/authorization/kakao';
+          }}
+          text={"가게 회원 로그인"}></Button>
         <Button text={"일반 회원 로그인"}></Button>
       </LoginButtons>
     </Container>
