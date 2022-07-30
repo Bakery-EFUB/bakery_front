@@ -1,4 +1,4 @@
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
 import MoreViewimg from "../images/MoreView.svg";
 import UserLogoimg from "../images/UserLogo.svg";

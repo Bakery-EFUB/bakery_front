@@ -5,15 +5,11 @@ import LoginHome from "./pages/LoginHome";
 import MainHome from "./pages/MainHome";
 import ShopDetailPage from "./pages/ShopDetailPage";
 import AddSchedulePage from "./pages/AddSchedulePage";
-import SearchPage from "./pages/SearchPage";
-import Recommend from "./pages/Recommend";
 
+import Recommend from "./pages/Recommend";
 import OurService from "./pages/OurService";
-import ShopMemberMyPage from "./pages/ShopMemberMyPage";
-import AllProposal from "./pages/AllProposal";
 
 import ShopMypageStart from "./pages/ShopMyPageStart";
-
 import ShopInformationModify from "./pages/ShopInformationModify";
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
 import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
@@ -27,7 +23,7 @@ function App() {
         <Route exact path="/" element={<MainHome />} />
         <Route exact path="/ShopDetailPage" element={<ShopDetailPage />} />
         <Route exact path="/AddSchedulePage" element={<AddSchedulePage />} />
-        <Route exact path="/search" element={<SearchPage />} />
+        <Route exact path="/search" element={<SearCh />} />
         <Route exact path="/recommend" element={<Recommend />} />
 
         <Route exact path="/serviceinfo" element={<OurService />} />

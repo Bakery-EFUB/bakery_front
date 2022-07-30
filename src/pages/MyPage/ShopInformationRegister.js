@@ -1,9 +1,9 @@
-import TopBar from "../../components/TopBar";
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ShopImgUpload from "../../components/Fileupload/ShopImgUpload";
 import ShopMenuUpload from "../../components/Fileupload/ShopMenuUpload";
+import TopBar from "../../components/Common/Sidebar/TopBar";
 
 //전체
 const WrapBox = styled.div`
@@ -78,6 +78,8 @@ const ShopInformationRegister = () => {
   const [OpenTime, setOpenTime] = useState("");
   const [KakaoUrl, setKakaoUrl] = useState("");
   const [Instagram, setInstagram] = useState("");
+  const [ShopFile, setShopFile] = useState([]);
+  const [MenuFile, setMenuFile] = useState([]);
 
   const NameHandler = e => {
     e.preventDefault();
@@ -106,6 +108,14 @@ const ShopInformationRegister = () => {
   const InstagramHandler = e => {
     e.preventDefault();
     setInstagram(e.target.value);
+  };
+  const ShopFileHandler = e => {
+    e.preventDefault();
+    setShopFile(e.tartget.value);
+  };
+  const MenuFileHandler = e => {
+    e.preventDefault();
+    setMenuFile(e.tartget.value);
   };
 
   const submitHandler = e => {
@@ -219,8 +229,16 @@ const ShopInformationRegister = () => {
         />
 
         {/* 드래그앤 드롭 파일 컴포넌트 2개 */}
-        <ShopImgUpload />
-        <ShopMenuUpload />
+        <ShopImgUpload
+          ShopFile={ShopFile}
+          setShopFile={setShopFile}
+          ShopFileHandler={ShopFileHandler}
+        />
+        <ShopMenuUpload
+          MenuFile={MenuFile}
+          setMenuFile={setMenuFile}
+          MenuFileHandler={MenuFileHandler}
+        />
 
         <RegisterBtn>등록하기</RegisterBtn>
       </form>
