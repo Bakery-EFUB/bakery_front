@@ -10,10 +10,11 @@ import Recommend from "./pages/ShopSearch/Recommend";
 import OurService from "./pages/OurService";
 import ShopMemberMyPage from "./pages/ShopMemberMyPage";
 import AllProposal from "./pages/AllProposal";
-import ShopInformationRegister from "./pages/ShopInformationRegister";
+
 import ShopMypageStart from "./pages/ShopMyPageStart";
 import ShopInformationModify from "./pages/ShopInformationModify";
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
+import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
 
 function App() {
   return (
@@ -26,7 +27,6 @@ function App() {
         <Route exact path="/AddSchedulePage" element={<AddSchedulePage />} />
         <Route exact path="/search" element={<SearchPage />} />
         <Route exact path="/recommend" element={<Recommend />} />
-
         <Route exact path="/serviceinfo" element={<OurService />} />
         <Route exact path="/mypagehost" element={<ShopMemberMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
