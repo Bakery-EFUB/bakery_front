@@ -12,9 +12,10 @@ import ShopMemberMyPage from "./pages/ShopMemberMyPage";
 import AllProposal from "./pages/AllProposal";
 
 import ShopMypageStart from "./pages/ShopMyPageStart";
-import ShopInformationModify from "./pages/ShopInformationModify";
+
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
 import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
+import ShopInformationModify from "./pages/MyPage/ShopInformationModify";
 
 function App() {
   return (
