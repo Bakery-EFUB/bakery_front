@@ -8,7 +8,7 @@ import AddSchedulePage from "./pages/AddSchedulePage";
 import SearchPage from "./pages/ShopSearch/SearchPage";
 import Recommend from "./pages/ShopSearch/Recommend";
 import OurService from "./pages/OurService";
-import ShopMemberMyPage from "./pages/ShopMemberMyPage";
+import ShopMemberMyPage from "./pages/MyPage/ShopMemberMyPage";
 import AllProposal from "./pages/AllProposal";
 
 import ShopMypageStart from "./pages/ShopMyPageStart";
