@@ -4,6 +4,9 @@ import UserLogoimg from "../../images/UserLogo.svg";
 import Mock from "../../images/Mock.svg";
 import PageTitle from "../../components/PageTitle";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import orderList from "../../_mock/orderImage.json";
 
 //전체 크기
 const WrapBox = styled.div`
@@ -117,16 +120,6 @@ const BottomProposal = styled.div`
   justify-content: space-between;
 `;
 
-//제안서 사진
-const Article = styled.article`
-  background: url(${Mock});
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 120px;
-  height: 120px;
-  border-radius: 6px;
-`;
-
 //더보기
 const MoreView = styled.div`
   margin-top: 19px;
@@ -138,7 +131,25 @@ const MoreView = styled.div`
   text-align: center;
 `;
 
+//제안서 사진 방법1
+const Article = styled.article`
+  background: url(${props => props.image});
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 120px;
+  height: 120px;
+  border: 1px solid pink;
+  border-radius: 6px;
+`;
+
 const ShopMemberMyPage = () => {
+  const [OrderImage, setOrderImage] = useState([]);
+
+  useEffect(() => {
+    console.log(orderList);
+    setOrderImage(orderList["sheetResponseDTOs"]);
+  }, []);
+
   return (
     <WrapBox>
       <TopBar></TopBar>
@@ -154,12 +165,16 @@ const ShopMemberMyPage = () => {
         <Button>픽업 일정 관리</Button>
         <CommitProposal>댓글 단 제안서</CommitProposal>
         <BottomProposal>
-          <Article></Article>
-          <Article></Article>
-          <Article></Article>
-          <Article></Article>
-          <Article></Article>
-          <Article></Article>
+          {OrderImage.map(order => {
+            return (
+              <Article
+                key={order.sheetId}
+                title={order.locationDong}
+                image={order.imageUrl}
+                subtitle={order.hashtag}
+              ></Article>
+            );
+          })}
         </BottomProposal>
         <MoreView>
           더보기
