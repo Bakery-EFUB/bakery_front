@@ -90,21 +90,21 @@ const City = ({ history, setHistory, original, setOriginal }) => {
       <SmallText>(복수선택가능)</SmallText>
 
       <Wrapper>
-        {cityArray.map((arr) => {
+        {cityArray.map(arr => {
           if (arr.selected === true) {
             return (
               <CityButton
                 selected
                 key={arr.id}
                 id={arr.id}
-                onClick={(e) => onToggle(e)}
+                onClick={e => onToggle(e)}
               >
                 {arr.city}
               </CityButton>
             );
           } else {
             return (
-              <CityButton key={arr.id} id={arr.id} onClick={(e) => onToggle(e)}>
+              <CityButton key={arr.id} id={arr.id} onClick={e => onToggle(e)}>
                 {arr.city}
               </CityButton>
             );

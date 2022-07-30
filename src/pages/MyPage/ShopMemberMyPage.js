@@ -1,13 +1,9 @@
-import TopBar from "../components/Common/Sidebar/TopBar";
+import TopBar from "../../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
-import UserLogoimg from "../images/UserLogo.svg";
-import CountManageimg from "../images/CountManage.svg";
-import Readingimg from "../images/Reading.svg";
-import PageTitle from "../components/PageTitle";
+import UserLogoimg from "../../images/UserLogo.svg";
+import Mock from "../../images/Mock.svg";
+import PageTitle from "../../components/PageTitle";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { useState } from "react";
-import { useEffect } from "react";
 
 //전체 크기
 const WrapBox = styled.div`
@@ -23,6 +19,7 @@ const PinkBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 
 //유저 이미지
@@ -78,105 +75,99 @@ const CountManager = styled.div`
   font-size: 12px;
   line-height: 14px;
 `;
-const CertifyBox = styled.div`
-  margin-top: 108.53px;
-  display: flex;
-  margin-right: 230px;
-`;
-
-//가게 인증
-const Completion = styled.div`
-  width: 70px;
-  height: 19px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-`;
-
-//미완료
-const Progress = styled.div`
-  width: 70px;
-  height: 19px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-  color: var(--sub-darkgray);
-`;
 
 //핑크 버튼
 const Button = styled.button`
   width: 380px;
-  height: 100px;
-  margin-top: 20px;
+  height: 60px;
+  margin-top: 10px;
   color: var(--white);
   background: var(--main-pink);
   border-radius: 6px;
   border-style: none;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
-  font-weight: bolder;
+  font-weight: 700;
   font-size: 18px;
   line-height: 22px;
   text-align: center;
   text-transform: uppercase;
 `;
 
-//참고
-const Reading = styled.div`
-  background: url(${Readingimg});
-  background-repeat: no-repeat;
-  box-sizing: border-box;
-  margin-top: 28.18px;
-  width: 280px;
-  height: 34px;
-  line-height: 17px;
+//제안서 글씨
+const CommitProposal = styled.div`
+  width: 137.05px;
+  height: 19px;
+  margin-top: 44.31px;
+  margin-right: 240px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
 `;
 
-const ShopMypageStart = () => {
-  const [Mydatas, setMyData] = useState([]);
-  const getData = () => {
-    axios
-      .get("https://caker.shop/stores/myStore")
-      .then(Response => {
-        console.log("받아오기 성공", Response.data);
-        setMyData(Response.data);
-      })
-      .catch(Error => {
-        console.log(Error);
-      });
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+//제안서 툴
+const BottomProposal = styled.div`
+  margin-top: 19px;
+  width: 380.14px;
+  height: 253.21px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
 
+//제안서 사진
+const Article = styled.article`
+  background: url(${Mock});
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 120px;
+  height: 120px;
+  border-radius: 6px;
+`;
+
+//더보기
+const MoreView = styled.div`
+  margin-top: 19px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+`;
+
+const ShopMemberMyPage = () => {
   return (
     <WrapBox>
       <TopBar></TopBar>
       <PageTitle title="마이페이지" margin="70.06px" />
-      <UserName>
-        {Mydatas.map(Mydata => (
-          <div key={Mydata.id}>{Mydata.owner.nickname}</div>
-        ))}
-      </UserName>
+      <UserName>터틀힙 님,</UserName>
+      <CountManager>계정 관리 &gt;</CountManager>
       <UserPlace>Caker 가게 회원</UserPlace>
       <UserImg></UserImg>
       <PinkBox>
-        <CountManager>계정 관리 &gt;</CountManager>
-        <CertifyBox>
-          <Completion>가게 인증</Completion>
-          <Progress>미완료</Progress>
-        </CertifyBox>
-        <Link to="/shopregister">
-          <Button>가게 정보 등록하기</Button>
+        <Link to="/shopmodify">
+          <Button>가게 정보 관리</Button>
         </Link>
-        <Reading />
+        <Button>픽업 일정 관리</Button>
+        <CommitProposal>댓글 단 제안서</CommitProposal>
+        <BottomProposal>
+          <Article></Article>
+          <Article></Article>
+          <Article></Article>
+          <Article></Article>
+          <Article></Article>
+          <Article></Article>
+        </BottomProposal>
+        <MoreView>
+          더보기
+          <br />∨
+        </MoreView>
       </PinkBox>
     </WrapBox>
   );
 };
 
-export default ShopMypageStart;
+export default ShopMemberMyPage;
