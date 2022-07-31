@@ -27,10 +27,12 @@ const PinkBox = styled.div`
 
 //유저 이미지
 const UserImg = styled.div`
-  background: url(${UserLogoimg});
+  background: url(${props => props.ImageUrl});
   background-repeat: no-repeat;
+  background-size: cover;
   box-sizing: border-box;
   position: absolute;
+  border-radius: 50%;
   width: 100px;
   height: 100px;
   left: 24.21px;
@@ -144,20 +146,22 @@ const Article = styled.article`
 
 const ShopMemberMyPage = () => {
   const [OrderImage, setOrderImage] = useState([]);
-
+  console.log(JSON.parse(localStorage.getItem("user")));
   useEffect(() => {
     console.log(orderList);
     setOrderImage(orderList["sheetResponseDTOs"]);
   }, []);
 
+  const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
+
   return (
     <WrapBox>
       <TopBar></TopBar>
       <PageTitle title="마이페이지" margin="70.06px" />
-      <UserName>터틀힙 님,</UserName>
+      <UserName>{JSON.parse(localStorage.getItem("user")).nickname}</UserName>
       <CountManager>계정 관리 &gt;</CountManager>
       <UserPlace>Caker 가게 회원</UserPlace>
-      <UserImg></UserImg>
+      <UserImg ImageUrl={ImageUrl}></UserImg>
       <PinkBox>
         <Link to="/shopmodify">
           <Button>가게 정보 관리</Button>
