@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ServiceBackground from "../images/ServiceBackground.svg";
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 import WeAreCakers from "../images/WeAreCakers.svg";
 import ServiceTitle from "../images/ServiceTitle.svg";
 import DescriptionText from "../images/DescriptionText.svg";
@@ -17,7 +17,7 @@ const BackGroundImg = styled.div`
   width: 100%;
   margin-top: 23%;
   height: 1379.12px;
-  z-index: -1
+  z-index: -1;
 `;
 const StartText = styled.div`
   color: var(--main-pink);
@@ -104,7 +104,7 @@ const ButtonContainer = styled.div`
 const Button = styled.button`
   width: 380px;
   height: 60px;
-  margin-top:10%;
+  margin-top: 10%;
   margin-left: 5px;
   margin-right: 5px;
 
