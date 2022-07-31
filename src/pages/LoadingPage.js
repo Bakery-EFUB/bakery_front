@@ -13,7 +13,6 @@ const Contents = styled.div`
   transform: translate(-50%, -50%);
 `;
 const SubText = styled.p`
-  font-family: "AppleSDGothicNeo";
   font-size: 20px;
   color: var(--main-pink);
 `;
