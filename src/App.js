@@ -18,8 +18,11 @@ import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
 import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
 import ShopInformationModify from "./pages/MyPage/ShopInformationModify";
 import LoginLoading from "./pages/Auth/LoginLoading";
+import Error from "./pages/Error/Error";
+import { userRole } from "./utils/auth";
 
 function App() {
+  console.log(userRole);
   return (
     <BrowserRouter>
       <Routes>
@@ -47,6 +50,7 @@ function App() {
           element={<ShopMyPageProgressive />}
         />
         <Route exact path="/kakaologin" element={<LoginLoading />} />
+        <Route exact path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );
