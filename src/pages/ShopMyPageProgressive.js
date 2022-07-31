@@ -26,10 +26,12 @@ const PinkBox = styled.div`
 
 //유저 이미지
 const UserImg = styled.div`
-  background: url(${UserLogoimg});
+  background: url(${props => props.ImageUrl});
   background-repeat: no-repeat;
+  background-size: cover;
   box-sizing: border-box;
   position: absolute;
+  border-radius: 50%;
   width: 100px;
   height: 100px;
   left: 24.21px;
@@ -137,6 +139,7 @@ const Reading = styled.div`
 
 const ShopMypageProgressive = () => {
   const [Mydatas, setMyData] = useState([]);
+  const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
   const getData = () => {
     axios
       .get("https://caker.shop/stores/myStore")
@@ -145,7 +148,7 @@ const ShopMypageProgressive = () => {
         setMyData(Response.data);
       })
       .catch(Error => {
-        console.log(Error);
+        console.log("받아오기 실패", Error);
       });
   };
   useEffect(() => {
@@ -156,13 +159,9 @@ const ShopMypageProgressive = () => {
     <WrapBox>
       <TopBar></TopBar>
       <PageTitle title="마이페이지" margin="70.06px" />
-      <UserName>
-        {Mydatas.map(Mydata => (
-          <div key={Mydata.id}>{Mydata.owner.nickname}</div>
-        ))}
-      </UserName>
+      <UserName>{JSON.parse(localStorage.getItem("user")).nickname}</UserName>
       <UserPlace>Caker 가게 회원</UserPlace>
-      <UserImg></UserImg>
+      <UserImg ImageUrl={ImageUrl}></UserImg>
       <PinkBox>
         <CountManager>계정 관리 &gt;</CountManager>
         <CertifyBox>
