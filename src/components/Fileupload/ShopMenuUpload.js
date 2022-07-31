@@ -29,7 +29,7 @@ const ShopMenuPhoto = styled.p`
   border: 1px solid var(--sub-lightgray);
   display: flex;
   text-align: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   &:hover {
     border: 1px dashed #333;
@@ -37,12 +37,18 @@ const ShopMenuPhoto = styled.p`
 `;
 
 //파일 컴포넌트
+const FileInfo = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
 const thumb = {
   display: "inline-flex",
   borderRadius: 2,
   marginBottom: 3,
   marginLeft: 1,
-  width: 80,
+  width: 100,
   height: 80,
   padding: 4,
   boxSizing: "border-box",
@@ -64,14 +70,32 @@ const img = {
   objectFit: "contain",
 };
 
+const DeleteButton = styled.button`
+  width: 40px;
+  height: 17px;
+  border-style: hidden;
+  text-decoration: underline;
+`;
+
 //ui 구현
 const ShopMenuUpload = ({ MenuFile, setMenuFile }) => {
   //객체 요소
-  console.log(MenuFile);
+  const onDelete = e => {
+    e.preventDefault();
+    setMenuFile([]);
+    setVisible(!Visible);
+  };
+
+  const [Visible, setVisible] = useState(false);
+  const onCheck = e => {
+    e.preventDefault();
+    setVisible(!Visible);
+  };
+
   const { getRootProps, getInputProps } = useDropzone({
     //허용하는 파일 형식
     accept: {
-      "image/*": [],
+      "image/png": [],
     },
     onDrop: acceptedFiles => {
       setMenuFile(
@@ -108,21 +132,25 @@ const ShopMenuUpload = ({ MenuFile, setMenuFile }) => {
   return (
     <form action="/save" method="post" encType="multipart/form-data">
       <ShopIntroduceName>케이크 대표 메뉴</ShopIntroduceName>
-      <section>
+      <section onDrop={onCheck}>
         <div {...getRootProps()}>
           <input {...getInputProps()} />
           <ShopMenuPhoto>➕</ShopMenuPhoto>
         </div>
         <ShopMenuPhoto>
-          {" "}
-          {thumbs}
-          {MenuFile.map(file => (
-            <div key={file.id}>
-              {file.name}
-              <br />
-              {file.size}KB
-            </div>
-          ))}{" "}
+          <FileInfo>
+            {" "}
+            {thumbs}
+            {MenuFile.map(file => (
+              <div key={file.id}>
+                {file.name}
+                <br />
+                {file.size}KB
+              </div>
+            ))}
+          </FileInfo>
+
+          {Visible ? <DeleteButton onClick={onDelete}>삭제</DeleteButton> : ""}
         </ShopMenuPhoto>
       </section>
     </form>
