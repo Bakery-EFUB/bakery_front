@@ -46,10 +46,14 @@ const LoginHome = () => {
       </Welcome>
       <CenterImg></CenterImg>
       <LoginButtons>
-        <Button text={"가게 회원 로그인"}></Button>
+        <a href="https://caker.shop/oauth2/authorization/kakao">
+          <Button text={"가게 회원 로그인"}></Button>
+        </a>
+
         <Button text={"일반 회원 로그인"}></Button>
       </LoginButtons>
     </Container>
   );
 };
+
 export default LoginHome;
