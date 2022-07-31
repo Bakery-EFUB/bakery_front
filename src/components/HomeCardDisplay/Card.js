@@ -1,17 +1,10 @@
 import React from "react";
+
 import styled from "styled-components";
 import Mock from "../../images/Mock.svg";
 
 const CardComponent = styled.div`
   margin-right: 3%;
-`;
-const MockImg = styled.div`
-  background: url(${Mock});
-  width: 150.08px;
-  height: 114.11px;
-  background-repeat: no-repeat;
-  background-position: center center;
-  border-radius: 6px;
 `;
 
 const Title = styled.div`
@@ -25,7 +18,15 @@ const SubTitle = styled.div`
   font-size: 14px;
 `;
 
-const Card = ({ title, subtitle }) => {
+const Card = ({ title, subtitle, image }) => {
+  const MockImg = styled.div`
+    background: url(${image});
+    width: 150.08px;
+    height: 114.11px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 6px;
+  `;
   return (
     <CardComponent>
       <MockImg></MockImg>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 import PageTitle from "../components/PageTitle";
 import mainImg from "../images/TempShopImage.png";
 import modifyImg from "../images/ModifyInfo.svg";
@@ -107,7 +107,11 @@ const CakeImages = styled.div`
 `;
 const CakeProductImage = styled.div`
   width: 32%;
+<<<<<<< HEAD
   height: 110px;
+=======
+  height: 120px;
+>>>>>>> main
   background: ${props => `url(${props.imgUrl}) center/cover no-repeat`};
   border-radius: 6px;
 `;
@@ -174,9 +178,19 @@ const ShopDetailPage = () => {
         </AlignCenterBox>
         <HorizonEmptySpace height="35px" />
         <DetailInfoCard>
-          <DetailInfoItem category="전화번호" content={shopDetail.phoneNumber} fontSize="16px" />
-          <DetailInfoItem category="주소" content={shopDetail.address} fontSize="16px" />
-          <DetailInfoItem category="운영시간" content={shopDetail.openTime} fontSize="16px" />
+          <DetailInfoItem
+            category="전화번호"
+            content={shopDetail.phoneNumber}
+            fontSize="16px" />
+          <DetailInfoItem
+            category="주소"
+            content={shopDetail.address}
+            fontSize="16px" />
+          <DetailInfoItem
+            category="운영시간"
+            content={shopDetail.openTime}
+            fontSize="16px"
+          />
           <DetailInfoItem
             category="문의"
             content={getMoreInfoSNSLinkElement( shopDetail.kakaoUrl, shopDetail.instagram )}

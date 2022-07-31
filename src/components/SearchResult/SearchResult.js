@@ -1,13 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import BigCardDisplay from "../BigCardDisplay";
+import BigCardDisplay from "../Common/BigCardDisplay";
 
-const SearchResult = () => {
+const SearchResult = ({ searchResult }) => {
   return (
     <>
-      <Link to="/shopdetail">
-        <BigCardDisplay MainText="달다구리" SubText="미등록"></BigCardDisplay>
-      </Link>
+      {searchResult?.map(shop => {
+        console.log(shop);
+        return (
+          <Link to="/shopdetail" key={shop.id}>
+            <BigCardDisplay
+              MainText={shop.name}
+              SubText={shop.certifyFlag}
+              image={shop.mainImg}
+            ></BigCardDisplay>
+          </Link>
+        );
+      })}
     </>
   );
 };
