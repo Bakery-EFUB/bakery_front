@@ -8,7 +8,7 @@ import TopBar from "../../components/Common/Sidebar/TopBar";
 //전체
 const WrapBox = styled.div`
   width: 428px;
-  height: 1800px;
+  height: 1850px;
 `;
 
 //가게 정보 등록
@@ -137,8 +137,8 @@ const ShopInformationRegister = () => {
   //제출 -> 백엔드로 post
   const submitHandler = e => {
     e.preventDefault();
-
-    FormData.append("data", JSON.stringify(body));
+    var formData = new FormData();
+    formData.append("data", JSON.stringify(body));
 
     const postSurvey = axios({
       method: "POST",
@@ -148,7 +148,13 @@ const ShopInformationRegister = () => {
         "Content-Type": "multipart/form-data",
       },
       data: formData,
-    });
+    })
+      .then(Response => {
+        console.log("제출 완료");
+      })
+      .catch(Error => {
+        console.log("제출 실패");
+      });
 
     console.log(postSurvey);
   };
