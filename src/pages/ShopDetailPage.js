@@ -1,41 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import TopBar from "../components/Common/Sidebar/TopBar";
 import PageTitle from "../components/PageTitle";
-import mainImg from "../images/TempShopImage.png";
 import modifyImg from "../images/ModifyInfo.svg";
 import moreIcon from "../images/MoreIcon.svg";
 import { DetailInfoCard } from "../components/DetailInfoCard";
 import DetailInfoItem from "../components/DetailInfoItem";
 import {useNavigate, useParams} from "react-router-dom";
-
-/////////////// 테스트를 위한 객체 -> 이후 삭제 예정 /////////////
-const TEMP_USER_ID = 3;
-const shopDetail = {
-  id: 1, //store db id(long)
-  owner: {
-    //사장 프로필
-    memberId: 2,
-    kakaoId: 2996125025,
-    nickname: "bakery",
-    email: "efub@kakao.com",
-    image: "mainImg",
-    authority: "BAKER",
-    deleteFlag: false,
-  },
-  ownerName: "bakery", //사장 이름(string)
-  name: "가게 이름", //(string)
-  mainImg: mainImg, //(string)
-  readme:
-    "달다구리는 다양한 상황과 감정을 케이크로 표현할 수 있는 아이디어를 늘 상상하고 고민합니다. 다양한 상황에 전하고 싶은 메시지를 찾아 디자인하고자 하는 달다구리는 벌써 고객님들과 함께한지 10년이 되었습니다.", //string
-  address: "가게 주소", //string
-  kakaoUrl: "가게 카카오 프로필 링크", //string
-  instagram: "인스타그램 주소", //string
-  certifyFlag: true, //가게 인증 여부 (boolean)
-  openTime: "가게 오픈 시간", //string
-  phoneNumber: "전화번호", //string
-  menuImg: [mainImg, mainImg],
-};
+import { GetMyStoreDetail, GetStoreDetail } from "../api/store";
 
 const PaddingBox = styled.div`
   padding: 0 24px 60px;
@@ -107,28 +79,21 @@ const CakeImages = styled.div`
 `;
 const CakeProductImage = styled.div`
   width: 32%;
-<<<<<<< HEAD
   height: 110px;
-=======
-  height: 120px;
->>>>>>> main
   background: ${props => `url(${props.imgUrl}) center/cover no-repeat`};
   border-radius: 6px;
 `;
 
 const ShopDetailPage = () => {
   const { storeId } = useParams();
-  // const [shopDetail, setShopDetail] = useState({});
-  // const loadShopDetailData = async () => {
-  //   const store_id = 'MyStore'; // 수정 필요
-  //   const response = await axios
-  //     .get(`/stores/${storeId}`)
-  //     .then((res) => setShopDetail(res.data))
-  //     .catch(e => console.error(e));
-  // };
-  // useEffect(() => {
-  //   //loadShopDetailData();
-  // }, []);
+  const [shopDetail, setShopDetail] = useState({});
+  useEffect(() => {
+    GetStoreDetail(storeId)
+      .then((res) => {
+        setShopDetail(res);
+      })
+      .catch(e => console.error(e));
+  }, []);
 
   const getMoreInfoSNSLinkElement = (kakao, insta) => {
     return (
@@ -146,6 +111,14 @@ const ShopDetailPage = () => {
       setOpenMore([{ WebkitLineClamp: "100" }, { transform: "scaleY(-1)" }]);
     } else setOpenMore([{}, {}]);
   };
+  const isOwner = (id) => {
+    if (JSON.parse(localStorage.user)?.authority !== 'BAKER') return false;
+    
+    let userStoreId = -1;
+    GetMyStoreDetail()
+      .then(res => userStoreId = res.id);
+    return userStoreId === id;
+  }
   return (
     <div>
       <TopBar />
@@ -160,7 +133,7 @@ const ShopDetailPage = () => {
               {shopDetail.certifyFlag ? "등록가게" : "미등록가게"}
             </IsRegistered>
           </div>
-          {shopDetail.owner.memberId === TEMP_USER_ID &&
+          { isOwner(shopDetail.id) &&
             <ModifyIcon
               className="modify-info"
               onClick={() => navigator("/shopmodify")}
@@ -201,7 +174,7 @@ const ShopDetailPage = () => {
         <SubTitle>대표 케이크</SubTitle>
         <HorizonEmptySpace height="30px" />
         <CakeImages>
-          {shopDetail.menuImg.map((imgUrl, idx) => (
+          {shopDetail.menuImg?.map((imgUrl, idx) => (
             <CakeProductImage imgUrl={imgUrl} key={idx} />
           ))}
         </CakeImages>
