@@ -1,0 +1,56 @@
+{
+  "sheetResponseDTOs": [
+    {
+      "sheetId": 3,
+      "locationGu": "서대문구",
+      "locationDong": "북아현동",
+      "type": "str",
+      "size": "str",
+      "flavor": "str",
+      "description": "str",
+      "image": null,
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1ErOS7ZD-idscVH8ttQiCCxh4fdeAsmzayYba9jKxptbzZxAgBy6DasjlYemyx9_wZ28&usqp=CAU",
+      "pickupDate": "2022-07-22T09:00:00",
+      "priceMin": 1,
+      "priceMax": 10,
+      "createdAt": "2022-07-18T22:43:37.700408",
+      "hashtag": "동그라미",
+      "finishedFlag": false,
+      "member": {
+        "memberId": 2,
+        "kakaoId": 2346125025,
+        "nickname": "bakery",
+        "email": "efub@kakao.com",
+        "image": "http://k.kakaocdn.net/dn/bphqch/btrHeo6yHYJ/E6W4H3Jh63OzRI115V2rIk/img_640x640.jpg",
+        "authority": "CLIENT",
+        "deleteFlag": false
+      }
+    },
+    {
+      "sheetId": 1,
+      "locationGu": "서대문구",
+      "locationDong": "동동이",
+      "type": "str",
+      "size": "str",
+      "flavor": "str",
+      "description": "str",
+      "image": null,
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGP7hzEoaaPf3B1n4HgdzbLyHXg_DZuUKryg&usqp=CAU",
+      "pickupDate": "2022-07-22T09:00:00",
+      "priceMin": 1,
+      "priceMax": 10,
+      "createdAt": "2022-07-18T22:43:37.700408",
+      "hashtag": "꽃",
+      "finishedFlag": false,
+      "member": {
+        "memberId": 2,
+        "kakaoId": 2346125025,
+        "nickname": "bakery",
+        "email": "efub@kakao.com",
+        "image": "http://k.kakaocdn.net/dn/bphqch/btrHeo6yHYJ/E6W4H3Jh63OzRI115V2rIk/img_640x640.jpg",
+        "authority": "CLIENT",
+        "deleteFlag": false
+      }
+    }
+  ]
+}

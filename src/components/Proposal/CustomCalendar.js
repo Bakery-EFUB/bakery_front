@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import classNames from "classnames/bind";
-import style from "../styles/calendar.css";
-import LeftVector from "../images/LeftVector.svg";
-import RightVector from "../images/RightVector.svg";
+import style from "../../styles/calendar.css";
+import LeftVector from "../../images/LeftVector.svg";
+import RightVector from "../../images/RightVector.svg";
 
 import styled from "styled-components";
 
@@ -21,7 +21,7 @@ const Right = styled.img`
   margin-right: 13px;
 `;
 
-const CustomCalendar = () => {
+const CustomCalendar = ({ setClickedDay, original, setOriginal }) => {
   const today = {
     year: new Date().getFullYear(), //오늘 연도
     month: new Date().getMonth() + 1, //오늘 월
@@ -71,17 +71,17 @@ const CustomCalendar = () => {
           className={cx(
             { weekday: true },
             { sunday: v === "일" },
-            { saturday: v === "토" }
+            { saturday: v === "토" },
           )}
         >
           {v}
-        </div>
+        </div>,
       );
     });
     return weekArr;
   }, []);
 
-  const [selected, setSelected] = useState(1); // 선택된 날짜
+  const [selected, setSelected] = useState(today.date); // 선택된 날짜
 
   const [existArr, setExistArr] = useState([
     { id: 0, exist: false, reservation: "예약 정보" },
@@ -133,7 +133,16 @@ const CustomCalendar = () => {
               <div
                 key={i + 1}
                 id={i + 1}
-                onClick={e => setSelected(parseInt(e.target.id))}
+                onClick={e => {
+                  setSelected(parseInt(e.target.id));
+                  // 상위 컴포넌트에서 날짜 setState 함수를 pro장s로 넘겨준 경우
+                  setClickedDay &&
+                    setClickedDay({
+                      year: Number(selectedYear),
+                      month: Number(selectedMonth),
+                      day: Number(i + 1),
+                    });
+                }}
                 className={cx(
                   { weekday: true }, //전체 날짜 스타일
                   {
@@ -141,6 +150,7 @@ const CustomCalendar = () => {
                     today: i + 1 === selected,
                   },
                   {
+                    // 예약 정보가 있을 때
                     exist: existArr[i + 1].exist,
                   },
 
@@ -150,7 +160,7 @@ const CustomCalendar = () => {
                       new Date(
                         selectedYear,
                         selectedMonth - 1,
-                        i + 1
+                        i + 1,
                       ).getDay() === 0,
                   },
                   {
@@ -159,14 +169,14 @@ const CustomCalendar = () => {
                       new Date(
                         selectedYear,
                         selectedMonth - 1,
-                        i + 1
+                        i + 1,
                       ).getDay() === 6,
-                  }
+                  },
                 )}
               >
                 {i + 1}
               </div>
-            </div>
+            </div>,
           );
         }
       } else {
@@ -178,14 +188,13 @@ const CustomCalendar = () => {
   };
 
   // 선택 된 날짜 출력 (test 코드)
-  console.log(
-    "년도 :",
-    selectedYear,
-    "월 :",
-    selectedMonth,
-    "날짜 : ",
-    selected
-  );
+
+  const pickUpDate =
+    selectedYear.toString() + selectedMonth.toString() + selected.toString();
+
+  useEffect(() => {
+    setOriginal({ ...original, pickUp: pickUpDate });
+  }, [pickUpDate]);
 
   return (
     <div className="container">

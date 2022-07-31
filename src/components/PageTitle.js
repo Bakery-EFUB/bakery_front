@@ -18,11 +18,9 @@ const PageTitle = ({ title, margin }) => {
 
   const TitleText = styled.div`
     width: fit-content;
-
     margin: 0 3px;
     position: relative;
     bottom: 9px;
-
     font-family: "Apple SD Gothic Neo";
     font-style: normal;
     font-weight: 700;
