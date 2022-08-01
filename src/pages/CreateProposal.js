@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 import PickUp from "./CreateProposal/PickUp";
 import City from "./CreateProposal/City";
 import Cake from "./CreateProposal/Cake";
@@ -12,9 +12,11 @@ import Price from "./CreateProposal/Price";
 import Design from "./CreateProposal/Design";
 import Done from "./CreateProposal/Done";
 
-import API from "../components/API";
-
+import http from "../common/http";
 const CreateProposal = () => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  console.log(token);
+
   const [history, setHistory] = useState(0);
 
   const [original, setOriginal] = useState({
@@ -36,8 +38,8 @@ const CreateProposal = () => {
 
   const navigate = useNavigate();
 
-  const postProposal = async () => {
-    const response = await API.post("/orders", {
+  const dropHandler = async => {
+    const dataSet = {
       locationGu: "서대문구", //구
       locationDong: original.city[0], //동
       type: original.cake, //케이크 종류
@@ -47,49 +49,59 @@ const CreateProposal = () => {
       pickupDate: original.pickUp, //픽업일자/시간
       priceMin: original.min, //minimum 가격
       priceMax: original.max, //maximum 가격
-      hashtag: original.city[0], //해시태그
-    })
-      .then(response => {
-        navigate("/create/done");
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  // 파일 전송 api
-  const dropHandler = file => {
-    //file을 백엔드에 전해줌(1)
+      // hashtag: original.city[0], //해시태그
+    };
 
     let formData = new FormData();
 
+    formData.append(
+      "sheetDTO",
+      new Blob([JSON.stringify(dataSet)], {
+        type: "application/json",
+      }),
+    );
+
+    formData.append("file", original.file);
+
+    console.dir(formData, "테스트");
+
     const config = {
-      header: { "content-type": "multipart/form-data" },
+      headers: { "X-AUTH-TOKEN": token },
     };
-    formData.append("file", file);
 
-    // test코드
-    for (let key of formData.keys()) {
-      console.log("키임", key);
-    }
-    for (let value of formData.values()) {
-      console.log("확인", value);
-    }
+    // let headers = new Headers({});
+    // headers = { "X-AUTH-TOKEN": token };
 
-    API.post("/orders", formData, config)
-      // 백엔드가 file저장하고 그 결과가 reponse에 담김
-      // 백엔드는 그 결과를 프론트로 보내줌(3)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    // axios({
+    //   method: "POST",
+    //   url: "https://caker.shop/orders",
+    //   mode: "cors",
+    //   headers: headers,
+    //   dataSet,
+    // })
+    //   .then(res => console.log("포스트 성공", res))
+    //   .catch(err => console.log("포스트 실패", err));
+
+    axios
+      .post("https://caker.shop/orders", formData, config)
+      .then(res => console.log("결과", res))
+      .catch(err => console.log("포스트실패", err));
+
+    // http
+    //   .post("/orders", formData, config)
+    //   // 백엔드가 file저장하고 그 결과가 reponse에 담김
+    //   // 백엔드는 그 결과를 프론트로 보내줌(3)
+    //   .then(response => {
+    //     console.log("제안서 올리기 성공", response);
+    //   })
+    //   .catch(error => {
+    //     console.log("제안서 올리기 실패", error);
+    //   });
   };
 
   // test 코드
   useEffect(() => {
-    console.log("변화", original);
+    console.log("변화", original.file);
   }, [original]);
 
   return (
@@ -171,7 +183,7 @@ const CreateProposal = () => {
               original={original}
               setOriginal={setOriginal}
               dropHandler={dropHandler}
-              postProposal={postProposal}
+              // postProposal={postProposal}
             />
           }
         />

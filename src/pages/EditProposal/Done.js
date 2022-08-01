@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import TopBar from "../../components/TopBar";
 
 import BigPinkButton from "../../components/BigPinkButton";
 import DoneImage from "../../images/DoneImage.svg";

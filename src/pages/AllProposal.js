@@ -2,7 +2,7 @@ import React from "react";
 import TopBar from "../components/Common/Sidebar/TopBar";
 import ChooseBox from "../components/WholeProposals/ChooseBox";
 import NoProposal from "../components/WholeProposals/NoProposal";
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../components/Proposal/PageTitle";
 
 const AllProposal = () => {
   return (

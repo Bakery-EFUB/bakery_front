@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import axios from "axios";
-import { Menu } from "antd";
 
 //이름
 const ShopIntroduceName = styled.div`

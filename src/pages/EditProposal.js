@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 import PickUp from "./EditProposal/PickUp";
 import City from "./EditProposal/City";
 import Cake from "./EditProposal/Cake";
@@ -11,8 +11,6 @@ import Taste from "./EditProposal/Taste";
 import Price from "./EditProposal/Price";
 import Design from "./EditProposal/Design";
 import Done from "./EditProposal/Done";
-
-import API from "../components/API";
 
 const EditProposal = () => {
   const [data, setData] = useState(null);
@@ -93,15 +91,15 @@ const EditProposal = () => {
       console.log("확인", value);
     }
 
-    API.post("/orders", formData, config)
-      // 백엔드가 file저장하고 그 결과가 reponse에 담김
-      // 백엔드는 그 결과를 프론트로 보내줌(3)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    // API.post("/orders", formData, config)
+    //   // 백엔드가 file저장하고 그 결과가 reponse에 담김
+    //   // 백엔드는 그 결과를 프론트로 보내줌(3)
+    //   .then(response => {
+    //     console.log(response);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
   };
 
   // test 코드

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import SmallPinkButton from "../../components/SmallPinkButton";
-import SmallWhiteButton from "../../components/SmallWhiteButton";
-import SmallGrayButton from "../../components/SmallGrayButton";
+import SmallPinkButton from "../../components/Proposal/SmallPinkButton";
+import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
+import SmallGrayButton from "../../components/Proposal/SmallGrayButton";
 
-import PageTitle from "../../components/PageTitle";
-import CityButton from "../../components/CityButton";
+import PageTitle from "../../components/Proposal/PageTitle";
+import CityButton from "../../components/Proposal/CityButton";
 import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
@@ -37,7 +37,7 @@ const City = ({ history, setHistory, original, setOriginal }) => {
   useEffect(() => {
     setCityArray(
       cityArray.map(city =>
-        original.cityId == city.id
+        original.cityId === city.id
           ? { ...city, selected: true }
           : { ...city, selected: false },
       ),
@@ -59,7 +59,7 @@ const City = ({ history, setHistory, original, setOriginal }) => {
   useEffect(() => {
     let city;
     for (city of cityArray) {
-      if (city.selected == true) {
+      if (city.selected === true) {
         setIsDone(true);
         break;
       } else {
@@ -76,14 +76,14 @@ const City = ({ history, setHistory, original, setOriginal }) => {
   const Next = () => {
     let idArr = [];
     cityArray.map(city => {
-      if (city.selected == true) {
+      if (city.selected === true) {
         idArr.push(city.id);
       }
     });
 
     let cityArr = [];
     cityArray.map(city => {
-      if (city.selected == true) {
+      if (city.selected === true) {
         cityArr.push(city.city);
       }
     });

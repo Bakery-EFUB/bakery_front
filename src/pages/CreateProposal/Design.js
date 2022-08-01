@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 
-import SmallPinkButton from "../../components/SmallPinkButton";
-import SmallWhiteButton from "../../components/SmallWhiteButton";
-import PageTitle from "../../components/PageTitle";
+import SmallPinkButton from "../../components/Proposal/SmallPinkButton";
+import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
+import PageTitle from "../../components/Proposal/PageTitle";
 import ProposalText from "../../components/Proposal/ProposalText";
 
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
 import { useDropzone } from "react-dropzone";
-import API from "../../components/API";
 
 const Design = ({ history, setHistory, original, setOriginal }) => {
   const ThisStep = 90;

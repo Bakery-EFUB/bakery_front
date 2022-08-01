@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 
 import CommentLogo from "../images/CommentLogo.svg";
 
-import SmallPinkButton from "../components/SmallPinkButton";
-import SmallWhiteButton from "../components/SmallWhiteButton";
+import SmallPinkButton from "../components/Proposal/SmallPinkButton";
+import SmallWhiteButton from "../components/Proposal/SmallWhiteButton";
 
-import PageTitle from "../components/PageTitle";
-import API from "../components/API";
+import PageTitle from "../components/Proposal/PageTitle";
 import axios from "axios";
 import CommentToggle from "../components/Proposal/CommentToggle";
+
+import { GetProposal } from "../api/proposal";
+import http from "../common/http";
 
 const Proposal = () => {
   // url에서 id 뽑기
@@ -19,10 +21,15 @@ const Proposal = () => {
   const { id } = useParams();
   window.localStorage.setItem("order_id", id);
 
+  const me = JSON.parse(localStorage.getItem("user")).email;
+  const [writer, setWriter] = useState(null);
+
   const [commentId, setCommentId] = useState(null);
   const [recommentId, setRecommentId] = useState(null);
   // 대댓글 선택 여부
   const [reply, setReply] = useState(false);
+  // 대댓글에 대댓글 선택 여부
+  const [rereply, setReReply] = useState(false);
 
   // 댓글 정보 여기에 저장
   const [comments, setComments] = useState([]);
@@ -48,15 +55,142 @@ const Proposal = () => {
   // 새로운 코멘트
   const [newComment, setNewComment] = useState("");
 
-  // 제안서 정보 Get api
-  const getProposal = async () => {
-    const response = await API.get(`/orders/${id}`)
+  // 제안서 수정하러 가기 버튼
+  const EditProposal = () => {
+    navigate("/edit/city");
+  };
+
+  // 제안서 Delete
+  const DeleteProposal = async () => {
+    const response = await http
+      .delete(`/orders/${id}`)
+      .then(function (response) {
+        console.log("제안서 삭제", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // 댓글/대댓글 Get api
+  const getComment = async () => {
+    const response = await http
+      .get(`/orders/${id}/comments`)
       .then(response => {
-        console.log(response.data, "이겅");
+        console.log("댓글 => ", response.data.commentDTOs);
+        setComments(response.data.commentDTOs);
+      })
+      .catch(error => {
+        console.log("실패", error);
+      });
+  };
+
+  // 댓글 post api
+  const postComment = async () => {
+    const response = await http
+      .post(`/orders/${id}/comments`, {
+        contents: newComment,
+      })
+      .then(function (response) {
+        console.log("댓글 작성 성공", response);
+        //location.reload();
+      })
+      .catch(function (error) {
+        console.log("댓글실패", error);
+      });
+  };
+
+  // 대댓글 post api
+  const postRecomment = async () => {
+    const response = await http
+      .post(`/orders/${id}/comments/${commentId}/recomments`, {
+        contents: newComment,
+      })
+      .then(function (response) {
+        console.log("대댓글 작성 성공", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // 댓글 삭제
+  const DeleteComment = async comment_id => {
+    const response = await http
+      .delete(`/orders/${id}/comments/${comment_id}`)
+      .then(function (response) {
+        console.log("댓글 삭제 성공", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // 대댓글 삭제
+  const DeleteReComment = async () => {
+    const response = await http
+      .delete(
+        `/orders/${id}/comments/${comment_id}/recomments/${recomments_id}`,
+      )
+      .then(function (response) {
+        console.log("대댓글 삭제 성공", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // 댓글 작성 공통
+  const onSubmit = e => {
+    if (reply || rereply) {
+      postRecomment();
+    } else {
+      postComment();
+    }
+    setNewComment("");
+  };
+
+  // 대댓글에 대댓글
+  const getReCommentId = (comment, re) => {
+    if (
+      commentId === comment.comment.commentId &&
+      recommentId === re.recommentId
+    ) {
+      setReReply(false);
+      setCommentId(null);
+      setRecommentId(null);
+    } else {
+      setReply(false);
+      setReReply(true);
+      setCommentId(comment.comment.commentId);
+      setRecommentId(re.recommentId);
+    }
+  };
+
+  // 댓글에 대댓글
+  const getCommentId = comment => {
+    console.log("댓글 선택", comment.comment.commentId);
+
+    if (
+      commentId == comment.comment.commentId &&
+      recommentId == re.recommentId
+    ) {
+      setReply(false);
+      setCommentId(null);
+    } else {
+      setReReply(false);
+      setReply(true);
+      setCommentId(comment.comment.commentId);
+    }
+  };
+
+  useEffect(() => {
+    http
+      .get(`/orders/${id}`)
+      .then(response => {
         const data = response.data;
-
-        //console.log("제안서", response.data);
-
+        setWriter(data.member.email);
+        console.log(data, "성공");
         setOption({
           date: data.createdAt.substr(0, 10),
           size: data.size,
@@ -69,128 +203,20 @@ const Proposal = () => {
         });
       })
       .catch(error => {
-        console.log("실패", error);
+        console.log("제안서불러오기실패다", error);
       });
-  };
 
-  // 제안서 수정하러 가기 버튼
-  const EditProposal = () => {
-    navigate("/edit/city");
-  };
-
-  // 제안서 Delete
-  const DeleteProposal = async () => {
-    const response = await API.delete(`/orders/${id}`)
-      .then(function (response) {
-        console.log("제안서 삭제", response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  // 댓글/대댓글 Get api
-  const getComment = async () => {
-    const response = await API.get(`/orders/${id}/comments`)
+    // 댓글 불러오기
+    http
+      .get(`/orders/${id}/comments`)
       .then(response => {
         console.log("댓글 => ", response.data.commentDTOs);
         setComments(response.data.commentDTOs);
       })
       .catch(error => {
-        console.log("실패", error);
+        console.log("댓글 실패", error);
       });
-  };
-
-  // 댓글 post api
-  const postComment = async () => {
-    const response = await API.post(`/orders/${id}/comments`, {
-      contents: newComment,
-    })
-      .then(function (response) {
-        console.log("댓글 작성 성공", response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  // 대댓글 post api
-  const postRecomment = async () => {
-    const response = await API.post(
-      `/orders/${id}/comments/${commentId}/recomments`,
-      {
-        contents: newComment,
-      },
-    )
-      .then(function (response) {
-        console.log("대댓글 작성 성공", response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  // 댓글 삭제
-  const DeleteComment = async comment_id => {
-    const response = await API.delete(`/orders/${id}/comments/${comment_id}`)
-      .then(function (response) {
-        console.log("댓글 삭제 성공", response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  // 대댓글 삭제
-  const DeleteReComment = async () => {
-    const response = await API.delete(
-      `/orders/${id}/comments/${comment_id}/recomments/${recomments_id}`,
-    )
-      .then(function (response) {
-        console.log("대댓글 삭제 성공", response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  // 댓글 작성 공통
-  const onSubmit = e => {
-    e.preventDefault();
-
-    if (reply) {
-      postRecomment();
-    } else {
-      postComment();
-    }
-
-    setNewComment("");
-  };
-
-  // (대댓글) 댓글, 대댓글 id 얻기 // 답글 버튼 누를 때
-  const getCommentId = (comment, re) => {
-    if (
-      commentId == comment.comment.commentId &&
-      recommentId == re.recommentId
-    ) {
-      setReply(false);
-      setCommentId(null);
-      setRecommentId(null);
-    } else {
-      setReply(true);
-      setCommentId(comment.comment.commentId);
-      setRecommentId(re.recommentId);
-    }
-  };
-
-  useEffect(() => {
-    getProposal();
-    getComment();
   }, []);
-
-  console.log(comments);
-
-  console.log(commentId, recommentId, reply);
 
   return (
     <div style={{ width: "100%" }}>
@@ -237,13 +263,18 @@ const Proposal = () => {
           margin: "36px auto 0 auto",
         }}
       >
-        {/* <Link to="/create/city"> */}
-        <SmallPinkButton onClick={() => EditProposal()}>수정</SmallPinkButton>
-        {/* </Link> */}
-
-        <SmallWhiteButton onClick={() => DeleteProposal()}>
-          삭제
-        </SmallWhiteButton>
+        {me === writer ? (
+          <>
+            <SmallPinkButton onClick={() => EditProposal()}>
+              수정
+            </SmallPinkButton>
+            <SmallWhiteButton onClick={() => DeleteProposal()}>
+              삭제
+            </SmallWhiteButton>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
 
       <Comment>댓글 {commentsLength}</Comment>
@@ -265,20 +296,35 @@ const Proposal = () => {
                   <CommentInfo>
                     <Nickname>{re.nickname}</Nickname>
                     <CommentTime>2022.05.10. 15:00</CommentTime>
+                    <div style={{ display: "flex", marginLeft: "auto" }}>
+                      {me === re.writer.email ? (
+                        <CommentToggle
+                          onClick={() =>
+                            DeleteComment(comment.comment.commentId)
+                          }
+                        >
+                          삭제
+                        </CommentToggle>
+                      ) : (
+                        <></>
+                      )}
 
-                    {commentId == comment.comment.commentId &&
-                    recommentId == re.recommentId ? (
-                      <CommentToggle
-                        selected
-                        onClick={() => getCommentId(comment, re)}
-                      >
-                        답글
-                      </CommentToggle>
-                    ) : (
-                      <CommentToggle onClick={() => getCommentId(comment, re)}>
-                        답글
-                      </CommentToggle>
-                    )}
+                      {commentId === comment.comment.commentId &&
+                      recommentId === re.recommentId ? (
+                        <CommentToggle
+                          selected
+                          onClick={() => getReCommentId(comment, re)}
+                        >
+                          답글
+                        </CommentToggle>
+                      ) : (
+                        <CommentToggle
+                          onClick={() => getReCommentId(comment, re)}
+                        >
+                          답글
+                        </CommentToggle>
+                      )}
+                    </div>
                   </CommentInfo>
 
                   <CommentContent>{re.contents}</CommentContent>
@@ -286,7 +332,6 @@ const Proposal = () => {
               </CommentPinkBox>
             );
           });
-
           return (
             <>
               <CommentYellowBox key={comment.comment.contents}>
@@ -296,11 +341,31 @@ const Proposal = () => {
                     {comment.comment.createdAt.substr(0, 10)}{" "}
                     {comment.comment.createdAt.substr(12, 4)}
                   </CommentTime>
-                  <CommentToggle
-                    onClick={() => DeleteComment(comment.comment.commentId)}
-                  >
-                    삭제
-                  </CommentToggle>
+
+                  <div style={{ display: "flex", marginLeft: "auto" }}>
+                    {me === comment.comment.writer.email ? (
+                      <CommentToggle
+                        onClick={() => DeleteComment(comment.comment.commentId)}
+                      >
+                        삭제
+                      </CommentToggle>
+                    ) : (
+                      <></>
+                    )}
+
+                    {commentId === comment.comment.commentId ? (
+                      <CommentToggle
+                        selected
+                        onClick={() => getCommentId(comment)}
+                      >
+                        답글
+                      </CommentToggle>
+                    ) : (
+                      <CommentToggle onClick={() => getCommentId(comment)}>
+                        답글
+                      </CommentToggle>
+                    )}
+                  </div>
                 </CommentInfo>
 
                 <CommentContent>{comment.comment.contents}</CommentContent>

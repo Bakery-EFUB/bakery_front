@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import SmallWhiteButton from "../../components/SmallWhiteButton";
-import SmallGrayButton from "../../components/SmallGrayButton";
-import SmallPinkButton from "../../components/SmallPinkButton";
+import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
+import SmallGrayButton from "../../components/Proposal/SmallGrayButton";
+import SmallPinkButton from "../../components/Proposal/SmallPinkButton";
 
 import CustomCalendar from "../../components/Proposal/CustomCalendar";
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "../../components/Proposal/PageTitle";
 import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
