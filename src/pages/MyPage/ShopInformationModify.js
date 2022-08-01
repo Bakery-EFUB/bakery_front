@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import ShopImgUpload from "../../components/Fileupload/ShopImgUpload";
 import ShopMenuUpload from "../../components/Fileupload/ShopMenuUpload";
 import TopBar from "../../components/Common/Sidebar/TopBar";
+import PreviewModal from "../PreviewModal";
 
 //전체
 const WrapBox = styled.div`
@@ -94,6 +94,7 @@ const ShopInformationModify = () => {
   const [Instagram, setInstagram] = useState("");
   const [MainFile, setMainFile] = useState([]);
   const [MenuFile, setMenuFile] = useState([]);
+  const [flip, setFlip] = useState(true);
 
   console.log(MainFile);
   console.log(MenuFile);
@@ -148,6 +149,10 @@ const ShopInformationModify = () => {
     e.preventDefault();
     setMenuFile(e.tartget.value);
   };
+  const onPreview = e => {
+    e.preventDefault();
+    setFlip(!flip);
+  };
 
   //제출 -> 백엔드로 post
   const submitHandler = e => {
@@ -167,89 +172,168 @@ const ShopInformationModify = () => {
 
     console.log(postSurvey);
   };
+  if (flip == true) {
+    return (
+      <WrapBox>
+        <TopBar />
+        <form onSubmit={submitHandler}>
+          <ShopRegistering>가게 정보 수정</ShopRegistering>
+          <ShopIntroduceName>가게 이름</ShopIntroduceName>
+          <ShopIntroduce
+            height="60px"
+            type="text"
+            value={Name}
+            onChange={NameHandler}
+            placeholder="     정확한 상호명을 입력해주세요."
+          />
+          <ShopIntroduceName>가게 소개</ShopIntroduceName>
+          <ShopIntroduce
+            height="125px"
+            type="text"
+            value={Readme}
+            onChange={ReadmeHandler}
+            placeholder="     자신의 가게를 자유롭게 소개해주세요! (최대 300자)"
+          />
+          <ShopIntroduceName>전화번호</ShopIntroduceName>
+          <ShopIntroduce
+            height="60px"
+            type="text"
+            value={PhoneNumber}
+            onChange={PhoneNumberHandler}
+            placeholder="     ex. 02-0000-0000"
+          />
+          <ShopIntroduceName>주소</ShopIntroduceName>
+          <ShopIntroduce
+            height="60px"
+            type="text"
+            value={Address}
+            onChange={AddressHandler}
+            placeholder="     ex. 서울특별시 서대문구 대현동 11-11층"
+          />
+          <ShopIntroduceName>운영 시간</ShopIntroduceName>
+          <ShopIntroduce
+            height="60px"
+            type="text"
+            value={OpenTime}
+            onChange={OpenTimeHandler}
+            placeholder="     ex. 매일 12:00~20:00"
+          />
+          <ShopIntroduceName>카카오톡 채널</ShopIntroduceName>
+          <ShopIntroduce
+            height="60px"
+            type="text"
+            value={KakaoUrl}
+            onChange={KakaoUrlHandler}
+            placeholder="     운영중인 카카오톡 채널이 있다면 링크를 첨부해주세요."
+          />
+          <ShopIntroduceName>인스타그램</ShopIntroduceName>
+          <ShopIntroduce
+            height="60px"
+            type="text"
+            value={Instagram}
+            onChange={InstagramHandler}
+            placeholder="     운영중인 인스타그램이 있다면 링크를 첨부해주세요."
+          />
 
-  return (
-    <WrapBox>
-      <TopBar />
-      <form onSubmit={submitHandler}>
-        <ShopRegistering>가게 정보 등록</ShopRegistering>
-        <ShopIntroduceName>가게 이름</ShopIntroduceName>
-        <ShopIntroduce
-          height="60px"
-          type="text"
-          value={Name}
-          onChange={NameHandler}
-          placeholder="     정확한 상호명을 입력해주세요."
-        />
-        <ShopIntroduceName>가게 소개</ShopIntroduceName>
-        <ShopIntroduce
-          height="125px"
-          type="text"
-          value={Readme}
-          onChange={ReadmeHandler}
-          placeholder="     자신의 가게를 자유롭게 소개해주세요! (최대 300자)"
-        />
-        <ShopIntroduceName>전화번호</ShopIntroduceName>
-        <ShopIntroduce
-          height="60px"
-          type="text"
-          value={PhoneNumber}
-          onChange={PhoneNumberHandler}
-          placeholder="     ex. 02-0000-0000"
-        />
-        <ShopIntroduceName>주소</ShopIntroduceName>
-        <ShopIntroduce
-          height="60px"
-          type="text"
-          value={Address}
-          onChange={AddressHandler}
-          placeholder="     ex. 서울특별시 서대문구 대현동 11-11층"
-        />
-        <ShopIntroduceName>운영 시간</ShopIntroduceName>
-        <ShopIntroduce
-          height="60px"
-          type="text"
-          value={OpenTime}
-          onChange={OpenTimeHandler}
-          placeholder="     ex. 매일 12:00~20:00"
-        />
-        <ShopIntroduceName>카카오톡 채널</ShopIntroduceName>
-        <ShopIntroduce
-          height="60px"
-          type="text"
-          value={KakaoUrl}
-          onChange={KakaoUrlHandler}
-          placeholder="     운영중인 카카오톡 채널이 있다면 링크를 첨부해주세요."
-        />
-        <ShopIntroduceName>인스타그램</ShopIntroduceName>
-        <ShopIntroduce
-          height="60px"
-          type="text"
-          value={Instagram}
-          onChange={InstagramHandler}
-          placeholder="     운영중인 인스타그램이 있다면 링크를 첨부해주세요."
-        />
+          {/* 드래그앤 드롭 파일 컴포넌트 2개 */}
+          <ShopImgUpload
+            MainFile={MainFile}
+            setMainFile={setMainFile}
+            MainFileHandler={MainFileHandler}
+          />
+          <ShopMenuUpload
+            MenuFile={MenuFile}
+            setMenuFile={setMenuFile}
+            MenuFileHandler={MenuFileHandler}
+          />
 
-        {/* 드래그앤 드롭 파일 컴포넌트 2개 */}
-        <ShopImgUpload
-          MainFile={MainFile}
-          setMainFile={setMainFile}
-          MainFileHandler={MainFileHandler}
-        />
-        <ShopMenuUpload
-          MenuFile={MenuFile}
-          setMenuFile={setMenuFile}
-          MenuFileHandler={MenuFileHandler}
-        />
+          <BeforeShowBtn onClick={onPreview}>미리보기</BeforeShowBtn>
 
-        <Link to="/shopdetail">
-          <BeforeShowBtn>미리보기</BeforeShowBtn>
-        </Link>
+          <ModifyBtn type="submit">수정하기</ModifyBtn>
+        </form>
+      </WrapBox>
+    );
+  } else {
+    return (
+      <WrapBox>
+        <TopBar />
+        <form onSubmit={submitHandler}>
+          <ShopRegistering>가게 정보 수정</ShopRegistering>
+          <ShopIntroduceName>가게 이름</ShopIntroduceName>
+          <ShopIntroduce
+            height="60px"
+            type="text"
+            value={Name}
+            onChange={NameHandler}
+            placeholder="     정확한 상호명을 입력해주세요."
+          />
+          <ShopIntroduceName>가게 소개</ShopIntroduceName>
+          <ShopIntroduce
+            height="125px"
+            type="text"
+            value={Readme}
+            onChange={ReadmeHandler}
+            placeholder="     자신의 가게를 자유롭게 소개해주세요! (최대 300자)"
+          />
+          <ShopIntroduceName>전화번호</ShopIntroduceName>
+          <ShopIntroduce
+            height="60px"
+            type="text"
+            value={PhoneNumber}
+            onChange={PhoneNumberHandler}
+            placeholder="     ex. 02-0000-0000"
+          />
+          <ShopIntroduceName>주소</ShopIntroduceName>
+          <ShopIntroduce
+            height="60px"
+            type="text"
+            value={Address}
+            onChange={AddressHandler}
+            placeholder="     ex. 서울특별시 서대문구 대현동 11-11층"
+          />
+          <ShopIntroduceName>운영 시간</ShopIntroduceName>
+          <ShopIntroduce
+            height="60px"
+            type="text"
+            value={OpenTime}
+            onChange={OpenTimeHandler}
+            placeholder="     ex. 매일 12:00~20:00"
+          />
+          <ShopIntroduceName>카카오톡 채널</ShopIntroduceName>
+          <ShopIntroduce
+            height="60px"
+            type="text"
+            value={KakaoUrl}
+            onChange={KakaoUrlHandler}
+            placeholder="     운영중인 카카오톡 채널이 있다면 링크를 첨부해주세요."
+          />
+          <ShopIntroduceName>인스타그램</ShopIntroduceName>
+          <ShopIntroduce
+            height="60px"
+            type="text"
+            value={Instagram}
+            onChange={InstagramHandler}
+            placeholder="     운영중인 인스타그램이 있다면 링크를 첨부해주세요."
+          />
 
-        <ModifyBtn type="submit">수정하기</ModifyBtn>
-      </form>
-    </WrapBox>
-  );
+          <ShopImgUpload
+            MainFile={MainFile}
+            setMainFile={setMainFile}
+            MainFileHandler={MainFileHandler}
+          />
+          <ShopMenuUpload
+            MenuFile={MenuFile}
+            setMenuFile={setMenuFile}
+            MenuFileHandler={MenuFileHandler}
+          />
+          {/* <PreviewModal body={body} onClick={onClick}></PreviewModal> */}
+          <BeforeShowBtn onClick={onPreview}>미리보기2</BeforeShowBtn>
+
+          <ModifyBtn type="submit">수정하기2</ModifyBtn>
+        </form>
+      </WrapBox>
+    );
+  }
 };
 
 export default ShopInformationModify;
