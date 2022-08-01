@@ -8,9 +8,10 @@
 | [@harloxx](https://github.com/harloxx) | || | |
 
 ## 🍰 개요
-'CAKER'는 레터링 케이크 주문/판매 플랫폼으로, 레터링 케이크를 주문하고자 하는 구매자와 그에 맞는 서비스를 제공하는 판매자를 서로 연결해주어 기존의 불편함을 해소하고 원하는 케이크 가게를 손쉽게 찾게 해줍니다.
+'CAKER'는 레터링 케이크 주문/판매 플랫폼으로, 레터링 케이크를 주문하고자 하는 구매자와 그에 맞는 서비스를 제공하는 판매자를 서로 연결해주어 기존의 불편함을 해소하고 원하는 케이크 가게를 손쉽게 찾게 해줍니다.  
 
 ## 🍰 기술 스택   
+<img src="https://github.com/Bakery-EFUB/Bakery-Back/blob/develop/BakeryArchitectureDiagram.png"/> 
 
 - Package Manager <img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white">  
 
@@ -22,7 +23,7 @@
 - ETC &nbsp; 
 <img src="https://img.shields.io/badge/GitHub -181717?style=flat-square&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub Action-256EE0?style=flat-square&logo=GitHub Action&logoColor=white"/></br>
 
-<img src="https://github.com/Bakery-EFUB/Bakery-Back/blob/develop/BakeryArchitectureDiagram.png"/>
+ 
 
 
 
@@ -35,7 +36,7 @@
 - react-icons: "^4.4.0",
 - react-router-dom : "^6.3.0",
 - react-scripts : "5.0.1",
--styled-components: "^5.3.5",
+-styled-components: "^5.3.5",  
 
 
 ## 🍰 프로젝트 구조
@@ -54,7 +55,7 @@
 ├─ 📂 utils  ▶️ 자주 사용되는 함수
 └─ 📂 _mock  ▶️ 샘플 데이터
 
-```
+```  
 
 ### 🍰 폴더
 ```
