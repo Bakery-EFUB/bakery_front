@@ -4,6 +4,7 @@ import axios from "axios";
 import ShopImgUpload from "../../components/Fileupload/ShopImgUpload";
 import ShopMenuUpload from "../../components/Fileupload/ShopMenuUpload";
 import TopBar from "../../components/Common/Sidebar/TopBar";
+import { options } from "dropzone";
 
 //전체
 const WrapBox = styled.div`
@@ -67,6 +68,7 @@ const RegisterBtn = styled.button`
   font-size: 16px;
   line-height: 19px;
 `;
+const token = JSON.parse(localStorage.getItem("token"));
 
 //ui 구현
 const ShopInformationRegister = () => {
@@ -83,7 +85,8 @@ const ShopInformationRegister = () => {
   console.log(MainFile);
   console.log(MenuFile);
 
-  let body = {
+  // //api 명세서
+  let variables = JSON.stringify({
     storedata: {
       name: Name,
       readme: Readme,
@@ -93,9 +96,17 @@ const ShopInformationRegister = () => {
       kakaoUrl: KakaoUrl,
       instagram: Instagram,
     },
-    mainImage: MainFile,
-    menuImage: MenuFile,
+  });
+
+  let MainImage = {
+    mainImg: MainFile,
   };
+
+  let MenuImage = {
+    menuImg: MenuFile,
+  };
+
+  console.log(variables, MainImage, MenuImage);
 
   const NameHandler = e => {
     e.preventDefault();
@@ -138,22 +149,28 @@ const ShopInformationRegister = () => {
   const submitHandler = e => {
     e.preventDefault();
     var formData = new FormData();
-    formData.append("data", JSON.stringify(body));
+    formData.append("file", MainImage);
+    formData.append("file", MenuImage);
+
+    formData.append("data", new Blob(variables), {
+      type: "application/json",
+    });
 
     const postSurvey = axios({
       method: "POST",
       url: "https://caker.shop/stores/myStore",
       mode: "cors",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+      headers: { "X-AUTH-TOKEN": token, "Content-Type": "multipart/form-data" },
       data: formData,
     })
       .then(Response => {
+        console.log(formData);
         console.log("제출 완료");
+        console.log(body);
       })
       .catch(Error => {
-        console.log("제출 실패");
+        console.log(formData);
+        console.log("제출 실패", Error);
       });
 
     console.log(postSurvey);
