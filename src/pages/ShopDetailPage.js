@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 import PageTitle from "../components/PageTitle";
 import mainImg from "../images/TempShopImage.png";
 import modifyImg from "../images/ModifyInfo.svg";
@@ -12,13 +12,13 @@ const PaddingBox = styled.div`
   padding: 0 24px 60px;
 `;
 const HorizonEmptySpace = styled.div`
-  height: ${(props) => props.height};
+  height: ${props => props.height};
 `;
 
 // 이미지
 const MainImage = styled.div`
-  height: ${(props) => props.height};
-  background: ${(props) => `url(${props.imgUrl}) center/cover no-repeat`};
+  height: ${props => props.height};
+  background: ${props => `url(${props.imgUrl}) center/cover no-repeat`};
   border-radius: 6px;
 `;
 
@@ -79,7 +79,7 @@ const CakeImages = styled.div`
 const CakeProductImage = styled.div`
   width: 32%;
   height: 120px;
-  background: ${(props) => `url(${props.imgUrl}) center/cover no-repeat`};
+  background: ${props => `url(${props.imgUrl}) center/cover no-repeat`};
   border-radius: 6px;
 `;
 
@@ -119,10 +119,26 @@ const ShopDetailPage = () => {
         </AlignCenterBox>
         <HorizonEmptySpace height="35px" />
         <DetailInfoCard>
-          <DetailInfoItem category="전화번호" content="02-336-5856" fontSize="16px" />
-          <DetailInfoItem category="주소" content="서울 마포구 양화로18안길 22 2층 터틀힙" fontSize="16px" />
-          <DetailInfoItem category="운영시간" content="매일 12:00~20:00" fontSize="16px" />
-          <DetailInfoItem category="문의" content="카카오톡 | 인스타그램" fontSize="16px" />
+          <DetailInfoItem
+            category="전화번호"
+            content="02-336-5856"
+            fontSize="16px"
+          />
+          <DetailInfoItem
+            category="주소"
+            content="서울 마포구 양화로18안길 22 2층 터틀힙"
+            fontSize="16px"
+          />
+          <DetailInfoItem
+            category="운영시간"
+            content="매일 12:00~20:00"
+            fontSize="16px"
+          />
+          <DetailInfoItem
+            category="문의"
+            content="카카오톡 | 인스타그램"
+            fontSize="16px"
+          />
         </DetailInfoCard>
         <HorizonEmptySpace height="48px" />
         <SubTitle>대표 케이크</SubTitle>

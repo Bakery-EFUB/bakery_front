@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import mainImg from "../images/TempShopImage.png";
 import { DetailInfoCard } from "../components/DetailInfoCard";
 import DetailInfoItem from "../components/DetailInfoItem";
 
@@ -24,8 +23,8 @@ const WhiteModal = styled.div`
 `;
 
 const MainImage = styled.div`
-  height: ${(props) => props.height};
-  background: ${(props) => `url(${props.imgUrl}) center/cover no-repeat`};
+  height: ${props => props.height};
+  background: ${props => `url(${props.imgUrl}) center/cover no-repeat`};
   border-radius: 6px;
 `;
 
@@ -71,7 +70,7 @@ const CakeImages = styled.div`
 const CakeProductImage = styled.div`
   width: 32%;
   height: 100px;
-  background: ${(props) => `url(${props.imgUrl}) center/cover no-repeat`};
+  background: ${props => `url(${props.imgUrl}) center/cover no-repeat`};
   border-radius: 6px;
 `;
 
@@ -86,46 +85,45 @@ const CloseButton = styled.button`
 `;
 
 const HorizonEmptySpace = styled.div`
-  height: ${(props) => props.height};
+  height: ${props => props.height};
 `;
 
-const PreviewModal = () => {
+const PreviewModal = ({ body, onClick }) => {
+  const { storedata, mainImage, menuImage } = body;
   return (
     <>
       <PreventClickBackground />
       <WhiteModal>
-        <MainImage imgUrl={mainImg} height="300px" />
+        <MainImage
+          imgUrl={window.URL.createObjectURL(mainImage[0])}
+          height="300px"
+        />
         <HorizonEmptySpace height="30px" />
         <ShopDetailHeader>
           <div>
-            <ShopName>달다구리</ShopName>
+            <ShopName>{storedata.name}</ShopName>
             <IsRegistered>등록가게</IsRegistered>
           </div>
         </ShopDetailHeader>
         <HorizonEmptySpace height="45px" />
         <SubTitle>소개</SubTitle>
         <HorizonEmptySpace height="12px" />
-        <ShopDesc>
-          달다구리는 다양한 상황과 감정을 케이크로 표현할 수 있는 아이디어를 늘
-          상상하고 고민합니다. 다양한 상황에 전하고 싶은 메시지를 찾아
-          디자인하고자 하는 달다구리는 벌써 고객님들과 함께한지 10년이
-          되었습니다.
-        </ShopDesc>
+        <ShopDesc>{storedata.readme}</ShopDesc>
         <HorizonEmptySpace height="35px" />
         <DetailInfoCard>
           <DetailInfoItem
             category="전화번호"
-            content="02-336-5856"
+            content={storedata.phoneNumber}
             fontSize="14px"
           />
           <DetailInfoItem
             category="주소"
-            content="서울 마포구 양화로18안길 22 2층 터틀힙"
+            content={storedata.address}
             fontSize="14px"
           />
           <DetailInfoItem
             category="운영시간"
-            content="매일 12:00~20:00"
+            content={storedata.openTime}
             fontSize="14px"
           />
           <DetailInfoItem
@@ -138,16 +136,16 @@ const PreviewModal = () => {
         <SubTitle>대표 케이크</SubTitle>
         <HorizonEmptySpace height="30px" />
         <CakeImages>
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
+          {menuImage.map((img, idx) => (
+            <CakeProductImage
+              key={idx}
+              imgUrl={window.URL.createObjectURL(img)}
+            />
+          ))}
         </CakeImages>
         <HorizonEmptySpace height="60px" />
-        <CloseButton>닫기</CloseButton>{" "}
-        {/*onClick= {state 수정해서 팝업 닫기}*/}
+        {/*onClick 수정페이지에서 팝업 열고 닫을 때 쓰는 setState*/}
+        <CloseButton onClick={() => onClick(false)}>닫기</CloseButton>{" "}
       </WhiteModal>
     </>
   );

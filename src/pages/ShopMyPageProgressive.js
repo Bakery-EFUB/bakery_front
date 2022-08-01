@@ -1,32 +1,120 @@
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
 import UserLogoimg from "../images/UserLogo.svg";
-import CountManageimg from "../images/CountManage.svg";
 import Readingimg from "../images/Reading.svg";
 import PageTitle from "../components/PageTitle";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
 
+//전체 크기
 const WrapBox = styled.div`
   width: 428px;
 `;
-const Box = styled.div`
+
+//연핑크 박스
+const PinkBox = styled.div`
   background-color: var(--sub-pink);
-  position: absolute;
+  margin-top: 120px;
   width: 428px;
-  height: 619.09px;
-  left: 0px;
-  top: 306.91px;
+  height: 670.09px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-const Button = styled.button`
+//유저 이미지
+const UserImg = styled.div`
+  background: url(${UserLogoimg});
+  background-repeat: no-repeat;
+  box-sizing: border-box;
   position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 24.21px;
+  top: 210.91px;
+`;
+
+//유저 닉네임
+const UserName = styled.div`
+  position: absolute;
+  width: 114.57px;
+  height: 24px;
+  left: 139px;
+  top: 230.7px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+`;
+
+//caker 가게 회원
+const UserPlace = styled.h1`
+  position: absolute;
+  width: 195.31px;
+  height: 30.31px;
+  left: 139px;
+  top: 270.91px;
+  font-family: "ITC Avant Garde Gothic";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+`;
+
+//계정 관리
+const CountManager = styled.div`
+  position: absolute;
+  width: 57px;
+  height: 14px;
+  left: 349.69px;
+  top: 280.7px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+`;
+const CertifyBox = styled.div`
+  margin-top: 108.53px;
+  display: flex;
+  margin-right: 230px;
+`;
+
+//가게 인증
+const Completion = styled.div`
+  width: 70px;
+  height: 19px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+`;
+
+//미완료
+const Progress = styled.div`
+  width: 70px;
+  height: 19px;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--sub-darkgray);
+`;
+
+//핑크 버튼
+const Button = styled.button`
   width: 380px;
   height: 100px;
-  left: 23.86px;
-  top: 148.53px;
+  margin-top: 20px;
   color: var(--main-pink);
   background: var(--sub-yellow);
   border-radius: 6px;
-  border: 0.1px solid var(--sub-yellow);
+  border-style: none;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: bolder;
@@ -36,125 +124,58 @@ const Button = styled.button`
   text-transform: uppercase;
 `;
 
-const CountManager = styled.div`
-  background: url(${CountManageimg});
-  background-repeat: no-repeat;
-  position: absolute;
-  width: 54px;
-  height: 14px;
-  left: 349.69px;
-  top: 280.7px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 14px;
-  text-align: right;
-`;
-
-const UserLogo = styled.div`
-  background: url(${UserLogoimg});
-  box-sizing: border-box;
-  position: absolute;
-  width: 99px;
-  height: 99px;
-  left: 24.21px;
-  top: 261.91px;
-  z-index: 1;
-  background-repeat: no-repeat;
-`;
-
-const UserName = styled.div`
-  position: absolute;
-  width: 114.57px;
-  height: 24px;
-  left: 139px;
-  top: 273.7px;
-  text-align: left;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
-`;
-
-const Completion = styled.div`
-  position: absolute;
-  width: 70px;
-  height: 19px;
-  left: 29px;
-  top: 108.53px;
-  z-index: 1;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-`;
-
-const Progress = styled.div`
-  position: absolute;
-  width: 70px;
-  height: 19px;
-  left: 112.26px;
-  top: 108.53px;
-  z-index: 1;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-
-  /* sub text */
-
-  color: var(--main-pink);
-`;
-
-const UserPlace = styled.h1`
-  position: absolute;
-  width: 195.31px;
-  height: 30.31px;
-  left: 139px;
-  top: 305.91px;
-  z-index: 1;
-  text-align: left;
-  font-family: "ITC Avant Garde Gothic";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 17px;
-`;
-
+//참고
 const Reading = styled.div`
   background: url(${Readingimg});
   background-repeat: no-repeat;
   box-sizing: border-box;
-  position: absolute;
+  margin-top: 28.18px;
   width: 280px;
   height: 34px;
-  left: 73.9px;
-  top: 276.09px;
-  z-index: 1;
   line-height: 17px;
 `;
 
-const ShopMyPageProgressive = () => {
+const ShopMypageProgressive = () => {
+  const [Mydatas, setMyData] = useState([]);
+  const getData = () => {
+    axios
+      .get("https://caker.shop/stores/myStore")
+      .then(Response => {
+        console.log("받아오기 성공", Response.data);
+        setMyData(Response.data);
+      })
+      .catch(Error => {
+        console.log(Error);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <WrapBox>
       <TopBar></TopBar>
-      <PageTitle>마이페이지</PageTitle>
-      <UserName>터틀힙 님,</UserName>
-      <CountManager></CountManager>
+      <PageTitle title="마이페이지" margin="70.06px" />
+      <UserName>
+        {Mydatas.map(Mydata => (
+          <div key={Mydata.id}>{Mydata.owner.nickname}</div>
+        ))}
+      </UserName>
       <UserPlace>Caker 가게 회원</UserPlace>
-      <UserLogo></UserLogo>
-      <Box className="BottomPinkBackground">
-        <Completion>가게 인증</Completion>
-        <Progress>진행중</Progress>
-        <Button>가게 정보 등록완료</Button>
-        <Reading></Reading>
-      </Box>
+      <UserImg></UserImg>
+      <PinkBox>
+        <CountManager>계정 관리 &gt;</CountManager>
+        <CertifyBox>
+          <Completion>가게 인증</Completion>
+          <Progress>진행중</Progress>
+        </CertifyBox>
+        <Link to="/shopregister">
+          <Button>가게 정보 등록하기</Button>
+        </Link>
+        <Reading />
+      </PinkBox>
     </WrapBox>
   );
 };
 
-export default ShopMyPageProgressive;
+export default ShopMypageProgressive;
