@@ -5,7 +5,9 @@
 |김하은|정다윤|김지원|도소현|최지민|
 |:---:|:---:|:---:|:---:|:---:|
 |Frontend Lead|Frontend Lead|Frontend Intern|Frontend Intern|Frontend Intern|
-| [@harloxx](https://github.com/harloxx) | || | |
+| [@harloxx](https://github.com/harloxx) |[@dy6578ekdbs](https://github.com/dy6578ekdbs) |[@JiwonKim08](https://github.com/JiwonKim08)|[@sohyundoh](https://github.com/sohyundoh) |[@zmin9
+](https://github.com/zmin9
+) |
 
 ## 🍰 개요
 'CAKER'는 레터링 케이크 주문/판매 플랫폼으로, 레터링 케이크를 주문하고자 하는 구매자와 그에 맞는 서비스를 제공하는 판매자를 서로 연결해주어 기존의 불편함을 해소하고 원하는 케이크 가게를 손쉽게 찾게 해줍니다.  
