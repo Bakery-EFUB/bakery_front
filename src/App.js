@@ -14,6 +14,7 @@ import AllProposal from "./pages/AllProposal";
 import ShopMypageStart from "./pages/ShopMyPageStart";
 
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
+import PickupSchedulePage from "./pages/PickupSchedulePage";
 
 import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
 import ShopInformationModify from "./pages/MyPage/ShopInformationModify";
@@ -46,6 +47,7 @@ function App() {
           path="/shopprogressive"
           element={<ShopMyPageProgressive />}
         />
+        <Route exact path="/pickupschedule/:storeId" element={<PickupSchedulePage />} />
         <Route exact path="/kakaologin" element={<LoginLoading />} />
       </Routes>
     </BrowserRouter>

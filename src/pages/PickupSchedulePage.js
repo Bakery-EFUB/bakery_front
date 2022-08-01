@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 import PageTitle from "../components/PageTitle";
 import CustomCalendar from "../components/Proposal/CustomCalendar";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import { DeleteSchedule, GetAllSchedules } from "../api/eventschedule";
+import NoPermission from "./Auth/NoPermission";
+
 
 const SelectedDay = styled.div`
   margin: 40px 0 0;
@@ -39,19 +42,33 @@ const ScheduleContent = styled.div`
     margin: 6px 0 0;
   }
 `;
-const ScheduleDelete = styled.div`
+const ScheduleDelete = styled.button`
   font-size: 14px;
+  color: var(--sub-darkgray);
+  background-color: transparent;
+  border: none;
+`;
+
+const EmptyDayMsg = styled.div`
+  font-size: 14px;
+  text-align: center;
   color: var(--sub-darkgray);
 `;
 
-const CreateScheduleCard = ({ pickupTime, pickupInfo }) => {
+const CreateScheduleCard = ({ pickupTime, pickupInfo, eventId, storeId }) => {
   return (
     <ScheduleCard>
       <div>
-        <ScheduleContent>{pickupTime}</ScheduleContent>
+        <ScheduleContent>{pickupTime.slice(11, 16)}</ScheduleContent>
         <ScheduleContent>{pickupInfo}</ScheduleContent>
       </div>
-      <ScheduleDelete>삭제</ScheduleDelete>
+      <ScheduleDelete
+        onClick={
+          DeleteSchedule(storeId, eventId)
+            .then(res => console.log(res), e => console.error(e))}
+      >
+        삭제
+      </ScheduleDelete>
     </ScheduleCard>
   );
 };
@@ -72,40 +89,94 @@ const BigPinkButtonBottom = styled.button`
 `;
 
 const PickupSchedulePage = () => {
+  const { storeId } = useParams();
+  const [isPermitted, setIsPermitted] = useState(false);
+  const [pickupOnSelectedDay, setPickupOnSelectedDay] = useState([]);
+  const [pickupSchedules, setPickupSchedules] = useState([]);
+  const [selectedDay, setSelectedDay] = useState({
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    date: new Date().getDate(),
+  });
+  const onClickDay = date => {
+    setSelectedDay(date);
+    setPickupOnSelectedDay(
+      pickupSchedules.filter(
+        schedule =>
+          schedule.pickupDate.slice(0, 10) ===
+          new Date(date.year, date.month - 1, date.date + 1)
+            .toISOString()
+            .slice(0, 10),
+      ),
+    );
+  };
+  useEffect(() => {
+    GetAllSchedules(storeId)
+      .then(res => {
+        setIsPermitted(true);
+        setPickupSchedules(
+          res.map(pickup => {
+            return {
+              storeId: pickup.store.id,
+              content: pickup.content,
+              pickupDate: pickup.pickupDate,
+              pickupTime: pickup.pickupTime,
+              eventId: pickup.eventId,
+            };
+          }),
+        );
+      }
+    )
+      .catch(e => e.code === 403 && setIsPermitted(false));
+  }, []);
   const navigator = useNavigate();
-  const [selectedDay, setSelectedDay] = useState(() => {
-    const today = new Date();
+  const allDaysHavingSchedule = pickupSchedules.map(schedule => {
+    const [pickupYear, pickupMonth, pickupDate] = schedule.pickupDate
+      .split("T")[0]
+      .split("-")
+      .map(Number);
     return {
-      year: today.getFullYear(),
-      month: today.getMonth() + 1,
-      day: today.getDate(),
+      year: pickupYear,
+      month: pickupMonth,
+      date: pickupDate,
     };
   });
+  <NoPermission/>
   return (
     <div>
       <TopBar />
-      <PageTitle title="픽업 일정" margin="60px 0 63px 0" />
-      <CalendarContainer>
-        <CustomCalendar setClickedDay={setSelectedDay} />
-      </CalendarContainer>
-      <SelectedDay>{`${selectedDay.year}.${selectedDay.month}.${selectedDay.day}`}</SelectedDay>
-      <ScheduleCardList>
-        <CreateScheduleCard
-          pickupTime="13:00"
-          pickupInfo="000님/ 도시락 케이크"
-        />
-        <CreateScheduleCard
-          pickupTime="15:00"
-          pickupInfo="000님/ 레터링 케이크"
-        />
-        <CreateScheduleCard
-          pickupTime="16:30"
-          pickupInfo="000님/ 꽃다발 케이크"
-        />
-      </ScheduleCardList>
-      <BigPinkButtonBottom onClick={() => navigator("/addschedule")}>
-        일정 추가
-      </BigPinkButtonBottom>
+      {isPermitted?
+        <>
+        <PageTitle title="픽업 일정" margin="60px 0 63px 0" />
+        <CalendarContainer>
+          <CustomCalendar
+            setClickedDay={onClickDay}
+            allDaysHavingSchedule={allDaysHavingSchedule}
+          />
+        </CalendarContainer>
+        <SelectedDay>{`${selectedDay.year}.${selectedDay.month}.${selectedDay.date}`}</SelectedDay>
+        <ScheduleCardList>
+          {pickupOnSelectedDay.length === 0 ? (
+            <EmptyDayMsg> 일정이 없습니다. </EmptyDayMsg>
+          ) : (
+            pickupOnSelectedDay.map((schedule, idx) => (
+              <CreateScheduleCard
+                key={idx}
+                pickupTime={schedule.pickupTime}
+                pickupInfo={schedule.content}
+                eventId={schedule.eventId}
+                storeId={schedule.storeId}
+              />
+            ))
+          )}
+        </ScheduleCardList>
+        <BigPinkButtonBottom onClick={() => navigator("/addschedule")}>
+          일정 추가
+        </BigPinkButtonBottom>
+      </>
+        :
+        <NoPermission />
+      }
     </div>
   );
 };
