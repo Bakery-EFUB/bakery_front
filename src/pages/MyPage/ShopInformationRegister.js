@@ -90,11 +90,12 @@ const ShopInformationRegister = () => {
     storedata: {
       name: Name,
       readme: Readme,
-      phoneNumber: PhoneNumber,
       address: Address,
-      openTime: OpenTime,
       kakaoUrl: KakaoUrl,
       instagram: Instagram,
+      certifyFlag: 0,
+      openTime: OpenTime,
+      phoneNumber: PhoneNumber,
     },
   });
 
