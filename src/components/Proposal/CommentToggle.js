@@ -6,7 +6,7 @@ const Toggle = styled.p`
   height: 17px;
 
   margin: 0;
-  margin-left: auto;
+  margin-left: 10px;
 
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
