@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import arrowImg from "../images/DropdownArrow.svg";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { AddSchedule } from "../api/eventschedule";
 
 const TopBar = styled.div`
   display: flex;
@@ -139,7 +139,7 @@ const AddSchedulePage = () => {
       case "4월": case "6월": case "9월": case "11월": return day.slice(0,30);
     }
   };
-  const sendPickupSchedule = async () => {
+  const sendPickupSchedule = () => {
     if (scheduleInfo.desc.trim() === "") {
       console.log("내용이 비어있습니다.");
       return;
@@ -147,21 +147,19 @@ const AddSchedulePage = () => {
     const [hour, minute] = scheduleInfo.time.split(":").map(Number);
     const pickupDate = new Date(
       Number(scheduleInfo.year.slice(0, -1)),
-      Number(scheduleInfo.month.slice(0, -1)),
+      Number(scheduleInfo.month.slice(0, -1)) - 1,
       Number(scheduleInfo.day.slice(0, -1)),
-      hour,
+      hour + 9, // time zone
       minute,
     );
     const pickupTime = pickupDate;
     console.log(pickupDate.toISOString().slice(0, -5), scheduleInfo.desc);
-    const response = await axios
-      .post("/events", {
-        content: scheduleInfo.desc,
-        pickupDate: pickupDate.toISOString().slice(0, -5),
-        pickupTime: pickupTime.toISOString().slice(0, -5),
-      })
-      .catch(error => console.log(error, response));
-    navigator("/pickupschedule");
+    AddSchedule({
+      content: scheduleInfo.desc,
+      pickupDate: pickupDate.toISOString().slice(0, -5),
+      pickupTime: pickupTime.toISOString().slice(0, -5),
+    }).then(() => navigator("/pickupschedule"))
+      .catch(error => console.log(error));
   };
 
   return (

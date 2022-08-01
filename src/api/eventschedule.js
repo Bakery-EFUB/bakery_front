@@ -19,3 +19,13 @@ export const DeleteSchedule = async (storeId, eventId) => {
     return Promise.reject(err);
   }
 };
+
+export const AddSchedule = async (data) => {
+  try {
+    const res = await PickupService.addSchedule(data);
+    console.log(res);
+    return Promise.resolve(res.data);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
