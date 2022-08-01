@@ -23,8 +23,8 @@ const WhiteModal = styled.div`
 `;
 
 const MainImage = styled.div`
-  height: ${(props) => props.height};
-  background: ${(props) => `url(${props.imgUrl}) center/cover no-repeat`};
+  height: ${props => props.height};
+  background: ${props => `url(${props.imgUrl}) center/cover no-repeat`};
   border-radius: 6px;
 `;
 
@@ -70,7 +70,7 @@ const CakeImages = styled.div`
 const CakeProductImage = styled.div`
   width: 32%;
   height: 100px;
-  background: ${(props) => `url(${props.imgUrl}) center/cover no-repeat`};
+  background: ${props => `url(${props.imgUrl}) center/cover no-repeat`};
   border-radius: 6px;
 `;
 
@@ -85,7 +85,7 @@ const CloseButton = styled.button`
 `;
 
 const HorizonEmptySpace = styled.div`
-  height: ${(props) => props.height};
+  height: ${props => props.height};
 `;
 
 const PreviewModal = ({ body, onClick }) => {
@@ -94,7 +94,10 @@ const PreviewModal = ({ body, onClick }) => {
     <>
       <PreventClickBackground />
       <WhiteModal>
-        <MainImage imgUrl={window.URL.createObjectURL(mainImage)} height="300px" />
+        <MainImage
+          imgUrl={window.URL.createObjectURL(mainImage[0])}
+          height="300px"
+        />
         <HorizonEmptySpace height="30px" />
         <ShopDetailHeader>
           <div>
@@ -105,27 +108,44 @@ const PreviewModal = ({ body, onClick }) => {
         <HorizonEmptySpace height="45px" />
         <SubTitle>소개</SubTitle>
         <HorizonEmptySpace height="12px" />
-        <ShopDesc>
-          {storedata.readme}
-        </ShopDesc>
+        <ShopDesc>{storedata.readme}</ShopDesc>
         <HorizonEmptySpace height="35px" />
         <DetailInfoCard>
-          <DetailInfoItem category="전화번호" content={storedata.phoneNumber} fontSize="14px" />
-          <DetailInfoItem category="주소" content={storedata.address} fontSize="14px" />
-          <DetailInfoItem category="운영시간" content={storedata.openTime} fontSize="14px" />
-          <DetailInfoItem category="문의" content="카카오톡 | 인스타그램" fontSize="14px" />
+          <DetailInfoItem
+            category="전화번호"
+            content={storedata.phoneNumber}
+            fontSize="14px"
+          />
+          <DetailInfoItem
+            category="주소"
+            content={storedata.address}
+            fontSize="14px"
+          />
+          <DetailInfoItem
+            category="운영시간"
+            content={storedata.openTime}
+            fontSize="14px"
+          />
+          <DetailInfoItem
+            category="문의"
+            content="카카오톡 | 인스타그램"
+            fontSize="14px"
+          />
         </DetailInfoCard>
         <HorizonEmptySpace height="48px" />
         <SubTitle>대표 케이크</SubTitle>
         <HorizonEmptySpace height="30px" />
         <CakeImages>
-          {menuImage.map((img, idx)=>
-            <CakeProductImage key={idx} imgUrl={window.URL.createObjectURL(img)} />
-          )}
+          {menuImage.map((img, idx) => (
+            <CakeProductImage
+              key={idx}
+              imgUrl={window.URL.createObjectURL(img)}
+            />
+          ))}
         </CakeImages>
         <HorizonEmptySpace height="60px" />
         {/*onClick 수정페이지에서 팝업 열고 닫을 때 쓰는 setState*/}
-        <CloseButton onClick={()=>onClick(false)}>닫기</CloseButton>{" "}
+        <CloseButton onClick={() => onClick(false)}>닫기</CloseButton>{" "}
       </WhiteModal>
     </>
   );
