@@ -1,44 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 import PageTitle from "../components/PageTitle";
 import CustomCalendar from "../components/Proposal/CustomCalendar";
 import {useNavigate, useParams} from "react-router-dom";
-import API from "../components/API";
+import { DeleteSchedule, GetAllSchedules } from "../api/eventschedule";
+import NoPermission from "./Auth/NoPermission";
 
-const TEMP_USER_ROLE = 'BAKER';
-const TEMP_USER_STORE_ID = 1;
-const TEMP_STORE_ID = 1;
-const TEMP_DATA_FOR_CALENDAR = [
-  {
-    content: "테스트 자료",
-    pickupDate: "2022-07-01T14:30:00",
-    pickupTime: "2022-07-01T14:30:00",
-    eventId: 2,
-    storeId: TEMP_STORE_ID,
-  },
-  {
-    content: "통신 상태 원활",
-    pickupDate: "2022-07-15T16:00:00",
-    pickupTime: "2022-07-15T16:00:00",
-    eventId: 3,
-    storeId: TEMP_STORE_ID,
-  },
-  {
-    content: "근데 이제 값이없는",
-    pickupDate: "2022-07-21T13:30:00",
-    pickupTime: "2022-07-21T13:30:00",
-    eventId: 4,
-    storeId: TEMP_STORE_ID,
-  },
-  {
-    content: "그렇습니다",
-    pickupDate: "2022-07-30T19:00:00",
-    pickupTime: "2022-07-30T19:00:00",
-    eventId: 5,
-    storeId: TEMP_STORE_ID,
-  },
-];
 
 const SelectedDay = styled.div`
   margin: 40px 0 0;
@@ -88,18 +56,19 @@ const EmptyDayMsg = styled.div`
 `;
 
 const CreateScheduleCard = ({ pickupTime, pickupInfo, eventId, storeId }) => {
-  // 사실 storeId는 페이지 쿼리로
-  const deleteSchedule = async () => {
-    const response = await API({url : `/store/${storeId}/events/${eventId}`, method: "delete"})
-      .catch((e)=>console.error(e));
-  };
   return (
     <ScheduleCard>
       <div>
         <ScheduleContent>{pickupTime.slice(11, 16)}</ScheduleContent>
         <ScheduleContent>{pickupInfo}</ScheduleContent>
       </div>
-      <ScheduleDelete onClick={deleteSchedule}>삭제</ScheduleDelete>
+      <ScheduleDelete
+        onClick={
+          DeleteSchedule(storeId, eventId)
+            .then(res => console.log(res), e => console.error(e))}
+      >
+        삭제
+      </ScheduleDelete>
     </ScheduleCard>
   );
 };
@@ -121,6 +90,7 @@ const BigPinkButtonBottom = styled.button`
 
 const PickupSchedulePage = () => {
   const { storeId } = useParams();
+  const [isPermitted, setIsPermitted] = useState(false);
   const [pickupOnSelectedDay, setPickupOnSelectedDay] = useState([]);
   const [pickupSchedules, setPickupSchedules] = useState([]);
   const [selectedDay, setSelectedDay] = useState({
@@ -140,30 +110,24 @@ const PickupSchedulePage = () => {
       ),
     );
   };
-  // API 통신
-  // const loadPickupScheduleData = async () => {
-  //   const response = await API({ url: `/store/${TEMP_STORE_ID}/events` })
-  //     .then(res => {
-  //       // console.log(res);
-  //       setPickupSchedules(
-  //         res.data.map(pickup => {
-  //           return {
-  //             storeId: pickup.store.id,
-  //             content: pickup.content,
-  //             pickupDate: pickup.pickupDate,
-  //             pickupTime: pickup.pickupTime,
-  //             eventId: pickup.eventId,
-  //             // 이후 이벤트 아이디도 추가해야함
-  //           };
-  //         }),
-  //       );
-  //     })
-  //     .catch(e => console.error(e));
-  // };
   useEffect(() => {
-    // loadPickupScheduleData();
-    // console.log(pickupSchedules);
-    setPickupSchedules(TEMP_DATA_FOR_CALENDAR); //test
+    GetAllSchedules(storeId)
+      .then(res => {
+        setIsPermitted(true);
+        setPickupSchedules(
+          res.map(pickup => {
+            return {
+              storeId: pickup.store.id,
+              content: pickup.content,
+              pickupDate: pickup.pickupDate,
+              pickupTime: pickup.pickupTime,
+              eventId: pickup.eventId,
+            };
+          }),
+        );
+      }
+    )
+      .catch(e => e.code === 403 && setIsPermitted(false));
   }, []);
   const navigator = useNavigate();
   const allDaysHavingSchedule = pickupSchedules.map(schedule => {
@@ -177,39 +141,43 @@ const PickupSchedulePage = () => {
       date: pickupDate,
     };
   });
+  <NoPermission/>
   return (
-    TEMP_USER_ROLE === 'BAKER' && TEMP_USER_STORE_ID === Number(storeId) ?
     <div>
       <TopBar />
-      <PageTitle title="픽업 일정" margin="60px 0 63px 0" />
-      <CalendarContainer>
-        <CustomCalendar
-          setClickedDay={onClickDay}
-          allDaysHavingSchedule={allDaysHavingSchedule}
-        />
-      </CalendarContainer>
-      <SelectedDay>{`${selectedDay.year}.${selectedDay.month}.${selectedDay.date}`}</SelectedDay>
-      <ScheduleCardList>
-        {pickupOnSelectedDay.length === 0 ? (
-          <EmptyDayMsg> 일정이 없습니다. </EmptyDayMsg>
-        ) : (
-          pickupOnSelectedDay.map((schedule, idx) => (
-            <CreateScheduleCard
-              key={idx}
-              pickupTime={schedule.pickupTime}
-              pickupInfo={schedule.content}
-              eventId={schedule.eventId}
-              storeId={schedule.storeId}
-            />
-          ))
-        )}
-      </ScheduleCardList>
-      <BigPinkButtonBottom onClick={() => navigator("/addschedule")}>
-        일정 추가
-      </BigPinkButtonBottom>
+      {isPermitted?
+        <>
+        <PageTitle title="픽업 일정" margin="60px 0 63px 0" />
+        <CalendarContainer>
+          <CustomCalendar
+            setClickedDay={onClickDay}
+            allDaysHavingSchedule={allDaysHavingSchedule}
+          />
+        </CalendarContainer>
+        <SelectedDay>{`${selectedDay.year}.${selectedDay.month}.${selectedDay.date}`}</SelectedDay>
+        <ScheduleCardList>
+          {pickupOnSelectedDay.length === 0 ? (
+            <EmptyDayMsg> 일정이 없습니다. </EmptyDayMsg>
+          ) : (
+            pickupOnSelectedDay.map((schedule, idx) => (
+              <CreateScheduleCard
+                key={idx}
+                pickupTime={schedule.pickupTime}
+                pickupInfo={schedule.content}
+                eventId={schedule.eventId}
+                storeId={schedule.storeId}
+              />
+            ))
+          )}
+        </ScheduleCardList>
+        <BigPinkButtonBottom onClick={() => navigator("/addschedule")}>
+          일정 추가
+        </BigPinkButtonBottom>
+      </>
+        :
+        <NoPermission />
+      }
     </div>
-      :
-    <div>권한이 없습니다</div>
   );
 };
 
