@@ -18,39 +18,50 @@ import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
 import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
 import ShopInformationModify from "./pages/MyPage/ShopInformationModify";
 import LoginLoading from "./pages/Auth/LoginLoading";
-import Error from "./pages/Error/Error";
 import { userRole } from "./utils/auth";
+import ClientRoute from "./route/ClientRoute";
+import TraineeRoute from "./route/TraineeRoute";
+import BakerRoute from "./route/BakerRoute";
 
 function App() {
   console.log(userRole);
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<MainHome />} />
+        <Route exact path="/*" element={<MainHome />} />
+        <Route exact path="/kakaologin" element={<LoginLoading />} />
         <Route exact path="/loginhome" element={<LoginHome />} />
         <Route exact path="/loading" element={<LoadingPage />} />
         <Route exact path="/ShopDetailPage" element={<ShopDetailPage />} />
-        <Route exact path="/AddSchedulePage" element={<AddSchedulePage />} />
         <Route exact path="/search" element={<SearchPage />} />
         <Route exact path="/recommend" element={<Recommend />} />
-        <Route exact path="/serviceinfo" element={<OurService />} />
-        <Route exact path="/mypagehost" element={<ShopMemberMyPage />} />
+        <Route exact path="/about" element={<OurService />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
         <Route exact path="/shopdetail" element={<ShopDetailPage />} />
-        <Route exact path="/shopmypagestart" element={<ShopMypageStart />} />
-        <Route
-          exact
-          path="/shopregister"
-          element={<ShopInformationRegister />}
-        />
-        <Route exact path="/shopmodify" element={<ShopInformationModify />} />
-        <Route
-          exact
-          path="/shopprogressive"
-          element={<ShopMyPageProgressive />}
-        />
-        <Route exact path="/kakaologin" element={<LoginLoading />} />
-        <Route exact path="*" element={<Error />} />
+
+        <Route exact path="/client" element={<ClientRoute />}>
+          <Route exact path="/client/mypage" element={<ShopMemberMyPage />} />
+        </Route>
+
+        <Route exact path="/shop" element={<BakerRoute />}>
+          <Route exact path="/shop/mypage" element={<ShopMypageStart />} />
+          <Route
+            exact
+            path="/shop/register"
+            element={<ShopInformationRegister />}
+          />
+          <Route
+            exact
+            path="/shop/modify"
+            element={<ShopInformationModify />}
+          />
+          <Route
+            exact
+            path="/shop/progressive"
+            element={<ShopMyPageProgressive />}
+          />
+          <Route exact path="/shop/addschedule" element={<AddSchedulePage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

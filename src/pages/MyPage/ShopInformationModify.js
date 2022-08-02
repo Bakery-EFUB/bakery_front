@@ -172,7 +172,7 @@ const ShopInformationModify = () => {
     <WrapBox>
       <TopBar />
       <form onSubmit={submitHandler}>
-        <ShopRegistering>가게 정보 등록</ShopRegistering>
+        <ShopRegistering>가게 정보 수정</ShopRegistering>
         <ShopIntroduceName>가게 이름</ShopIntroduceName>
         <ShopIntroduce
           height="60px"

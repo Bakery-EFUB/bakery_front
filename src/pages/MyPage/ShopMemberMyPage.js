@@ -163,7 +163,7 @@ const ShopMemberMyPage = () => {
       <UserPlace>Caker 가게 회원</UserPlace>
       <UserImg ImageUrl={ImageUrl}></UserImg>
       <PinkBox>
-        <Link to="/shopmodify">
+        <Link to="/shop/modify">
           <Button>가게 정보 관리</Button>
         </Link>
         <Button>픽업 일정 관리</Button>
