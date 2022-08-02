@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 const LoginLoading = () => {
   const nav = useNavigate();
   const token = new URL(document.location.toString()).searchParams.get("token");
-  localStorage.setItem("token", JSON.stringify(token));
 
   AuthService.login(token)
     .then(res => {
