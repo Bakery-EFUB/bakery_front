@@ -167,15 +167,24 @@ const PickupSchedulePage = () => {
             {pickupOnSelectedDay.length === 0 ? (
               <EmptyDayMsg> 일정이 없습니다. </EmptyDayMsg>
             ) : (
-              pickupOnSelectedDay.map(schedule => (
-                <CreateScheduleCard
-                  key={schedule.eventId}
-                  pickupTime={schedule.pickupTime}
-                  pickupInfo={schedule.content}
-                  eventId={schedule.eventId}
-                  storeId={schedule.storeId}
-                />
-              ))
+              pickupOnSelectedDay
+                .sort((a, b) => {
+                  if (a.pickupTime.slice(11, 16) < b.pickupTime.slice(11, 16))
+                    return -1;
+                  if (a.pickupTime.slice(11, 16) === b.pickupTime.slice(11, 16))
+                    return 0;
+                  if (a.pickupTime.slice(11, 16) > b.pickupTime.slice(11, 16))
+                    return 1;
+                })
+                .map(schedule => (
+                  <CreateScheduleCard
+                    key={schedule.eventId}
+                    pickupTime={schedule.pickupTime}
+                    pickupInfo={schedule.content}
+                    eventId={schedule.eventId}
+                    storeId={schedule.storeId}
+                  />
+                ))
             )}
           </ScheduleCardList>
           <Link to="/addschedule">
