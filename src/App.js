@@ -12,7 +12,6 @@ import ShopMemberMyPage from "./pages/MyPage/ShopMemberMyPage";
 import AllProposal from "./pages/AllProposal";
 
 import ShopMypageStart from "./pages/ShopMyPageStart";
-
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
 
 import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
@@ -27,15 +26,14 @@ function App() {
         <Route exact path="/" element={<MainHome />} />
         <Route exact path="/loginhome" element={<LoginHome />} />
         <Route exact path="/loading" element={<LoadingPage />} />
-        <Route exact path="/ShopDetailPage" element={<ShopDetailPage />} />
-        <Route exact path="/AddSchedulePage" element={<AddSchedulePage />} />
+        <Route exact path="/shopdetail/:storeId" element={<ShopDetailPage />} />
+        <Route exact path="/addschedule" element={<AddSchedulePage />} />
         <Route exact path="/search" element={<SearchPage />} />
         <Route exact path="/recommend" element={<Recommend />} />
         <Route exact path="/serviceinfo" element={<OurService />} />
         <Route exact path="/mypagehost" element={<ShopMemberMyPage />} />
         <Route exact path="/mypagecaker" element={<ShopCakerMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
-        <Route exact path="/shopdetail" element={<ShopDetailPage />} />
         <Route exact path="/shopmypagestart" element={<ShopMypageStart />} />
         <Route
           exact
