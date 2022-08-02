@@ -18,6 +18,7 @@ import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
 import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
 import ShopInformationModify from "./pages/MyPage/ShopInformationModify";
 import LoginLoading from "./pages/Auth/LoginLoading";
+import ShopCakerMyPage from "./pages/MyPage/ShopCakerMyPage";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route exact path="/recommend" element={<Recommend />} />
         <Route exact path="/serviceinfo" element={<OurService />} />
         <Route exact path="/mypagehost" element={<ShopMemberMyPage />} />
+        <Route exact path="/mypagecaker" element={<ShopCakerMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
         <Route exact path="/shopdetail" element={<ShopDetailPage />} />
         <Route exact path="/shopmypagestart" element={<ShopMypageStart />} />

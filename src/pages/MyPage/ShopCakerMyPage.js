@@ -142,7 +142,7 @@ const Article = styled.article`
   border-radius: 6px;
 `;
 
-const ShopMemberMyPage = () => {
+const ShopCakerMyPage = () => {
   const [OrderImage, setOrderImage] = useState([]);
   console.log(JSON.parse(localStorage.getItem("user")));
   useEffect(() => {
@@ -158,14 +158,14 @@ const ShopMemberMyPage = () => {
       <PageTitle title="마이페이지" margin="70.06px" />
       <UserName>{JSON.parse(localStorage.getItem("user")).nickname}</UserName>
       <CountManager>계정 관리 &gt;</CountManager>
-      <UserPlace>Caker 일반 회원</UserPlace>
+      <UserPlace>Caker 가게 회원</UserPlace>
       <UserImg ImageUrl={ImageUrl}></UserImg>
       <PinkBox>
         <Link to="/shopmodify">
-          <Button>제안서 작성하기</Button>
+          <Button>가게 정보 관리</Button>
         </Link>
-
-        <CommitProposal>내 제안서</CommitProposal>
+        <Button>픽업 일정 관리</Button>
+        <CommitProposal>댓글 단 제안서</CommitProposal>
         <BottomProposal>
           {OrderImage.map(order => {
             return (
@@ -187,4 +187,4 @@ const ShopMemberMyPage = () => {
   );
 };
 
-export default ShopMemberMyPage;
+export default ShopCakerMyPage;
