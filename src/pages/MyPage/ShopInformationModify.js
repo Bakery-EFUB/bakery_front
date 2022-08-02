@@ -70,7 +70,6 @@ const IsRegistered = styled.span`
 const ShopDesc = styled.div`
   margin-bottom: 19px;
   width: 339px;
-
   font-size: 16px;
   line-height: 25px;
   overflow: hidden;
