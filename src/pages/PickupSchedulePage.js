@@ -187,7 +187,7 @@ const PickupSchedulePage = () => {
                 ))
             )}
           </ScheduleCardList>
-          <Link to="/addschedule">
+          <Link to={`/addschedule/${storeId}`}>
             <BigPinkButtonBottom>일정 추가</BigPinkButtonBottom>
           </Link>
         </>

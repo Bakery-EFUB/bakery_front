@@ -45,8 +45,16 @@ function App() {
           path="/shopprogressive"
           element={<ShopMyPageProgressive />}
         />
-        <Route exact path="/pickupschedule/:storeId" element={<PickupSchedulePage />} />
-        <Route exact path="/addschedule" element={<AddSchedulePage />} />
+        <Route
+          exact
+          path="/pickupschedule/:storeId"
+          element={<PickupSchedulePage />}
+        />
+        <Route
+          exact
+          path="/addschedule/:storeId"
+          element={<AddSchedulePage />}
+        />
         <Route exact path="/kakaologin" element={<LoginLoading />} />
       </Routes>
     </BrowserRouter>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import arrowImg from "../images/DropdownArrow.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AddSchedule } from "../api/eventschedule";
 
 const TopBar = styled.div`
@@ -107,6 +107,7 @@ const BigPinkButtonBottom = styled.button`
 `;
 
 const AddSchedulePage = () => {
+  const { storeId } = useParams();
   const navigator = useNavigate();
   const [scheduleInfo, setScheduleInfo] = useState(() => {
     const today = new Date();
@@ -177,14 +178,12 @@ const AddSchedulePage = () => {
       hour + 9, // time zone
       minute,
     );
-    const pickupTime = pickupDate;
-    console.log(pickupDate.toISOString().slice(0, -5), scheduleInfo.desc);
     AddSchedule({
       content: scheduleInfo.desc,
       pickupDate: pickupDate.toISOString().slice(0, -5),
-      pickupTime: pickupTime.toISOString().slice(0, -5),
+      pickupTime: pickupDate.toISOString().slice(0, -5),
     })
-      .then(() => navigator("/pickupschedule"))
+      .then(() => navigator(`/pickupschedule/${storeId}`))
       .catch(error => console.log(error));
   };
 
