@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Button from "../../components/Button";
-import CakeImg from "../../images/NoResult.svg"
-import { useNavigate } from "react-router-dom";
+import CakeImg from "../../images/NoResult.svg";
+import { Link } from "react-router-dom";
 
 const FlexBox = styled.div`
   height: 70vh;
@@ -11,7 +11,6 @@ const FlexBox = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
 
 const ResizingBox = styled.div`
   display: flex;
@@ -26,14 +25,14 @@ const NoPermissionMsg = styled.div`
 `;
 
 const NoPermission = () => {
-  const nav = useNavigate();
-  
   return (
     <FlexBox>
-      <img src={CakeImg} width='40%' alt="cake image"/>
+      <img src={CakeImg} width="40%" alt="cake image" />
       <NoPermissionMsg>페이지에 접근할 수 없어요</NoPermissionMsg>
       <ResizingBox>
-        <Button text='홈으로 돌아가기' onClick={() => nav('/')}/>
+        <Link to="/">
+          <Button text="홈으로 돌아가기" />
+        </Link>
       </ResizingBox>
     </FlexBox>
   );

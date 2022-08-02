@@ -3,10 +3,9 @@ import styled from "styled-components";
 import TopBar from "../components/Common/Sidebar/TopBar";
 import PageTitle from "../components/PageTitle";
 import CustomCalendar from "../components/Proposal/CustomCalendar";
-import {useNavigate, useParams} from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { DeleteSchedule, GetAllSchedules } from "../api/eventschedule";
 import NoPermission from "./Auth/NoPermission";
-
 
 const SelectedDay = styled.div`
   margin: 40px 0 0;
@@ -55,24 +54,6 @@ const EmptyDayMsg = styled.div`
   color: var(--sub-darkgray);
 `;
 
-const CreateScheduleCard = ({ pickupTime, pickupInfo, eventId, storeId }) => {
-  return (
-    <ScheduleCard>
-      <div>
-        <ScheduleContent>{pickupTime.slice(11, 16)}</ScheduleContent>
-        <ScheduleContent>{pickupInfo}</ScheduleContent>
-      </div>
-      <ScheduleDelete
-        onClick={
-          DeleteSchedule(storeId, eventId)
-            .then(res => console.log(res), e => console.error(e))}
-      >
-        삭제
-      </ScheduleDelete>
-    </ScheduleCard>
-  );
-};
-
 const BigPinkButtonBottom = styled.button`
   margin: 40px 0 40px;
   position: relative;
@@ -90,7 +71,7 @@ const BigPinkButtonBottom = styled.button`
 
 const PickupSchedulePage = () => {
   const { storeId } = useParams();
-  const [isPermitted, setIsPermitted] = useState(false);
+  const [isPermitted, setIsPermitted] = useState(true);
   const [pickupOnSelectedDay, setPickupOnSelectedDay] = useState([]);
   const [pickupSchedules, setPickupSchedules] = useState([]);
   const [selectedDay, setSelectedDay] = useState({
@@ -98,15 +79,19 @@ const PickupSchedulePage = () => {
     month: new Date().getMonth() + 1,
     date: new Date().getDate(),
   });
+
+  const getLocalDateStr = date => {
+    const tzOffset = new Date().getTimezoneOffset() * 60000;
+    return new Date(new Date(date.year, date.month - 1, date.date) - tzOffset)
+      .toISOString()
+      .slice(0, 10);
+  };
+
   const onClickDay = date => {
     setSelectedDay(date);
     setPickupOnSelectedDay(
       pickupSchedules.filter(
-        schedule =>
-          schedule.pickupDate.slice(0, 10) ===
-          new Date(date.year, date.month - 1, date.date + 1)
-            .toISOString()
-            .slice(0, 10),
+        schedule => schedule.pickupDate.slice(0, 10) === getLocalDateStr(date),
       ),
     );
   };
@@ -114,22 +99,26 @@ const PickupSchedulePage = () => {
     GetAllSchedules(storeId)
       .then(res => {
         setIsPermitted(true);
-        setPickupSchedules(
-          res.map(pickup => {
-            return {
-              storeId: pickup.store.id,
-              content: pickup.content,
-              pickupDate: pickup.pickupDate,
-              pickupTime: pickup.pickupTime,
-              eventId: pickup.eventId,
-            };
-          }),
+        const pickups = res.map(pickup => {
+          return {
+            storeId: storeId,
+            content: pickup.content,
+            pickupDate: pickup.pickupDate,
+            pickupTime: pickup.pickupTime,
+            eventId: pickup.eventId,
+          };
+        });
+        setPickupSchedules(pickups);
+        setPickupOnSelectedDay(
+          pickups.filter(
+            schedule =>
+              schedule.pickupDate.slice(0, 10) === getLocalDateStr(selectedDay),
+          ),
         );
-      }
-    )
+      })
       .catch(e => e.code === 403 && setIsPermitted(false));
   }, []);
-  const navigator = useNavigate();
+
   const allDaysHavingSchedule = pickupSchedules.map(schedule => {
     const [pickupYear, pickupMonth, pickupDate] = schedule.pickupDate
       .split("T")[0]
@@ -141,42 +130,61 @@ const PickupSchedulePage = () => {
       date: pickupDate,
     };
   });
-  <NoPermission/>
+  const CreateScheduleCard = ({ pickupTime, pickupInfo, eventId, storeId }) => {
+    return (
+      <ScheduleCard>
+        <div>
+          <ScheduleContent>{pickupTime.slice(11, 16)}</ScheduleContent>
+          <ScheduleContent>{pickupInfo}</ScheduleContent>
+        </div>
+        <ScheduleDelete
+          onClick={() =>
+            DeleteSchedule(storeId, eventId).then(
+              res => console.log(res),
+              e => console.error(e),
+            )
+          }
+        >
+          삭제
+        </ScheduleDelete>
+      </ScheduleCard>
+    );
+  };
   return (
     <div>
       <TopBar />
-      {isPermitted?
+      {isPermitted ? (
         <>
-        <PageTitle title="픽업 일정" margin="60px 0 63px 0" />
-        <CalendarContainer>
-          <CustomCalendar
-            setClickedDay={onClickDay}
-            allDaysHavingSchedule={allDaysHavingSchedule}
-          />
-        </CalendarContainer>
-        <SelectedDay>{`${selectedDay.year}.${selectedDay.month}.${selectedDay.date}`}</SelectedDay>
-        <ScheduleCardList>
-          {pickupOnSelectedDay.length === 0 ? (
-            <EmptyDayMsg> 일정이 없습니다. </EmptyDayMsg>
-          ) : (
-            pickupOnSelectedDay.map((schedule, idx) => (
-              <CreateScheduleCard
-                key={idx}
-                pickupTime={schedule.pickupTime}
-                pickupInfo={schedule.content}
-                eventId={schedule.eventId}
-                storeId={schedule.storeId}
-              />
-            ))
-          )}
-        </ScheduleCardList>
-        <BigPinkButtonBottom onClick={() => navigator("/addschedule")}>
-          일정 추가
-        </BigPinkButtonBottom>
-      </>
-        :
+          <PageTitle title="픽업 일정" margin="60px 0 63px 0" />
+          <CalendarContainer>
+            <CustomCalendar
+              setClickedDay={onClickDay}
+              allDaysHavingSchedule={allDaysHavingSchedule}
+            />
+          </CalendarContainer>
+          <SelectedDay>{`${selectedDay.year}.${selectedDay.month}.${selectedDay.date}`}</SelectedDay>
+          <ScheduleCardList>
+            {pickupOnSelectedDay.length === 0 ? (
+              <EmptyDayMsg> 일정이 없습니다. </EmptyDayMsg>
+            ) : (
+              pickupOnSelectedDay.map(schedule => (
+                <CreateScheduleCard
+                  key={schedule.eventId}
+                  pickupTime={schedule.pickupTime}
+                  pickupInfo={schedule.content}
+                  eventId={schedule.eventId}
+                  storeId={schedule.storeId}
+                />
+              ))
+            )}
+          </ScheduleCardList>
+          <Link to="/addschedule">
+            <BigPinkButtonBottom>일정 추가</BigPinkButtonBottom>
+          </Link>
+        </>
+      ) : (
         <NoPermission />
-      }
+      )}
     </div>
   );
 };

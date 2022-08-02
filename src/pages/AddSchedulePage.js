@@ -118,7 +118,20 @@ const AddSchedulePage = () => {
       desc: "",
     };
   });
-  const month = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+  const month = [
+    "1월",
+    "2월",
+    "3월",
+    "4월",
+    "5월",
+    "6월",
+    "7월",
+    "8월",
+    "9월",
+    "10월",
+    "11월",
+    "12월",
+  ];
   const day = [];
   const time = [];
   for (let i = 1; i <= 31; i++) day.push(i + "일");
@@ -134,9 +147,21 @@ const AddSchedulePage = () => {
   };
   const getDayArrayDependOnMonth = month => {
     switch (month) {
-      case "2월": return day.slice(0,28);
-      case "1월": case "3월": case "5월": case "7월": case "8월": case "10월": case "12월": return day.slice();
-      case "4월": case "6월": case "9월": case "11월": return day.slice(0,30);
+      case "2월":
+        return day.slice(0, 28);
+      case "1월":
+      case "3월":
+      case "5월":
+      case "7월":
+      case "8월":
+      case "10월":
+      case "12월":
+        return day.slice();
+      case "4월":
+      case "6월":
+      case "9월":
+      case "11월":
+        return day.slice(0, 30);
     }
   };
   const sendPickupSchedule = () => {
@@ -158,7 +183,8 @@ const AddSchedulePage = () => {
       content: scheduleInfo.desc,
       pickupDate: pickupDate.toISOString().slice(0, -5),
       pickupTime: pickupTime.toISOString().slice(0, -5),
-    }).then(() => navigator("/pickupschedule"))
+    })
+      .then(() => navigator("/pickupschedule"))
       .catch(error => console.log(error));
   };
 

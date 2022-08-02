@@ -27,8 +27,6 @@ function App() {
         <Route exact path="/" element={<MainHome />} />
         <Route exact path="/loginhome" element={<LoginHome />} />
         <Route exact path="/loading" element={<LoadingPage />} />
-        <Route exact path="/ShopDetailPage" element={<ShopDetailPage />} />
-        <Route exact path="/addschedule" element={<AddSchedulePage />} />
         <Route exact path="/search" element={<SearchPage />} />
         <Route exact path="/recommend" element={<Recommend />} />
         <Route exact path="/serviceinfo" element={<OurService />} />
@@ -48,6 +46,7 @@ function App() {
           element={<ShopMyPageProgressive />}
         />
         <Route exact path="/pickupschedule/:storeId" element={<PickupSchedulePage />} />
+        <Route exact path="/addschedule" element={<AddSchedulePage />} />
         <Route exact path="/kakaologin" element={<LoginLoading />} />
       </Routes>
     </BrowserRouter>
