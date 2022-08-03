@@ -26,7 +26,7 @@ import ClientRoute from "./route/ClientRoute";
 import TraineeRoute from "./route/TraineeRoute";
 import BakerRoute from "./route/BakerRoute";
 import ShopCakerMyPage from "./pages/MyPage/ShopCakerMyPage";
-
+import Kakao from "./pages/Auth/Kakao";
 function App() {
   console.log(userRole);
   return (
@@ -34,6 +34,8 @@ function App() {
       <Routes>
         <Route exact path="/*" element={<MainHome />} />
         <Route exact path="/kakaologin" element={<LoginLoading />} />
+        <Route exact path="/kakao" element={<Kakao />} />
+
         <Route exact path="/loginhome" element={<LoginHome />} />
         <Route exact path="/loading" element={<LoadingPage />} />
         <Route exact path="/ShopDetailPage" element={<ShopDetailPage />} />

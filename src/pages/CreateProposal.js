@@ -78,21 +78,48 @@ const CreateProposal = () => {
       .catch(err => console.log("json 포스트 실패", err));
   };
 
-  const postImg2 = async id => {
-    console.log("아이디", id);
+  // const postImg2 = async id => {
+  //   console.log("아이디", id);
 
-    let formData = new FormData();
-    formData.append("file", original.file);
-    formData.append("orderId", id);
+  //   let formData = new FormData();
+  //   formData.append("file", original.file);
+  //   formData.append("orderId", id);
 
+  //   // console.log("폼데이터", formData); // FormData {}
+  //   for (const keyValue of formData) console.log(keyValue);
+
+  //   await axios({
+  //     method: "patch",
+  //     url: "https://caker.shop/orders",
+  //     data: formData,
+  //     headers: {
+  //       "Content-Type": "multipart/form-data",
+  //       "X-AUTH-TOKEN": token,
+  //     },
+  //   })
+  //     .then(res => console.log("파일 포스트 성공", res))
+  //     .catch(err => console.log("파일 포스트 실패", err));
+
+  //   // axios
+  //   //   .patch("https://caker.shop/orders", formData, {
+  //   //     headers: {
+  //   //       "Content-Type": "multipart/form-data",
+  //   //       Accept: "multipart/form-data",
+  //   //       "X-AUTH-TOKEN": token,
+  //   //     },
+  //   //   })
+  //   //   .then(res => console.log("파일 포스트 성공", res))
+  //   //   .catch(err => console.log("파일 포스트 실패", err));
+  // };
+
+  const onChange = e => {
+    const img = e.target.files[0];
+    console.log(img);
+    const formData = new FormData();
+    formData.append("file", img);
+    formData.append("orderId", 5);
     // console.log("폼데이터", formData); // FormData {}
-    for (const keyValue of formData) console.log(keyValue);
-
-    const headers = {
-      "Content-Type": "multipart/form-data",
-      Accept: "multipart/form-data",
-      "X-AUTH-TOKEN": token,
-    };
+    // for (const keyValue of formData) console.log(keyValue);
 
     axios
       .patch("https://caker.shop/orders", formData, {
@@ -100,24 +127,6 @@ const CreateProposal = () => {
           "Content-Type": "multipart/form-data",
           Accept: "multipart/form-data",
           "X-AUTH-TOKEN": token,
-        },
-      })
-      .then(res => console.log("파일 포스트 성공", res))
-      .catch(err => console.log("파일 포스트 실패", err));
-  };
-
-  const onChange = e => {
-    const img = e.target.files[0];
-    const formData = new FormData();
-    formData.append("file", img);
-    formData.append("orderId", 5);
-    // console.log("폼데이터", formData); // FormData {}
-    // for (const keyValue of formData) console.log(keyValue);
-
-    http
-      .patch("/orders", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
         },
       })
       .then(res => console.log("파일 포스트 성공", res))

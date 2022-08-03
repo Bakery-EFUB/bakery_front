@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import LoginMainImg from "../../images/LoginMainImg.svg";
 import Button from "../../components/Button";
+import http from "../../common/http";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -35,6 +37,19 @@ const LoginButtons = styled.div`
 `;
 
 const LoginHome = () => {
+  const BakerLogin = async () => {
+    http
+      .get("/members/signup/baker")
+      .then(res => console.log("성공", res))
+      .catch(err => console.log(err));
+  };
+
+  const nav = useNavigate();
+
+  const ClientLogin = () => {
+    nav("/");
+  };
+
   return (
     <Container>
       <Welcome>
@@ -44,20 +59,12 @@ const LoginHome = () => {
       </Welcome>
       <CenterImg></CenterImg>
       <LoginButtons>
-<<<<<<< HEAD:src/pages/LoginHome.js
-        <a href="https://caker.shop/oauth2/authorization/kakao">
-          <Button text={"가게 회원 로그인"}></Button>
-        </a>
+        <Button onClick={() => BakerLogin()} text={"가게 회원 로그인"}></Button>
 
-=======
         <Button
-          onClick={() => {
-            location.href = "https://caker.shop/oauth2/authorization/kakao";
-          }}
-          text={"가게 회원 로그인"}
+          onClick={() => ClientLogin()}
+          text={"일반 회원 로그인"}
         ></Button>
->>>>>>> 7b689a37d1066f3aefd586f9444cb9daa3e1a842:src/pages/Auth/LoginHome.js
-        <Button text={"일반 회원 로그인"}></Button>
       </LoginButtons>
     </Container>
   );

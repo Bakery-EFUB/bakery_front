@@ -19,8 +19,8 @@ const SubmitButton = styled.button`
     background-color: var(--sub-lightgray);
   }
 `;
-const ButtonSidebar = ({ text }) => {
-  return <SubmitButton>{text}</SubmitButton>;
+const ButtonSidebar = ({ text, onClick }) => {
+  return <SubmitButton onClick={onClick}>{text}</SubmitButton>;
 };
 
 export default ButtonSidebar;
