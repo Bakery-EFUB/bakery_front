@@ -15,8 +15,7 @@ const PickUp = ({
   setHistory,
   original,
   setOriginal,
-  dropHandler,
-  // postProposal,
+  postProposal,
 }) => {
   const ThisStep = 95;
 
@@ -27,8 +26,7 @@ const PickUp = ({
   const Next = () => {
     setHistory(ThisStep);
     setOriginal({ ...original, PickUp });
-    dropHandler();
-    //postProposal();
+    postProposal();
   };
 
   // 선택된 날짜 (예약 부분은 여기선 필요 없음)
@@ -96,9 +94,7 @@ const PickUp = ({
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
-          {/* <Link to="/create/done"> */}
           <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
-          {/* </Link> */}
         </div>
       </div>
     </div>

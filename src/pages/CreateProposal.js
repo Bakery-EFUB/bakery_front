@@ -38,75 +38,103 @@ const CreateProposal = () => {
 
   const navigate = useNavigate();
 
-  const dropHandler = async => {
-    const dataSet = {
-      locationGu: "서대문구", //구
-      locationDong: original.city[0], //동
-      type: original.cake, //케이크 종류
-      flavor: original.taste, //케이크 맛
-      size: original.size, //케이크 크기
-      description: original.design, //케이크 설명
-      pickupDate: original.pickUp, //픽업일자/시간
-      priceMin: original.min, //minimum 가격
-      priceMax: original.max, //maximum 가격
-      // hashtag: original.city[0], //해시태그
+  const postProposal = async => {
+    // const dataSet = {
+    //   locationGu: [original.city[0]], //구
+    //   type: original.cake, //케이크 종류
+    //   flavor: original.taste, //케이크 맛
+    //   size: original.size, //케이크 크기
+    //   description: original.design, //케이크 설명
+    //   pickupDate: original.pickUp, //픽업일자/시간
+    //   priceMin: original.min, //minimum 가격
+    //   priceMax: original.max, //maximum 가격
+    // };
+
+    const sheetDTO = {
+      locationGu: "gu1",
+      locationDong: "dong",
+      type: "str", //케이크 종류
+      flavor: "str", //케이크 맛
+      size: "str", //케이크 크기
+      description: "str", //케이크 설명
+      pickupDate: "2022-07-22T09:00:00.00", //픽업일자/시간
+      priceMin: 1, //minimum 가격
+      priceMax: 10, //maximum 가격
     };
 
-    let formData = new FormData();
-
-    formData.append(
-      "sheetDTO",
-      new Blob([JSON.stringify(dataSet)], {
-        type: "application/json",
-      }),
-    );
-
-    formData.append("file", original.file);
-
-    console.dir(formData, "테스트");
-
-    const config = {
-      headers: { "X-AUTH-TOKEN": token },
-    };
-
-    // let headers = new Headers({});
-    // headers = { "X-AUTH-TOKEN": token };
-
-    // axios({
-    //   method: "POST",
-    //   url: "https://caker.shop/orders",
-    //   mode: "cors",
-    //   headers: headers,
-    //   dataSet,
-    // })
-    //   .then(res => console.log("포스트 성공", res))
-    //   .catch(err => console.log("포스트 실패", err));
-
-    axios
-      .post("https://caker.shop/orders", formData, config)
-      .then(res => console.log("결과", res))
-      .catch(err => console.log("포스트실패", err));
-
-    // http
-    //   .post("/orders", formData, config)
-    //   // 백엔드가 file저장하고 그 결과가 reponse에 담김
-    //   // 백엔드는 그 결과를 프론트로 보내줌(3)
-    //   .then(response => {
-    //     console.log("제안서 올리기 성공", response);
-    //   })
-    //   .catch(error => {
-    //     console.log("제안서 올리기 실패", error);
-    //   });
+    http
+      .post("/orders", {
+        locationGu: "gu1",
+        locationDong: "dong",
+        type: "str",
+        flavor: "str",
+        size: "str",
+        description: "str",
+        pickupDate: "2022-07-22T09:00:00.00",
+        priceMin: 1,
+        priceMax: 10,
+      })
+      .then(res => postImg2(res.data))
+      .catch(err => console.log("json 포스트 실패", err));
   };
 
-  // test 코드
-  useEffect(() => {
-    console.log("변화", original.file);
-  }, [original]);
+  const postImg2 = async id => {
+    console.log("아이디", id);
+
+    let formData = new FormData();
+    formData.append("file", original.file);
+    formData.append("orderId", id);
+
+    // console.log("폼데이터", formData); // FormData {}
+    for (const keyValue of formData) console.log(keyValue);
+
+    const headers = {
+      "Content-Type": "multipart/form-data",
+      Accept: "multipart/form-data",
+      "X-AUTH-TOKEN": token,
+    };
+
+    axios
+      .patch("https://caker.shop/orders", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Accept: "multipart/form-data",
+          "X-AUTH-TOKEN": token,
+        },
+      })
+      .then(res => console.log("파일 포스트 성공", res))
+      .catch(err => console.log("파일 포스트 실패", err));
+  };
+
+  const onChange = e => {
+    const img = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", img);
+    formData.append("orderId", 5);
+    // console.log("폼데이터", formData); // FormData {}
+    // for (const keyValue of formData) console.log(keyValue);
+
+    http
+      .patch("/orders", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then(res => console.log("파일 포스트 성공", res))
+      .catch(err => console.log("파일 포스트 실패", err));
+  };
 
   return (
     <div>
       <TopBar />
+
+      <input
+        type="file"
+        accept="image/jpg,impge/png,image/jpeg,image/gif"
+        name="profile_img"
+        onChange={onChange}
+      ></input>
+
       <Routes>
         <Route
           path="/city"
@@ -182,8 +210,7 @@ const CreateProposal = () => {
               setHistory={setHistory}
               original={original}
               setOriginal={setOriginal}
-              dropHandler={dropHandler}
-              // postProposal={postProposal}
+              postProposal={postProposal}
             />
           }
         />
