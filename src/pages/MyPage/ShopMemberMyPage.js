@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import orderList from "../../_mock/orderImage.json";
+import { userImage, userName } from "../../utils/auth";
 
 //전체 크기
 const WrapBox = styled.div`
@@ -152,16 +153,14 @@ const ShopMemberMyPage = () => {
     setOrderImage(orderList["sheetResponseDTOs"]);
   }, []);
 
-  const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
-
   return (
     <WrapBox>
       <TopBar></TopBar>
       <PageTitle title="마이페이지" margin="70.06px" />
-      <UserName>{JSON.parse(localStorage.getItem("user")).nickname}</UserName>
+      <UserName>{userName} 님</UserName>
       <CountManager>계정 관리 &gt;</CountManager>
       <UserPlace>Caker 가게 회원</UserPlace>
-      <UserImg ImageUrl={ImageUrl}></UserImg>
+      <UserImg ImageUrl={userImage}></UserImg>
       <PinkBox>
         <Link to="/shop/modify">
           <Button>가게 정보 관리</Button>

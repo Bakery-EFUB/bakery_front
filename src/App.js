@@ -38,30 +38,20 @@ function App() {
         <Route exact path="/about" element={<OurService />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
         <Route exact path="/shopdetail" element={<ShopDetailPage />} />
-
-        <Route exact path="/client" element={<ClientRoute />}>
-          <Route exact path="/client/mypage" element={<ShopMemberMyPage />} />
-        </Route>
-
-        <Route exact path="/shop" element={<BakerRoute />}>
-          <Route exact path="/shop/mypage" element={<ShopMypageStart />} />
-          <Route
-            exact
-            path="/shop/register"
-            element={<ShopInformationRegister />}
-          />
-          <Route
-            exact
-            path="/shop/modify"
-            element={<ShopInformationModify />}
-          />
-          <Route
-            exact
-            path="/shop/progressive"
-            element={<ShopMyPageProgressive />}
-          />
-          <Route exact path="/shop/addschedule" element={<AddSchedulePage />} />
-        </Route>
+        <Route exact path="/client/mypage" element={<ShopMemberMyPage />} />
+        <Route exact path="/shop/mypage" element={<ShopMypageStart />} />
+        <Route
+          exact
+          path="/shop/register"
+          element={<ShopInformationRegister />}
+        />
+        <Route exact path="/shop/modify" element={<ShopInformationModify />} />
+        <Route
+          exact
+          path="/shop/progressive"
+          element={<ShopMyPageProgressive />}
+        />
+        <Route exact path="/shop/addschedule" element={<AddSchedulePage />} />
       </Routes>
     </BrowserRouter>
   );
