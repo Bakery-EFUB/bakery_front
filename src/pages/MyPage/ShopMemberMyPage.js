@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import orderList from "../../_mock/orderImage.json";
+import axios from "axios";
+import http from "../../common/http";
 
 //전체 크기
 const WrapBox = styled.div`
@@ -143,6 +145,22 @@ const Article = styled.article`
 `;
 
 const ShopMemberMyPage = () => {
+  /* const [Mydatas, setMyData] = useState([]);
+  const getData = () => {
+    http
+      .get("/orders/myOrder")
+      .then(Response => {
+        console.log("받아오기 성공", Response.data);
+        setMyData(Response.data);
+      })
+      .catch(Error => {
+        console.log(Error);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []);*/
+
   const [OrderImage, setOrderImage] = useState([]);
   console.log(JSON.parse(localStorage.getItem("user")));
   useEffect(() => {
@@ -161,7 +179,7 @@ const ShopMemberMyPage = () => {
       <UserPlace>Caker 일반 회원</UserPlace>
       <UserImg ImageUrl={ImageUrl}></UserImg>
       <PinkBox>
-        <Link to="/shopmodify">
+        <Link to="/create/*">
           <Button>제안서 작성하기</Button>
         </Link>
 

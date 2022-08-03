@@ -19,7 +19,8 @@ import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
 import ShopInformationModify from "./pages/MyPage/ShopInformationModify";
 import LoginLoading from "./pages/Auth/LoginLoading";
 import ShopCakerMyPage from "./pages/MyPage/ShopCakerMyPage";
-
+import Proposal from "./pages/Proposal";
+import CreateProposal from "./pages/CreateProposal";
 function App() {
   return (
     <BrowserRouter>
@@ -37,6 +38,9 @@ function App() {
         <Route exact path="/allproposal" element={<AllProposal />} />
         <Route exact path="/shopdetail" element={<ShopDetailPage />} />
         <Route exact path="/shopmypagestart" element={<ShopMypageStart />} />
+        <Route path="/create/*" element={<CreateProposal />} />
+
+        <Route path="/proposal/:id" element={<Proposal />} />
         <Route
           exact
           path="/shopregister"

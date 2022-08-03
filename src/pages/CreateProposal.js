@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Route, Routes, useNavigate } from "react-router-dom";
 
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 import PickUp from "./CreateProposal/PickUp";
 import City from "./CreateProposal/City";
 import Cake from "./CreateProposal/Cake";

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 
 import Rectangle147 from "../images/Rectangle147.svg";
 import CommentLogo from "../images/CommentLogo.svg";

@@ -91,7 +91,6 @@ const ShopMenuUpload = ({ MenuFile, setMenuFile }) => {
     e.preventDefault();
     setVisible(!Visible);
   };
-
   const { getRootProps, getInputProps } = useDropzone({
     //허용하는 파일 형식
     accept: {
