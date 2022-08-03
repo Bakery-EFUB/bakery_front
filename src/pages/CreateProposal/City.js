@@ -2,31 +2,31 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import SmallPinkButton from "../../components/SmallPinkButton";
-import SmallWhiteButton from "../../components/SmallWhiteButton";
-import SmallGrayButton from "../../components/SmallGrayButton";
+import SmallPinkButton from "../../components/Proposal/SmallPinkButton";
+import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
+import SmallGrayButton from "../../components/Proposal/SmallGrayButton";
 
-import PageTitle from "../../components/PageTitle";
-import CityButton from "../../components/CityButton";
+import PageTitle from "../../components/Common/PageTitle";
+import CityButton from "../../components/Proposal/CityButton";
 import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
 const City = ({ history, setHistory, original, setOriginal }) => {
   const [cityArray, setCityArray] = useState([
-    { id: 1, city: "은평구", selected: false },
-    { id: 2, city: "종로구", selected: false },
-    { id: 3, city: "광진구", selected: false },
-    { id: 4, city: "서대문구", selected: false },
-    { id: 5, city: "강북구", selected: false },
-    { id: 6, city: "중랑구", selected: false },
-    { id: 7, city: "마포구", selected: false },
-    { id: 8, city: "성북구", selected: false },
-    { id: 9, city: "노원구", selected: false },
-    { id: 10, city: "용산구", selected: false },
-    { id: 11, city: "동대문구", selected: false },
-    { id: 12, city: "도봉구", selected: false },
-    { id: 13, city: "중구", selected: false },
-    { id: 14, city: "성동구", selected: false },
+    { id: 1, city: "북아현동", selected: false },
+    { id: 2, city: "충현동", selected: false },
+    { id: 3, city: "천연동", selected: false },
+    { id: 4, city: "신촌동", selected: false },
+    { id: 5, city: "연희동", selected: false },
+    { id: 6, city: "홍제1동", selected: false },
+    { id: 7, city: "홍제2동", selected: false },
+    { id: 8, city: "홍제3동", selected: false },
+    { id: 9, city: "홍은1동", selected: false },
+    { id: 10, city: "홍은2동", selected: false },
+    { id: 11, city: "남가좌1동", selected: false },
+    { id: 12, city: "남가좌2동", selected: false },
+    { id: 13, city: "북가좌1동", selected: false },
+    { id: 14, city: "북가좌2동", selected: false },
   ]);
 
   const [isDone, setIsDone] = useState(true);
@@ -37,7 +37,7 @@ const City = ({ history, setHistory, original, setOriginal }) => {
   useEffect(() => {
     setCityArray(
       cityArray.map(city =>
-        original.cityId.includes(city.id)
+        original.cityId === city.id
           ? { ...city, selected: true }
           : { ...city, selected: false },
       ),
@@ -48,7 +48,9 @@ const City = ({ history, setHistory, original, setOriginal }) => {
   const onToggle = id => {
     setCityArray(
       cityArray.map(city =>
-        city.id === id ? { ...city, selected: !city.selected } : city,
+        city.id === id
+          ? { ...city, selected: true }
+          : { ...city, selected: false },
       ),
     );
   };
@@ -57,7 +59,7 @@ const City = ({ history, setHistory, original, setOriginal }) => {
   useEffect(() => {
     let city;
     for (city of cityArray) {
-      if (city.selected == true) {
+      if (city.selected === true) {
         setIsDone(true);
         break;
       } else {
@@ -72,13 +74,20 @@ const City = ({ history, setHistory, original, setOriginal }) => {
 
   // 선택한 id 저장 (부모에 전달)
   const Next = () => {
-    let temp = [];
+    let idArr = [];
     cityArray.map(city => {
-      if (city.selected == true) {
-        temp.push(city.id);
+      if (city.selected === true) {
+        idArr.push(city.id);
       }
     });
-    setOriginal({ ...original, cityId: temp });
+
+    let cityArr = [];
+    cityArray.map(city => {
+      if (city.selected === true) {
+        cityArr.push(city.city);
+      }
+    });
+    setOriginal({ ...original, cityId: idArr, city: cityArr });
     setHistory(ThisStep);
   };
 
@@ -120,7 +129,7 @@ const City = ({ history, setHistory, original, setOriginal }) => {
           justifyContent: "center",
         }}
       >
-        <Link to="/create">
+        <Link to="/">
           <SmallWhiteButton onClick={() => Back()}>이전</SmallWhiteButton>
         </Link>
 

@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import TopBar from "../components/Common/Sidebar/TopBar";
 import PageTitle from "../components/PageTitle";
-import mainImg from "../images/TempShopImage.png";
 import modifyImg from "../images/ModifyInfo.svg";
 import moreIcon from "../images/MoreIcon.svg";
 import { DetailInfoCard } from "../components/DetailInfoCard";
 import DetailInfoItem from "../components/DetailInfoItem";
+import {useNavigate, useParams} from "react-router-dom";
+import { GetMyStoreDetail, GetStoreDetail } from "../api/store";
 
 const PaddingBox = styled.div`
   padding: 0 24px 60px;
@@ -78,41 +79,72 @@ const CakeImages = styled.div`
 `;
 const CakeProductImage = styled.div`
   width: 32%;
-  height: 120px;
+  height: 110px;
   background: ${props => `url(${props.imgUrl}) center/cover no-repeat`};
   border-radius: 6px;
 `;
 
 const ShopDetailPage = () => {
+  const { storeId } = useParams();
+  const [shopDetail, setShopDetail] = useState({});
+  useEffect(() => {
+    GetStoreDetail(storeId)
+      .then((res) => {
+        setShopDetail(res);
+      })
+      .catch(e => console.error(e));
+  }, []);
+
+  const getMoreInfoSNSLinkElement = (kakao, insta) => {
+    return (
+      <>
+        <a href={kakao}>카카오톡 채널</a>
+        &nbsp;|&nbsp;
+        <a href={insta}>인스타그램</a>
+      </>
+    );
+  };
+  const navigator = useNavigate();
   const [openMore, setOpenMore] = useState([{}, {}]);
   const getMoreDesc = () => {
     if (Object.keys(openMore[0]).length === 0) {
       setOpenMore([{ WebkitLineClamp: "100" }, { transform: "scaleY(-1)" }]);
     } else setOpenMore([{}, {}]);
   };
+  const isOwner = (id) => {
+    if (JSON.parse(localStorage.user)?.authority !== 'BAKER') return false;
+    
+    let userStoreId = -1;
+    GetMyStoreDetail()
+      .then(res => userStoreId = res.id);
+    return userStoreId === id;
+  }
   return (
     <div>
       <TopBar />
       <PageTitle title="가게 상세정보" margin="60px 0 63px 0" />
       <PaddingBox>
-        <MainImage imgUrl={mainImg} height="300px" />
+        <MainImage imgUrl={shopDetail.mainImg} height="300px" />
         <HorizonEmptySpace height="30px" />
         <ShopDetailHeader>
           <div>
-            <ShopName>달다구리</ShopName>
-            <IsRegistered>등록가게</IsRegistered>
+            <ShopName>{shopDetail.name}</ShopName>
+            <IsRegistered>
+              {shopDetail.certifyFlag ? "등록가게" : "미등록가게"}
+            </IsRegistered>
           </div>
-          <ModifyIcon className="modify-info" />{" "}
-          {/* 권한이 있을 때만 이 아이콘이 나타나도록 */}
+          { isOwner(shopDetail.id) &&
+            <ModifyIcon
+              className="modify-info"
+              onClick={() => navigator("/shopmodify")}
+            />
+          }
         </ShopDetailHeader>
         <HorizonEmptySpace height="45px" />
         <SubTitle>소개</SubTitle>
         <HorizonEmptySpace height="12px" />
-        <ShopDesc style={openMore[0]}>
-          달다구리는 다양한 상황과 감정을 케이크로 표현할 수 있는 아이디어를 늘
-          상상하고 고민합니다. 다양한 상황에 전하고 싶은 메시지를 찾아
-          디자인하고자 하는 달다구리는 벌써 고객님들과 함께한지 10년이
-          되었습니다.
+        <ShopDesc style={openMore[0]} onClick={getMoreDesc}>
+          {shopDetail.readme}
         </ShopDesc>
         <AlignCenterBox>
           <MoreIcon style={openMore[1]} onClick={getMoreDesc} />
@@ -121,22 +153,20 @@ const ShopDetailPage = () => {
         <DetailInfoCard>
           <DetailInfoItem
             category="전화번호"
-            content="02-336-5856"
-            fontSize="16px"
-          />
+            content={shopDetail.phoneNumber}
+            fontSize="16px" />
           <DetailInfoItem
             category="주소"
-            content="서울 마포구 양화로18안길 22 2층 터틀힙"
-            fontSize="16px"
-          />
+            content={shopDetail.address}
+            fontSize="16px" />
           <DetailInfoItem
             category="운영시간"
-            content="매일 12:00~20:00"
+            content={shopDetail.openTime}
             fontSize="16px"
           />
           <DetailInfoItem
             category="문의"
-            content="카카오톡 | 인스타그램"
+            content={getMoreInfoSNSLinkElement( shopDetail.kakaoUrl, shopDetail.instagram )}
             fontSize="16px"
           />
         </DetailInfoCard>
@@ -144,12 +174,9 @@ const ShopDetailPage = () => {
         <SubTitle>대표 케이크</SubTitle>
         <HorizonEmptySpace height="30px" />
         <CakeImages>
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
-          <CakeProductImage imgUrl={mainImg} />
+          {shopDetail.menuImg?.map((imgUrl, idx) => (
+            <CakeProductImage imgUrl={imgUrl} key={idx} />
+          ))}
         </CakeImages>
       </PaddingBox>
     </div>

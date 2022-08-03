@@ -2,14 +2,8 @@ import React, {useEffect, useState} from "react";
 import TopBar from "../components/TopBar";
 import ChooseBox from "../components/WholeProposals/ChooseBox";
 import NoProposal from "../components/WholeProposals/NoProposal";
-import PageTitle from "../components/PageTitle";
-import { GetProposals } from "../api/allproposal";
-import ProposalBox from "../components/WholeProposals/PropasalBox";
-import styled from "styled-components";
-const ProposalsDisplay = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+import PageTitle from "../components/Common/PageTitle";
+
 const AllProposal = () => {
   const [allProposals, setAllProposals] = useState([]);
   const proposalApi = () => {

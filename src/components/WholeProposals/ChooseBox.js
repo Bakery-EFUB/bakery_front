@@ -68,8 +68,8 @@ const CakeType = [
 ];
 const Dropdown = ({ items }) => {
   return (
-    <ChoooseDisplay>
-      <CustomSelect autofocus>
+    <div>
+      <CustomSelect autoFocus>
         {items.map((item, idx) => (
           <option key={idx} value={item}>
             {item}
@@ -79,7 +79,7 @@ const Dropdown = ({ items }) => {
       <DropdownArrow>
         <img src={DropdownArrow1} alt="dropdown" />
       </DropdownArrow>
-    </ChoooseDisplay>
+    </div>
   );
 };
 const ChooseBox = () => {

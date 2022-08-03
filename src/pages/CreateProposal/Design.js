@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import SmallPinkButton from "../../components/SmallPinkButton";
-import SmallWhiteButton from "../../components/SmallWhiteButton";
-import PageTitle from "../../components/PageTitle";
+import SmallPinkButton from "../../components/Proposal/SmallPinkButton";
+import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
+import PageTitle from "../../components/Common/PageTitle";
 import ProposalText from "../../components/Proposal/ProposalText";
 
 import ProgessBar from "../../components/Proposal/ProgressBar";
@@ -13,7 +13,6 @@ import { useDropzone } from "react-dropzone";
 
 const Design = ({ history, setHistory, original, setOriginal }) => {
   const ThisStep = 90;
-
   const [files, setFiles] = useState([]); //업로드 하려는 파일의 url을 새생성하고 파일의 정보를 파일즈에 담아준다.
   const { getRootProps, getInputProps } = useDropzone({
     //허용하는 파일 형식
@@ -54,9 +53,34 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
   const Back = () => {
     setHistory(ThisStep);
   };
+
+  const navigate = useNavigate();
+
   const Next = () => {
     setHistory(ThisStep);
-    // setOriginal({...original, })
+    setOriginal({ ...original, file: files });
+  };
+
+  const onChange2 = e => {
+    console.log("아아아아ㅏ");
+    const img = e.target.files[0];
+    console.log(img);
+    const formData = new FormData();
+    // formData.append("file", img);
+    // formData.append("orderId", 5);
+    // console.log("폼데이터", formData); // FormData {}
+    // for (const keyValue of formData) console.log(keyValue);
+
+    // axios
+    //   .patch("https://caker.shop/orders", formData, {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //       Accept: "multipart/form-data",
+    //       "X-AUTH-TOKEN": token,
+    //     },
+    //   })
+    //   .then(res => console.log("파일 포스트 성공", res))
+    //   .catch(err => console.log("파일 포스트 실패", err));
   };
 
   return (
@@ -68,7 +92,7 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
       <ProposalText text="디자인 시안이 있다면 알려주세요." />
 
       <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} />
+        <input type="file" onChange={onChange2} {...getInputProps()} />
         <Button>사진 업로드</Button>
       </div>
       {thumbs}

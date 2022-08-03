@@ -1,12 +1,15 @@
 import TopBar from "../../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
+import PageTitle from "../../components/Proposal/PageTitle";
+
 import UserLogoimg from "../../images/UserLogo.svg";
 import Mock from "../../images/Mock.svg";
-import PageTitle from "../../components/PageTitle";
+
+
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import orderList from "../../_mock/orderImage.json";
+import { userImage, userName } from "../../utils/auth";
 
 //전체 크기
 const WrapBox = styled.div`
@@ -152,22 +155,20 @@ const ShopMemberMyPage = () => {
     setOrderImage(orderList["sheetResponseDTOs"]);
   }, []);
 
-  const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
-
   return (
     <WrapBox>
       <TopBar></TopBar>
       <PageTitle title="마이페이지" margin="70.06px" />
-      <UserName>{JSON.parse(localStorage.getItem("user")).nickname}</UserName>
+      <UserName>{userName} 님</UserName>
       <CountManager>계정 관리 &gt;</CountManager>
-      <UserPlace>Caker 가게 회원</UserPlace>
-      <UserImg ImageUrl={ImageUrl}></UserImg>
+      <UserPlace>Caker 일반 회원</UserPlace>
+      <UserImg ImageUrl={userImage}></UserImg>
       <PinkBox>
         <Link to="/shopmodify">
-          <Button>가게 정보 관리</Button>
+          <Button>제안서 작성하기</Button>
         </Link>
-        <Button>픽업 일정 관리</Button>
-        <CommitProposal>댓글 단 제안서</CommitProposal>
+
+        <CommitProposal>내 제안서</CommitProposal>
         <BottomProposal>
           {OrderImage.map(order => {
             return (

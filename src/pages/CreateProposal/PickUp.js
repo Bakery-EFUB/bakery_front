@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import SmallWhiteButton from "../../components/SmallWhiteButton";
-import SmallGrayButton from "../../components/SmallGrayButton";
-import SmallPinkButton from "../../components/SmallPinkButton";
+import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
+import SmallGrayButton from "../../components/Proposal/SmallGrayButton";
+import SmallPinkButton from "../../components/Proposal/SmallPinkButton";
 
 import CustomCalendar from "../../components/Proposal/CustomCalendar";
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "../../components/Common/PageTitle";
 import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
-const PickUp = ({ history, setHistory, original, setOriginal }) => {
+const PickUp = ({
+  history,
+  setHistory,
+  original,
+  setOriginal,
+  postProposal,
+}) => {
   const ThisStep = 95;
 
   const Back = () => {
@@ -19,8 +25,45 @@ const PickUp = ({ history, setHistory, original, setOriginal }) => {
 
   const Next = () => {
     setHistory(ThisStep);
-    // api 함수 호출 postProposal()
+    setOriginal({ ...original, PickUp });
+    postProposal();
   };
+
+  // 선택된 날짜 (예약 부분은 여기선 필요 없음)
+  const [existArr, setExistArr] = useState([
+    { id: 0, exist: false, reservation: "예약 정보" },
+    { id: 1, exist: false, reservation: "예약 정보" },
+    { id: 2, exist: false, reservation: "예약 정보" },
+    { id: 3, exist: false, reservation: "예약 정보" },
+    { id: 4, exist: false, reservation: "예약 정보" },
+    { id: 5, exist: false, reservation: "예약 정보" },
+    { id: 6, exist: false, reservation: "예약 정보" },
+    { id: 7, exist: false, reservation: "예약 정보" },
+    { id: 8, exist: false, reservation: "예약 정보" },
+    { id: 9, exist: false, reservation: "예약 정보" },
+    { id: 10, exist: false, reservation: "예약 정보" },
+    { id: 11, exist: false, reservation: "예약 정보" },
+    { id: 12, exist: false, reservation: "예약 정보" },
+    { id: 13, exist: false, reservation: "예약 정보" },
+    { id: 14, exist: false, reservation: "예약 정보" },
+    { id: 15, exist: false, reservation: "예약 정보" },
+    { id: 16, exist: false, reservation: "예약 정보" },
+    { id: 17, exist: false, reservation: "예약 정보" },
+    { id: 18, exist: false, reservation: "예약 정보" },
+    { id: 19, exist: false, reservation: "예약 정보" },
+    { id: 20, exist: false, reservation: "예약 정보" },
+    { id: 21, exist: false, reservation: "예약 정보" },
+    { id: 22, exist: false, reservation: "예약 정보" },
+    { id: 23, exist: false, reservation: "예약 정보" },
+    { id: 24, exist: false, reservation: "예약 정보" },
+    { id: 25, exist: false, reservation: "예약 정보" },
+    { id: 26, exist: false, reservation: "예약 정보" },
+    { id: 27, exist: false, reservation: "예약 정보" },
+    { id: 28, exist: false, reservation: "예약 정보" },
+    { id: 29, exist: false, reservation: "예약 정보" },
+    { id: 30, exist: false, reservation: "예약 정보" },
+    { id: 31, exist: false, reservation: "예약 정보" },
+  ]);
 
   return (
     <div>
@@ -31,7 +74,11 @@ const PickUp = ({ history, setHistory, original, setOriginal }) => {
       <ProposalText text="픽업 날짜를 선택해주세요." />
 
       <CalendarSection>
-        <CustomCalendar original={original} setOriginal={setOriginal} />
+        <CustomCalendar
+          original={original}
+          setOriginal={setOriginal}
+          existArr={existArr}
+        />
       </CalendarSection>
 
       <div
@@ -47,9 +94,7 @@ const PickUp = ({ history, setHistory, original, setOriginal }) => {
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
-          <Link to="/create/done">
-            <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
-          </Link>
+          <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
         </div>
       </div>
     </div>
