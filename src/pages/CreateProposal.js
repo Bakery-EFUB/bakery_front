@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
-
 import TopBar from "../components/Common/Sidebar/TopBar";
 import PickUp from "./CreateProposal/PickUp";
 import City from "./CreateProposal/City";

@@ -100,6 +100,7 @@ const ShopImgUpload = ({ setMainFile, MainFile }) => {
         acceptedFiles.map(file =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
+            original: file,
           }),
         ),
       );
@@ -130,7 +131,7 @@ const ShopImgUpload = ({ setMainFile, MainFile }) => {
   return (
     <form action="/save" method="post" encType="multipart/form-data">
       <ShopIntroduceName>가게 대표 사진</ShopIntroduceName>
-      <section onDrop={onCheck}>
+      <section onDrop={onCheck} onClick={onCheck}>
         <div {...getRootProps()}>
           <input {...getInputProps()} />
           <ShopPhoto>➕</ShopPhoto>
