@@ -34,7 +34,7 @@ const CustomSelect = styled.select`
 const ChoooseDisplay = styled.div`
   border-radius: 25px;
   border: 2px solid var(--sub-darkgray);
-  margin-left:20px;
+  margin-left:40px;
 `;
 const DropdownArrow = styled.span`
   margin-right: 3px;
@@ -68,7 +68,7 @@ const CakeType = [
 ];
 const Dropdown = ({ items }) => {
   return (
-    <div>
+    <ChoooseDisplay>
       <CustomSelect autoFocus>
         {items.map((item, idx) => (
           <option key={idx} value={item}>
@@ -79,7 +79,7 @@ const Dropdown = ({ items }) => {
       <DropdownArrow>
         <img src={DropdownArrow1} alt="dropdown" />
       </DropdownArrow>
-    </div>
+    </ChoooseDisplay>
   );
 };
 const ChooseBox = () => {

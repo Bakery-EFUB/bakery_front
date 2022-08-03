@@ -1,4 +1,4 @@
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
 import React, {useState} from "react";
 import AccountRemovePop from "../components/AccountSetting/AccountRemovePop";
