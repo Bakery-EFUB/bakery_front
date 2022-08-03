@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
 import SmallGrayButton from "../../components/Proposal/SmallGrayButton";
 import SmallPinkButton from "../../components/Proposal/SmallPinkButton";
@@ -19,6 +19,8 @@ const PickUp = ({
 }) => {
   const ThisStep = 95;
 
+  const nav = useNavigate();
+
   const Back = () => {
     setHistory(ThisStep);
   };
@@ -27,6 +29,7 @@ const PickUp = ({
     setHistory(ThisStep);
     setOriginal({ ...original, PickUp });
     postProposal();
+    nav("/create/done");
   };
 
   // 선택된 날짜 (예약 부분은 여기선 필요 없음)

@@ -162,9 +162,9 @@ const CustomCalendar = ({
   const pickUpDate =
     selectedYear.toString() +
     "-" +
-    selectedMonth.toString() +
+    selectedMonth.toString().padStart(2, "0") +
     "-" +
-    selected.toString() +
+    selected.toString().padStart(2, "0") +
     "T00:00:00.00";
 
   // 상위 컴포넌트로 선택된 날짜 전달

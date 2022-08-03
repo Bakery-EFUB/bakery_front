@@ -16,6 +16,7 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
   const [files, setFiles] = useState([]); //업로드 하려는 파일의 url을 새생성하고 파일의 정보를 파일즈에 담아준다.
   const { getRootProps, getInputProps } = useDropzone({
     //허용하는 파일 형식
+
     accept: {
       "image/*": [],
     },
@@ -24,6 +25,7 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
         acceptedFiles.map(file =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
+            original: file,
           }),
         ),
       );
@@ -54,33 +56,9 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
     setHistory(ThisStep);
   };
 
-  const navigate = useNavigate();
-
   const Next = () => {
     setHistory(ThisStep);
-    setOriginal({ ...original, file: files });
-  };
-
-  const onChange2 = e => {
-    console.log("아아아아ㅏ");
-    const img = e.target.files[0];
-    console.log(img);
-    const formData = new FormData();
-    // formData.append("file", img);
-    // formData.append("orderId", 5);
-    // console.log("폼데이터", formData); // FormData {}
-    // for (const keyValue of formData) console.log(keyValue);
-
-    // axios
-    //   .patch("https://caker.shop/orders", formData, {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //       Accept: "multipart/form-data",
-    //       "X-AUTH-TOKEN": token,
-    //     },
-    //   })
-    //   .then(res => console.log("파일 포스트 성공", res))
-    //   .catch(err => console.log("파일 포스트 실패", err));
+    setOriginal({ ...original, file: files[0].original });
   };
 
   return (
@@ -92,7 +70,7 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
       <ProposalText text="디자인 시안이 있다면 알려주세요." />
 
       <div {...getRootProps({ className: "dropzone" })}>
-        <input type="file" onChange={onChange2} {...getInputProps()} />
+        <input type="file" {...getInputProps()} />
         <Button>사진 업로드</Button>
       </div>
       {thumbs}

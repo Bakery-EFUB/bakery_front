@@ -36,90 +36,32 @@ const CreateProposal = () => {
     file: null,
   });
 
-  const navigate = useNavigate();
+  const [myOrderId, setMyOrderId] = useState(null);
 
   const postProposal = async => {
-    // const dataSet = {
-    //   locationGu: [original.city[0]], //구
-    //   type: original.cake, //케이크 종류
-    //   flavor: original.taste, //케이크 맛
-    //   size: original.size, //케이크 크기
-    //   description: original.design, //케이크 설명
-    //   pickupDate: original.pickUp, //픽업일자/시간
-    //   priceMin: original.min, //minimum 가격
-    //   priceMax: original.max, //maximum 가격
-    // };
-
-    const sheetDTO = {
-      locationGu: "gu1",
-      locationDong: "dong",
-      type: "str", //케이크 종류
-      flavor: "str", //케이크 맛
-      size: "str", //케이크 크기
-      description: "str", //케이크 설명
-      pickupDate: "2022-07-22T09:00:00.00", //픽업일자/시간
-      priceMin: 1, //minimum 가격
-      priceMax: 10, //maximum 가격
-    };
-
     http
       .post("/orders", {
-        locationGu: "gu1",
-        locationDong: "dong",
-        type: "str",
-        flavor: "str",
-        size: "str",
-        description: "str",
-        pickupDate: "2022-07-22T09:00:00.00",
-        priceMin: 1,
-        priceMax: 10,
+        locationGu: "서대문구",
+        locationDong: original.city[0],
+        type: original.cake, //케이크 종류
+        flavor: original.taste, //케이크 맛
+        size: original.size, //케이크 크기
+        description: original.design, //케이크 설명
+        pickupDate: original.pickUp, //픽업일자/시간 2022-07-22T09:00:00.00
+        priceMin: original.min, //minimum 가격
+        priceMax: original.max, //maximum 가격
       })
-      .then(res => postImg2(res.data))
+      .then(res => postImg(res.data))
       .catch(err => console.log("json 포스트 실패", err));
   };
 
-  // const postImg2 = async id => {
-  //   console.log("아이디", id);
+  const postImg = async id => {
+    setMyOrderId(id);
+    let formData = new FormData();
+    formData.append("file", original.file);
+    formData.append("orderId", id);
 
-  //   let formData = new FormData();
-  //   formData.append("file", original.file);
-  //   formData.append("orderId", id);
-
-  //   // console.log("폼데이터", formData); // FormData {}
-  //   for (const keyValue of formData) console.log(keyValue);
-
-  //   await axios({
-  //     method: "patch",
-  //     url: "https://caker.shop/orders",
-  //     data: formData,
-  //     headers: {
-  //       "Content-Type": "multipart/form-data",
-  //       "X-AUTH-TOKEN": token,
-  //     },
-  //   })
-  //     .then(res => console.log("파일 포스트 성공", res))
-  //     .catch(err => console.log("파일 포스트 실패", err));
-
-  //   // axios
-  //   //   .patch("https://caker.shop/orders", formData, {
-  //   //     headers: {
-  //   //       "Content-Type": "multipart/form-data",
-  //   //       Accept: "multipart/form-data",
-  //   //       "X-AUTH-TOKEN": token,
-  //   //     },
-  //   //   })
-  //   //   .then(res => console.log("파일 포스트 성공", res))
-  //   //   .catch(err => console.log("파일 포스트 실패", err));
-  // };
-
-  const onChange = e => {
-    const img = e.target.files[0];
-    console.log(img);
-    const formData = new FormData();
-    formData.append("file", img);
-    formData.append("orderId", 5);
-    // console.log("폼데이터", formData); // FormData {}
-    // for (const keyValue of formData) console.log(keyValue);
+    for (const keyValue of formData) console.log(keyValue);
 
     axios
       .patch("https://caker.shop/orders", formData, {
@@ -133,17 +75,13 @@ const CreateProposal = () => {
       .catch(err => console.log("파일 포스트 실패", err));
   };
 
+  useEffect(() => {
+    console.log("변화감지", original);
+  }, [original]);
+
   return (
     <div>
       <TopBar />
-
-      <input
-        type="file"
-        accept="image/jpg,impge/png,image/jpeg,image/gif"
-        name="profile_img"
-        onChange={onChange}
-      ></input>
-
       <Routes>
         <Route
           path="/city"
@@ -223,7 +161,7 @@ const CreateProposal = () => {
             />
           }
         />
-        <Route path="/done" element={<Done />} />
+        <Route path="/done" element={<Done myOrderId={myOrderId} />} />
       </Routes>
     </div>
   );
