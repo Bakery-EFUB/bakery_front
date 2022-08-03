@@ -5,7 +5,6 @@ import PageTitle from "../components/PageTitle";
 import CustomCalendar from "../components/Proposal/CustomCalendar";
 import { Link, useParams } from "react-router-dom";
 import { DeleteSchedule, GetAllSchedules } from "../api/eventschedule";
-import NoPermission from "./Auth/NoPermission";
 
 const SelectedDay = styled.div`
   margin: 40px 0 0;
@@ -71,7 +70,6 @@ const BigPinkButtonBottom = styled.button`
 
 const PickupSchedulePage = () => {
   const { storeId } = useParams();
-  const [isPermitted, setIsPermitted] = useState(true);
   const [pickupOnSelectedDay, setPickupOnSelectedDay] = useState([]);
   const [pickupSchedules, setPickupSchedules] = useState([]);
   const [selectedDay, setSelectedDay] = useState({
@@ -98,7 +96,6 @@ const PickupSchedulePage = () => {
   useEffect(() => {
     GetAllSchedules(storeId)
       .then(res => {
-        setIsPermitted(true);
         const pickups = res.map(pickup => {
           return {
             storeId: storeId,
@@ -116,7 +113,7 @@ const PickupSchedulePage = () => {
           ),
         );
       })
-      .catch(e => e.code === 403 && setIsPermitted(false));
+      .catch(e => console.error(e));
   }, []);
 
   const allDaysHavingSchedule = pickupSchedules.map(schedule => {
@@ -153,47 +150,41 @@ const PickupSchedulePage = () => {
   return (
     <div>
       <TopBar />
-      {isPermitted ? (
-        <>
-          <PageTitle title="픽업 일정" margin="60px 0 63px 0" />
-          <CalendarContainer>
-            <CustomCalendar
-              setClickedDay={onClickDay}
-              allDaysHavingSchedule={allDaysHavingSchedule}
-            />
-          </CalendarContainer>
-          <SelectedDay>{`${selectedDay.year}.${selectedDay.month}.${selectedDay.date}`}</SelectedDay>
-          <ScheduleCardList>
-            {pickupOnSelectedDay.length === 0 ? (
-              <EmptyDayMsg> 일정이 없습니다. </EmptyDayMsg>
-            ) : (
-              pickupOnSelectedDay
-                .sort((a, b) => {
-                  if (a.pickupTime.slice(11, 16) < b.pickupTime.slice(11, 16))
-                    return -1;
-                  if (a.pickupTime.slice(11, 16) === b.pickupTime.slice(11, 16))
-                    return 0;
-                  if (a.pickupTime.slice(11, 16) > b.pickupTime.slice(11, 16))
-                    return 1;
-                })
-                .map(schedule => (
-                  <CreateScheduleCard
-                    key={schedule.eventId}
-                    pickupTime={schedule.pickupTime}
-                    pickupInfo={schedule.content}
-                    eventId={schedule.eventId}
-                    storeId={schedule.storeId}
-                  />
-                ))
-            )}
-          </ScheduleCardList>
-          <Link to={`/addschedule/${storeId}`}>
-            <BigPinkButtonBottom>일정 추가</BigPinkButtonBottom>
-          </Link>
-        </>
-      ) : (
-        <NoPermission />
-      )}
+      <PageTitle title="픽업 일정" margin="60px 0 63px 0" />
+      <CalendarContainer>
+        <CustomCalendar
+          setClickedDay={onClickDay}
+          allDaysHavingSchedule={allDaysHavingSchedule}
+        />
+      </CalendarContainer>
+      <SelectedDay>{`${selectedDay.year}.${selectedDay.month}.${selectedDay.date}`}</SelectedDay>
+      <ScheduleCardList>
+        {pickupOnSelectedDay.length === 0 ? (
+          <EmptyDayMsg> 일정이 없습니다. </EmptyDayMsg>
+        ) : (
+          pickupOnSelectedDay
+            .sort((a, b) => {
+              if (a.pickupTime.slice(11, 16) < b.pickupTime.slice(11, 16))
+                return -1;
+              if (a.pickupTime.slice(11, 16) === b.pickupTime.slice(11, 16))
+                return 0;
+              if (a.pickupTime.slice(11, 16) > b.pickupTime.slice(11, 16))
+                return 1;
+            })
+            .map(schedule => (
+              <CreateScheduleCard
+                key={schedule.eventId}
+                pickupTime={schedule.pickupTime}
+                pickupInfo={schedule.content}
+                eventId={schedule.eventId}
+                storeId={schedule.storeId}
+              />
+            ))
+        )}
+      </ScheduleCardList>
+      <Link to={`/addschedule/${storeId}`}>
+        <BigPinkButtonBottom>일정 추가</BigPinkButtonBottom>
+      </Link>
     </div>
   );
 };

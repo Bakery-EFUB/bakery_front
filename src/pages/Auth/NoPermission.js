@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Button from "../../components/Button";
 import CakeImg from "../../images/NoResult.svg";
 import { Link } from "react-router-dom";
 
@@ -12,16 +11,23 @@ const FlexBox = styled.div`
   align-items: center;
 `;
 
-const ResizingBox = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 80%;
-  transform: scale(0.8);
-`;
-
 const NoPermissionMsg = styled.div`
   font-size: 20px;
   margin: 30px 0 10px;
+`;
+
+const Button = styled.button`
+  cursor: pointer;
+  background-color: var(--main-pink);
+  color: var(--white);
+  border-radius: 6px;
+  margin: 10px 0 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-style: none;
+  &:hover {
+    background-color: var(--sub-lightgray);
+  }
 `;
 
 const NoPermission = () => {
@@ -29,11 +35,9 @@ const NoPermission = () => {
     <FlexBox>
       <img src={CakeImg} width="40%" alt="cake image" />
       <NoPermissionMsg>페이지에 접근할 수 없어요</NoPermissionMsg>
-      <ResizingBox>
-        <Link to="/">
-          <Button text="홈으로 돌아가기" />
-        </Link>
-      </ResizingBox>
+      <Link to="/">
+        <Button>홈으로 돌아가기</Button>
+      </Link>
     </FlexBox>
   );
 };
