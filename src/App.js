@@ -22,6 +22,7 @@ import { userRole } from "./utils/auth";
 import ClientRoute from "./route/ClientRoute";
 import TraineeRoute from "./route/TraineeRoute";
 import BakerRoute from "./route/BakerRoute";
+import ShopCakerMyPage from "./pages/MyPage/ShopCakerMyPage";
 
 function App() {
   console.log(userRole);
@@ -36,6 +37,8 @@ function App() {
         <Route exact path="/search" element={<SearchPage />} />
         <Route exact path="/recommend" element={<Recommend />} />
         <Route exact path="/about" element={<OurService />} />
+        <Route exact path="/mypagehost" element={<ShopMemberMyPage />} />
+        <Route exact path="/mypagecaker" element={<ShopCakerMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
         <Route exact path="/shopdetail" element={<ShopDetailPage />} />
         <Route exact path="/client/mypage" element={<ShopMemberMyPage />} />
