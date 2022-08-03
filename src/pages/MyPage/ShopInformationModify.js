@@ -339,7 +339,6 @@ const ShopInformationModify = () => {
             onChange={InstagramHandler}
             placeholder="     운영중인 인스타그램이 있다면 링크를 첨부해주세요."
           />
-
           {/* 드래그앤 드롭 파일 컴포넌트 2개 */}
           <ShopImgUpload
             MainFile={MainFile}

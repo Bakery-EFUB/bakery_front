@@ -1,14 +1,19 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TopLogoimg from "../../../images/TopLogo.svg";
 import GuestProfile from "../../../images/Profile.svg";
 import TopMenuBarimg from "../../../images/TopMenuBar.svg";
 import SidebarCloseBtn from "../../../images/SidebarCloseBtn.svg";
 import { Link } from "react-router-dom";
-import { SidebarDataCustomer } from "../Sidebar/SidebarData";
+import {
+  SidebarDataBaker,
+  SidebarDataClient,
+  SidebarDataGuest,
+} from "../Sidebar/SidebarData";
 import ButtonSidebar from "./ButtonSidebar";
 import "./Sidebar.css";
 import "../../../styles/common.scss";
+import { isLogined, userImage, userName, userRole } from "../../../utils/auth";
 
 const TopBarPink = styled.div`
   z-index: 5;
@@ -56,6 +61,18 @@ const ProfileImg = styled.div`
   height: 47px;
   margin-right: 10px;
 `;
+const LoginBox = styled.div`
+  flex-direction: column;
+`;
+
+const LoginProfileImage = styled.img`
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 70%;
+`;
+
 const CloseBtn = styled.div`
   height: 19px;
   width: 19px;
@@ -70,6 +87,13 @@ const CloseBtn = styled.div`
 const TopBar = () => {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+  const [userStatus, setUserStatus] = useState();
+  useEffect(() => {
+    if (userRole === "ROLE_CLIENT") setUserStatus(SidebarDataClient);
+    else if (userRole === "ROLE_TRAINEE" || userRole === "ROLE_BAKER")
+      setUserStatus(SidebarDataBaker);
+    else setUserStatus(SidebarDataGuest);
+  }, []);
 
   return (
     <div>
@@ -84,19 +108,43 @@ const TopBar = () => {
             <CloseBtn onClick={showSidebar}></CloseBtn>
           </li>
           <Profile>
-            <ProfileImg></ProfileImg>로그인해 주세요
+            {isLogined ? (
+              <>
+                <LoginProfileImage src={userImage}></LoginProfileImage>
+                <LoginBox>
+                  <div
+                    style={{
+                      fontWeight: 800,
+                      fontSize: "20px",
+                      marginBottom: "2px",
+                    }}
+                  >
+                    {userName} 님
+                  </div>
+                  <div>계정관리</div>
+                </LoginBox>
+              </>
+            ) : (
+              <>
+                <ProfileImg></ProfileImg>로그인해 주세요
+              </>
+            )}
           </Profile>
           <hr />
-          {SidebarDataCustomer.map((item, index) => {
+          {userStatus?.map((item, index) => {
             return (
               <li key={index} className="nav-text">
                 <Link to={item.path}>{item.title}</Link>
               </li>
             );
           })}
-          <Link to="/loginhome">
-            <ButtonSidebar text="로그인"></ButtonSidebar>
-          </Link>
+          {isLogined ? (
+            <ButtonSidebar text="로그아웃"></ButtonSidebar>
+          ) : (
+            <Link to="/loginhome">
+              <ButtonSidebar text="로그인"></ButtonSidebar>
+            </Link>
+          )}
         </nav>
       </TopBarPink>
     </div>
