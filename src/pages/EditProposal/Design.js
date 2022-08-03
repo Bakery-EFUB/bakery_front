@@ -63,7 +63,7 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
 
   return (
     <div>
-      <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
+      <PageTitle title="제안서 수정하기" margin="56px auto 0 auto" />
 
       <ProgessBar step={ThisStep} before={history} />
 
@@ -84,12 +84,12 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
           justifyContent: "center",
         }}
       >
-        <Link to="/create/price">
+        <Link to="/edit/price">
           <SmallWhiteButton onClick={() => Back()}>이전</SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
-          <Link to="/create/pickup">
+          <Link to="/edit/pickup">
             <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
           </Link>
         </div>

@@ -12,6 +12,9 @@ import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
 const City = ({ history, setHistory, original, setOriginal }) => {
+  const order_id = window.localStorage.getItem("order_id");
+  const before_url = `/proposal/${order_id}`;
+
   const [cityArray, setCityArray] = useState([
     { id: 1, city: "북아현동", selected: false },
     { id: 2, city: "충현동", selected: false },
@@ -37,12 +40,36 @@ const City = ({ history, setHistory, original, setOriginal }) => {
   useEffect(() => {
     setCityArray(
       cityArray.map(city =>
-        original.cityId === city.id
+        original.cityId == city.id
           ? { ...city, selected: true }
           : { ...city, selected: false },
       ),
     );
   }, []);
+
+  useEffect(() => {
+    // 클릭한 부분 효과
+    setCityArray(
+      cityArray.map(city =>
+        original.cityId == city.id
+          ? { ...city, selected: true }
+          : { ...city, selected: false },
+      ),
+    );
+  }, [original]);
+
+  useEffect(() => {
+    // 완료 버튼 렌더링
+    let city;
+    for (city of cityArray) {
+      if (city.selected == true) {
+        setIsDone(true);
+        break;
+      } else {
+        setIsDone(false);
+      }
+    }
+  }, [cityArray]);
 
   // 도시 선택하기
   const onToggle = id => {
@@ -55,45 +82,33 @@ const City = ({ history, setHistory, original, setOriginal }) => {
     );
   };
 
-  // 완료 버튼 렌더링
-  useEffect(() => {
-    let city;
-    for (city of cityArray) {
-      if (city.selected === true) {
-        setIsDone(true);
-        break;
-      } else {
-        setIsDone(false);
-      }
-    }
-  }, [cityArray]);
-
   const Back = () => {
     setHistory(ThisStep);
   };
 
-  // 선택한 id 저장 (부모에 전달)
   const Next = () => {
-    let idArr = [];
+    // 선택한 id 저장 (부모에 전달)
+
+    let cityId = 0;
     cityArray.map(city => {
-      if (city.selected === true) {
-        idArr.push(city.id);
+      if (city.selected == true) {
+        cityId = city.id;
       }
     });
 
-    let cityArr = [];
+    let cityName = "";
     cityArray.map(city => {
-      if (city.selected === true) {
-        cityArr.push(city.city);
+      if (city.selected == true) {
+        cityName = city.city;
       }
     });
-    setOriginal({ ...original, cityId: idArr, city: cityArr });
+    setOriginal({ ...original, cityId: cityId, city: cityName });
     setHistory(ThisStep);
   };
 
   return (
     <div>
-      <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
+      <PageTitle title="제안서 수정하기" margin="56px auto 0 auto" />
       <ProgessBar step={ThisStep} before={history} />
       <ProposalText text="원하시는 지역을 선택해주세요" />
       <SmallText>(복수선택가능)</SmallText>
@@ -129,13 +144,13 @@ const City = ({ history, setHistory, original, setOriginal }) => {
           justifyContent: "center",
         }}
       >
-        <Link to="/">
+        <Link to={before_url}>
           <SmallWhiteButton onClick={() => Back()}>이전</SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
           {isDone ? (
-            <Link to="/create/cake">
+            <Link to="/edit/cake">
               <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
             </Link>
           ) : (

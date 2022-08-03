@@ -2,7 +2,7 @@ import TopBar from "../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
 import UserLogoimg from "../images/UserLogo.svg";
 import Readingimg from "../images/Reading.svg";
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../components/Proposal/PageTitle";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";

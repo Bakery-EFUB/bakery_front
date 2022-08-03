@@ -44,15 +44,23 @@ const LoginHome = () => {
       </Welcome>
       <CenterImg></CenterImg>
       <LoginButtons>
+<<<<<<< HEAD:src/pages/LoginHome.js
+        <a href="https://caker.shop/oauth2/authorization/kakao">
+          <Button text={"가게 회원 로그인"}></Button>
+        </a>
+
+=======
         <Button
           onClick={() => {
             location.href = "https://caker.shop/oauth2/authorization/kakao";
           }}
           text={"가게 회원 로그인"}
         ></Button>
+>>>>>>> 7b689a37d1066f3aefd586f9444cb9daa3e1a842:src/pages/Auth/LoginHome.js
         <Button text={"일반 회원 로그인"}></Button>
       </LoginButtons>
     </Container>
   );
 };
+
 export default LoginHome;

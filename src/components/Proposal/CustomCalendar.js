@@ -21,7 +21,13 @@ const Right = styled.img`
   margin-right: 13px;
 `;
 
-const CustomCalendar = ({ setClickedDay, original, setOriginal }) => {
+const CustomCalendar = ({
+  setClickedDay,
+  original,
+  setOriginal,
+  existArr,
+  setExistArr,
+}) => {
   const today = {
     year: new Date().getFullYear(), //오늘 연도
     month: new Date().getMonth() + 1, //오늘 월
@@ -83,41 +89,6 @@ const CustomCalendar = ({ setClickedDay, original, setOriginal }) => {
 
   const [selected, setSelected] = useState(today.date); // 선택된 날짜
 
-  const [existArr, setExistArr] = useState([
-    { id: 0, exist: false, reservation: "예약 정보" },
-    { id: 1, exist: false, reservation: "예약 정보" },
-    { id: 2, exist: false, reservation: "예약 정보" },
-    { id: 3, exist: false, reservation: "예약 정보" },
-    { id: 4, exist: false, reservation: "예약 정보" },
-    { id: 5, exist: false, reservation: "예약 정보" },
-    { id: 6, exist: false, reservation: "예약 정보" },
-    { id: 7, exist: true, reservation: "예약 정보" },
-    { id: 8, exist: false, reservation: "예약 정보" },
-    { id: 9, exist: false, reservation: "예약 정보" },
-    { id: 10, exist: false, reservation: "예약 정보" },
-    { id: 11, exist: false, reservation: "예약 정보" },
-    { id: 12, exist: false, reservation: "예약 정보" },
-    { id: 13, exist: false, reservation: "예약 정보" },
-    { id: 14, exist: false, reservation: "예약 정보" },
-    { id: 15, exist: false, reservation: "예약 정보" },
-    { id: 16, exist: false, reservation: "예약 정보" },
-    { id: 17, exist: false, reservation: "예약 정보" },
-    { id: 18, exist: false, reservation: "예약 정보" },
-    { id: 19, exist: false, reservation: "예약 정보" },
-    { id: 20, exist: false, reservation: "예약 정보" },
-    { id: 21, exist: false, reservation: "예약 정보" },
-    { id: 22, exist: false, reservation: "예약 정보" },
-    { id: 23, exist: false, reservation: "예약 정보" },
-    { id: 24, exist: false, reservation: "예약 정보" },
-    { id: 25, exist: false, reservation: "예약 정보" },
-    { id: 26, exist: false, reservation: "예약 정보" },
-    { id: 27, exist: false, reservation: "예약 정보" },
-    { id: 28, exist: false, reservation: "예약 정보" },
-    { id: 29, exist: false, reservation: "예약 정보" },
-    { id: 30, exist: false, reservation: "예약 정보" },
-    { id: 31, exist: false, reservation: "예약 정보" },
-  ]);
-
   const returnDay = () => {
     //선택된 달의 날짜들 반환 함수
     let dayArr = [];
@@ -135,7 +106,7 @@ const CustomCalendar = ({ setClickedDay, original, setOriginal }) => {
                 id={i + 1}
                 onClick={e => {
                   setSelected(parseInt(e.target.id));
-                  // 상위 컴포넌트에서 날짜 setState 함수를 pro장s로 넘겨준 경우
+                  // 상위 컴포넌트에서 날짜 setState 함수를 props로 넘겨준 경우
                   setClickedDay &&
                     setClickedDay({
                       year: Number(selectedYear),
@@ -187,11 +158,16 @@ const CustomCalendar = ({ setClickedDay, original, setOriginal }) => {
     return dayArr;
   };
 
-  // 선택 된 날짜 출력 (test 코드)
-
+  // 선택 된 날짜 string으로 변환
   const pickUpDate =
-    selectedYear.toString() + selectedMonth.toString() + selected.toString();
+    selectedYear.toString() +
+    "-" +
+    selectedMonth.toString() +
+    "-" +
+    selected.toString() +
+    "T00:00:00.00";
 
+  // 상위 컴포넌트로 선택된 날짜 전달
   useEffect(() => {
     setOriginal({ ...original, pickUp: pickUpDate });
   }, [pickUpDate]);

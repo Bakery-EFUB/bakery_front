@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import SmallPinkButton from "../../components/SmallPinkButton";
-import SmallWhiteButton from "../../components/SmallWhiteButton";
-import SmallGrayButton from "../../components/SmallGrayButton";
+import SmallPinkButton from "../../components/Proposal/SmallPinkButton";
+import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
+import SmallGrayButton from "../../components/Proposal/SmallGrayButton";
 
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "../../components/Proposal/PageTitle";
 import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
@@ -33,7 +33,11 @@ const Cake = ({ history, setHistory, original, setOriginal }) => {
 
   const Next = () => {
     setHistory(ThisStep);
-    setOriginal({ ...original, cakeId: isChecked });
+    setOriginal({
+      ...original,
+      cakeId: isChecked,
+      cake: cakes[isChecked - 1].cake,
+    });
   };
 
   return (
