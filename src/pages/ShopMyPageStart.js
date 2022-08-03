@@ -3,7 +3,7 @@ import styled from "styled-components";
 import UserLogoimg from "../images/UserLogo.svg";
 import CountManageimg from "../images/CountManage.svg";
 import Readingimg from "../images/Reading.svg";
-import PageTitle from "../components/Proposal/PageTitle";
+import PageTitle from "../components/Common/PageTitle";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";

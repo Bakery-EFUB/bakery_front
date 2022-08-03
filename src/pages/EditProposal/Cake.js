@@ -5,7 +5,7 @@ import SmallPinkButton from "../../components/Proposal/SmallPinkButton";
 import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
 import SmallGrayButton from "../../components/Proposal/SmallGrayButton";
 
-import PageTitle from "../../components/Proposal/PageTitle";
+import PageTitle from "../../components/Common/PageTitle";
 import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 

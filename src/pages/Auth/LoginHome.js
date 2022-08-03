@@ -59,12 +59,15 @@ const LoginHome = () => {
       </Welcome>
       <CenterImg></CenterImg>
       <LoginButtons>
+
         <Button onClick={() => BakerLogin()} text={"가게 회원 로그인"}></Button>
+
 
         <Button
           onClick={() => ClientLogin()}
           text={"일반 회원 로그인"}
         ></Button>
+
       </LoginButtons>
     </Container>
   );
