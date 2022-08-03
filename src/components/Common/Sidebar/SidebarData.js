@@ -1,15 +1,15 @@
 export const SidebarDataGuest = [
-  { title: "CAKER 소개", path: "/serviceinfo" },
+  { title: "CAKER 소개", path: "/about" },
   { title: "전체 제안서 리스트", path: "/allproposal" },
 ];
-export const SidebarDataHost = [
-  { title: "CAKER 소개", path: "/serviceinfo" },
+export const SidebarDataBaker = [
+  { title: "CAKER 소개", path: "/about" },
   { title: "전체 제안서 리스트", path: "/allproposal" },
-  { title: "마이페이지", path: "/mypagehost" },
+  { title: "마이페이지", path: "/shop/mypage" },
 ];
-export const SidebarDataCustomer = [
-  { title: "CAKER 소개", path: "/serviceinfo" },
+export const SidebarDataClient = [
+  { title: "CAKER 소개", path: "/about" },
   { title: "전체 제안서 리스트", path: "/allproposal" },
   { title: "제안서 작성하기", path: "/proposal" },
-  { title: "마이페이지", path: "/allproposal" },
+  { title: "마이페이지", path: "/client/mypage" },
 ];

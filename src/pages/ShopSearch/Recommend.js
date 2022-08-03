@@ -15,15 +15,15 @@ const Recommend = () => {
   const [allShop, setAllShop] = useState();
 
   useEffect(() => {
-    setAllShop(recommendShop);
-    /*
+    //setAllShop(recommendShop);
+
     GetRecommendShop()
       .then(data => {
         setAllShop(data);
       })
       .catch(e => {
         console.log(e);
-      });*/
+      });
   }, []);
 
   return (
