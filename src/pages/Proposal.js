@@ -53,7 +53,7 @@ const Proposal = () => {
 
   // 제안서 수정하러 가기 버튼
   const EditProposal = () => {
-    navigate("/edit/city");
+    navigate("/edit/pickup");
   };
 
   // 제안서 Delete

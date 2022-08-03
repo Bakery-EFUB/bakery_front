@@ -50,15 +50,11 @@ function App() {
         <Route path="/edit/*" element={<EditProposal />} />
         <Route path="/proposal/:id" element={<Proposal />} />
 
-        <Route exact path="/serviceinfo" element={<OurService />} />
-
         <Route exact path="/about" element={<OurService />} />
 
-        <Route exact path="/mypagehost" element={<ShopMemberMyPage />} />
         <Route exact path="/mypagecaker" element={<ShopCakerMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
         <Route exact path="/shopdetail" element={<ShopDetailPage />} />
-        <Route exact path="/shopmypagestart" element={<ShopMypageStart />} />
 
         <Route exact path="/client/mypage" element={<ShopMemberMyPage />} />
         <Route exact path="/shop/mypage" element={<ShopMypageStart />} />
