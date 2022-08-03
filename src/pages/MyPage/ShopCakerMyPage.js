@@ -1,13 +1,10 @@
 import TopBar from "../../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
-import UserLogoimg from "../../images/UserLogo.svg";
-import Mock from "../../images/Mock.svg";
-import PageTitle from "../../components/Proposal/PageTitle";
+import PageTitle from "../../components/PageTitle";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import orderList from "../../_mock/orderImage.json";
-import { userImage, userName } from "../../utils/auth";
 
 //전체 크기
 const WrapBox = styled.div`
@@ -145,7 +142,7 @@ const Article = styled.article`
   border-radius: 6px;
 `;
 
-const ShopMemberMyPage = () => {
+const ShopCakerMyPage = () => {
   const [OrderImage, setOrderImage] = useState([]);
   console.log(JSON.parse(localStorage.getItem("user")));
   useEffect(() => {
@@ -153,20 +150,22 @@ const ShopMemberMyPage = () => {
     setOrderImage(orderList["sheetResponseDTOs"]);
   }, []);
 
+  const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
+
   return (
     <WrapBox>
       <TopBar></TopBar>
       <PageTitle title="마이페이지" margin="70.06px" />
-      <UserName>{userName} 님</UserName>
+      <UserName>{JSON.parse(localStorage.getItem("user")).nickname}</UserName>
       <CountManager>계정 관리 &gt;</CountManager>
-      <UserPlace>Caker 일반 회원</UserPlace>
-      <UserImg ImageUrl={userImage}></UserImg>
+      <UserPlace>Caker 가게 회원</UserPlace>
+      <UserImg ImageUrl={ImageUrl}></UserImg>
       <PinkBox>
         <Link to="/shopmodify">
-          <Button>제안서 작성하기</Button>
+          <Button>가게 정보 관리</Button>
         </Link>
-
-        <CommitProposal>내 제안서</CommitProposal>
+        <Button>픽업 일정 관리</Button>
+        <CommitProposal>댓글 단 제안서</CommitProposal>
         <BottomProposal>
           {OrderImage.map(order => {
             return (
@@ -188,4 +187,4 @@ const ShopMemberMyPage = () => {
   );
 };
 
-export default ShopMemberMyPage;
+export default ShopCakerMyPage;

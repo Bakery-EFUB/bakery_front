@@ -1,6 +1,7 @@
 import React from "react";
 import MainBackground from "../images/MainBackground.svg";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const BackgroundImg = styled.div`
   background: url(${MainBackground});
@@ -42,7 +43,9 @@ function MainHeader() {
           caker!
         </header>
         <p>케이커와 함께하는 특별한 하루</p>
-        <ServiceIntro>서비스 소개</ServiceIntro>
+        <Link to="/about">
+          <ServiceIntro>서비스 소개</ServiceIntro>
+        </Link>
       </TextContainer>
     </BackgroundImg>
   );
