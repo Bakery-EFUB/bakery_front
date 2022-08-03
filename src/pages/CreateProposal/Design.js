@@ -61,6 +61,28 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
     setOriginal({ ...original, file: files });
   };
 
+  const onChange2 = e => {
+    console.log("아아아아ㅏ");
+    const img = e.target.files[0];
+    console.log(img);
+    const formData = new FormData();
+    // formData.append("file", img);
+    // formData.append("orderId", 5);
+    // console.log("폼데이터", formData); // FormData {}
+    // for (const keyValue of formData) console.log(keyValue);
+
+    // axios
+    //   .patch("https://caker.shop/orders", formData, {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //       Accept: "multipart/form-data",
+    //       "X-AUTH-TOKEN": token,
+    //     },
+    //   })
+    //   .then(res => console.log("파일 포스트 성공", res))
+    //   .catch(err => console.log("파일 포스트 실패", err));
+  };
+
   return (
     <div>
       <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
@@ -70,7 +92,7 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
       <ProposalText text="디자인 시안이 있다면 알려주세요." />
 
       <div {...getRootProps({ className: "dropzone" })}>
-        <input type="file" {...getInputProps()} />
+        <input type="file" onChange={onChange2} {...getInputProps()} />
         <Button>사진 업로드</Button>
       </div>
       {thumbs}

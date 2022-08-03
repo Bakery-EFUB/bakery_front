@@ -4,7 +4,7 @@ import TopLogoimg from "../../../images/TopLogo.svg";
 import GuestProfile from "../../../images/Profile.svg";
 import TopMenuBarimg from "../../../images/TopMenuBar.svg";
 import SidebarCloseBtn from "../../../images/SidebarCloseBtn.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   SidebarDataBaker,
   SidebarDataClient,
@@ -95,6 +95,12 @@ const TopBar = () => {
     else setUserStatus(SidebarDataGuest);
   }, []);
 
+  const Logout = () => {
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("user");
+    location.reload();
+  };
+
   return (
     <div>
       <TopBarPink>
@@ -139,9 +145,12 @@ const TopBar = () => {
             );
           })}
           {isLogined ? (
-            <ButtonSidebar text="로그아웃"></ButtonSidebar>
+            <ButtonSidebar
+              onClick={() => Logout()}
+              text="로그아웃"
+            ></ButtonSidebar>
           ) : (
-            <Link to="/loginhome">
+            <Link to="/kakao">
               <ButtonSidebar text="로그인"></ButtonSidebar>
             </Link>
           )}

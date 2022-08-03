@@ -1,6 +1,10 @@
 import TopBar from "../../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
-import PageTitle from "../../components/Common/PageTitle";
+import PageTitle from "../../components/Proposal/PageTitle";
+
+import UserLogoimg from "../../images/UserLogo.svg";
+import Mock from "../../images/Mock.svg";
+
 
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
