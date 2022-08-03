@@ -40,7 +40,9 @@ function App() {
 
         <Route exact path="/loginhome" element={<LoginHome />} />
         <Route exact path="/loading" element={<LoadingPage />} />
-        <Route exact path="/ShopDetailPage" element={<ShopDetailPage />} />
+
+        <Route exact path="/shopdetail/:storeId" element={<ShopDetailPage />} />
+        <Route exact path="/addschedule" element={<AddSchedulePage />} />
         <Route exact path="/search" element={<SearchPage />} />
         <Route exact path="/recommend" element={<Recommend />} />
 
