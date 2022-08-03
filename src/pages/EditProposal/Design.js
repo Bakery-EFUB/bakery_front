@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import SmallPinkButton from "../../components/Proposal/SmallPinkButton";
 import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
-import PageTitle from "../../components/Proposal/PageTitle";
+import PageTitle from "../../components/Common/PageTitle";
 import ProposalText from "../../components/Proposal/ProposalText";
 
 import ProgessBar from "../../components/Proposal/ProgressBar";

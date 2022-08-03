@@ -1,9 +1,8 @@
 import TopBar from "../../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "../../components/Common/PageTitle";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import orderList from "../../_mock/orderImage.json";
 
 //전체 크기
