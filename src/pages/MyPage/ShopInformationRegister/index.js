@@ -18,25 +18,26 @@ const token = JSON.parse(localStorage.getItem("token"));
 //ui 구현
 const ShopInformationRegister = () => {
   const formData = new FormData();
-  const onChange = e => {
-    const img = e.target.files[0];
-    console.log(img);
-    formData.append("mainImg", img);
-  };
+  // const onChange = e => {
+  //   const img = e.target.files[0];
+  //   console.log(img);
+  //   formData.append("mainImg", img);
+  // };
 
-  const onChange2 = e => {
-    const img2 = e.target.files[0];
-    console.log(img2);
-    formData.append("menuImg", img2);
-  };
+  // const onChange2 = e => {
+  //   const img2 = e.target.files[0];
+  //   console.log(img2);
+  //   formData.append("menuImg", img2);
+  // };
 
   const [storeData, setStoreData] = useState(DEFAULT_STORE_DATA);
-  const [MainFile, setMainFile] = useState([]);
-  const [MenuFile, setMenuFile] = useState([]);
 
   const updateStoreData = partialStoreData => {
     setStoreData(prev => ({ ...prev, ...partialStoreData }));
   };
+
+  const [MainFile, setMainFile] = useState([]);
+  const [MenuFile, setMenuFile] = useState([]);
 
   //...prev가 이전값이고 ...partialStoreData가 현재값임
   const MainFileHandler = e => {
@@ -74,13 +75,14 @@ const ShopInformationRegister = () => {
       .catch(err => console.log("json 포스트 실패", err));
 
     const postImg = async id => {
+      formData.append("mainImg", MainFile[0].original, "mainImage.png");
+      formData.append("menuImg", MenuFile[0].original, "menuImage.png");
       formData.append("storeId", id);
+      for (const keyValue of formData) console.log(keyValue);
       axios
-        .patch("https://caker.shop/stores/myStore", {
-          formData,
+        .patch("https://caker.shop/stores/myStore/image", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-            Accept: "multipart/form-data",
             "X-AUTH-TOKEN": token,
           },
         })
@@ -112,7 +114,7 @@ const ShopInformationRegister = () => {
           );
         })}
         {/* 드래그앤 드롭 파일 컴포넌트 2개 */}
-        {/* <ShopImgUpload
+        <ShopImgUpload
           MainFile={MainFile}
           setMainFile={setMainFile}
           MainFileHandler={MainFileHandler}
@@ -120,8 +122,9 @@ const ShopInformationRegister = () => {
         <ShopMenuUpload
           MenuFile={MenuFile}
           setMenuFile={setMenuFile}
-          MenuFileHandler={MenuFileHandler} */}
-        <input
+          MenuFileHandler={MenuFileHandler}
+        />
+        {/* <input
           type="file"
           accept="impge/png"
           name="profile_img"
@@ -132,7 +135,7 @@ const ShopInformationRegister = () => {
           accept="impge/png"
           name="profile_img2"
           onChange={onChange2}
-        ></input>
+        ></input> */}
 
         <RegisterBtn onClick={submitHandler}>등록하기</RegisterBtn>
       </div>

@@ -1,12 +1,14 @@
 import TopBar from "../../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "../../components/Common/PageTitle";
+
+import UserLogoimg from "../../images/UserLogo.svg";
+import Mock from "../../images/Mock.svg";
+
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import orderList from "../../_mock/orderImage.json";
-import axios from "axios";
-import http from "../../common/http";
+import { userImage, userName } from "../../utils/auth";
 
 //전체 크기
 const WrapBox = styled.div`
@@ -168,16 +170,14 @@ const ShopMemberMyPage = () => {
     setOrderImage(orderList["sheetResponseDTOs"]);
   }, []);
 
-  const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
-
   return (
     <WrapBox>
       <TopBar></TopBar>
       <PageTitle title="마이페이지" margin="70.06px" />
-      <UserName>{JSON.parse(localStorage.getItem("user")).nickname}</UserName>
+      <UserName>{userName} 님</UserName>
       <CountManager>계정 관리 &gt;</CountManager>
       <UserPlace>Caker 일반 회원</UserPlace>
-      <UserImg ImageUrl={ImageUrl}></UserImg>
+      <UserImg ImageUrl={userImage}></UserImg>
       <PinkBox>
         <Link to="/create/*">
           <Button>제안서 작성하기</Button>

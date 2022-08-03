@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -10,18 +10,19 @@ import PageTitle from "../../components/Common/PageTitle";
 import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
-const Price = ({ history, setHistory, original, setOriginal }) => {
-  const [isChecked, setIsChecked] = useState(original.priceId);
+const Size = ({ history, setHistory, original, setOriginal }) => {
+  const [isChecked, setIsChecked] = useState(original.sizeId);
 
-  const [prices, setPrices] = useState([
-    { id: 1, price: "1만원 미만", min: 0, max: 10000 },
-    { id: 2, price: "1만원 이상 3만원 미만", min: 10000, max: 30000 },
-    { id: 3, price: "3만원 이상 7만원 미만", min: 30000, max: 70000 },
-    { id: 4, price: "7만원 이상 10만원 미만", min: 70000, max: 100000 },
-    { id: 5, price: "10만원 이상", min: 100000, max: 1000000 },
+  const ThisStep = 45;
+
+  const [sizes, setSizes] = useState([
+    { id: 1, size: "미니", exp: "지름 11cm, 1~2인분" },
+    { id: 2, size: "1호", exp: "지름 15cm, 2~4인분" },
+    { id: 3, size: "2호", exp: "지름 13cm, 4~6인분" },
+    { id: 4, size: "3호", exp: "지름 21cm, 6~8인분" },
+    { id: 5, size: "3호 이상", exp: "" },
+    { id: 6, size: "컵케이크", exp: "" },
   ]);
-
-  const ThisStep = 75;
 
   const onToggle = id => {
     setIsChecked(id);
@@ -30,54 +31,53 @@ const Price = ({ history, setHistory, original, setOriginal }) => {
   const Back = () => {
     setHistory(ThisStep);
   };
-
   const Next = () => {
     setHistory(ThisStep);
     setOriginal({
       ...original,
-      priceId: isChecked,
-      min: prices[isChecked - 1].min,
-      max: prices[isChecked - 1].max,
+      sizeId: isChecked,
+      size: sizes[isChecked - 1].size,
     });
   };
 
   return (
     <div>
-      <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
+      <PageTitle title="제안서 수정하기" margin="56px auto 0 auto" />
       <ProgessBar step={ThisStep} before={history} />
-
-      <ProposalText text="원하는 가격대를 선택해주세요." />
+      <ProposalText text="케이크 사이즈를 선택해주세요." />
 
       <Wrapper>
-        {prices.map(price => {
-          if (price.id === isChecked) {
+        {sizes.map(size => {
+          if (size.id === isChecked) {
             return (
               <div
-                onClick={() => onToggle(price.id)}
+                onClick={() => onToggle(size.id)}
                 className="item"
-                key={price.id}
+                key={size.id}
                 style={{
                   display: "flex",
                   height: "60px",
                 }}
               >
                 <Circle checked />
-                <Option>{price.price}</Option>
+                <Option>{size.size}</Option>
+                <Exp>{size.exp}</Exp>
               </div>
             );
           } else {
             return (
               <div
-                onClick={() => onToggle(price.id)}
+                onClick={() => onToggle(size.id)}
                 className="item"
-                key={price.id}
+                key={size.id}
                 style={{
                   display: "flex",
                   height: "60px",
                 }}
               >
                 <Circle />
-                <Option>{price.price}</Option>
+                <Option>{size.size}</Option>
+                <Exp>{size.exp}</Exp>
               </div>
             );
           }
@@ -92,13 +92,13 @@ const Price = ({ history, setHistory, original, setOriginal }) => {
           justifyContent: "center",
         }}
       >
-        <Link to="/create/taste">
+        <Link to="/edit/cake">
           <SmallWhiteButton onClick={() => Back()}>이전</SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
           {isChecked ? (
-            <Link to="/create/design">
+            <Link to="/edit/taste">
               <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
             </Link>
           ) : (
@@ -110,7 +110,7 @@ const Price = ({ history, setHistory, original, setOriginal }) => {
   );
 };
 
-export default Price;
+export default Size;
 
 const Wrapper = styled.div`
   height: auto;
@@ -140,7 +140,7 @@ const Circle = styled.div`
 
 const Option = styled.p`
   margin: auto 0 auto 23px;
-  width: 150px;
+  width: 75px;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 400;
@@ -149,4 +149,15 @@ const Option = styled.p`
   line-height: 14px;
 
   color: var(--black);
+`;
+
+const Exp = styled.p`
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 32px;
+  /* identical to box height */
+
+  color: var(--sub-darkgray);
 `;

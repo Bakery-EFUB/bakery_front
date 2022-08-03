@@ -5,23 +5,22 @@ import { Link } from "react-router-dom";
 import SmallPinkButton from "../../components/Proposal/SmallPinkButton";
 import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
 import SmallGrayButton from "../../components/Proposal/SmallGrayButton";
-
 import PageTitle from "../../components/Common/PageTitle";
+
 import ProposalText from "../../components/Proposal/ProposalText";
 import ProgessBar from "../../components/Proposal/ProgressBar";
 
-const Price = ({ history, setHistory, original, setOriginal }) => {
-  const [isChecked, setIsChecked] = useState(original.priceId);
+const Taste = ({ history, setHistory, original, setOriginal }) => {
+  const [isChecked, setIsChecked] = useState(original.tasteId);
+  const [design, setDesign] = useState(original.design);
 
-  const [prices, setPrices] = useState([
-    { id: 1, price: "1만원 미만", min: 0, max: 10000 },
-    { id: 2, price: "1만원 이상 3만원 미만", min: 10000, max: 30000 },
-    { id: 3, price: "3만원 이상 7만원 미만", min: 30000, max: 70000 },
-    { id: 4, price: "7만원 이상 10만원 미만", min: 70000, max: 100000 },
-    { id: 5, price: "10만원 이상", min: 100000, max: 1000000 },
+  const [tastes, setTastes] = useState([
+    { id: 1, taste: "초코" },
+    { id: 2, taste: "바닐라" },
+    { id: 3, taste: "기타" },
   ]);
 
-  const ThisStep = 75;
+  const ThisStep = 60;
 
   const onToggle = id => {
     setIsChecked(id);
@@ -35,54 +34,64 @@ const Price = ({ history, setHistory, original, setOriginal }) => {
     setHistory(ThisStep);
     setOriginal({
       ...original,
-      priceId: isChecked,
-      min: prices[isChecked - 1].min,
-      max: prices[isChecked - 1].max,
+      tasteId: isChecked,
+      taste: tastes[isChecked - 1].taste,
+      design: design,
     });
   };
 
   return (
     <div>
-      <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
+      <PageTitle title="제안서 수정하기" margin="56px auto 0 auto" />
       <ProgessBar step={ThisStep} before={history} />
 
-      <ProposalText text="원하는 가격대를 선택해주세요." />
+      <ProposalText text="어떤 맛을 원하시나요?" />
 
       <Wrapper>
-        {prices.map(price => {
-          if (price.id === isChecked) {
+        {tastes.map(taste => {
+          if (taste.id === isChecked) {
             return (
               <div
-                onClick={() => onToggle(price.id)}
+                onClick={() => onToggle(taste.id)}
                 className="item"
-                key={price.id}
+                key={taste.id}
                 style={{
                   display: "flex",
                   height: "60px",
                 }}
               >
                 <Circle checked />
-                <Option>{price.price}</Option>
+                <Option>{taste.taste}</Option>
               </div>
             );
           } else {
             return (
               <div
-                onClick={() => onToggle(price.id)}
+                onClick={() => onToggle(taste.id)}
                 className="item"
-                key={price.id}
+                key={taste.id}
                 style={{
                   display: "flex",
                   height: "60px",
                 }}
               >
                 <Circle />
-                <Option>{price.price}</Option>
+                <Option>{taste.taste}</Option>
               </div>
             );
           }
         })}
       </Wrapper>
+
+      <ProposalText text="디자인에 대해 상세히 적어주세요!"></ProposalText>
+
+      <DesignInput>
+        <textarea
+          value={design}
+          onChange={e => setDesign(e.target.value)}
+          placeholder="ex) 레터링을 ‘생일 축하해'로 해주세요!"
+        />
+      </DesignInput>
 
       <div
         style={{
@@ -92,13 +101,13 @@ const Price = ({ history, setHistory, original, setOriginal }) => {
           justifyContent: "center",
         }}
       >
-        <Link to="/create/taste">
-          <SmallWhiteButton onClick={() => Back()}>이전</SmallWhiteButton>
+        <Link to="/edit/size">
+          <SmallWhiteButton onClick={() => Back()}> 이전</SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
           {isChecked ? (
-            <Link to="/create/design">
+            <Link to="/edit/price">
               <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
             </Link>
           ) : (
@@ -110,7 +119,7 @@ const Price = ({ history, setHistory, original, setOriginal }) => {
   );
 };
 
-export default Price;
+export default Taste;
 
 const Wrapper = styled.div`
   height: auto;
@@ -140,7 +149,7 @@ const Circle = styled.div`
 
 const Option = styled.p`
   margin: auto 0 auto 23px;
-  width: 150px;
+  width: 75px;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 400;
@@ -149,4 +158,53 @@ const Option = styled.p`
   line-height: 14px;
 
   color: var(--black);
+`;
+
+const Exp = styled.p`
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 32px;
+  /* identical to box height */
+
+  color: var(--sub-darkgray);
+`;
+
+const DesignInput = styled.form`
+  min-height: 50px;
+  height: auto;
+
+  margin: 38px 24px 0 24px;
+  background: var(--sub-lightgray);
+  border-radius: 6px;
+  border: none;
+  padding: auto;
+
+  textarea {
+    width: 346px;
+    height: 17px;
+
+    resize: none;
+    overflow: auto;
+
+    padding: 17px;
+
+    background: transparent;
+    border: none;
+    color: var(--sub-darkgray);
+
+    font-family: "Apple SD Gothic Neo";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  textarea::placeholder {
+    color: var(--background);
+  }
+  textarea:focus {
+    outline: none;
+  }
 `;

@@ -68,7 +68,7 @@ const Done = () => {
     <div>
       <Image />
 
-      <BigText>제안서 작성하기 완료!</BigText>
+      <BigText>제안서 수정 완료!</BigText>
       <SmallText>곧 있으면 사장님들이 연락을 드릴거에요</SmallText>
 
       <Link to="/" style={{ textDecoration: "none" }}>

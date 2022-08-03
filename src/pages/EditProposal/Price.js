@@ -43,7 +43,7 @@ const Price = ({ history, setHistory, original, setOriginal }) => {
 
   return (
     <div>
-      <PageTitle title="제안서 작성하기" margin="56px auto 0 auto" />
+      <PageTitle title="제안서 수정하기" margin="56px auto 0 auto" />
       <ProgessBar step={ThisStep} before={history} />
 
       <ProposalText text="원하는 가격대를 선택해주세요." />
@@ -92,13 +92,13 @@ const Price = ({ history, setHistory, original, setOriginal }) => {
           justifyContent: "center",
         }}
       >
-        <Link to="/create/taste">
+        <Link to="/edit/taste">
           <SmallWhiteButton onClick={() => Back()}>이전</SmallWhiteButton>
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
           {isChecked ? (
-            <Link to="/create/design">
+            <Link to="/edit/design">
               <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
             </Link>
           ) : (

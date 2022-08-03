@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { GetRecommend } from "../../api/home";
+import { GetRecommendShop } from "../../api/home";
 import { useEffect, useState } from "react";
 //axios 적용 전 임시
 import recommend from "../../_mock/recommendShopList";
@@ -18,17 +18,16 @@ const ShopDisplay = ({ title }) => {
   const [allShopInfo, setAllShopInfo] = useState([]);
 
   useEffect(() => {
-    setAllShopInfo(recommend);
+    //setAllShopInfo(recommend);
 
-    /* GetRecommend()
+    GetRecommendShop()
       .then(data => {
         console.log(data);
-        console.log(recommend);
         setAllShopInfo();
       })
       .catch(e => {
         console.log(e);
-      });*/
+      });
   }, []);
 
   return (
@@ -42,11 +41,15 @@ const ShopDisplay = ({ title }) => {
         </Link>
       </Header>
       <Body>
-        {allShopInfo.map(shop => {
-          return (
-            <Card key={shop.id} title={shop.name} image={shop.mainImg}></Card>
-          );
-        })}
+        {allShopInfo ? (
+          allShopInfo.map(shop => {
+            return (
+              <Card key={shop.id} title={shop.name} image={shop.mainImg}></Card>
+            );
+          })
+        ) : (
+          <Card subtitle={"등록된 가게가 없습니다"}></Card>
+        )}
       </Body>
     </CardDisplayContainer>
   );

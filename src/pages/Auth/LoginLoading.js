@@ -6,12 +6,22 @@ const LoginLoading = () => {
   const nav = useNavigate();
   const token = new URL(document.location.toString()).searchParams.get("token");
   localStorage.setItem("token", JSON.stringify(token));
-  console.log("토큰입니다".token);
+
+  const firstLogin = new URL(document.location.toString()).searchParams.get(
+    "firstLogin",
+  );
 
   AuthService.login(token)
     .then(res => {
       localStorage.setItem("user", JSON.stringify(res.data));
-      nav("/");
+
+      if (firstLogin === "false") {
+        console.log("firstLogin아아아아아", firstLogin);
+        nav("/loginhome");
+      } else {
+        nav("/");
+      }
+
       console.log("로그인 정보 확인", res.data);
     })
     .catch(e => {

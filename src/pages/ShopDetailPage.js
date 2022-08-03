@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import TopBar from "../components/Common/Sidebar/TopBar";
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../components/Common/PageTitle";
 import mainImg from "../images/TempShopImage.png";
 import modifyImg from "../images/ModifyInfo.svg";
 import moreIcon from "../images/MoreIcon.svg";

@@ -15,7 +15,8 @@ const PickUp = ({
   setHistory,
   original,
   setOriginal,
-  postProposal,
+  dropHandler,
+  EditProposal,
 }) => {
   const ThisStep = 95;
 
@@ -25,8 +26,8 @@ const PickUp = ({
 
   const Next = () => {
     setHistory(ThisStep);
-    setOriginal({ ...original, PickUp });
-    postProposal();
+    dropHandler();
+    EditProposal();
   };
 
   // 선택된 날짜 (예약 부분은 여기선 필요 없음)
@@ -67,7 +68,7 @@ const PickUp = ({
 
   return (
     <div>
-      <PageTitle margin="56px auto 0 auto" title="제안서 작성하기" />
+      <PageTitle margin="56px auto 0 auto" title="제안서 수정하기" />
 
       <ProgessBar step={ThisStep} before={history} />
 
@@ -89,7 +90,7 @@ const PickUp = ({
           justifyContent: "center",
         }}
       >
-        <Link to="/create/design">
+        <Link to="/edit/design">
           <SmallWhiteButton onClick={() => Back()}>이전</SmallWhiteButton>
         </Link>
 
