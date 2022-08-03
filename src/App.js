@@ -15,7 +15,6 @@ import AllProposal from "./pages/AllProposal";
 
 import ShopMypageStart from "./pages/ShopMyPageStart";
 
-import Proposal from "./pages/Proposal";
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
 import EditProposal from "./pages/EditProposal";
 
@@ -27,6 +26,8 @@ import ClientRoute from "./route/ClientRoute";
 import TraineeRoute from "./route/TraineeRoute";
 import BakerRoute from "./route/BakerRoute";
 import ShopCakerMyPage from "./pages/MyPage/ShopCakerMyPage";
+import Proposal from "./pages/Proposal";
+
 import Kakao from "./pages/Auth/Kakao";
 function App() {
   console.log(userRole);
@@ -49,13 +50,12 @@ function App() {
         <Route path="/edit/*" element={<EditProposal />} />
         <Route path="/proposal/:id" element={<Proposal />} />
 
-        <Route exact path="/serviceinfo" element={<OurService />} />
-
         <Route exact path="/about" element={<OurService />} />
 
-        <Route exact path="/mypagehost" element={<ShopMemberMyPage />} />
         <Route exact path="/mypagecaker" element={<ShopCakerMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
+        <Route exact path="/shopdetail" element={<ShopDetailPage />} />
+
         <Route exact path="/client/mypage" element={<ShopMemberMyPage />} />
         <Route exact path="/shop/mypage" element={<ShopMypageStart />} />
         <Route

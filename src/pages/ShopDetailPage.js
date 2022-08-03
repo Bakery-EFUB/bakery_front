@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import TopBar from "../components/Common/Sidebar/TopBar";
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../components/Common/PageTitle";
 import modifyImg from "../images/ModifyInfo.svg";
 import moreIcon from "../images/MoreIcon.svg";
 import { DetailInfoCard } from "../components/DetailInfoCard";
 import DetailInfoItem from "../components/DetailInfoItem";
-import {useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { GetMyStoreDetail, GetStoreDetail } from "../api/store";
 
 const PaddingBox = styled.div`
@@ -89,7 +89,7 @@ const ShopDetailPage = () => {
   const [shopDetail, setShopDetail] = useState({});
   useEffect(() => {
     GetStoreDetail(storeId)
-      .then((res) => {
+      .then(res => {
         setShopDetail(res);
       })
       .catch(e => console.error(e));
@@ -111,14 +111,13 @@ const ShopDetailPage = () => {
       setOpenMore([{ WebkitLineClamp: "100" }, { transform: "scaleY(-1)" }]);
     } else setOpenMore([{}, {}]);
   };
-  const isOwner = (id) => {
-    if (JSON.parse(localStorage.user)?.authority !== 'BAKER') return false;
-    
+  const isOwner = id => {
+    if (JSON.parse(localStorage.user)?.authority !== "BAKER") return false;
+
     let userStoreId = -1;
-    GetMyStoreDetail()
-      .then(res => userStoreId = res.id);
+    GetMyStoreDetail().then(res => (userStoreId = res.id));
     return userStoreId === id;
-  }
+  };
   return (
     <div>
       <TopBar />
@@ -133,12 +132,12 @@ const ShopDetailPage = () => {
               {shopDetail.certifyFlag ? "등록가게" : "미등록가게"}
             </IsRegistered>
           </div>
-          { isOwner(shopDetail.id) &&
+          {isOwner(shopDetail.id) && (
             <ModifyIcon
               className="modify-info"
               onClick={() => navigator("/shopmodify")}
             />
-          }
+          )}
         </ShopDetailHeader>
         <HorizonEmptySpace height="45px" />
         <SubTitle>소개</SubTitle>
@@ -154,11 +153,13 @@ const ShopDetailPage = () => {
           <DetailInfoItem
             category="전화번호"
             content={shopDetail.phoneNumber}
-            fontSize="16px" />
+            fontSize="16px"
+          />
           <DetailInfoItem
             category="주소"
             content={shopDetail.address}
-            fontSize="16px" />
+            fontSize="16px"
+          />
           <DetailInfoItem
             category="운영시간"
             content={shopDetail.openTime}
@@ -166,7 +167,10 @@ const ShopDetailPage = () => {
           />
           <DetailInfoItem
             category="문의"
-            content={getMoreInfoSNSLinkElement( shopDetail.kakaoUrl, shopDetail.instagram )}
+            content={getMoreInfoSNSLinkElement(
+              shopDetail.kakaoUrl,
+              shopDetail.instagram,
+            )}
             fontSize="16px"
           />
         </DetailInfoCard>

@@ -30,7 +30,7 @@ export const SHOP_DATA = [
     keyword: "운영 시간",
   },
   {
-    key: "kakao",
+    key: "kakaoUrl",
     height: "60px",
     placeholder: "     운영중인 카카오톡 채널이 있다면 링크를 첨부해주세요.",
     keyword: "카카오톡 채널",
@@ -44,12 +44,13 @@ export const SHOP_DATA = [
 ];
 
 export const DEFAULT_STORE_DATA = {
-  name: "",
-  readme: "",
-  phoneNumber: "",
-  address: "",
-  openTime: "",
-  kakaoUrl: "",
-  instagram: "",
-  certifyFlag: 0,
+  name: "", //(string)
+  readme: "", //string
+  address: "", //string
+  kakaoUrl: "", //string
+  instagram: "", //string
+  certifyFlag: 0, //가게 인증 여부 (boolean)
+  openTime: "", //string
+  phoneNumber: "", //string
+  mainImg: "",
 };

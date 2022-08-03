@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const BigPinkButton = ({ children, margin }) => {
+const BigPinkButton = ({ children, margin, onClick }) => {
   const Button = styled.div`
     text-decoration: none;
     height: 60px;
@@ -26,7 +26,7 @@ const BigPinkButton = ({ children, margin }) => {
     text-transform: uppercase;
   `;
 
-  return <Button>{children}</Button>;
+  return <Button onClick={onClick}>{children}</Button>;
 };
 
 export default BigPinkButton;
