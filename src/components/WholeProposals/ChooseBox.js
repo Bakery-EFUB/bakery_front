@@ -75,7 +75,7 @@ const CakeType = [
 const Dropdown = ({ items }) => {
   return (
     <div>
-      <CustomSelect autofocus>
+      <CustomSelect autoFocus>
         {items.map((item, idx) => (
           <option key={idx} value={item}>
             {item}

@@ -2,7 +2,7 @@ import TopBar from "../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
 import UserLogoimg from "../images/UserLogo.svg";
 import Readingimg from "../images/Reading.svg";
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../components/Common/PageTitle";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
@@ -169,7 +169,7 @@ const ShopMypageProgressive = () => {
           <Completion>가게 인증</Completion>
           <Progress>진행중</Progress>
         </CertifyBox>
-        <Link to="/shopregister">
+        <Link to="/shop/register">
           <Button>가게 정보 등록하기</Button>
         </Link>
         <Reading />
