@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import TopBar from "../components/Common/Sidebar/TopBar";
-
 import CommentLogo from "../images/CommentLogo.svg";
-
 import SmallPinkButton from "../components/Proposal/SmallPinkButton";
 import SmallWhiteButton from "../components/Proposal/SmallWhiteButton";
-
-import PageTitle from "../components/Proposal/PageTitle";
-import axios from "axios";
+import PageTitle from "../components/Common/PageTitle";
 import CommentToggle from "../components/Proposal/CommentToggle";
 
 import { GetProposal } from "../api/proposal";

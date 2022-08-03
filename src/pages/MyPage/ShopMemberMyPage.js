@@ -1,14 +1,12 @@
 import TopBar from "../../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
-
-import PageTitle from "../../components/Proposal/PageTitle";
+import PageTitle from "../../components/Common/PageTitle";
 
 import UserLogoimg from "../../images/UserLogo.svg";
 import Mock from "../../images/Mock.svg";
 
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import orderList from "../../_mock/orderImage.json";
 import { userImage, userName } from "../../utils/auth";
 
@@ -149,6 +147,22 @@ const Article = styled.article`
 `;
 
 const ShopMemberMyPage = () => {
+  /* const [Mydatas, setMyData] = useState([]);
+  const getData = () => {
+    http
+      .get("/orders/myOrder")
+      .then(Response => {
+        console.log("받아오기 성공", Response.data);
+        setMyData(Response.data);
+      })
+      .catch(Error => {
+        console.log(Error);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []);*/
+
   const [OrderImage, setOrderImage] = useState([]);
   console.log(JSON.parse(localStorage.getItem("user")));
   useEffect(() => {
@@ -165,7 +179,7 @@ const ShopMemberMyPage = () => {
       <UserPlace>Caker 일반 회원</UserPlace>
       <UserImg ImageUrl={userImage}></UserImg>
       <PinkBox>
-        <Link to="/shopmodify">
+        <Link to="/create/*">
           <Button>제안서 작성하기</Button>
         </Link>
 
