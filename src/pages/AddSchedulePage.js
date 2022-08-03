@@ -59,7 +59,7 @@ const DropdownArrow = styled.span`
 const Dropdown = ({ items }) => {
   return (
     <div>
-      <CustomSelect autofocus>
+      <CustomSelect autoFocus>
         {items.map((item, idx) => (
           <option key={idx} value={item}>
             {item}
@@ -99,7 +99,20 @@ const BigPinkButtonBottom = styled.button`
 `;
 
 const AddSchedulePage = () => {
-  const month = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+  const month = [
+    "1월",
+    "2월",
+    "3월",
+    "4월",
+    "5월",
+    "6월",
+    "7월",
+    "8월",
+    "9월",
+    "10월",
+    "11월",
+    "12월",
+  ];
   const day = [];
   const time = [];
   for (let i = 1; i <= 31; i++) day.push(i + "일");

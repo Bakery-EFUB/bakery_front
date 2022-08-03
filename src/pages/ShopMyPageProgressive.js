@@ -169,7 +169,7 @@ const ShopMypageProgressive = () => {
           <Completion>가게 인증</Completion>
           <Progress>진행중</Progress>
         </CertifyBox>
-        <Link to="/shopregister">
+        <Link to="/shop/register">
           <Button>가게 정보 등록하기</Button>
         </Link>
         <Reading />

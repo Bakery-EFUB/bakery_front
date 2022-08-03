@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
+import Button from "../Button";
 
 const ShopIntroduceName = styled.div`
   width: 120px;
@@ -27,7 +28,7 @@ const ShopPhoto = styled.p`
   border: 1px solid var(--sub-lightgray);
   text-align: center;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   &:hover {
     border: 1px dashed #333;
@@ -35,12 +36,18 @@ const ShopPhoto = styled.p`
 `;
 
 //파일 컴포넌트
+const FileInfo = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
 const thumb = {
   display: "inline-flex",
   borderRadius: 2,
   marginBottom: 3,
   marginLeft: 1,
-  width: 80,
+  width: 100,
   height: 80,
   padding: 4,
   boxSizing: "border-box",
@@ -62,14 +69,31 @@ const img = {
   objectFit: "contain",
 };
 
+const DeleteButton = styled.button`
+  width: 40px;
+  height: 17px;
+  border-style: hidden;
+  text-decoration: underline;
+`;
+
 //ui 구현
 const ShopImgUpload = ({ setMainFile, MainFile }) => {
   //객체 요소
-  console.log(MainFile);
+  const onDelete = e => {
+    e.preventDefault();
+    setMainFile([]);
+    setVisible(!Visible);
+  };
+  const [Visible, setVisible] = useState(false);
+  const onCheck = e => {
+    e.preventDefault();
+    setVisible(!Visible);
+  };
+
   const { getRootProps, getInputProps } = useDropzone({
     //허용하는 파일 형식
     accept: {
-      "image/*": [],
+      "image/png": [],
     },
     onDrop: acceptedFiles => {
       setMainFile(
@@ -106,21 +130,25 @@ const ShopImgUpload = ({ setMainFile, MainFile }) => {
   return (
     <form action="/save" method="post" encType="multipart/form-data">
       <ShopIntroduceName>가게 대표 사진</ShopIntroduceName>
-      <section>
+      <section onDrop={onCheck}>
         <div {...getRootProps()}>
           <input {...getInputProps()} />
           <ShopPhoto>➕</ShopPhoto>
         </div>
         <ShopPhoto>
-          {" "}
-          {thumbs}
-          {MainFile.map(file => (
-            <div key={file.id}>
-              {file.name}
-              <br />
-              {file.size}KB
-            </div>
-          ))}{" "}
+          <FileInfo>
+            {" "}
+            {thumbs}
+            {MainFile.map(file => (
+              <div key={file.id}>
+                {file.name}
+                <br />
+                {file.size}KB
+              </div>
+            ))}
+          </FileInfo>
+
+          {Visible ? <DeleteButton onClick={onDelete}>삭제</DeleteButton> : ""}
         </ShopPhoto>
       </section>
     </form>
