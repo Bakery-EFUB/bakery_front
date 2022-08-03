@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Rectangle from "../../images/Rectangle.svg";
 import BoxLine from "../../images/BoxLine.svg";
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -53,7 +52,31 @@ const Timeshow = styled.div`
 const Line = styled.img`
   margin: 1%;
 `;
-const ProposalBox = () => {
+export function timeForToday(value) {
+  const today = new Date();
+  const timeValue = new Date(value);
+
+  const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+  if (betweenTime < 1) return '방금전';
+  if (betweenTime < 60) {
+      return `${betweenTime}분전`;
+  }
+
+  const betweenTimeHour = Math.floor(betweenTime / 60);
+  if (betweenTimeHour < 24) {
+      return `${betweenTimeHour}시간전`;
+  }
+
+  const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+  if (betweenTimeDay < 365) {
+      return `${betweenTimeDay}일전`;
+  }
+
+  return `${Math.floor(betweenTimeDay / 365)}년전`;
+};
+const ProposalBox = ({key, description, time, hashtag}) => {
+
+  
   return (
     <Container>
       <Oneproposal>
@@ -61,14 +84,13 @@ const ProposalBox = () => {
           <img src={Rectangle} />
         </Cakeimg>
         <Textbox>
-          <Title>cake1235</Title>
-          <Description>레터링케이크</Description>
+          <Title>{key}</Title>
+          <Description>{description}</Description>
           <HashtagBox>
-            <Hashtag>#서대문구</Hashtag>
-            <Hashtag>#북아현동</Hashtag>
+            <Hashtag>{hashtag}</Hashtag>
           </HashtagBox>
         </Textbox>
-        <Timeshow>10분전</Timeshow>
+        <Timeshow><timeForToday value = {time}/></Timeshow>
       </Oneproposal>
       <Line src={BoxLine} />
     </Container>

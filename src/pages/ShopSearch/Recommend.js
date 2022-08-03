@@ -1,3 +1,55 @@
+<<<<<<< HEAD
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import BigCardDisplay from "../../components/Common/BigCardDisplay";
+import PageTitle from "../../components/PageTitle";
+import TopBar from "../../components/Common/Sidebar/TopBar";
+import recommendShop from "../../_mock/recommendShopList.json";
+
+import { GetRecommendShop } from "../../api/home";
+import { Link } from "react-router-dom";
+const RecommendContainer = styled.div`
+  margin: 0 5%;
+`;
+
+const Recommend = () => {
+  const [allShop, setAllShop] = useState();
+
+  useEffect(() => {
+    setAllShop(recommendShop);
+    /*
+    GetRecommendShop()
+      .then(data => {
+        setAllShop(data);
+      })
+      .catch(e => {
+        console.log(e);
+      });*/
+  }, []);
+
+  return (
+    <>
+      <TopBar></TopBar>
+      <RecommendContainer>
+        <PageTitle title="가게 추천" margin="60px 0 63px 0" />
+        {allShop?.map(shop => {
+          return (
+            <Link to="/shopdetail" key={shop.id}>
+              <BigCardDisplay
+                MainText={shop.name}
+                SubText={shop.certifyFlag}
+                image={shop.mainImg}
+              ></BigCardDisplay>
+            </Link>
+          );
+        })}
+      </RecommendContainer>
+    </>
+  );
+};
+
+export default Recommend;
+=======
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import BigCardDisplay from "../../components/Common/BigCardDisplay";
@@ -48,3 +100,4 @@ const Recommend = () => {
 };
 
 export default Recommend;
+>>>>>>> ce39361191a01c19de76bc5ea1997237ef32bd81
