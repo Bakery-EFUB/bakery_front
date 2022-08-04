@@ -136,10 +136,20 @@ const PickupSchedulePage = () => {
         </div>
         <ScheduleDelete
           onClick={() =>
-            DeleteSchedule(storeId, eventId).then(
-              res => console.log(res),
-              e => console.error(e),
-            )
+            DeleteSchedule(storeId, eventId)
+              .then(() => {
+                setPickupSchedules(
+                  pickupSchedules.filter(
+                    schedule => schedule.eventId !== eventId,
+                  ),
+                );
+                setPickupOnSelectedDay(
+                  pickupOnSelectedDay.filter(
+                    schedule => schedule.eventId !== eventId,
+                  ),
+                );
+              })
+              .catch(e => console.error(e))
           }
         >
           삭제
@@ -182,7 +192,7 @@ const PickupSchedulePage = () => {
             ))
         )}
       </ScheduleCardList>
-      <Link to={`/addschedule/${storeId}`}>
+      <Link to={`/shop/addschedule/${storeId}`}>
         <BigPinkButtonBottom>일정 추가</BigPinkButtonBottom>
       </Link>
     </div>

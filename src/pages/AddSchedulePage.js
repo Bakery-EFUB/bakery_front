@@ -183,7 +183,7 @@ const AddSchedulePage = () => {
       pickupDate: pickupDate.toISOString().slice(0, -5),
       pickupTime: pickupDate.toISOString().slice(0, -5),
     })
-      .then(() => navigator(`/pickupschedule/${storeId}`))
+      .then(() => navigator(`/shop/pickupschedule/${storeId}`))
       .catch(error => console.log(error));
   };
 
