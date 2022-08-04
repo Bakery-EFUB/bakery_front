@@ -86,6 +86,7 @@ const CakeProductImage = styled.div`
 
 const ShopDetailPage = () => {
   const { storeId } = useParams();
+  localStorage.setItem("storeId", storeId);
   const [shopDetail, setShopDetail] = useState({});
   const [isOwner, setIsOwner] = useState(false);
   useEffect(() => {

@@ -149,7 +149,7 @@ const Article = styled.article`
 `;
 
 const ShopMemberMyPage = () => {
-  /* const [Mydatas, setMyData] = useState([]);
+  const [Mydatas, setMyData] = useState([]);
   const getData = () => {
     http
       .get("/orders/myOrder")
@@ -163,7 +163,7 @@ const ShopMemberMyPage = () => {
   };
   useEffect(() => {
     getData();
-  }, []);*/
+  }, []);
 
   const [OrderImage, setOrderImage] = useState([]);
   console.log(JSON.parse(localStorage.getItem("user")));

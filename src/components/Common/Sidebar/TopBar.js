@@ -49,6 +49,7 @@ const Profile = styled.div`
   align-items: center;
   margin: 0 0 32px;
 `;
+
 const ProfileImg = styled.div`
   background-repeat: no-repeat;
   background-position: center center;

@@ -6,6 +6,8 @@ import PageTitle from "../../components/Common/PageTitle";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import orderList from "../../_mock/orderImage.json";
+import http from "../../common/http";
+import axios from "axios";
 
 //전체 크기
 const WrapBox = styled.div`
@@ -147,14 +149,27 @@ const Article = styled.article`
 
 const ShopCakerMyPage = () => {
   const [OrderImage, setOrderImage] = useState([]);
-  console.log(JSON.parse(localStorage.getItem("user")));
-  useEffect(() => {
-    console.log(orderList);
-    setOrderImage(orderList["sheetResponseDTOs"]);
-  }, []);
 
+  console.log(JSON.parse(localStorage.getItem("user")));
   const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
 
+  const [Mydatas, setMyData] = useState([]);
+  const getData = () => {
+    http
+      .get("orders/myPin")
+      .then(Response => {
+        console.log("받아오기 성공", Response.data.sheetResponseDTOs);
+        setMyData(Response.data.sheetResponseDTOs);
+      })
+      .catch(Error => {
+        console.log("에러", Error);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const Id = localStorage.getItem("storeId");
   return (
     <WrapBox>
       <TopBar></TopBar>
@@ -166,13 +181,15 @@ const ShopCakerMyPage = () => {
       <UserPlace>Caker 가게 회원</UserPlace>
       <UserImg ImageUrl={ImageUrl}></UserImg>
       <PinkBox>
-        <Link to="/shopmodify">
+        <Link to="/shop/modify">
           <Button>가게 정보 관리</Button>
         </Link>
-        <Button>픽업 일정 관리</Button>
+        <Link to="/shop/pickupschedule/:{Id}">
+          <Button>픽업 일정 관리</Button>
+        </Link>
         <CommitProposal>댓글 단 제안서</CommitProposal>
         <BottomProposal>
-          {OrderImage.map(order => {
+          {Mydatas.map(order => {
             return (
               <Article
                 key={order.sheetId}
@@ -183,6 +200,7 @@ const ShopCakerMyPage = () => {
             );
           })}
         </BottomProposal>
+
         <MoreView>
           더보기
           <br />∨
