@@ -23,6 +23,7 @@ const PickUp = ({
 
   const Back = () => {
     setHistory(ThisStep);
+    nav(-1);
   };
 
   const Next = () => {

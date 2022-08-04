@@ -94,6 +94,8 @@ const TopBar = () => {
   const Logout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("user");
+    localStorage.setItem("isLogin", JSON.stringify("false"));
+
     location.reload();
   };
 
