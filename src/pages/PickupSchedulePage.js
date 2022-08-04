@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import TopBar from "../components/Common/Sidebar/TopBar";
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../components/Common/PageTitle";
 import CustomCalendar from "../components/Proposal/CustomCalendar";
 import { Link, useParams } from "react-router-dom";
 import { DeleteSchedule, GetAllSchedules } from "../api/eventschedule";
