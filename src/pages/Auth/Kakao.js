@@ -47,7 +47,6 @@ const Kakao = () => {
           onClick={() => {
             location.href = "https://caker.shop/oauth2/authorization/kakao";
           }}
-          text={"카카오임"}
         ></KakaoButton>
       </Container>
     </div>
