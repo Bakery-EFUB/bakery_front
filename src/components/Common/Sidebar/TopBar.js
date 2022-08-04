@@ -30,11 +30,7 @@ const TopLogo = styled.div`
   background: url(${TopLogoimg});
   width: 130.13px;
   height: 33px;
-  position: absolute;
-  left: 34.79%;
-  right: 34.8%;
-  top: 21.71%;
-  bottom: 23.29%;
+  margin: 12px auto;
 `;
 
 const TopMenuBar = styled.div`
@@ -98,6 +94,8 @@ const TopBar = () => {
   const Logout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("user");
+    localStorage.setItem("isLogin", JSON.stringify("false"));
+
     location.reload();
   };
 

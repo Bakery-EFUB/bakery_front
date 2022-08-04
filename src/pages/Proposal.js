@@ -8,7 +8,6 @@ import SmallWhiteButton from "../components/Proposal/SmallWhiteButton";
 import PageTitle from "../components/Common/PageTitle";
 import CommentToggle from "../components/Proposal/CommentToggle";
 
-import { GetProposal } from "../api/proposal";
 import http from "../common/http";
 
 const Proposal = () => {
@@ -17,7 +16,16 @@ const Proposal = () => {
   const { id } = useParams();
   window.localStorage.setItem("order_id", id);
 
-  const me = JSON.parse(localStorage.getItem("user")).email;
+  // 로그인 유무
+  const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+  let me;
+  if (isLogin === "true") {
+    // 현재 유저 정보 뽑기
+    me = JSON.parse(localStorage.getItem("user")).email;
+  } else {
+    me = "none";
+  }
+  // 제안서 작성자 저장
   const [writer, setWriter] = useState(null);
 
   const [commentId, setCommentId] = useState(null);
@@ -30,8 +38,8 @@ const Proposal = () => {
   // 댓글 정보 여기에 저장
   const [comments, setComments] = useState([]);
 
+  // 댓글 개수
   let commentsLength = comments.length;
-
   for (let i = 0; i < comments.length; i++) {
     commentsLength += comments[i].recomments.length;
   }
@@ -62,6 +70,7 @@ const Proposal = () => {
       .delete(`/orders/${id}`)
       .then(function (response) {
         console.log("제안서 삭제", response);
+        navigate("/");
       })
       .catch(function (error) {
         console.log(error);
@@ -116,6 +125,7 @@ const Proposal = () => {
       .delete(`/orders/${id}/comments/${comment_id}`)
       .then(function (response) {
         console.log("댓글 삭제 성공", response);
+        location.reload();
       })
       .catch(function (error) {
         console.log(error);
@@ -123,13 +133,14 @@ const Proposal = () => {
   };
 
   // 대댓글 삭제
-  const DeleteReComment = async () => {
+  const DeleteReComment = async (comment_id, recomments_id) => {
     const response = await http
       .delete(
         `/orders/${id}/comments/${comment_id}/recomments/${recomments_id}`,
       )
       .then(function (response) {
         console.log("대댓글 삭제 성공", response);
+        location.reload();
       })
       .catch(function (error) {
         console.log(error);
@@ -185,6 +196,7 @@ const Proposal = () => {
       .get(`/orders/${id}`)
       .then(response => {
         const data = response.data;
+        // 작성자
         setWriter(data.member.email);
         console.log(data, "성공");
         setOption({
@@ -199,7 +211,7 @@ const Proposal = () => {
         });
       })
       .catch(error => {
-        console.log("제안서불러오기실패다", error);
+        console.log("제안서불러오기실패", error);
       });
 
     // 댓글 불러오기
@@ -296,7 +308,10 @@ const Proposal = () => {
                       {me === re.writer.email ? (
                         <CommentToggle
                           onClick={() =>
-                            DeleteComment(comment.comment.commentId)
+                            DeleteReComment(
+                              comment.comment.commentId,
+                              re.recommentId,
+                            )
                           }
                         >
                           삭제

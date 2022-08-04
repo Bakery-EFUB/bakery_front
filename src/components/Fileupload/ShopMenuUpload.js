@@ -18,8 +18,8 @@ const ShopIntroduceName = styled.div`
 
 //가게 대표 사진
 const ShopMenuPhoto = styled.p`
-  margin: 10px 0 0 24px;
-  width: 380px;
+  margin: 10px 0px 0px 5%;
+  width: 90%;
   height: 100px;
   background: var(--sub-lightgray);
   border-radius: 6px;
