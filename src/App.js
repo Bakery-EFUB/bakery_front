@@ -39,26 +39,28 @@ function App() {
         <Route exact path="/*" element={<MainHome />} />
         <Route exact path="/kakaologin" element={<LoginLoading />} />
         <Route exact path="/kakao" element={<Kakao />} />
-
         <Route exact path="/loginhome" element={<LoginHome />} />
         <Route exact path="/loading" element={<LoadingPage />} />
-
         <Route exact path="/shopdetail/:storeId" element={<ShopDetailPage />} />
         <Route exact path="/search" element={<SearchPage />} />
         <Route exact path="/recommend" element={<Recommend />} />
-
         <Route path="/create/*" element={<CreateProposal />} />
         <Route path="/edit/*" element={<EditProposal />} />
         <Route path="/proposal/:id" element={<Proposal />} />
-
         <Route exact path="/about" element={<OurService />} />
-
         <Route exact path="/mypagecaker" element={<ShopCakerMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
-
         <Route exact path="/client/modify" element={<AccountSetting />} />
+
+        {/* 마이페이지 */}
         <Route exact path="/client/mypage" element={<ShopMemberMyPage />} />
+        <Route exact path="/caker/mypage" element={<ShopCakerMyPage />} />
         <Route exact path="/shop/mypage" element={<ShopMypageStart />} />
+        <Route
+          exact
+          path="/shop/progressive"
+          element={<ShopMyPageProgressive />}
+        />
         <Route
           exact
           path="/shop/register"
@@ -70,6 +72,8 @@ function App() {
           path="/shop/progressive"
           element={<ShopMyPageProgressive />}
         />
+
+        {/* 스케줄 */}
         <Route
           exact
           path="/shop/pickupschedule/:storeId"
