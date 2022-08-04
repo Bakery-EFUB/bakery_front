@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ShopImgUpload from "../../components/Fileupload/ShopImgUpload";
-import ShopMenuUpload from "../../components/Fileupload/ShopMenuUpload";
-import TopBar from "../../components/Common/Sidebar/TopBar";
-import { DetailInfoCard } from "../../components/DetailInfoCard";
-import DetailInfoItem from "../../components/DetailInfoItem";
+import ShopImgUpload from "../../../components/Fileupload/ShopImgUpload";
+import ShopMenuUpload from "../../../components/Fileupload/ShopMenuUpload";
+import TopBar from "../../../components/Common/Sidebar/TopBar";
+import { DetailInfoCard } from "../../../components/DetailInfoCard";
+import DetailInfoItem from "../../../components/DetailInfoItem";
+import { SHOP_DATA, DEFAULT_STORE_DATA } from "./const";
+import http from "../../../common/http";
 
 const WhiteModal = styled.div`
   margin: 70px 24.46px 90px 24.47px;
@@ -113,7 +115,7 @@ const CloseButton = styled.button`
 
 //전체
 const WrapBox = styled.div`
-  width: 428px;
+  width: 100%;
   height: 1850px;
 `;
 
@@ -147,9 +149,9 @@ const ShopIntroduceName = styled.div`
 
 //인풋 칸
 const ShopIntroduce = styled.input`
-  width: 380px;
+  width: 90%;
   height: ${props => props.height};
-  margin: 10px 0px 0px 24px;
+  margin: 10px 0px 0px 4.5%;
   background: var(--sub-lightgray);
   border-radius: 6px;
   border: 1px solid var(--sub-lightgray);
@@ -158,9 +160,9 @@ const ShopIntroduce = styled.input`
 
 //미리보기 버튼
 const BeforeShowBtn = styled.button`
-  margin: 70px 0px 0px 24px;
+  margin: 70px 0px 0px 5%;
   background: var(--white);
-  width: 180px;
+  width: 43%;
   height: 60px;
   border: 1px solid var(--main-pink);
   border-radius: 6px;
@@ -174,9 +176,9 @@ const BeforeShowBtn = styled.button`
 
 //수정 버튼
 const ModifyBtn = styled.button`
-  margin: 70px 0px 0px 24px;
+  margin: 70px 0px 0px 4%;
   background: var(--main-pink);
-  width: 180px;
+  width: 43%;
   height: 60px;
   border: 1px solid var(--main-pink);
   border-radius: 6px;
@@ -188,64 +190,20 @@ const ModifyBtn = styled.button`
   line-height: 19px;
 `;
 
+const token = JSON.parse(localStorage.getItem("token"));
+
 //ui 구현
 const ShopInformationModify = () => {
-  const [Name, setName] = useState("");
-  const [Readme, setReadme] = useState("");
-  const [PhoneNumber, setPhoneNumber] = useState("");
-  const [Address, setAddress] = useState("");
-  const [OpenTime, setOpenTime] = useState("");
-  const [KakaoUrl, setKakaoUrl] = useState("");
-  const [Instagram, setInstagram] = useState("");
+  const formData = new FormData();
+  const [storeData, setStoreData] = useState(DEFAULT_STORE_DATA);
   const [MainFile, setMainFile] = useState([]);
   const [MenuFile, setMenuFile] = useState([]);
   const [flip, setFlip] = useState(true);
 
-  console.log(MainFile);
-  console.log(MenuFile);
-
-  let body = {
-    storedata: {
-      name: Name,
-      readme: Readme,
-      phoneNumber: PhoneNumber,
-      address: Address,
-      openTime: OpenTime,
-      kakaoUrl: KakaoUrl,
-      instagram: Instagram,
-    },
-    mainImage: MainFile,
-    menuImage: MenuFile,
+  const updateStoreData = partialStoreData => {
+    setStoreData(prev => ({ ...prev, ...partialStoreData }));
   };
 
-  const NameHandler = e => {
-    e.preventDefault();
-    setName(e.target.value);
-  };
-  const ReadmeHandler = e => {
-    e.preventDefault();
-    setReadme(e.target.value);
-  };
-  const PhoneNumberHandler = e => {
-    e.preventDefault();
-    setPhoneNumber(e.target.value);
-  };
-  const AddressHandler = e => {
-    e.preventDefault();
-    setAddress(e.target.value);
-  };
-  const OpenTimeHandler = e => {
-    e.preventDefault();
-    setOpenTime(e.target.value);
-  };
-  const KakaoUrlHandler = e => {
-    e.preventDefault();
-    setKakaoUrl(e.target.value);
-  };
-  const InstagramHandler = e => {
-    e.preventDefault();
-    setInstagram(e.target.value);
-  };
   const MainFileHandler = e => {
     e.preventDefault();
     setShopFile(e.tartget.value);
@@ -261,84 +219,60 @@ const ShopInformationModify = () => {
 
   //제출 -> 백엔드로 post
   const submitHandler = e => {
-    e.preventDefault();
+    console.log(storeData);
 
-    FormData.append("data", JSON.stringify(body));
+    http
+      .post("/stores/myStore", storeData, {
+        headers: {
+          "Content-type": "application/json",
+        },
+      })
+      .then(res => postImg(res.data))
 
-    const postSurvey = axios({
-      method: "POST",
-      url: "https://caker.shop/stores/myStore",
-      mode: "cors",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      data: formData,
-    });
+      // .then(res => postImg(res.orderId))
+      .catch(err => console.log("json 포스트 실패", err));
 
-    console.log(postSurvey);
+    const postImg = async id => {
+      formData.append("mainImg", MainFile[0].original, "mainImage.png");
+      formData.append("menuImg", MenuFile[0].original, "menuImage.png");
+      formData.append("storeId", id);
+      for (const keyValue of formData) console.log(keyValue);
+      axios
+        .patch("https://caker.shop/stores/myStore/image", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "X-AUTH-TOKEN": token,
+          },
+        })
+        .then(res => console.log("파일 포스트 성공", res))
+        .catch(err => console.log("파일 포스트 실패", err));
+    };
   };
+
   if (flip == true) {
     return (
       <WrapBox>
         <TopBar />
-        <form onSubmit={submitHandler}>
+        <div>
           <ShopRegistering>가게 정보 수정</ShopRegistering>
-          <ShopIntroduceName>가게 이름</ShopIntroduceName>
-          <ShopIntroduce
-            height="60px"
-            type="text"
-            value={Name}
-            onChange={NameHandler}
-            placeholder="     정확한 상호명을 입력해주세요."
-          />
-          <ShopIntroduceName>가게 소개</ShopIntroduceName>
-          <ShopIntroduce
-            height="125px"
-            type="text"
-            value={Readme}
-            onChange={ReadmeHandler}
-            placeholder="     자신의 가게를 자유롭게 소개해주세요! (최대 300자)"
-          />
-          <ShopIntroduceName>전화번호</ShopIntroduceName>
-          <ShopIntroduce
-            height="60px"
-            type="text"
-            value={PhoneNumber}
-            onChange={PhoneNumberHandler}
-            placeholder="     ex. 02-0000-0000"
-          />
-          <ShopIntroduceName>주소</ShopIntroduceName>
-          <ShopIntroduce
-            height="60px"
-            type="text"
-            value={Address}
-            onChange={AddressHandler}
-            placeholder="     ex. 서울특별시 서대문구 대현동 11-11층"
-          />
-          <ShopIntroduceName>운영 시간</ShopIntroduceName>
-          <ShopIntroduce
-            height="60px"
-            type="text"
-            value={OpenTime}
-            onChange={OpenTimeHandler}
-            placeholder="     ex. 매일 12:00~20:00"
-          />
-          <ShopIntroduceName>카카오톡 채널</ShopIntroduceName>
-          <ShopIntroduce
-            height="60px"
-            type="text"
-            value={KakaoUrl}
-            onChange={KakaoUrlHandler}
-            placeholder="     운영중인 카카오톡 채널이 있다면 링크를 첨부해주세요."
-          />
-          <ShopIntroduceName>인스타그램</ShopIntroduceName>
-          <ShopIntroduce
-            height="60px"
-            type="text"
-            value={Instagram}
-            onChange={InstagramHandler}
-            placeholder="     운영중인 인스타그램이 있다면 링크를 첨부해주세요."
-          />
+          {SHOP_DATA.map(data => {
+            return (
+              <React.Fragment key={data.key}>
+                <ShopIntroduceName>{data.keyword}</ShopIntroduceName>
+                <ShopIntroduce
+                  type="text"
+                  height={data.height}
+                  value={storeData[data.key]}
+                  onChange={e => {
+                    e.preventDefault();
+                    updateStoreData({ [data.key]: e.target.value });
+                  }}
+                  placeholder={data.placeholder}
+                />
+              </React.Fragment>
+            );
+          })}
+
           {/* 드래그앤 드롭 파일 컴포넌트 2개 */}
           <ShopImgUpload
             MainFile={MainFile}
@@ -353,8 +287,8 @@ const ShopInformationModify = () => {
 
           <BeforeShowBtn onClick={onPreview}>미리보기</BeforeShowBtn>
 
-          <ModifyBtn type="submit">수정하기</ModifyBtn>
-        </form>
+          <ModifyBtn onClick={submitHandler}>수정하기</ModifyBtn>
+        </div>
       </WrapBox>
     );
   } else {
@@ -375,25 +309,25 @@ const ShopInformationModify = () => {
               })}
             </MainImages>
             <ShopDetailHeader>
-              <ShopName>{Name}</ShopName>
+              <ShopName>{storeData.name}</ShopName>
               <IsRegistered>등록가게</IsRegistered>
             </ShopDetailHeader>{" "}
             <SubTitle>소개</SubTitle>
-            <ShopDesc>{Readme}</ShopDesc>
+            <ShopDesc>{storeData.readme}</ShopDesc>
             <DetailInfoCard>
               <DetailInfoItem
                 category="전화번호"
-                content={PhoneNumber}
+                content={storeData.phoneNumber}
                 fontSize="14px"
               />
               <DetailInfoItem
                 category="주소"
-                content={Address}
+                content={storeData.address}
                 fontSize="14px"
               />
               <DetailInfoItem
                 category="운영시간"
-                content={OpenTime}
+                content={storeData.openTime}
                 fontSize="14px"
               />
               <DetailInfoItem

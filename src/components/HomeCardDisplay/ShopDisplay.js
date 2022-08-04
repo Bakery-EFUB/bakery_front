@@ -19,11 +19,9 @@ const ShopDisplay = ({ title }) => {
 
   useEffect(() => {
     //setAllShopInfo(recommend);
-
     GetRecommendShop()
       .then(data => {
-        console.log(data);
-        setAllShopInfo();
+        setAllShopInfo(data);
       })
       .catch(e => {
         console.log(e);
@@ -44,7 +42,13 @@ const ShopDisplay = ({ title }) => {
         {allShopInfo ? (
           allShopInfo.map(shop => {
             return (
-              <Card key={shop.id} title={shop.name} image={shop.mainImg}></Card>
+              <Link
+                to={`/shopdetail/${shop.id}`}
+                key={shop.id}
+                style={{ marginRight: "3%" }}
+              >
+                <Card title={shop.name} image={shop.mainImg}></Card>
+              </Link>
             );
           })
         ) : (

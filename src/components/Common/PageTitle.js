@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
-const PageTitle = ({ title, margin }) => {
-  const PageTitleBox = styled.div`
+const PageTitleBox = styled.div`
     display: flex;
     justify-content: center;
 
-    margin: ${margin};
+    margin: ${({ margin }) => margin};
   `;
 
-  const Highlight = styled.div`
+const Highlight = styled.div`
     display: inline-block;
 
     height: 13px;
@@ -16,12 +15,11 @@ const PageTitle = ({ title, margin }) => {
     vertical-align: center;
   `;
 
-  const TitleText = styled.div`
+const TitleText = styled.div`
     width: fit-content;
     margin: 0 3px;
     position: relative;
     bottom: 9px;
-    font-family: "Apple SD Gothic Neo";
     font-style: normal;
     font-weight: 700;
     font-size: 22px;
@@ -31,8 +29,9 @@ const PageTitle = ({ title, margin }) => {
     color: var(--black-text);
   `;
 
+const PageTitle = ({ title, margin }) => {
   return (
-    <PageTitleBox>
+    <PageTitleBox margin={margin}>
       <Highlight>
         <TitleText>{title}</TitleText>
       </Highlight>

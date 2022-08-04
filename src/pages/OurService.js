@@ -17,6 +17,7 @@ const Container = styled.div`
 const BackGroundImg = styled.div`
   background: url(${ServiceBackground});
   background-repeat: no-repeat;
+  align-content: center;
   width: 100%;
   margin-top: 23%;
   height: 1379.12px;
