@@ -9,6 +9,85 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import orderList from "../../_mock/orderImage.json";
 import { userImage, userName } from "../../utils/auth";
+import http from "../../common/http";
+
+const ShopMemberMyPage = () => {
+  const [Mydatas, setMyData] = useState([]);
+  const [SixImg, setSixImg] = useState([]);
+
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (Mydatas.length > 6) {
+      setSixImg(Mydatas.slice(0, 6));
+      console.log("앞에", SixImg);
+    }
+  }, [Mydatas]);
+
+  const getData = () => {
+    http
+      .get("/orders/myOrder")
+      .then(Response => {
+        console.log("받아오기 성공", Response.data.sheetResponseDTOs);
+        setMyData(Response.data.sheetResponseDTOs);
+      })
+      .catch(Error => {
+        console.log("에러", Error);
+      });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  console.log(JSON.parse(localStorage.getItem("user")));
+
+  return (
+    <WrapBox>
+      <TopBar></TopBar>
+      <PageTitle title="마이페이지" margin="70.06px" />
+      <UserName>{userName} 님</UserName>
+      <CountManager>계정 관리 &gt;</CountManager>
+      <UserPlace>Caker 일반 회원</UserPlace>
+      <UserImg ImageUrl={userImage}></UserImg>
+      <PinkBox>
+        <Link to="/create/*">
+          <Button>제안서 작성하기</Button>
+        </Link>
+
+        <CommitProposal>내 제안서</CommitProposal>
+        <BottomProposal>
+          {visible ||
+            SixImg.map(order => {
+              return (
+                <Article
+                  key={order.sheetId}
+                  title={order.locationDong}
+                  image={order.imageUrl}
+                ></Article>
+              );
+            })}
+          {visible &&
+            Mydatas.map(order => {
+              return (
+                <Article
+                  key={order.sheetId}
+                  title={order.locationDong}
+                  image={order.imageUrl}
+                ></Article>
+              );
+            })}
+        </BottomProposal>
+        <MoreView onClick={() => setVisible(!visible)}>
+          더보기
+          <br />∨
+        </MoreView>
+      </PinkBox>
+    </WrapBox>
+  );
+};
+
+export default ShopMemberMyPage;
 
 //전체 크기
 const WrapBox = styled.div`
@@ -147,64 +226,3 @@ const Article = styled.article`
   border: 1px solid pink;
   border-radius: 6px;
 `;
-
-const ShopMemberMyPage = () => {
-  /* const [Mydatas, setMyData] = useState([]);
-  const getData = () => {
-    http
-      .get("/orders/myOrder")
-      .then(Response => {
-        console.log("받아오기 성공", Response.data);
-        setMyData(Response.data);
-      })
-      .catch(Error => {
-        console.log(Error);
-      });
-  };
-  useEffect(() => {
-    getData();
-  }, []);*/
-
-  const [OrderImage, setOrderImage] = useState([]);
-  console.log(JSON.parse(localStorage.getItem("user")));
-  useEffect(() => {
-    console.log(orderList);
-    setOrderImage(orderList["sheetResponseDTOs"]);
-  }, []);
-
-  return (
-    <WrapBox>
-      <TopBar></TopBar>
-      <PageTitle title="마이페이지" margin="70.06px" />
-      <UserName>{userName} 님</UserName>
-      <CountManager>계정 관리 &gt;</CountManager>
-      <UserPlace>Caker 일반 회원</UserPlace>
-      <UserImg ImageUrl={userImage}></UserImg>
-      <PinkBox>
-        <Link to="/create/*">
-          <Button>제안서 작성하기</Button>
-        </Link>
-
-        <CommitProposal>내 제안서</CommitProposal>
-        <BottomProposal>
-          {OrderImage.map(order => {
-            return (
-              <Article
-                key={order.sheetId}
-                title={order.locationDong}
-                image={order.imageUrl}
-                subtitle={order.hashtag}
-              ></Article>
-            );
-          })}
-        </BottomProposal>
-        <MoreView>
-          더보기
-          <br />∨
-        </MoreView>
-      </PinkBox>
-    </WrapBox>
-  );
-};
-
-export default ShopMemberMyPage;
