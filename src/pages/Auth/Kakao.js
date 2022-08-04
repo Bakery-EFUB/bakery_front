@@ -1,57 +1,56 @@
 import React from "react";
 import styled from "styled-components";
 import LoginMainImg from "../../images/LoginMainImg.svg";
-import Button from "../../components/Button";
+import kakao from "../../images/kakao.png";
 
 const Container = styled.div`
-  width: 100%;
-  margin: 10%;
+  padding: 24px;
 `;
 const Welcome = styled.div`
   color: var(--black);
   font-size: 22px;
   font-weight: 800;
-  position: absolute;
-  left: 10%;
-  top: 12%;
+  margin: 143px auto 0 0;
+  width: 307px;
 `;
 const CenterImg = styled.div`
   background: url(${LoginMainImg});
   width: 358.91px;
   height: 381.06px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+
+  margin: 56px auto 0 24px;
+
   background-repeat: no-repeat;
   background-position: center center;
 `;
 
-const LoginButtons = styled.div`
-  position: absolute;
-  left: 10%;
-  bottom: 5%;
-  width: 100%;
+const KakaoButton = styled.img`
+  margin: 75px auto 0 0;
+
+  width: 380px;
+  height: 60px;
 `;
 
 const Kakao = () => {
   return (
-    <Container>
-      <Welcome>
-        안녕하세요!
-        <br />
-        CAKER에 오신 것을 환영합니다.
-      </Welcome>
-      <CenterImg></CenterImg>
-      <LoginButtons>
-        <Button
+    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+      <Container>
+        <Welcome>
+          안녕하세요!
+          <br />
+          CAKER에 오신 것을 환영합니다.
+        </Welcome>
+        <CenterImg></CenterImg>
+
+        <KakaoButton
+          src={kakao}
           onClick={() => {
             location.href = "https://caker.shop/oauth2/authorization/kakao";
           }}
           text={"카카오임"}
-        ></Button>
-      </LoginButtons>
-    </Container>
+        ></KakaoButton>
+      </Container>
+    </div>
   );
 };
 
