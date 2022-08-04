@@ -8,7 +8,7 @@ const SearchResult = ({ searchResult }) => {
       {searchResult?.map(shop => {
         console.log(shop);
         return (
-          <Link to="/shopdetail" key={shop.id}>
+          <Link to={`/shopdetail/${shop.id}`} key={shop.id}>
             <BigCardDisplay
               MainText={shop.name}
               SubText={shop.certifyFlag}

@@ -87,14 +87,21 @@ const CakeProductImage = styled.div`
 const ShopDetailPage = () => {
   const { storeId } = useParams();
   const [shopDetail, setShopDetail] = useState({});
+  const [isOwner, setIsOwner] = useState(false);
   useEffect(() => {
     GetStoreDetail(storeId)
       .then(res => {
         setShopDetail(res);
       })
       .catch(e => console.error(e));
+    if (
+      localStorage.getItem("token") !== null &&
+      JSON.parse(localStorage.user)?.role === "ROLE_BAKER"
+    )
+      GetMyStoreDetail().then(res => {
+        setIsOwner(res.id === Number(storeId));
+      });
   }, []);
-
   const getMoreInfoSNSLinkElement = (kakao, insta) => {
     return (
       <>
@@ -111,13 +118,6 @@ const ShopDetailPage = () => {
       setOpenMore([{ WebkitLineClamp: "100" }, { transform: "scaleY(-1)" }]);
     } else setOpenMore([{}, {}]);
   };
-  const isOwner = id => {
-    if (JSON.parse(localStorage.user)?.authority !== "BAKER") return false;
-
-    let userStoreId = -1;
-    GetMyStoreDetail().then(res => (userStoreId = res.id));
-    return userStoreId === id;
-  };
   return (
     <div>
       <TopBar />
@@ -132,10 +132,10 @@ const ShopDetailPage = () => {
               {shopDetail.certifyFlag ? "등록가게" : "미등록가게"}
             </IsRegistered>
           </div>
-          {isOwner(shopDetail.id) && (
+          {isOwner && (
             <ModifyIcon
               className="modify-info"
-              onClick={() => navigator("/shopmodify")}
+              onClick={() => navigator("/shop/modify")}
             />
           )}
         </ShopDetailHeader>
