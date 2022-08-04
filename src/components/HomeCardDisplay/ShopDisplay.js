@@ -41,7 +41,6 @@ const ShopDisplay = ({ title }) => {
       <Body>
         {allShopInfo ? (
           allShopInfo.map(shop => {
-            console.log(allShopInfo);
             return (
               <Card key={shop.id} title={shop.name} image={shop.mainImg}></Card>
             );

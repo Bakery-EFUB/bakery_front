@@ -90,7 +90,6 @@ const ShopDetailPage = () => {
   useEffect(() => {
     GetStoreDetail(storeId)
       .then(res => {
-        console.log(res);
         setShopDetail(res);
       })
       .catch(e => console.error(e));
