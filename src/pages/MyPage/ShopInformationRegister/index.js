@@ -18,18 +18,6 @@ const token = JSON.parse(localStorage.getItem("token"));
 //ui 구현
 const ShopInformationRegister = () => {
   const formData = new FormData();
-  // const onChange = e => {
-  //   const img = e.target.files[0];
-  //   console.log(img);
-  //   formData.append("mainImg", img);
-  // };
-
-  // const onChange2 = e => {
-  //   const img2 = e.target.files[0];
-  //   console.log(img2);
-  //   formData.append("menuImg", img2);
-  // };
-
   const [storeData, setStoreData] = useState(DEFAULT_STORE_DATA);
 
   const updateStoreData = partialStoreData => {
@@ -52,15 +40,6 @@ const ShopInformationRegister = () => {
 
   //제출 -> 백엔드로 post
   const submitHandler = e => {
-    // const formData = new FormData();
-    // const encoder = new TextEncoder();
-    // const variables = JSON.stringify({ storedata: storeData });
-    // const data = new Blob(encoder.encode(variables));
-
-    // //api 명세서
-    // formData.append("mainImg", MainFile[0], "mainImage.png");
-    // formData.append("menuImg", MenuFile[0], "menuImage.png");
-
     console.log(storeData);
 
     http

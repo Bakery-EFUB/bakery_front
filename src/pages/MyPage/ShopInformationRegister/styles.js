@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-//전체
+//전체 428px;
 export const WrapBox = styled.div`
-  width: 428px;
+  width: 100%;
   height: 1850px;
 `;
 
@@ -36,9 +36,9 @@ export const ShopIntroduceName = styled.div`
 
 //인풋 칸
 export const ShopIntroduce = styled.input`
-  width: 380px;
+  width: 90%;
   height: ${props => props.height};
-  margin: 10px 0px 0px 24px;
+  margin: 10px 0px 0px 4.5%;
   background: var(--sub-lightgray);
   border-radius: 6px;
   border: 1px solid var(--sub-lightgray);
@@ -48,7 +48,7 @@ export const ShopIntroduce = styled.input`
 //등록하기 버튼
 export const RegisterBtn = styled.button`
   margin: 70px 0px 0px 24px;
-  width: 380.47px;
+  width: 90%;
   height: 60px;
   left: 24px;
   top: 1593.19px;
