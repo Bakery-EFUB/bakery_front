@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Rectangle from "../../images/Rectangle.svg";
 import BoxLine from "../../images/BoxLine.svg";
 const Container = styled.div`
   display: flex;
@@ -74,14 +73,14 @@ export function timeForToday(value) {
 
   return `${Math.floor(betweenTimeDay / 365)}년전`;
 };
-const ProposalBox = ({key, description, time, hashtag}) => {
+const ProposalBox = ({key, description, time, hashtag, image}) => {
 
   
   return (
     <Container>
       <Oneproposal>
         <Cakeimg>
-          <img src={Rectangle} />
+          <img src={image} />
         </Cakeimg>
         <Textbox>
           <Title>{key}</Title>

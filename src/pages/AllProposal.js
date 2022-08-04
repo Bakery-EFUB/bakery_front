@@ -33,8 +33,8 @@ const AllProposal = () => {
       <PageTitle title="전체 제안서 리스트" margin="60px 0 63px 0"></PageTitle>
       <ChooseBox></ChooseBox>
       <ProposalsDisplay>
-        {Array.from(allProposals).map(orders =>{
-          return (<ProposalBox key= {orders.member.nickname} description ={orders.type} time ={orders.createdAt} hashtag={hashtag}></ProposalBox>
+        {Array.from(allProposals).map(allProposals =>{
+          return (<ProposalBox key= {allProposals.member.nickname} image = {allProposals.image} description = {allProposals.type} time ={allProposals.createdAt} hashtag={allProposals.hashtag}></ProposalBox>
           );
         })}
       </ProposalsDisplay>
