@@ -1,7 +1,7 @@
-import TopBar from "../components/Common/Sidebar/TopBar";
+import TopBar from "../../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
 import React, {useState} from "react";
-import AccountRemovePop from "../components/AccountSetting/AccountRemovePop";
+import AccountRemovePop from "../../components/AccountSetting/AccountRemovePop";
 import axios from "axios";
 
 const WrapBox = styled.div`
@@ -128,7 +128,7 @@ const AccountSetting = (props) => {
     e.preventDefault();
     FormData.append("data", JSON.stringify(body));
     const postSurvey = axios({
-      method : "POST",
+      method : "PATCH",
       url: "https://caker.shop/members/account/profile",
       mode:"cors",
       headers: {

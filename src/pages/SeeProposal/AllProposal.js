@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
-import TopBar from "../components/Common/Sidebar/TopBar";
-import ChooseBox from "../components/WholeProposals/ChooseBox";
-import NoProposal from "../components/WholeProposals/NoProposal";
-import PageTitle from "../components/Common/PageTitle";
+import TopBar from "../../components/Common/Sidebar/TopBar";
+import ChooseBox from "../../components/WholeProposals/ChooseBox";
+import NoProposal from "../../components/WholeProposals/NoProposal";
+import PageTitle from "../../components/Common/PageTitle";
 import styled from "styled-components";
-import ProposalBox from "../components/WholeProposals/PropasalBox";
-import { GetProposals } from "../api/allproposal";
+import ProposalBox from "../../components/WholeProposals/PropasalBox";
+import { GetProposals } from "../../api/allproposal";
 
 const ProposalsDisplay = styled.div`
  display: flex;

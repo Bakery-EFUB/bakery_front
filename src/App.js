@@ -9,9 +9,9 @@ import CreateProposal from "./pages/CreateProposal";
 
 import SearchPage from "./pages/ShopSearch/SearchPage";
 import Recommend from "./pages/ShopSearch/Recommend";
-import OurService from "./pages/OurService";
+import OurService from "./pages/ServiceInfo/OurService";
 import ShopMemberMyPage from "./pages/MyPage/ShopMemberMyPage";
-import AllProposal from "./pages/AllProposal";
+import AllProposal from "./pages/SeeProposal/AllProposal";
 
 import ShopMypageStart from "./pages/ShopMyPageStart";
 
@@ -26,7 +26,7 @@ import { userRole } from "./utils/auth";
 import ClientRoute from "./route/ClientRoute";
 import TraineeRoute from "./route/TraineeRoute";
 import BakerRoute from "./route/BakerRoute";
-import AccountSetting from "./pages/AccountSetting";
+import AccountSetting from "./pages/AccountSetting/AccountSetting";
 import ShopCakerMyPage from "./pages/MyPage/ShopCakerMyPage";
 import Proposal from "./pages/Proposal";
 

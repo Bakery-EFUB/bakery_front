@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import ServiceBackground from "../images/ServiceBackground.svg";
-import TopBar from "../components/Common/Sidebar/TopBar";
-import WeAreCakers from "../images/WeAreCakers.svg";
-import ServiceTitle from "../images/ServiceTitle.svg";
-import DescriptionText from "../images/DescriptionText.svg";
+import ServiceBackground from "../../images/ServiceBackground.svg";
+import TopBar from "../../components/Common/Sidebar/TopBar";
+import WeAreCakers from "../../images/WeAreCakers.svg";
+import ServiceTitle from "../../images/ServiceTitle.svg";
+import DescriptionText from "../../images/DescriptionText.svg";
 
 const ContentBoxWithMargin = styled.div`
     margin-left : 5%;

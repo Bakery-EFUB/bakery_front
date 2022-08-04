@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import RemoveBackground from "../images/RemoveBackground.svg";
-import BigPinkButton from "../components/BigPinkButton";
+import BigPinkButton from "../../components/BigPinkButton";
 import TopBar from "../components/TopBar";
 import { Link } from "react-router-dom";
 const Container = styled.div`
