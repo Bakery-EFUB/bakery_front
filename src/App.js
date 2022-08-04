@@ -16,6 +16,7 @@ import AllProposal from "./pages/AllProposal";
 import ShopMypageStart from "./pages/ShopMyPageStart";
 
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
+import PickupSchedulePage from "./pages/PickupSchedulePage";
 import EditProposal from "./pages/EditProposal";
 
 import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
@@ -43,7 +44,6 @@ function App() {
         <Route exact path="/loading" element={<LoadingPage />} />
 
         <Route exact path="/shopdetail/:storeId" element={<ShopDetailPage />} />
-        <Route exact path="/addschedule" element={<AddSchedulePage />} />
         <Route exact path="/search" element={<SearchPage />} />
         <Route exact path="/recommend" element={<Recommend />} />
 
@@ -55,9 +55,8 @@ function App() {
 
         <Route exact path="/mypagecaker" element={<ShopCakerMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
-        <Route exact path="/shopdetail" element={<ShopDetailPage />} />
-        
-        <Route exact path="/client/modify" element ={<AccountSetting/>} />
+
+        <Route exact path="/client/modify" element={<AccountSetting />} />
         <Route exact path="/client/mypage" element={<ShopMemberMyPage />} />
         <Route exact path="/shop/mypage" element={<ShopMypageStart />} />
         <Route
@@ -71,7 +70,16 @@ function App() {
           path="/shop/progressive"
           element={<ShopMyPageProgressive />}
         />
-        <Route exact path="/shop/addschedule" element={<AddSchedulePage />} />
+        <Route
+          exact
+          path="/shop/pickupschedule/:storeId"
+          element={<PickupSchedulePage />}
+        />
+        <Route
+          exact
+          path="/shop/addschedule/:storeId"
+          element={<AddSchedulePage />}
+        />
       </Routes>
     </BrowserRouter>
   );

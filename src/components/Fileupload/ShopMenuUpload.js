@@ -6,8 +6,7 @@ import { useDropzone } from "react-dropzone";
 const ShopIntroduceName = styled.div`
   width: 120px;
   height: 22px;
-  margin: 30px 0px 0px 24px;
-  font-family: "Apple SD Gothic Neo";
+  margin: 30px 0 0 24px;
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -19,7 +18,7 @@ const ShopIntroduceName = styled.div`
 
 //가게 대표 사진
 const ShopMenuPhoto = styled.p`
-  margin: 10px 0px 0px 24px;
+  margin: 10px 0 0 24px;
   width: 380px;
   height: 100px;
   background: var(--sub-lightgray);
@@ -56,7 +55,6 @@ const thumbInner = {
   display: "flex",
   minWidth: 0,
   overflow: "hidden",
-  display: "flex",
   justifyContent: "space-evenly",
   alignItems: "center",
 };
