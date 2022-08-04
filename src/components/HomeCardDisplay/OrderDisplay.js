@@ -42,12 +42,17 @@ const OrderDisplay = ({ title }) => {
       <Body>
         {allOrderInfo?.map(order => {
           return (
-            <Card
+            <Link
+              to={`/proposal/${order.sheetId}`}
               key={order.sheetId}
-              title={order.locationDong}
-              image={order.imageUrl}
-              subtitle={order.hashtag}
-            ></Card>
+              style={{ marginRight: "3%" }}
+            >
+              <Card
+                title={order.locationDong}
+                image={order.imageUrl}
+                subtitle={order.hashtag}
+              ></Card>
+            </Link>
           );
         })}
       </Body>
