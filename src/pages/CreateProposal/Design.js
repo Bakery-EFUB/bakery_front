@@ -8,11 +8,15 @@ import PageTitle from "../../components/Common/PageTitle";
 import ProposalText from "../../components/Proposal/ProposalText";
 
 import ProgessBar from "../../components/Proposal/ProgressBar";
+import SmallGrayButton from "../../components/Proposal/SmallGrayButton";
 
 import { useDropzone } from "react-dropzone";
 
 const Design = ({ history, setHistory, original, setOriginal }) => {
   const ThisStep = 90;
+
+  const [isDone, setIsDone] = useState(false);
+
   const [files, setFiles] = useState([]); //업로드 하려는 파일의 url을 새생성하고 파일의 정보를 파일즈에 담아준다.
   const { getRootProps, getInputProps } = useDropzone({
     //허용하는 파일 형식
@@ -52,6 +56,15 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
     return () => files.forEach(file => URL.revokeObjectURL(file.preview));
   }, []);
 
+  // 완료 버튼 렌더링
+  useEffect(() => {
+    if (files.length !== 0) {
+      setIsDone(true);
+    } else {
+      setIsDone(false);
+    }
+  }, [files]);
+
   const Back = () => {
     setHistory(ThisStep);
   };
@@ -89,9 +102,13 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
         </Link>
 
         <div style={{ marginLeft: "6px" }}>
-          <Link to="/create/pickup">
-            <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
-          </Link>
+          {isDone ? (
+            <Link to="/create/pickup">
+              <SmallPinkButton onClick={() => Next()}>완료</SmallPinkButton>
+            </Link>
+          ) : (
+            <SmallGrayButton>완료</SmallGrayButton>
+          )}
         </div>
       </div>
     </div>
