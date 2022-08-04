@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import BigCardDisplay from "../../components/Common/BigCardDisplay";
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "../../components/Common/PageTitle";
 import TopBar from "../../components/Common/Sidebar/TopBar";
 import recommendShop from "../../_mock/recommendShopList.json";
 
@@ -15,15 +15,15 @@ const Recommend = () => {
   const [allShop, setAllShop] = useState();
 
   useEffect(() => {
-    setAllShop(recommendShop);
-    /*
+    //setAllShop(recommendShop);
+
     GetRecommendShop()
       .then(data => {
         setAllShop(data);
       })
       .catch(e => {
         console.log(e);
-      });*/
+      });
   }, []);
 
   return (

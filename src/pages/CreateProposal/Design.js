@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import SmallPinkButton from "../../components/SmallPinkButton";
-import SmallWhiteButton from "../../components/SmallWhiteButton";
-import PageTitle from "../../components/PageTitle";
+import SmallPinkButton from "../../components/Proposal/SmallPinkButton";
+import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
+import PageTitle from "../../components/Common/PageTitle";
 import ProposalText from "../../components/Proposal/ProposalText";
 
 import ProgessBar from "../../components/Proposal/ProgressBar";
@@ -13,10 +13,10 @@ import { useDropzone } from "react-dropzone";
 
 const Design = ({ history, setHistory, original, setOriginal }) => {
   const ThisStep = 90;
-
   const [files, setFiles] = useState([]); //업로드 하려는 파일의 url을 새생성하고 파일의 정보를 파일즈에 담아준다.
   const { getRootProps, getInputProps } = useDropzone({
     //허용하는 파일 형식
+
     accept: {
       "image/*": [],
     },
@@ -25,6 +25,7 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
         acceptedFiles.map(file =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
+            original: file,
           }),
         ),
       );
@@ -54,9 +55,10 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
   const Back = () => {
     setHistory(ThisStep);
   };
+
   const Next = () => {
     setHistory(ThisStep);
-    // setOriginal({...original, })
+    setOriginal({ ...original, file: files[0].original });
   };
 
   return (
@@ -68,7 +70,7 @@ const Design = ({ history, setHistory, original, setOriginal }) => {
       <ProposalText text="디자인 시안이 있다면 알려주세요." />
 
       <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} />
+        <input type="file" {...getInputProps()} />
         <Button>사진 업로드</Button>
       </div>
       {thumbs}

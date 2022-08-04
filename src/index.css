@@ -20,3 +20,8 @@ code {
   font-family: "Apple SD Gothic Neo";
   src: url("./styles/fonts/AppleSDGothicNeoM.ttf") format("truetype");
 }
+
+a {
+  text-decoration: none;
+  color: var(--black-text);
+}

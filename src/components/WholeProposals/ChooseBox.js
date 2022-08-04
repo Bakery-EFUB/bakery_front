@@ -3,21 +3,18 @@ import styled from "styled-components";
 import DropdownArrow1 from "../../images/DropdownArrow1.svg";
 
 const ContentBoxWithMargin = styled.div`
-  position: absolute;
   width: 381px;
   height: 31px;
-  left: 24px;
-  top: 150px;
+  margin-top: 50px;
 `;
 const DropdownGroup = styled.div`
+  justify-content: center;
   margin-top: 23px;
   display: flex;
-  gap: 10px 20px;
-  flex-wrap: wrap;
 `;
 const CustomSelect = styled.select`
   font-family: "Apple SD Gothic Neo";
-  position: relative;
+  margin: 5px;
   font-size: 15px;
   appearance: none;
   padding-right: 2px;
@@ -34,7 +31,13 @@ const CustomSelect = styled.select`
     list-style: none;
   }
 `;
+const ChoooseDisplay = styled.div`
+  border-radius: 25px;
+  border: 2px solid var(--sub-darkgray);
+  margin-left:40px;
+`;
 const DropdownArrow = styled.span`
+  margin-right: 3px;
   & > img {
     width: 12px;
     margin-bottom: 4px;
@@ -44,15 +47,6 @@ const DropdownArrow = styled.span`
     transform: rotate(180deg);
   }
 `;
-const RegionGu = [
-  "구 전체",
-  "서대문구",
-  "종로구",
-  "마포구",
-  "중구",
-  "용산구",
-  "성동구",
-];
 const Seodaemun = [
   "동 전체",
   "북아현동",
@@ -74,8 +68,8 @@ const CakeType = [
 ];
 const Dropdown = ({ items }) => {
   return (
-    <div>
-      <CustomSelect autofocus>
+    <ChoooseDisplay>
+      <CustomSelect autoFocus>
         {items.map((item, idx) => (
           <option key={idx} value={item}>
             {item}
@@ -85,7 +79,7 @@ const Dropdown = ({ items }) => {
       <DropdownArrow>
         <img src={DropdownArrow1} alt="dropdown" />
       </DropdownArrow>
-    </div>
+    </ChoooseDisplay>
   );
 };
 const ChooseBox = () => {
@@ -93,7 +87,6 @@ const ChooseBox = () => {
     <div>
       <ContentBoxWithMargin>
         <DropdownGroup>
-          <Dropdown items={RegionGu}></Dropdown>
           <Dropdown items={Seodaemun}></Dropdown>
           <Dropdown items={CakeType}></Dropdown>
         </DropdownGroup>

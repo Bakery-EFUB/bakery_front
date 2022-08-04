@@ -21,7 +21,12 @@ const Right = styled.img`
   margin-right: 13px;
 `;
 
-const CustomCalendar = ({ setClickedDay, original, setOriginal, allDaysHavingSchedule }) => {
+const CustomCalendar = ({
+  setClickedDay,
+  original,
+  setOriginal,
+  allDaysHavingSchedule,
+}) => {
   const today = {
     year: new Date().getFullYear(), //오늘 연도
     month: new Date().getMonth() + 1, //오늘 월
@@ -151,7 +156,7 @@ const CustomCalendar = ({ setClickedDay, original, setOriginal, allDaysHavingSch
                 id={i + 1}
                 onClick={e => {
                   setSelected(parseInt(e.target.id));
-                  // 상위 컴포넌트에서 날짜 setState 함수를 pro장s로 넘겨준 경우
+                  // 상위 컴포넌트에서 날짜 setState 함수를 props로 넘겨준 경우
                   setClickedDay &&
                     setClickedDay({
                       year: Number(selectedYear),
@@ -203,11 +208,16 @@ const CustomCalendar = ({ setClickedDay, original, setOriginal, allDaysHavingSch
     return dayArr;
   };
 
-  // 선택 된 날짜 출력 (test 코드)
-
+  // 선택 된 날짜 string으로 변환
   const pickUpDate =
-    selectedYear.toString() + selectedMonth.toString() + selected.toString();
+    selectedYear.toString() +
+    "-" +
+    selectedMonth.toString().padStart(2, "0") +
+    "-" +
+    selected.toString().padStart(2, "0") +
+    "T00:00:00.00";
 
+  // 상위 컴포넌트로 선택된 날짜 전달
   useEffect(() => {
     setOriginal && setOriginal({ ...original, pickUp: pickUpDate });
   }, [pickUpDate]);

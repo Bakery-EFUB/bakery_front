@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "./Card";
-import { GetRecommendShop } from "../../api/home";
+import { GetOrder } from "../../api/home";
 //axios 적용 전 임시
 import orderList from "../../_mock/orderList";
 import {
@@ -17,18 +17,16 @@ const OrderDisplay = ({ title }) => {
   const [allOrderInfo, setAllOrderInfo] = useState([]);
 
   useEffect(() => {
-    console.log(orderList);
-    setAllOrderInfo(orderList["sheetResponseDTOs"]);
+    //setAllOrderInfo(orderList["sheetResponseDTOs"]);
 
-    /* GetRecommend()
+    GetOrder()
       .then(data => {
         console.log(data);
-        console.log(recommend);
-        setAllorderInfo();
-      }) 
+        setAllOrderInfo(data["sheetResponseDTOs"]);
+      })
       .catch(e => {
         console.log(e);
-      });*/
+      });
   }, []);
 
   return (
@@ -42,7 +40,7 @@ const OrderDisplay = ({ title }) => {
         </Link>
       </Header>
       <Body>
-        {allOrderInfo.map(order => {
+        {allOrderInfo?.map(order => {
           return (
             <Card
               key={order.sheetId}

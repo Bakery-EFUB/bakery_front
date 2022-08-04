@@ -1,5 +1,4 @@
 import React from "react";
-
 import styled from "styled-components";
 import Mock from "../../images/Mock.svg";
 
@@ -19,8 +18,16 @@ const SubTitle = styled.div`
 `;
 
 const Card = ({ title, subtitle, image }) => {
-  const MockImg = styled.div`
+  const ClientImg = styled.div`
     background: url(${image});
+    width: 150.08px;
+    height: 114.11px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 6px;
+  `;
+  const MockImg = styled.div`
+    background: url(${Mock});
     width: 150.08px;
     height: 114.11px;
     background-repeat: no-repeat;
@@ -29,7 +36,8 @@ const Card = ({ title, subtitle, image }) => {
   `;
   return (
     <CardComponent>
-      <MockImg></MockImg>
+      {image ? <ClientImg></ClientImg> : <MockImg></MockImg>}
+
       <Title>{title}</Title>
       <SubTitle>{subtitle}</SubTitle>
     </CardComponent>
