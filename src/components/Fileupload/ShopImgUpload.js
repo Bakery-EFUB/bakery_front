@@ -5,7 +5,7 @@ import axios from "axios";
 import Button from "../Button";
 
 const ShopIntroduceName = styled.div`
-  width: 120px;
+  width: 200px;
   height: 22px;
   margin: 30px 0px 0px 24px;
   font-family: "Apple SD Gothic Neo";
@@ -20,8 +20,8 @@ const ShopIntroduceName = styled.div`
 
 //가게 대표 사진
 const ShopPhoto = styled.p`
-  margin: 10px 0px 0px 24px;
-  width: 380px;
+  margin: 10px 0px 0px 5%;
+  width: 90%;
   height: 100px;
   background: var(--sub-lightgray);
   border-radius: 6px;

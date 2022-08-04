@@ -11,14 +11,15 @@ import { useEffect } from "react";
 
 //전체 크기
 const WrapBox = styled.div`
-  width: 428px;
+  width: 100%;
 `;
 
 //연핑크 박스
 const PinkBox = styled.div`
   background-color: var(--sub-pink);
   margin-top: 120px;
-  width: 428px;
+  width: 100%;
+  padding-bottom: 100%;
   height: 670.09px;
   display: flex;
   flex-direction: column;
@@ -27,10 +28,12 @@ const PinkBox = styled.div`
 
 //유저 이미지
 const UserImg = styled.div`
-  background: url(${UserLogoimg});
+  background: url(${props => props.ImageUrl});
   background-repeat: no-repeat;
+  background-size: cover;
   box-sizing: border-box;
   position: absolute;
+  border-radius: 50%;
   width: 100px;
   height: 100px;
   left: 24.21px;
@@ -70,14 +73,16 @@ const CountManager = styled.div`
   position: absolute;
   width: 57px;
   height: 14px;
-  left: 349.69px;
-  top: 280.7px;
+  left: 210.69px;
+  top: 237.7px;
+  color: gray;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 14px;
 `;
+
 const CertifyBox = styled.div`
   margin-top: 108.53px;
   display: flex;
@@ -138,6 +143,8 @@ const Reading = styled.div`
 
 const ShopMypageStart = () => {
   const [Mydatas, setMyData] = useState([]);
+  const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
+  /*
   const getData = () => {
     axios
       .get("https://caker.shop/stores/myStore")
@@ -151,19 +158,17 @@ const ShopMypageStart = () => {
   };
   useEffect(() => {
     getData();
-  }, []);
+  }, []); */
 
   return (
     <WrapBox>
       <TopBar></TopBar>
       <PageTitle title="마이페이지" margin="70.06px" />
       <UserName>
-        {Mydatas.map(Mydata => (
-          <div key={Mydata.id}>{Mydata.owner.nickname}</div>
-        ))}
+        {JSON.parse(localStorage.getItem("user")).nickname} 님
       </UserName>
       <UserPlace>Caker 가게 회원</UserPlace>
-      <UserImg></UserImg>
+      <UserImg ImageUrl={ImageUrl}></UserImg>
       <PinkBox>
         <CountManager>계정 관리 &gt;</CountManager>
         <CertifyBox>

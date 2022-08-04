@@ -12,14 +12,15 @@ import { userImage, userName } from "../../utils/auth";
 
 //전체 크기
 const WrapBox = styled.div`
-  width: 428px;
+  width: 100%;
 `;
 
 //연핑크 박스
 const PinkBox = styled.div`
   background-color: var(--sub-pink);
   margin-top: 120px;
-  width: 428px;
+  width: 100%;
+  padding-bottom: 100%;
   height: 670.09px;
   display: flex;
   flex-direction: column;
@@ -74,12 +75,13 @@ const CountManager = styled.div`
   position: absolute;
   width: 57px;
   height: 14px;
-  left: 349.69px;
-  top: 280.7px;
+  left: 206.69px;
+  top: 237.7px;
+  color: gray;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 14px;
 `;
 
