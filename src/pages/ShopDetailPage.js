@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import TopBar from "../components/Common/Sidebar/TopBar";
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../components/Common/PageTitle";
 import modifyImg from "../images/ModifyInfo.svg";
 import moreIcon from "../images/MoreIcon.svg";
 import { DetailInfoCard } from "../components/DetailInfoCard";
@@ -87,14 +87,21 @@ const CakeProductImage = styled.div`
 const ShopDetailPage = () => {
   const { storeId } = useParams();
   const [shopDetail, setShopDetail] = useState({});
+  const [isOwner, setIsOwner] = useState(false);
   useEffect(() => {
     GetStoreDetail(storeId)
       .then(res => {
         setShopDetail(res);
       })
       .catch(e => console.error(e));
+    if (
+      localStorage.getItem("token") !== null &&
+      JSON.parse(localStorage.user)?.role === "ROLE_BAKER"
+    )
+      GetMyStoreDetail().then(res => {
+        setIsOwner(res.id === Number(storeId));
+      });
   }, []);
-
   const getMoreInfoSNSLinkElement = (kakao, insta) => {
     return (
       <>
@@ -111,17 +118,6 @@ const ShopDetailPage = () => {
       setOpenMore([{ WebkitLineClamp: "100" }, { transform: "scaleY(-1)" }]);
     } else setOpenMore([{}, {}]);
   };
-  const isOwner = id => {
-    if (
-      localStorage.getItem("token") === null ||
-      JSON.parse(localStorage.user)?.authority !== "ROLE_BAKER"
-    )
-      return false;
-
-    let userStoreId = -1;
-    GetMyStoreDetail().then(res => (userStoreId = res.id));
-    return userStoreId === id;
-  };
   return (
     <div>
       <TopBar />
@@ -136,10 +132,10 @@ const ShopDetailPage = () => {
               {shopDetail.certifyFlag ? "등록가게" : "미등록가게"}
             </IsRegistered>
           </div>
-          {isOwner(shopDetail.id) && (
+          {isOwner && (
             <ModifyIcon
               className="modify-info"
-              onClick={() => navigator("/shopmodify")}
+              onClick={() => navigator("/shop/modify")}
             />
           )}
         </ShopDetailHeader>
