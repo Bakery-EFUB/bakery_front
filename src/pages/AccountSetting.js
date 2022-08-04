@@ -1,15 +1,15 @@
-import TopBar from "../components/TopBar";
+import TopBar from "../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
 import React, {useState} from "react";
 import AccountRemovePop from "../components/AccountSetting/AccountRemovePop";
-
+import axios from "axios";
 
 const WrapBox = styled.div`
   width: 428px;
   height: 1000px;
 `;
 
-const AccountName = styled.input`
+const TextHolder = styled.input`
   width: 380px;
   height: 50px;
   margin: 10px 0px 0px 24px;
@@ -20,48 +20,6 @@ const AccountName = styled.input`
   border: 1px solid var(--sub-lightgray);
   z-index: 0;
 `;
-const AccountEmail = styled.input`
-  width: 380px;
-  height:50px;
-  margin: 10px 0px 0px 24px;
-  background: var(--sub-lightgray);
-  border-radius: 6px;
-  border: 1px solid var(--sub-lightgray);
-  text-align: justify;
-  z-index: 0;
-`;
-
-const Password = styled.input`
-  width: 380px;
-  height: 50px;
-  margin: 10px 0px 0px 24px;
-  background: var(--sub-lightgray);
-  border-radius: 6px;
-  border: 1px solid var(--sub-lightgray);
-  z-index: 0;
-`;
-
-const TelephoneNum = styled.input`
-  width: 380px;
-  height: 50px;
-  margin: 10px 0px 0px 24px;
-  background: var(--sub-lightgray);
-  border-radius: 6px;
-  border: 1px solid var(--sub-lightgray);
-  z-index: 0;
-`;
-
-const NickName = styled.input`
-  width: 380px;
-  height: 50px;
-  margin: 10px 0px 0px 24px;
-  background: var(--sub-lightgray);
-  border-radius: 6px;
-  border: 1px solid var(--sub-lightgray);
-  z-index: 0;
-`;
-
-
 
 const AccountRegistering = styled.div`
   width: 162px;
@@ -75,7 +33,7 @@ const AccountRegistering = styled.div`
   z-index: 1;
 `;
 
-const AccountNameing = styled.div`
+const TextTitle = styled.div`
   width: 80px;
   height: 22px;
   margin: 70px 0px 0px 24px;
@@ -86,58 +44,6 @@ const AccountNameing = styled.div`
   line-height: 22px;
   text-transform: uppercase;
   color: #202020;
-  z-index: 1;
-`;
-
-const ShopIntroducing = styled.div`
-  width: 80px;
-  height: 22px;
-  margin: 30px 0px 0px 24px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  text-transform: uppercase;
-  color: #202020;
-  z-index: 1;
-`;
-
-const Passwording = styled.div`
-  width: 73px;
-  height: 22px;
-  margin: 30px 0px 0px 24px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  text-transform: uppercase;
-  z-index: 1;
-`;
-
-const Telephoneing = styled.div`
-  width: 90px;
-  height: 22px;
-  margin: 30px 0px 0px 24px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  text-transform: uppercase;
-  z-index: 1;
-`;
-const NickNameing = styled.div`
-  width: 60px;
-  height: 22px;
-  margin: 30px 0px 0px 24px;
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  text-transform: uppercase;
   z-index: 1;
 `;
 
@@ -178,36 +84,90 @@ const PopupContainer = styled.div`
   z-index: 1000;
 `;
 
+const token = JSON.parse(localStorage.getItem("token"));
+
 //ui 구현
 const AccountSetting = (props) => {
+
+  const [Name,setName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [PhoneNumber, setPhoneNumber] = useState("");
+  const [NickName, setNickName] = useState("");
+  console.log(MainFile);
 
   const {} = props;
   const [popup, handlePopup] = useState(false);
 
+  let body  = {
+    storedata:{
+      name: Name,
+      phonenumber: PhoneNumber,
+      nickname : NickName,
+      email: Email,
+    },
+  };
+
+  const NameHandler = e =>{
+    e.preventDefault();
+    setName(e.target.value);
+  };
+  const PhoneNumberHandler = e =>{
+    e.preventDefault();
+    setPhoneNumber(e.target.value);
+  };
+  const NickNameHandler = e => {
+    e.preventDefault();
+    setNickName(e.target.value);
+  };
+  const EmailHandler = e =>{
+    e.preventDefault();
+    setEmail(e.target.value);
+  };
+
+  const submitHandler = e =>{
+    e.preventDefault();
+    FormData.append("data", JSON.stringify(body));
+    const postSurvey = axios({
+      method : "POST",
+      url: "https://caker.shop/members/account/profile",
+      mode:"cors",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
+    });
+    console.log(postSurvey);
+  }
   return (
     <WrapBox>
       <TopBar />
       <AccountRegistering>계정 관리</AccountRegistering>
-      <AccountNameing>이름</AccountNameing>
-      <AccountName type="text" placeholder="이화연" />
-      <ShopIntroducing>이메일</ShopIntroducing>
-      <AccountEmail
+      <TextTitle>이름</TextTitle>
+      <TextHolder type="text" value={Name} onChange={NameHandler} placeholder={Name}/>
+      <TextTitle>이메일</TextTitle>
+      <TextHolder
         type="text"
-        placeholder="cake123@naver.com"
+        value={Email}
+        onChange={EmailHandler}
+        placeholder={Email}
       />
-      <Passwording>비밀번호</Passwording>
-      <Password type="text" placeholder="********" />
-      <Telephoneing>휴대폰 번호</Telephoneing>
-      <TelephoneNum
+      <TextTitle>휴대폰 번호</TextTitle>
+      <TextHolder
         type="text"
-        placeholder="010-0000-0000"
+        value={PhoneNumber}
+        onChange ={PhoneNumberHandler}
+        placeholder ={PhoneNumber}
       />
-      <NickNameing>닉네임</NickNameing>
-      <NickName type="text" placeholder="이화연" />
+      <TextTitle>닉네임</TextTitle>
+      <TextHolder 
+        type="text" 
+        placeholder={NickName}
+        onChange = {PhoneNumberHandler}
+        value={NickName} />
       <PopupContainer>
         <RemoveAccountBtn onClick={()=>{handlePopup(true);}}>회원 탈퇴</RemoveAccountBtn> {popup && <AccountRemovePop onClose = {handlePopup}/>}
       </PopupContainer>
-      <ModifyBtn>수정하기</ModifyBtn>
+      <ModifyBtn type="submit">수정하기</ModifyBtn>
       
     </WrapBox>
   );

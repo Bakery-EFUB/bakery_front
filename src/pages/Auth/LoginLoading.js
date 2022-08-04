@@ -1,6 +1,7 @@
 import AuthService from "../../services/authservice";
 import LoadingPage from "../LoadingPage";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const LoginLoading = () => {
   const nav = useNavigate();
