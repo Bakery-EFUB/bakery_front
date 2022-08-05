@@ -92,11 +92,12 @@ const TopBar = () => {
     else setUserStatus(SidebarDataGuest);
   }, []);
 
+  const nav = useNavigate();
   const Logout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("user");
     localStorage.setItem("isLogin", JSON.stringify("false"));
-
+    nav("/");
     location.reload();
   };
 

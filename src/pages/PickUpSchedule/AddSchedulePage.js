@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import arrowImg from "../images/DropdownArrow.svg";
+import arrowImg from "../../images/DropdownArrow.svg";
 import { useNavigate, useParams } from "react-router-dom";
-import { AddSchedule } from "../api/eventschedule";
+import { AddSchedule } from "../../api/eventschedule";
 
 const TopBar = styled.div`
   display: flex;

@@ -4,9 +4,13 @@ const token = JSON.parse(localStorage.getItem("token"));
 
 console.log("토큰", token);
 
-export default axios.create({
-  baseURL: "https://caker.shop/",
-  headers: {
-    "X-AUTH-TOKEN": token,
-  },
-});
+export default token
+  ? axios.create({
+      baseURL: "https://caker.shop/",
+      headers: {
+        "X-AUTH-TOKEN": token,
+      },
+    })
+  : axios.create({
+      baseURL: "https://caker.shop/",
+    });
