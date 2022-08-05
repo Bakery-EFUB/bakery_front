@@ -13,7 +13,10 @@ import {
 import ButtonSidebar from "./ButtonSidebar";
 import "./Sidebar.css";
 import "../../../styles/common.scss";
-import { isLogined, userImage, userName, userRole } from "../../../utils/auth";
+import { userRole } from "../../../utils/auth";
+import { useAppDispatch, useAppSelector } from "../../../store";
+import { initUser } from "../../../store/features/userSlice";
+import { persistor } from "../../..";
 
 const TopBarPink = styled.div`
   z-index: 5;
@@ -82,6 +85,10 @@ const CloseBtn = styled.div`
 `;
 
 const TopBar = () => {
+  const { nickname, imageUrl, role, isLogin } = useAppSelector(
+    state => state.user,
+  );
+
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
   const [userStatus, setUserStatus] = useState();
@@ -93,10 +100,16 @@ const TopBar = () => {
   }, []);
 
   const nav = useNavigate();
+  const dispatch = useAppDispatch();
   const Logout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("user");
     localStorage.setItem("isLogin", JSON.stringify("false"));
+    dispatch(initUser());
+    console.log(nickname, imageUrl, role);
+  };
+  const purge = async () => {
+    await persistor.purge();
     nav("/");
     location.reload();
   };
@@ -114,9 +127,9 @@ const TopBar = () => {
             <CloseBtn onClick={showSidebar}></CloseBtn>
           </li>
           <Profile>
-            {isLogined ? (
+            {isLogin ? (
               <>
-                <LoginProfileImage src={userImage}></LoginProfileImage>
+                <LoginProfileImage src={imageUrl}></LoginProfileImage>
                 <LoginBox>
                   <div
                     style={{
@@ -125,7 +138,7 @@ const TopBar = () => {
                       marginBottom: "2px",
                     }}
                   >
-                    {userName} 님
+                    {nickname} 님
                   </div>
                   <div>계정관리</div>
                 </LoginBox>
@@ -144,9 +157,12 @@ const TopBar = () => {
               </li>
             );
           })}
-          {isLogined ? (
+          {isLogin ? (
             <ButtonSidebar
-              onClick={() => Logout()}
+              onClick={async () => {
+                Logout();
+                setTimeout(() => purge(), 200);
+              }}
               text="로그아웃"
             ></ButtonSidebar>
           ) : (
