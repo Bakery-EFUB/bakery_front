@@ -35,7 +35,7 @@ const CustomSelect = styled.select`
 const ChoooseDisplay = styled.div`
   border-radius: 25px;
   border: 2px solid var(--sub-darkgray);
-  margin-left:40px;
+  margin-left:30px;
   display: flex;
   flex-direction: row;
 `;
