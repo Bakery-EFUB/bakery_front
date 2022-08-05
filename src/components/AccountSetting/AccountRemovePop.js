@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import { Link } from "react-router-dom";
+import http from "../../common/http";
 
 const PopupBox = styled.div`
    /* Rectangle 1549 */
@@ -100,6 +101,14 @@ const OkayBtn = styled.button`
 
 	color: white;
 `;
+const RemoveAccount = () => {
+    http
+        .delete(`/member/account`)
+        .then(console.log("계정 탈퇴 성공"))
+        .catch(e => {
+            console.log(e);
+        });
+}
 const AccountRemovePop = (props)=>{
     const {onClose} = props;
     return(
@@ -108,7 +117,9 @@ const AccountRemovePop = (props)=>{
             <PopupDescription>제안서는 삭제되지 않으며<br/>탈퇴 후 계정을 복구할 수 없습니다. </PopupDescription>
             <BtnContatiner>
                 <GoToBackBtn onClick={() => {onClose(false);}}>취소</GoToBackBtn>
-                <Link to = "/accountremove"><OkayBtn onClick={() => {onClose(false);}}>탈퇴</OkayBtn></Link>
+                <Link to = "/accountremove"><OkayBtn onClick={() => {
+                    onClose(false);
+                    RemoveAccount();}}>탈퇴</OkayBtn></Link>
             </BtnContatiner>
         </PopupBox>
     );

@@ -34,6 +34,7 @@ const ButtonBox = styled.div`
     margin-bottom: 100px;
     width: 400px;
 `;
+
 const AccountRemove = () => {
     return(
         <Container>
