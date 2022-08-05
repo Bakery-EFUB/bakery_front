@@ -4,7 +4,7 @@ import LoadingPage from "./pages/LoadingPage";
 import LoginHome from "./pages/Auth/LoginHome";
 import MainHome from "./pages/Main/MainHome";
 import ShopDetailPage from "./pages/MyPage/ShopInformationRegister/ShopDetailPage";
-import AddSchedulePage from "./pages/AddSchedulePage";
+import AddSchedulePage from "./pages/PickUpSchedule/AddSchedulePage";
 
 import SearchPage from "./pages/ShopSearch/SearchPage";
 import Recommend from "./pages/ShopSearch/Recommend";
@@ -21,7 +21,7 @@ import ShopMypageStart from "./pages/MyPage/ShopMyPageStart";
 
 import ShopMyPageProgressive from "./pages/MyPage/ShopMyPageProgressive";
 
-import PickupSchedulePage from "./pages/PickupSchedulePage";
+import PickupSchedulePage from "./pages/PickUpSchedule/PickupSchedulePage";
 import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
 import ShopInformationModify from "./pages/MyPage/ShopInformationModify";
 import LoginLoading from "./pages/Auth/LoginLoading";
