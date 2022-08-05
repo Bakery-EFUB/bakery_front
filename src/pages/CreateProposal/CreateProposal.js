@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
-import TopBar from "../components/Common/Sidebar/TopBar";
-import PickUp from "./CreateProposal/PickUp";
-import City from "./CreateProposal/City";
-import Cake from "./CreateProposal/Cake";
-import Size from "./CreateProposal/Size";
-import Taste from "./CreateProposal/Taste";
-import Price from "./CreateProposal/Price";
-import Design from "./CreateProposal/Design";
-import Done from "./CreateProposal/Done";
+import TopBar from "../../components/Common/Sidebar/TopBar";
+import PickUp from "./PickUp";
+import City from "./City";
+import Cake from "./Cake";
+import Size from "./Size";
+import Taste from "./Taste";
+import Price from "./Price";
+import Design from "./Design";
+import Done from "./Done";
 
-import http from "../common/http";
+import http from "../../common/http";
 const CreateProposal = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   console.log(token);
