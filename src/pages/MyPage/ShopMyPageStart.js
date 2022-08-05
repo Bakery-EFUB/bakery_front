@@ -1,12 +1,9 @@
-import TopBar from "../components/Common/Sidebar/TopBar";
+import TopBar from "../../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
-import UserLogoimg from "../images/UserLogo.svg";
-import Readingimg from "../images/Reading.svg";
-import PageTitle from "../components/Common/PageTitle";
+import Readingimg from "../../images/Reading.svg";
+import PageTitle from "../../components/Common/PageTitle";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useState } from "react";
-import { useEffect } from "react";
 
 //전체 크기
 const WrapBox = styled.div`
@@ -111,14 +108,13 @@ const Progress = styled.div`
   color: var(--sub-darkgray);
 `;
 
-//노랑 버튼
+//핑크 버튼
 const Button = styled.button`
   width: 380px;
   height: 100px;
-  margin: auto;
-  margin: 4% auto;
-  color: var(--main-pink);
-  background: var(--sub-yellow);
+  margin-top: 20px;
+  color: var(--white);
+  background: var(--main-pink);
   border-radius: 6px;
   border-style: none;
   font-family: "Apple SD Gothic Neo";
@@ -141,10 +137,11 @@ const Reading = styled.div`
   line-height: 17px;
 `;
 
-const ShopMypageProgressive = () => {
+const ShopMypageStart = () => {
   const [Mydatas, setMyData] = useState([]);
   const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
-  /* const getData = () => {
+  /*
+  const getData = () => {
     axios
       .get("https://caker.shop/stores/myStore")
       .then(Response => {
@@ -172,9 +169,9 @@ const ShopMypageProgressive = () => {
         <CountManager>계정 관리 &gt;</CountManager>
         <CertifyBox>
           <Completion>가게 인증</Completion>
-          <Progress>진행중</Progress>
+          <Progress>미완료</Progress>
         </CertifyBox>
-        <Link to="/shop/register">
+        <Link to="/shopregister">
           <Button>가게 정보 등록하기</Button>
         </Link>
         <Reading />
@@ -183,4 +180,4 @@ const ShopMypageProgressive = () => {
   );
 };
 
-export default ShopMypageProgressive;
+export default ShopMypageStart;

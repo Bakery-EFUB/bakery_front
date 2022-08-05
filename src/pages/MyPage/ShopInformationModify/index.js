@@ -8,6 +8,7 @@ import { DetailInfoCard } from "../../../components/DetailInfoCard";
 import DetailInfoItem from "../../../components/DetailInfoItem";
 import { SHOP_DATA, DEFAULT_STORE_DATA } from "./const";
 import http from "../../../common/http";
+import { useNavigate } from "react-router-dom";
 
 const WhiteModal = styled.div`
   margin: 70px 24.46px 90px 24.47px;
@@ -194,6 +195,7 @@ const token = JSON.parse(localStorage.getItem("token"));
 
 //ui 구현
 const ShopInformationModify = () => {
+  const nav = useNavigate();
   const formData = new FormData();
   const [storeData, setStoreData] = useState(DEFAULT_STORE_DATA);
   const [MainFile, setMainFile] = useState([]);
@@ -220,33 +222,23 @@ const ShopInformationModify = () => {
   //제출 -> 백엔드로 post
   const submitHandler = e => {
     console.log(storeData);
+    const Id = localStorage.getItem("storeId");
 
-    http
-      .post("/stores/myStore", storeData, {
+    formData.append("mainImg", MainFile[0].original, "mainImage.png");
+    formData.append("menuImg", MenuFile[0].original, "menuImage.png");
+    formData.append("storeId", Id);
+    for (const keyValue of formData) console.log(keyValue);
+    axios
+      .patch("https://caker.shop/stores/myStore/image", formData, {
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "multipart/form-data",
+          "X-AUTH-TOKEN": token,
         },
       })
-      .then(res => postImg(res.data))
+      .then(res => console.log("파일 포스트 성공", res))
+      .catch(err => console.log("파일 포스트 실패", err));
 
-      // .then(res => postImg(res.orderId))
-      .catch(err => console.log("json 포스트 실패", err));
-
-    const postImg = async id => {
-      formData.append("mainImg", MainFile[0].original, "mainImage.png");
-      formData.append("menuImg", MenuFile[0].original, "menuImage.png");
-      formData.append("storeId", id);
-      for (const keyValue of formData) console.log(keyValue);
-      axios
-        .patch("https://caker.shop/stores/myStore/image", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "X-AUTH-TOKEN": token,
-          },
-        })
-        .then(res => console.log("파일 포스트 성공", res))
-        .catch(err => console.log("파일 포스트 실패", err));
-    };
+    nav("/caker/mypage");
   };
 
   if (flip == true) {
