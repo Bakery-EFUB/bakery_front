@@ -49,6 +49,7 @@ const Profile = styled.div`
   align-items: center;
   margin: 0 0 32px;
 `;
+
 const ProfileImg = styled.div`
   background-repeat: no-repeat;
   background-position: center center;
@@ -91,11 +92,12 @@ const TopBar = () => {
     else setUserStatus(SidebarDataGuest);
   }, []);
 
+  const nav = useNavigate();
   const Logout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("user");
     localStorage.setItem("isLogin", JSON.stringify("false"));
-
+    nav("/");
     location.reload();
   };
 

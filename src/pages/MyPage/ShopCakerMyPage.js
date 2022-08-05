@@ -6,6 +6,8 @@ import PageTitle from "../../components/Common/PageTitle";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import orderList from "../../_mock/orderImage.json";
+import http from "../../common/http";
+import axios from "axios";
 
 //전체 크기
 const WrapBox = styled.div`
@@ -72,7 +74,7 @@ const CountManager = styled.div`
   position: absolute;
   width: 57px;
   height: 14px;
-  left: 210.69px;
+  left: 225.69px;
   top: 237.7px;
   color: gray;
   font-family: "Apple SD Gothic Neo";
@@ -83,7 +85,24 @@ const CountManager = styled.div`
 `;
 
 //핑크 버튼
-const Button = styled.button`
+const Button1 = styled.button`
+  width: 380px;
+  height: 60px;
+  margin-top: 50px;
+  color: var(--white);
+  background: var(--main-pink);
+  border-radius: 6px;
+  border-style: none;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  text-transform: uppercase;
+`;
+
+const Button2 = styled.button`
   width: 380px;
   height: 60px;
   margin-top: 10px;
@@ -117,7 +136,8 @@ const CommitProposal = styled.div`
 const BottomProposal = styled.div`
   margin-top: 19px;
   width: 380.14px;
-  height: 253.21px;
+  height: 300px;
+  box-sizing: content-box;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -125,7 +145,7 @@ const BottomProposal = styled.div`
 
 //더보기
 const MoreView = styled.div`
-  margin-top: 19px;
+  margin-top: 1px;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
@@ -139,54 +159,100 @@ const Article = styled.article`
   background: url(${props => props.image});
   background-repeat: no-repeat;
   background-size: cover;
+  margin-top: 7px;
+  box-shadow: 2px 2px 2px pink;
   width: 120px;
   height: 120px;
-  border: 1px solid pink;
   border-radius: 6px;
 `;
 
 const ShopCakerMyPage = () => {
-  const [OrderImage, setOrderImage] = useState([]);
-  console.log(JSON.parse(localStorage.getItem("user")));
+  const [Mydatas, setMyData] = useState([]);
+  const [SixImg, setSixImg] = useState([]);
+  const [visible, setVisible] = useState(false);
+
   useEffect(() => {
-    console.log(orderList);
-    setOrderImage(orderList["sheetResponseDTOs"]);
+    if (Mydatas.length > 6) {
+      setSixImg(Mydatas.slice(0, 6));
+    }
+  }, [Mydatas]);
+
+  console.log(JSON.parse(localStorage.getItem("user")));
+  const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
+  const getData = () => {
+    http
+      .get("orders/myPin")
+      .then(Response => {
+        console.log("받아오기 성공", Response.data.sheetResponseDTOs);
+        setMyData(Response.data.sheetResponseDTOs);
+      })
+      .catch(Error => {
+        console.log("에러", Error);
+      });
+  };
+  useEffect(() => {
+    getData();
   }, []);
 
-  const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
-
+  const Id = localStorage.getItem("storeId");
   return (
     <WrapBox>
       <TopBar></TopBar>
       <PageTitle title="마이페이지" margin="70.06px" />
-      <UserName>
-        {JSON.parse(localStorage.getItem("user")).nickname} 님
-      </UserName>
-      <CountManager>계정 관리 &gt;</CountManager>
+      <div>
+        <UserName>
+          {JSON.parse(localStorage.getItem("user")).nickname} 님
+        </UserName>
+        <Link to="/client/modify">
+          {" "}
+          <CountManager>계정 관리 &gt;</CountManager>
+        </Link>
+      </div>
+
       <UserPlace>Caker 가게 회원</UserPlace>
       <UserImg ImageUrl={ImageUrl}></UserImg>
       <PinkBox>
-        <Link to="/shopmodify">
-          <Button>가게 정보 관리</Button>
+        <Link to="/shop/modify">
+          <Button1>가게 정보 관리</Button1>
         </Link>
-        <Button>픽업 일정 관리</Button>
+        <Link to="/shop/pickupschedule/:{Id}">
+          <Button2>픽업 일정 관리</Button2>
+        </Link>
         <CommitProposal>댓글 단 제안서</CommitProposal>
         <BottomProposal>
-          {OrderImage.map(order => {
-            return (
-              <Article
-                key={order.sheetId}
-                title={order.locationDong}
-                image={order.imageUrl}
-                subtitle={order.hashtag}
-              ></Article>
-            );
-          })}
+          {visible ||
+            SixImg.map(order => {
+              return (
+                <Link to={`/proposal/${order.sheetId}`} key={order.id}>
+                  <Article
+                    key={order.sheetId}
+                    title={order.locationDong}
+                    image={order.imageUrl}
+                  ></Article>
+                </Link>
+              );
+            })}
+          {visible &&
+            Mydatas.map(order => {
+              return (
+                <Link to={`/proposal/${order.id}`} key={order.id}>
+                  <Article
+                    key={order.sheetId}
+                    title={order.locationDong}
+                    image={order.imageUrl}
+                  ></Article>
+                </Link>
+              );
+            })}
         </BottomProposal>
-        <MoreView>
-          더보기
-          <br />∨
-        </MoreView>
+        {visible == false ? (
+          <MoreView onClick={() => setVisible(!visible)}>
+            더보기
+            <br />∨
+          </MoreView>
+        ) : (
+          <MoreView onClick={() => setVisible(!visible)}></MoreView>
+        )}
       </PinkBox>
     </WrapBox>
   );

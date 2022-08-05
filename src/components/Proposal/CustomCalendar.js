@@ -126,19 +126,19 @@ const CustomCalendar = ({
   // allDaysHavingSchedule은
   // { year: , month: , date: }인 객체를 가지는 배열
   // 해당 파라미터 생략하여 캘린더 사용하면 아래 조건문 실행 X
-  if (allDaysHavingSchedule) {
-    const dateHavingSchedule = allDaysHavingSchedule
-      .filter(
-        day => day["year"] === selectedYear && day["month"] === selectedMonth,
-      )
-      .map(day => day["date"]);
-    existArr = existArr.map(exist => {
-      return {
-        ...exist,
-        exist: dateHavingSchedule.includes(exist.id),
-      };
-    });
-  }
+  // if (allDaysHavingSchedule) {
+  //   const dateHavingSchedule = allDaysHavingSchedule
+  //     .filter(
+  //       day => day["year"] === selectedYear && day["month"] === selectedMonth,
+  //     )
+  //     .map(day => day["date"]);
+  //   existArr = existArr.map(exist => {
+  //     return {
+  //       ...exist,
+  //       exist: dateHavingSchedule.includes(exist.id),
+  //     };
+  //   });
+  // }
   const returnDay = () => {
     //선택된 달의 날짜들 반환 함수
     let dayArr = [];

@@ -14,13 +14,11 @@ import http from "../../common/http";
 const ShopMemberMyPage = () => {
   const [Mydatas, setMyData] = useState([]);
   const [SixImg, setSixImg] = useState([]);
-
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (Mydatas.length > 6) {
       setSixImg(Mydatas.slice(0, 6));
-      console.log("앞에", SixImg);
     }
   }, [Mydatas]);
 
@@ -47,7 +45,10 @@ const ShopMemberMyPage = () => {
       <TopBar></TopBar>
       <PageTitle title="마이페이지" margin="70.06px" />
       <UserName>{userName} 님</UserName>
-      <CountManager>계정 관리 &gt;</CountManager>
+      <Link to="/client/modify">
+        <CountManager>계정 관리 &gt;</CountManager>
+      </Link>
+
       <UserPlace>Caker 일반 회원</UserPlace>
       <UserImg ImageUrl={userImage}></UserImg>
       <PinkBox>
@@ -60,11 +61,13 @@ const ShopMemberMyPage = () => {
           {visible ||
             SixImg.map(order => {
               return (
-                <Article
-                  key={order.sheetId}
-                  title={order.locationDong}
-                  image={order.imageUrl}
-                ></Article>
+                <Link to={`/proposal/${order.sheetId}`} key={order.id}>
+                  <Article
+                    key={order.sheetId}
+                    title={order.locationDong}
+                    image={order.imageUrl}
+                  ></Article>
+                </Link>
               );
             })}
           {visible &&
@@ -78,10 +81,14 @@ const ShopMemberMyPage = () => {
               );
             })}
         </BottomProposal>
-        <MoreView onClick={() => setVisible(!visible)}>
-          더보기
-          <br />∨
-        </MoreView>
+        {visible == false ? (
+          <MoreView onClick={() => setVisible(!visible)}>
+            더보기
+            <br />∨
+          </MoreView>
+        ) : (
+          <MoreView onClick={() => setVisible(!visible)}></MoreView>
+        )}
       </PinkBox>
     </WrapBox>
   );
@@ -154,7 +161,7 @@ const CountManager = styled.div`
   position: absolute;
   width: 57px;
   height: 14px;
-  left: 206.69px;
+  left: 225.69px;
   top: 237.7px;
   color: gray;
   font-family: "Apple SD Gothic Neo";
@@ -199,7 +206,7 @@ const CommitProposal = styled.div`
 const BottomProposal = styled.div`
   margin-top: 19px;
   width: 380.14px;
-  height: 253.21px;
+  height: ${props => props.height};
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -207,13 +214,14 @@ const BottomProposal = styled.div`
 
 //더보기
 const MoreView = styled.div`
-  margin-top: 19px;
+  margin-top: 1px;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
   line-height: 14px;
   text-align: center;
+  transform: translateY(50px);
 `;
 
 //제안서 사진 방법1
@@ -222,7 +230,8 @@ const Article = styled.article`
   background-repeat: no-repeat;
   background-size: cover;
   width: 120px;
+  margin-top: 7px;
+  box-shadow: 2px 2px 2px pink;
   height: 120px;
-  border: 1px solid pink;
   border-radius: 6px;
 `;
