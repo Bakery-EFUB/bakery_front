@@ -19,7 +19,7 @@ const AllProposal = () => {
     .get(`https://caker.shop/orders`)
     .then(
        data =>{
-        setAllProposals(data);
+        setAllProposals(data["sheetResponseDTOs"]);
       })
     .catch(e => {
       console.log(e);
