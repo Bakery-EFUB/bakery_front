@@ -6,6 +6,7 @@ const ContentBoxWithMargin = styled.div`
   width: 381px;
   height: 31px;
   margin-top: 50px;
+  margin-bottom: 20px;
 `;
 const DropdownGroup = styled.div`
   justify-content: center;
