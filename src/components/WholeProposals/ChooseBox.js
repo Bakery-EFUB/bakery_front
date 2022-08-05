@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import styled from "styled-components";
 import DropdownArrow1 from "../../images/DropdownArrow1.svg";
-
+import axios from "axios";
 const ContentBoxWithMargin = styled.div`
   width: 381px;
   height: 31px;
@@ -47,25 +47,7 @@ const DropdownArrow = styled.span`
     transform: rotate(180deg);
   }
 `;
-const Seodaemun = [
-  "동 전체",
-  "북아현동",
-  "신촌동",
-  "연희동",
-  "홍제동",
-  "홍은동",
-  "남가좌동",
-  "북가좌동",
-];
-const CakeType = [
-  "케이크 전체",
-  "레터링케이크",
-  "생화케이크",
-  "미니(도시락 케이크)",
-  "플라워앙금 케이크",
-  "컵케이크",
-  "기타",
-];
+
 const Dropdown = ({ items }) => {
   return (
     <ChoooseDisplay>
@@ -82,7 +64,11 @@ const Dropdown = ({ items }) => {
     </ChoooseDisplay>
   );
 };
+const Seodaemun =['홍은동'];
+const CakeType = ['레터링케이크'];
 const ChooseBox = () => {
+
+
   return (
     <div>
       <ContentBoxWithMargin>

@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import ServiceBackground from "../images/ServiceBackground.svg";
-import TopBar from "../components/Common/Sidebar/TopBar";
-import WeAreCakers from "../images/WeAreCakers.svg";
-import ServiceTitle from "../images/ServiceTitle.svg";
-import DescriptionText from "../images/DescriptionText.svg";
+import ServiceBackground from "../../images/ServiceBackground.svg";
+import TopBar from "../../components/Common/Sidebar/TopBar";
+import WeAreCakers from "../../images/WeAreCakers.svg";
+import ServiceTitle from "../../images/ServiceTitle.svg";
+import DescriptionText from "../../images/DescriptionText.svg";
 
 const ContentBoxWithMargin = styled.div`
-    margin-left : 3px;
+    margin-left : 5%;
 `;
 const Container = styled.div`
   width: 100%;
@@ -27,7 +27,7 @@ const StartText = styled.div`
   color: var(--main-pink);
   font-size: 20px;
   margin-left: 5%;
-  margin-top: -1400px;
+  margin-top: -110%;
   font-family: "Apple SD Gothic Neo";
   z-index: 0;
 `;
@@ -108,9 +108,7 @@ const Button = styled.button`
   width: 380px;
   height: 60px;
   margin-top: 10%;
-  margin-left: 5px;
-  margin-right: 5px;
-
+  margin-left: 0.3%;
   margin-bottom: 10px;
   /* main pink */
 
@@ -167,7 +165,7 @@ const OurService = () => {
                         당신이 상상한 모든 케이크,
                         <br />
                         <br />
-                     케이커에서 만나보세요!
+                        케이커에서 만나보세요!
                     </Description3>
                 </DescriptionBox2>
                 <LastImg src={WeAreCakers} />

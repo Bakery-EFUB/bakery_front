@@ -21,7 +21,12 @@ const Right = styled.img`
   margin-right: 13px;
 `;
 
-const CustomCalendar = ({ setClickedDay, original, setOriginal }) => {
+const CustomCalendar = ({
+  setClickedDay,
+  original,
+  setOriginal,
+  allDaysHavingSchedule,
+}) => {
   const today = {
     year: new Date().getFullYear(), //오늘 연도
     month: new Date().getMonth() + 1, //오늘 월

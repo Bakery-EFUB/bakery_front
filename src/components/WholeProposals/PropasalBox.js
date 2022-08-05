@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Rectangle from "../../images/Rectangle.svg";
 import BoxLine from "../../images/BoxLine.svg";
+import Mock from "../../images/Mock.svg";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -10,7 +11,13 @@ const Oneproposal = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const Cakeimg = styled.div`
+const CakeImg = styled.div`
+  background: url(${image});
+  border-radius: 15%;
+  margin: 15px;
+`;
+const MockImg = styled.div`
+  background: url(${Mock});
   border-radius: 15%;
   margin: 15px;
 `;
@@ -74,15 +81,11 @@ export function timeForToday(value) {
 
   return `${Math.floor(betweenTimeDay / 365)}년전`;
 };
-const ProposalBox = ({key, description, time, hashtag}) => {
-
-  
+const ProposalBox = ({key, description, time, hashtag, image}) => {
   return (
     <Container>
       <Oneproposal>
-        <Cakeimg>
-          <img src={Rectangle} />
-        </Cakeimg>
+          {image ? <CakeImg></CakeImg> : <MockImg></MockImg>}
         <Textbox>
           <Title>{key}</Title>
           <Description>{description}</Description>
