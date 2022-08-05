@@ -34,14 +34,7 @@ const ButtonBox = styled.div`
     margin-bottom: 100px;
     width: 400px;
 `;
-const RemoveAccount = () => {
-    http
-        .delete(`/member/account/profile`)
-        .then(console.log("계정 탈퇴 성공"))
-        .catch(e => {
-            console.log(e);
-        });
-}
+
 const AccountRemove = () => {
     return(
         <Container>
