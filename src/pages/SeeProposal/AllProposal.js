@@ -51,12 +51,11 @@ const AllProposal = () => {
           (
             Array.from(allProposals).map(orders => {
             return (<ProposalBox
-            key= {orders.member.nickname} 
-            description = {orders.type} 
-            time ={orders.createdAt} 
-            hashtag = {orders.hashtag}
-            image = {orders.imageUrl} >
-
+              key= {orders.member.nickname} 
+              description = {orders.type} 
+              time ={orders.createdAt} 
+              hashtag = {orders.hashtag}
+              image = {orders.imageUrl} >
             </ProposalBox>
           );
         })
