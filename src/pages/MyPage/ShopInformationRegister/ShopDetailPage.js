@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import TopBar from "../components/Common/Sidebar/TopBar";
-import PageTitle from "../components/Common/PageTitle";
-import modifyImg from "../images/ModifyInfo.svg";
-import moreIcon from "../images/MoreIcon.svg";
-import { DetailInfoCard } from "../components/DetailInfoCard";
-import DetailInfoItem from "../components/DetailInfoItem";
+import TopBar from "../../../components/Common/Sidebar/TopBar";
+import PageTitle from "../../../components/Common/PageTitle";
+import modifyImg from "../../../images/ModifyInfo.svg";
+import moreIcon from "../../../images/MoreIcon.svg";
+import { DetailInfoCard } from "../../../components/DetailInfoCard";
+import DetailInfoItem from "../../../components/DetailInfoItem";
 import { useNavigate, useParams } from "react-router-dom";
-import { GetMyStoreDetail, GetStoreDetail } from "../api/store";
+import { GetMyStoreDetail, GetStoreDetail } from "../../../api/store";
 
 const PaddingBox = styled.div`
   padding: 0 24px 60px;
@@ -86,6 +86,7 @@ const CakeProductImage = styled.div`
 
 const ShopDetailPage = () => {
   const { storeId } = useParams();
+  localStorage.setItem("storeId", storeId);
   const [shopDetail, setShopDetail] = useState({});
   const [isOwner, setIsOwner] = useState(false);
   useEffect(() => {
