@@ -85,7 +85,24 @@ const CountManager = styled.div`
 `;
 
 //핑크 버튼
-const Button = styled.button`
+const Button1 = styled.button`
+  width: 380px;
+  height: 60px;
+  margin-top: 10%;
+  color: var(--white);
+  background: var(--main-pink);
+  border-radius: 6px;
+  border-style: none;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  text-transform: uppercase;
+`;
+
+const Button2 = styled.button`
   width: 380px;
   height: 60px;
   margin-top: 10px;
@@ -119,7 +136,7 @@ const CommitProposal = styled.div`
 const BottomProposal = styled.div`
   margin-top: 19px;
   width: 380.14px;
-  height: 253.21px;
+  height: ${props => props.height};
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -148,12 +165,18 @@ const Article = styled.article`
 `;
 
 const ShopCakerMyPage = () => {
-  const [OrderImage, setOrderImage] = useState([]);
+  const [Mydatas, setMyData] = useState([]);
+  const [SixImg, setSixImg] = useState([]);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (Mydatas.length > 6) {
+      setSixImg(Mydatas.slice(0, 6));
+    }
+  }, [Mydatas]);
 
   console.log(JSON.parse(localStorage.getItem("user")));
   const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
-
-  const [Mydatas, setMyData] = useState([]);
   const getData = () => {
     http
       .get("orders/myPin")
@@ -177,31 +200,45 @@ const ShopCakerMyPage = () => {
       <UserName>
         {JSON.parse(localStorage.getItem("user")).nickname} 님
       </UserName>
-      <CountManager>계정 관리 &gt;</CountManager>
+      <Link to="/client/modify">
+        {" "}
+        <CountManager>계정 관리 &gt;</CountManager>
+      </Link>
+
       <UserPlace>Caker 가게 회원</UserPlace>
       <UserImg ImageUrl={ImageUrl}></UserImg>
       <PinkBox>
         <Link to="/shop/modify">
-          <Button>가게 정보 관리</Button>
+          <Button1>가게 정보 관리</Button1>
         </Link>
         <Link to="/shop/pickupschedule/:{Id}">
-          <Button>픽업 일정 관리</Button>
+          <Button2>픽업 일정 관리</Button2>
         </Link>
         <CommitProposal>댓글 단 제안서</CommitProposal>
         <BottomProposal>
-          {Mydatas.map(order => {
-            return (
-              <Article
-                key={order.sheetId}
-                title={order.locationDong}
-                image={order.imageUrl}
-                subtitle={order.hashtag}
-              ></Article>
-            );
-          })}
+          {visible ||
+            SixImg.map(order => {
+              return (
+                <Article
+                  key={order.sheetId}
+                  title={order.locationDong}
+                  image={order.imageUrl}
+                ></Article>
+              );
+            })}
+          {visible &&
+            Mydatas.map(order => {
+              return (
+                <Article
+                  key={order.sheetId}
+                  title={order.locationDong}
+                  image={order.imageUrl}
+                ></Article>
+              );
+            })}
         </BottomProposal>
 
-        <MoreView>
+        <MoreView onClick={() => setVisible(!visible)}>
           더보기
           <br />∨
         </MoreView>

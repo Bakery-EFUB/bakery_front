@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingPage from "./pages/LoadingPage";
 import LoginHome from "./pages/Auth/LoginHome";
 import MainHome from "./pages/Main/MainHome";
-import ShopDetailPage from "./pages/ShopDetailPage";
+import ShopDetailPage from "./pages/MyPage/ShopInformationRegister/ShopDetailPage";
 import AddSchedulePage from "./pages/AddSchedulePage";
 import CreateProposal from "./pages/CreateProposal";
 
@@ -13,9 +13,9 @@ import OurService from "./pages/OurService";
 import ShopMemberMyPage from "./pages/MyPage/ShopMemberMyPage";
 import AllProposal from "./pages/AllProposal";
 
-import ShopMypageStart from "./pages/ShopMyPageStart";
+import ShopMypageStart from "./pages/MyPage/ShopMyPageStart";
 
-import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
+import ShopMyPageProgressive from "./pages/MyPage/ShopMyPageProgressive";
 import PickupSchedulePage from "./pages/PickupSchedulePage";
 import EditProposal from "./pages/EditProposal";
 
@@ -67,11 +67,6 @@ function App() {
           element={<ShopInformationRegister />}
         />
         <Route exact path="/shop/modify" element={<ShopInformationModify />} />
-        <Route
-          exact
-          path="/shop/progressive"
-          element={<ShopMyPageProgressive />}
-        />
 
         {/* 스케줄 */}
         <Route

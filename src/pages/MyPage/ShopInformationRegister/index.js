@@ -38,6 +38,12 @@ const ShopInformationRegister = () => {
     setMenuFile(e.tartget.value);
   };
 
+  // const nav = useNavigate();
+
+  // const mypage = () => {
+  //   nav("/");
+  // };
+
   //제출 -> 백엔드로 post
   const submitHandler = e => {
     console.log(storeData);
