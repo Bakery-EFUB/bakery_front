@@ -1,13 +1,8 @@
 import TopBar from "../../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
 import PageTitle from "../../components/Common/PageTitle";
-
-import UserLogoimg from "../../images/UserLogo.svg";
-import Mock from "../../images/Mock.svg";
-
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import orderList from "../../_mock/orderImage.json";
 import { userImage, userName } from "../../utils/auth";
 import http from "../../common/http";
 
@@ -206,10 +201,11 @@ const CommitProposal = styled.div`
 const BottomProposal = styled.div`
   margin-top: 19px;
   width: 380.14px;
-  height: ${props => props.height};
+  height: 300px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  overflow: scroll;
 `;
 
 //더보기

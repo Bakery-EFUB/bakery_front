@@ -196,6 +196,7 @@ const token = JSON.parse(localStorage.getItem("token"));
 //ui 구현
 const ShopInformationModify = () => {
   const nav = useNavigate();
+
   const formData = new FormData();
   const [storeData, setStoreData] = useState(DEFAULT_STORE_DATA);
   const [MainFile, setMainFile] = useState([]);
