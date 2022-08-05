@@ -5,6 +5,7 @@ import AccountRemovePop from "../../components/AccountSetting/AccountRemovePop";
 import axios from "axios";
 import http from "../../common/http";
 
+const token = JSON.parse(localStorage.getItem("token"));
 
 const WrapBox = styled.div`
   width: 428px;
@@ -113,6 +114,11 @@ const AccountSetting = (props) => {
       .patch(`/member/account/profile`,{
         name : Profile.Name,
         phonenum : Profile.phoneNum,
+      }, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "X-AUTH-TOKEN": token,
+        },
       })
   };
 

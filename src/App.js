@@ -5,20 +5,23 @@ import LoginHome from "./pages/Auth/LoginHome";
 import MainHome from "./pages/Main/MainHome";
 import ShopDetailPage from "./pages/MyPage/ShopInformationRegister/ShopDetailPage";
 import AddSchedulePage from "./pages/AddSchedulePage";
-import CreateProposal from "./pages/CreateProposal";
 
 import SearchPage from "./pages/ShopSearch/SearchPage";
 import Recommend from "./pages/ShopSearch/Recommend";
 import OurService from "./pages/ServiceInfo/OurService";
 import ShopMemberMyPage from "./pages/MyPage/ShopMemberMyPage";
+
+// 제안서 관련
+import Proposal from "./pages/Proposal/Proposal";
 import AllProposal from "./pages/SeeProposal/AllProposal";
+import EditProposal from "./pages/EditProposal/EditProposal";
+import CreateProposal from "./pages/CreateProposal/CreateProposal";
 
 import ShopMypageStart from "./pages/MyPage/ShopMyPageStart";
 
 import ShopMyPageProgressive from "./pages/MyPage/ShopMyPageProgressive";
-import PickupSchedulePage from "./pages/PickupSchedulePage";
-import EditProposal from "./pages/EditProposal";
 
+import PickupSchedulePage from "./pages/PickupSchedulePage";
 import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
 import ShopInformationModify from "./pages/MyPage/ShopInformationModify";
 import LoginLoading from "./pages/Auth/LoginLoading";
@@ -29,9 +32,10 @@ import BakerRoute from "./route/BakerRoute";
 import AccountSetting from "./pages/AccountSetting/AccountSetting";
 import AccountRemove from "./pages/AccountSetting/AccountRemove";
 import ShopCakerMyPage from "./pages/MyPage/ShopCakerMyPage";
-import Proposal from "./pages/Proposal";
 
 import Kakao from "./pages/Auth/Kakao";
+import NoPermission from "./pages/Auth/NoPermission";
+
 function App() {
   console.log(userRole);
   return (
@@ -81,6 +85,8 @@ function App() {
           path="/shop/addschedule/:storeId"
           element={<AddSchedulePage />}
         />
+        {/* 잘못된 접근 */}
+        <Route exact path="/accessfail" element={<NoPermission />} />
       </Routes>
     </BrowserRouter>
   );

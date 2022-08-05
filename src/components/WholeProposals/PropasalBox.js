@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import BoxLine from "../../images/BoxLine.svg";
+import Mock from "../../images/Mock.svg";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -9,7 +11,13 @@ const Oneproposal = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const Cakeimg = styled.div`
+const CakeImg = styled.div`
+  background: url(${Mock});
+  border-radius: 15%;
+  margin: 15px;
+`;
+const MockImg = styled.div`
+  background: url(${Mock});
   border-radius: 15%;
   margin: 15px;
 `;
@@ -55,33 +63,31 @@ export function timeForToday(value) {
   const today = new Date();
   const timeValue = new Date(value);
 
-  const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
-  if (betweenTime < 1) return '방금전';
+  const betweenTime = Math.floor(
+    (today.getTime() - timeValue.getTime()) / 1000 / 60,
+  );
+  if (betweenTime < 1) return "방금전";
   if (betweenTime < 60) {
-      return `${betweenTime}분전`;
+    return `${betweenTime}분전`;
   }
 
   const betweenTimeHour = Math.floor(betweenTime / 60);
   if (betweenTimeHour < 24) {
-      return `${betweenTimeHour}시간전`;
+    return `${betweenTimeHour}시간전`;
   }
 
   const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
   if (betweenTimeDay < 365) {
-      return `${betweenTimeDay}일전`;
+    return `${betweenTimeDay}일전`;
   }
 
   return `${Math.floor(betweenTimeDay / 365)}년전`;
-};
-const ProposalBox = ({key, description, time, hashtag, image}) => {
-
-  
+}
+const ProposalBox = ({ key, description, time, hashtag, image }) => {
   return (
     <Container>
       <Oneproposal>
-        <Cakeimg>
-          <img src={image} />
-        </Cakeimg>
+        {image ? <CakeImg></CakeImg> : <MockImg></MockImg>}
         <Textbox>
           <Title>{key}</Title>
           <Description>{description}</Description>
@@ -89,7 +95,9 @@ const ProposalBox = ({key, description, time, hashtag, image}) => {
             <Hashtag>{hashtag}</Hashtag>
           </HashtagBox>
         </Textbox>
-        <Timeshow><timeForToday value = {time}/></Timeshow>
+        <Timeshow>
+          <timeForToday value={time} />
+        </Timeshow>
       </Oneproposal>
       <Line src={BoxLine} />
     </Container>

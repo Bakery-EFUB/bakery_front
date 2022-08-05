@@ -221,7 +221,7 @@ const ShopCakerMyPage = () => {
           {visible ||
             SixImg.map(order => {
               return (
-                <Link to={`/proposal/${order.id}`} key={order.id}>
+                <Link to={`/proposal/${order.sheetId}`} key={order.id}>
                   <Article
                     key={order.sheetId}
                     title={order.locationDong}

@@ -61,11 +61,13 @@ const ShopMemberMyPage = () => {
           {visible ||
             SixImg.map(order => {
               return (
-                <Article
-                  key={order.sheetId}
-                  title={order.locationDong}
-                  image={order.imageUrl}
-                ></Article>
+                <Link to={`/proposal/${order.sheetId}`} key={order.id}>
+                  <Article
+                    key={order.sheetId}
+                    title={order.locationDong}
+                    image={order.imageUrl}
+                  ></Article>
+                </Link>
               );
             })}
           {visible &&

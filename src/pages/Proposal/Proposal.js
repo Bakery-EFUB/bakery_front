@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import TopBar from "../components/Common/Sidebar/TopBar";
-import CommentLogo from "../images/CommentLogo.svg";
-import SmallPinkButton from "../components/Proposal/SmallPinkButton";
-import SmallWhiteButton from "../components/Proposal/SmallWhiteButton";
-import PageTitle from "../components/Common/PageTitle";
-import CommentToggle from "../components/Proposal/CommentToggle";
+import TopBar from "../../components/Common/Sidebar/TopBar";
+import CommentLogo from "../../images/CommentLogo.svg";
+import SmallPinkButton from "../../components/Proposal/SmallPinkButton";
+import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
+import PageTitle from "../../components/Common/PageTitle";
+import CommentToggle from "../../components/Proposal/CommentToggle";
 
-import http from "../common/http";
+import http from "../../common/http";
 
 const Proposal = () => {
+  const [fail, setFail] = useState(false);
+
   // url에서 id 뽑기
   const navigate = useNavigate();
   const { id } = useParams();
@@ -191,6 +193,7 @@ const Proposal = () => {
     }
   };
 
+  // 제안서 get
   useEffect(() => {
     http
       .get(`/orders/${id}`)
@@ -212,6 +215,7 @@ const Proposal = () => {
       })
       .catch(error => {
         console.log("제안서불러오기실패", error);
+        navigate("/accessfail");
       });
 
     // 댓글 불러오기
