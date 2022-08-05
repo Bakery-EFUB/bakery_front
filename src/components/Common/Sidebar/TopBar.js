@@ -4,16 +4,15 @@ import TopLogoimg from "../../../images/TopLogo.svg";
 import GuestProfile from "../../../images/Profile.svg";
 import TopMenuBarimg from "../../../images/TopMenuBar.svg";
 import SidebarCloseBtn from "../../../images/SidebarCloseBtn.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   SidebarDataBaker,
   SidebarDataClient,
   SidebarDataGuest,
-} from "../Sidebar/SidebarData";
+} from "./SidebarData";
 import ButtonSidebar from "./ButtonSidebar";
 import "./Sidebar.css";
 import "../../../styles/common.scss";
-import { isLogined, userImage, userName, userRole } from "../../../utils/auth";
 
 const TopBarPink = styled.div`
   z-index: 5;
@@ -84,9 +83,12 @@ const TopBar = () => {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
   const [userStatus, setUserStatus] = useState();
+  const [loginUserInfo, setLoginUserInfo] = useState();
   useEffect(() => {
-    if (userRole === "ROLE_CLIENT") setUserStatus(SidebarDataClient);
-    else if (userRole === "ROLE_TRAINEE" || userRole === "ROLE_BAKER")
+    const info = JSON.parse(localStorage.getItem("user"));
+    setLoginUserInfo(info);
+    if (info?.role === "ROLE_CLIENT") setUserStatus(SidebarDataClient);
+    else if (info?.role === "ROLE_TRAINEE" || info?.role === "ROLE_BAKER")
       setUserStatus(SidebarDataBaker);
     else setUserStatus(SidebarDataGuest);
   }, []);
@@ -102,19 +104,21 @@ const TopBar = () => {
   return (
     <div>
       <TopBarPink>
+        <TopMenuBar onClick={showSidebar}></TopMenuBar>
         <Link to="/">
           <TopLogo></TopLogo>
         </Link>
-        <TopMenuBar onClick={showSidebar}></TopMenuBar>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items"></ul>
           <li className="navbar-toggle">
             <CloseBtn onClick={showSidebar}></CloseBtn>
           </li>
           <Profile>
-            {isLogined ? (
+            {!!loginUserInfo ? (
               <>
-                <LoginProfileImage src={userImage}></LoginProfileImage>
+                <LoginProfileImage
+                  src={loginUserInfo.imageUrl}
+                ></LoginProfileImage>
                 <LoginBox>
                   <div
                     style={{
@@ -123,7 +127,7 @@ const TopBar = () => {
                       marginBottom: "2px",
                     }}
                   >
-                    {userName} 님
+                    {loginUserInfo.nickname} 님
                   </div>
                   <div>계정관리</div>
                 </LoginBox>
@@ -142,7 +146,7 @@ const TopBar = () => {
               </li>
             );
           })}
-          {isLogined ? (
+          {!!loginUserInfo ? (
             <ButtonSidebar
               onClick={() => Logout()}
               text="로그아웃"
