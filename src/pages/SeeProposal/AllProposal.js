@@ -34,7 +34,13 @@ const AllProposal = () => {
       <ChooseBox></ChooseBox>
       <ProposalsDisplay>
         {Array.from(allProposals).map(allProposals =>{
-          return (<ProposalBox key= {allProposals.member.nickname} image = {allProposals.image} description = {allProposals.type} time ={allProposals.createdAt} hashtag={allProposals.hashtag}></ProposalBox>
+          return (<ProposalBox 
+            key= {allProposals.member.nickname}
+            image = {allProposals.image}
+            description = {allProposals.type} 
+            time ={allProposals.createdAt} 
+            hashtag={allProposals.hashtag}>
+            </ProposalBox>
           );
         })}
       </ProposalsDisplay>
