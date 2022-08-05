@@ -5,7 +5,7 @@ import NoProposal from "../../components/WholeProposals/NoProposal";
 import PageTitle from "../../components/Common/PageTitle";
 import styled from "styled-components";
 import ProposalBox from "../../components/WholeProposals/PropasalBox";
-import { GetProposals } from "../../api/allproposal";
+import http from "../../common/http";
 
 const ProposalsDisplay = styled.div`
  display: flex;
@@ -15,7 +15,8 @@ const ProposalsDisplay = styled.div`
 const AllProposal = () => {
   const [allProposals, setAllProposals] = useState([]);
   const proposalApi = () => {
-    GetProposals()
+    http
+    .get(`https://caker.shop/orders`)
     .then(
        data =>{
         setAllProposals(data);
@@ -33,10 +34,22 @@ const AllProposal = () => {
       <PageTitle title="전체 제안서 리스트" margin="60px 0 63px 0"></PageTitle>
       <ChooseBox></ChooseBox>
       <ProposalsDisplay>
-        {Array.from(allProposals).map(allProposals =>{
-          return (<ProposalBox key= {allProposals.member.nickname} image = {allProposals.image} description = {allProposals.type} time ={allProposals.createdAt} hashtag={allProposals.hashtag}></ProposalBox>
+        {allProposals?
+          (
+            Array.from(allProposals).map(orders =>{
+            return (<ProposalBox
+            key= {orders.member.nickname} 
+            image = {orders.image} 
+            description = {orders.type} 
+            time ={orders.createdAt} 
+            hashtag={orders.hashtag}>
+
+            </ProposalBox>
           );
-        })}
+        })
+        ) :(
+          <NoProposal/>
+        )}
       </ProposalsDisplay>
     </div>
   );
