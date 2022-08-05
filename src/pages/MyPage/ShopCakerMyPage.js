@@ -74,7 +74,7 @@ const CountManager = styled.div`
   position: absolute;
   width: 57px;
   height: 14px;
-  left: 210.69px;
+  left: 225.69px;
   top: 237.7px;
   color: gray;
   font-family: "Apple SD Gothic Neo";
@@ -88,7 +88,7 @@ const CountManager = styled.div`
 const Button1 = styled.button`
   width: 380px;
   height: 60px;
-  margin-top: 70px;
+  margin-top: 50px;
   color: var(--white);
   background: var(--main-pink);
   border-radius: 6px;
@@ -136,7 +136,8 @@ const CommitProposal = styled.div`
 const BottomProposal = styled.div`
   margin-top: 19px;
   width: 380.14px;
-  height: ${props => props.height};
+  height: 300px;
+  box-sizing: content-box;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -144,7 +145,7 @@ const BottomProposal = styled.div`
 
 //더보기
 const MoreView = styled.div`
-  margin-top: 19px;
+  margin-top: 1px;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
@@ -198,13 +199,15 @@ const ShopCakerMyPage = () => {
     <WrapBox>
       <TopBar></TopBar>
       <PageTitle title="마이페이지" margin="70.06px" />
-      <UserName>
-        {JSON.parse(localStorage.getItem("user")).nickname} 님
-      </UserName>
-      <Link to="/client/modify">
-        {" "}
-        <CountManager>계정 관리 &gt;</CountManager>
-      </Link>
+      <div>
+        <UserName>
+          {JSON.parse(localStorage.getItem("user")).nickname} 님
+        </UserName>
+        <Link to="/client/modify">
+          {" "}
+          <CountManager>계정 관리 &gt;</CountManager>
+        </Link>
+      </div>
 
       <UserPlace>Caker 가게 회원</UserPlace>
       <UserImg ImageUrl={ImageUrl}></UserImg>
@@ -216,7 +219,6 @@ const ShopCakerMyPage = () => {
           <Button2>픽업 일정 관리</Button2>
         </Link>
         <CommitProposal>댓글 단 제안서</CommitProposal>
-
         <BottomProposal>
           {visible ||
             SixImg.map(order => {
@@ -243,11 +245,14 @@ const ShopCakerMyPage = () => {
               );
             })}
         </BottomProposal>
-
-        <MoreView onClick={() => setVisible(!visible)}>
-          더보기
-          <br />∨
-        </MoreView>
+        {visible == false ? (
+          <MoreView onClick={() => setVisible(!visible)}>
+            더보기
+            <br />∨
+          </MoreView>
+        ) : (
+          <MoreView onClick={() => setVisible(!visible)}></MoreView>
+        )}
       </PinkBox>
     </WrapBox>
   );
