@@ -6,7 +6,7 @@ import PageTitle from "../../components/Common/PageTitle";
 import styled from "styled-components";
 import ProposalBox from "../../components/WholeProposals/PropasalBox";
 import http from "../../common/http";
-
+import { GetOrder } from "../../api/home";
 const ProposalsDisplay = styled.div`
  display: flex;
  flex-direction: column;
@@ -14,7 +14,20 @@ const ProposalsDisplay = styled.div`
 
 const AllProposal = () => {
   const [allProposals, setAllProposals] = useState([]);
-  const proposalApi = () => {
+  useEffect(() => {
+    //setAllOrderInfo(orderList["sheetResponseDTOs"]);
+
+    GetOrder()
+      .then(data => {
+        console.log(data);
+        setAllProposals(data["sheetResponseDTOs"]);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }, []);
+
+  /* const proposalApi = () => {
     http
     .get(`https://caker.shop/orders`)
     .then(
@@ -27,11 +40,11 @@ const AllProposal = () => {
   };
   useEffect(() =>{
     proposalApi();
-  },[]);
+  },[]);*/
   return (
     <div>
       <TopBar />
-      <PageTitle title="전체 제안서 리스트" margin="60px 0 63px 0"></PageTitle>
+      <PageTitle title="전체 제안서 리스트" margin="10% 0% 10% 0%"></PageTitle>
       <ChooseBox></ChooseBox>
       <ProposalsDisplay>
         {allProposals?
@@ -39,10 +52,10 @@ const AllProposal = () => {
             Array.from(allProposals).map(orders =>{
             return (<ProposalBox
             key= {orders.member.nickname} 
-            image = {orders.image} 
             description = {orders.type} 
             time ={orders.createdAt} 
-            hashtag={orders.hashtag}>
+            hashtag = {orders.hashtag}
+            image = {orders.imageURL} >
 
             </ProposalBox>
           );
