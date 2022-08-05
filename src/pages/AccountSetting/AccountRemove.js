@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import RemoveBackground from "../images/RemoveBackground.svg";
-import BigPinkButton from "../components/BigPinkButton";
-import TopBar from "../components/TopBar";
+import RemoveBackground from "../../images/RemoveBackground.svg";
+import BigPinkButton from "../../components/BigPinkButton";
+import TopBar from "../../components/Common/Sidebar/TopBar";
 import { Link } from "react-router-dom";
+import http from "../../common/http";
+
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -11,8 +13,8 @@ const Container = styled.div`
 const Text = styled.div`
     width: 152px;
     height: 58px;
-    margin-left: 24px;
-    margin-top: 100px;
+    margin-left: 8%;
+    margin-top: 20%;
     font-family: 'Apple SD Gothic Neo';
     font-style: normal;
     font-weight: 700;
@@ -21,7 +23,7 @@ const Text = styled.div`
     color: #202020;
 `;
 const Background = styled.img`
-    margin-top:40px;
+    margin-top: 10%;
     width: 424.57px;
     height: 415.7px;
     align-items: center;
@@ -30,6 +32,7 @@ const ButtonBox = styled.div`
     margin-top: 100px;
     margin-left: 24.38px;
     margin-bottom: 100px;
+    width: 400px;
 `;
 const AccountRemove = () => {
     return(

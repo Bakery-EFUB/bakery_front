@@ -9,9 +9,9 @@ import CreateProposal from "./pages/CreateProposal";
 
 import SearchPage from "./pages/ShopSearch/SearchPage";
 import Recommend from "./pages/ShopSearch/Recommend";
-import OurService from "./pages/OurService";
+import OurService from "./pages/ServiceInfo/OurService";
 import ShopMemberMyPage from "./pages/MyPage/ShopMemberMyPage";
-import AllProposal from "./pages/AllProposal";
+import AllProposal from "./pages/SeeProposal/AllProposal";
 
 import ShopMypageStart from "./pages/ShopMyPageStart";
 
@@ -26,7 +26,8 @@ import { userRole } from "./utils/auth";
 import ClientRoute from "./route/ClientRoute";
 import TraineeRoute from "./route/TraineeRoute";
 import BakerRoute from "./route/BakerRoute";
-import AccountSetting from "./pages/AccountSetting";
+import AccountSetting from "./pages/AccountSetting/AccountSetting";
+import AccountRemove from "./pages/AccountSetting/AccountRemove";
 import ShopCakerMyPage from "./pages/MyPage/ShopCakerMyPage";
 import Proposal from "./pages/Proposal";
 
@@ -50,7 +51,6 @@ function App() {
         <Route exact path="/about" element={<OurService />} />
         <Route exact path="/mypagecaker" element={<ShopCakerMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
-        <Route exact path="/client/modify" element={<AccountSetting />} />
 
         {/* 마이페이지 */}
         <Route exact path="/client/mypage" element={<ShopMemberMyPage />} />
@@ -72,7 +72,8 @@ function App() {
           path="/shop/progressive"
           element={<ShopMyPageProgressive />}
         />
-
+        <Route exact path="/client/modify" element={<AccountSetting />} />
+        <Route exact path="/accountremove" element ={<AccountRemove/>}/>
         {/* 스케줄 */}
         <Route
           exact
