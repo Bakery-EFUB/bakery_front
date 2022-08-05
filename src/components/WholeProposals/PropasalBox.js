@@ -10,6 +10,7 @@ const Oneproposal = styled.div`
   flex-direction: row;
 `;
 const Cakeimg = styled.div`
+  background: url(${image});
   border-radius: 15%;
   margin: 15px;
 `;
