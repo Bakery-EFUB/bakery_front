@@ -11,11 +11,9 @@ import Recommend from "./pages/ShopSearch/Recommend";
 import OurService from "./pages/ServiceInfo/OurService";
 import ShopMemberMyPage from "./pages/MyPage/ShopMemberMyPage";
 
-import AllProposal from "./pages/SeeProposal/AllProposal";
-
 // 제안서 관련
 import Proposal from "./pages/Proposal/Proposal";
-import AllProposal from "./pages/Proposal/AllProposal";
+import AllProposal from "./pages/SeeProposal/AllProposal";
 import EditProposal from "./pages/EditProposal/EditProposal";
 import CreateProposal from "./pages/CreateProposal/CreateProposal";
 
