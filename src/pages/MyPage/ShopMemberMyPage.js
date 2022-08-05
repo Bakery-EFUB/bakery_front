@@ -81,10 +81,14 @@ const ShopMemberMyPage = () => {
               );
             })}
         </BottomProposal>
-        <MoreView onClick={() => setVisible(!visible)}>
-          더보기
-          <br />∨
-        </MoreView>
+        {visible == false ? (
+          <MoreView onClick={() => setVisible(!visible)}>
+            더보기
+            <br />∨
+          </MoreView>
+        ) : (
+          <MoreView onClick={() => setVisible(!visible)}></MoreView>
+        )}
       </PinkBox>
     </WrapBox>
   );
@@ -157,7 +161,7 @@ const CountManager = styled.div`
   position: absolute;
   width: 57px;
   height: 14px;
-  left: 206.69px;
+  left: 225.69px;
   top: 237.7px;
   color: gray;
   font-family: "Apple SD Gothic Neo";
@@ -210,13 +214,14 @@ const BottomProposal = styled.div`
 
 //더보기
 const MoreView = styled.div`
-  margin-top: 19px;
+  margin-top: 1px;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
   line-height: 14px;
   text-align: center;
+  transform: translateY(50px);
 `;
 
 //제안서 사진 방법1
