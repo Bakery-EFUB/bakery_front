@@ -8,12 +8,12 @@ import http from "../../common/http";
 const token = JSON.parse(localStorage.getItem("token"));
 
 const WrapBox = styled.div`
-  width: 428px;
-  height: 1000px;
+  width: 100%;
+  height: 100%;
 `;
 
 const TextHolder = styled.input`
-  width: 380px;
+  width: 90%;
   height: 50px;
   margin: 2% 0% 0% 5%;
   left: 24px;
@@ -51,8 +51,8 @@ const TextTitle = styled.div`
 `;
 
 const ModifyBtn = styled.button`
-  margin: 10% 0% 0% 5%;
-  width: 380.47px;
+  margin: 10% 0% 5% 5%;
+  width: 90%;
   height: 60px;
   background: var(--main-pink);
   border-radius: 6px;

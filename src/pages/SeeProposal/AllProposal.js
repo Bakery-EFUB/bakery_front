@@ -51,7 +51,8 @@ const AllProposal = () => {
           (
             Array.from(allProposals).map(orders => {
             return (<ProposalBox
-              key= {orders.member.nickname} 
+              key= {orders.sheetId}
+              title = {orders.member.nickname}
               description = {orders.type} 
               time ={orders.createdAt} 
               hashtag = {orders.hashtag}
