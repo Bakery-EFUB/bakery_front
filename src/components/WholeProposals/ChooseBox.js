@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import DropdownArrow1 from "../../images/DropdownArrow1.svg";
-
+import axios from "axios";
 const ContentBoxWithMargin = styled.div`
   width: 381px;
   height: 31px;
@@ -47,25 +47,7 @@ const DropdownArrow = styled.span`
     transform: rotate(180deg);
   }
 `;
-const Seodaemun = [
-  "동 전체",
-  "북아현동",
-  "신촌동",
-  "연희동",
-  "홍제동",
-  "홍은동",
-  "남가좌동",
-  "북가좌동",
-];
-const CakeType = [
-  "케이크 전체",
-  "레터링케이크",
-  "생화케이크",
-  "미니(도시락 케이크)",
-  "플라워앙금 케이크",
-  "컵케이크",
-  "기타",
-];
+
 const Dropdown = ({ items }) => {
   return (
     <ChoooseDisplay>
@@ -83,6 +65,32 @@ const Dropdown = ({ items }) => {
   );
 };
 const ChooseBox = () => {
+  //셀렉트박스에서 누를 때마다 해당 카테고리의 체크리스트들을 배열의 형태로 저장할 state
+  const [selectedOrder,setSelectedOrder] = useState([]);
+
+  //필터된 제안서 정보들을 받고 이를 orderlist에 저장해주는 함수
+  const [orderList, setOrderList] = useState([]);
+  const getOrderListData = useCallback(async () =>{
+    const res = await fetch(`https://caker.shop/order/${search}`);
+    const data = await res.json();
+    setOrderList(data.result);
+  }, [select]);
+  
+  useEffect(() => {
+    getOrderListData();
+  },[getOrderListData]);  
+  //해당 셀렉트박스가 선택되거나 해제되었을 때 해당 정보들을 selectedOrder 저장하는 함수
+  const handleSelectList = (e, loc_gu, loc_dong ,caketype) =>{
+    e.targeted.checked
+    ? setSelectedOrder([
+      ...selectedOrder,
+      { locgu: loc_gu, locdong: loc_dong, caketype},
+    ])
+    : setSelectedOrder(
+      selectedOrder.filter(list => list.content !== content)
+    );
+  };
+
   return (
     <div>
       <ContentBoxWithMargin>

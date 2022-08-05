@@ -1,8 +1,10 @@
-import TopBar from "../components/Common/Sidebar/TopBar";
+import TopBar from "../../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
-import React, {useState} from "react";
-import AccountRemovePop from "../components/AccountSetting/AccountRemovePop";
+import React, {useEffect, useState} from "react";
+import AccountRemovePop from "../../components/AccountSetting/AccountRemovePop";
 import axios from "axios";
+import http from "../../common/http";
+
 
 const WrapBox = styled.div`
   width: 428px;
@@ -12,7 +14,7 @@ const WrapBox = styled.div`
 const TextHolder = styled.input`
   width: 380px;
   height: 50px;
-  margin: 10px 0px 0px 24px;
+  margin: 2% 0% 0% 5%;
   left: 24px;
   top: 291.87px;
   background: var(--sub-lightgray);
@@ -24,7 +26,7 @@ const TextHolder = styled.input`
 const AccountRegistering = styled.div`
   width: 162px;
   height: 29px;
-  margin: 56px 0px 0px 24px;
+  margin: 8% 0% 0% 5%;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
@@ -34,9 +36,9 @@ const AccountRegistering = styled.div`
 `;
 
 const TextTitle = styled.div`
-  width: 80px;
+  width: 100px;
   height: 22px;
-  margin: 70px 0px 0px 24px;
+  margin: 12% 0% 0% 5%;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
@@ -48,7 +50,7 @@ const TextTitle = styled.div`
 `;
 
 const ModifyBtn = styled.button`
-  margin: 70px 0px 0px 24px;
+  margin: 10% 0% 0% 5%;
   width: 380.47px;
   height: 60px;
   background: var(--main-pink);
@@ -64,9 +66,9 @@ const ModifyBtn = styled.button`
 const RemoveAccountBtn = styled.button`
     width: 90px;
     height: 19px;
-    margin-left: 329px;
+    margin-left: 75%;
     background-color: white;
-    margin-top: 20px;
+    margin-top: 7%;
     border: none;
     font-family: 'Apple SD Gothic Neo';
     font-style: normal;
@@ -84,28 +86,49 @@ const PopupContainer = styled.div`
   z-index: 1000;
 `;
 
-const token = JSON.parse(localStorage.getItem("token"));
 
-//ui 구현
 const AccountSetting = (props) => {
+  const [Profile, setProfile] = useState([]);
+
+
+  useEffect(() =>{
+    ProfileModi();
+  },[{Profile}]);
+  
+  const ProfileModi = () => {
+    http
+      .get(`/member/account/profile`)
+      .then(
+         Profile =>{
+         setProfile(Profile);
+         console.log("받아오기 성공", Profile.data.sheetResponseDTOs);
+      })
+      .catch(e => {
+      console.log(e);
+    });
+  };
+
+  const UpdateProfile = () =>{
+    http
+      .patch(`/member/account/profile`,{
+        name : Profile.Name,
+        phonenum : Profile.phoneNum,
+      })
+  };
+
+  useEffect(() => {
+    ProfileModi();
+  },[]);
+
+  console.log(JSON.parse(localStorage.getItem("user")));
 
   const [Name,setName] = useState("");
   const [Email, setEmail] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [NickName, setNickName] = useState("");
-  console.log(MainFile);
 
   const {} = props;
   const [popup, handlePopup] = useState(false);
-
-  let body  = {
-    storedata:{
-      name: Name,
-      phonenumber: PhoneNumber,
-      nickname : NickName,
-      email: Email,
-    },
-  };
 
   const NameHandler = e =>{
     e.preventDefault();
@@ -115,59 +138,36 @@ const AccountSetting = (props) => {
     e.preventDefault();
     setPhoneNumber(e.target.value);
   };
-  const NickNameHandler = e => {
-    e.preventDefault();
-    setNickName(e.target.value);
-  };
-  const EmailHandler = e =>{
-    e.preventDefault();
-    setEmail(e.target.value);
-  };
 
-  const submitHandler = e =>{
-    e.preventDefault();
-    FormData.append("data", JSON.stringify(body));
-    const postSurvey = axios({
-      method : "POST",
-      url: "https://caker.shop/members/account/profile",
-      mode:"cors",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      data: formData,
-    });
-    console.log(postSurvey);
-  }
   return (
     <WrapBox>
-      <TopBar />
+      <TopBar/>
       <AccountRegistering>계정 관리</AccountRegistering>
       <TextTitle>이름</TextTitle>
-      <TextHolder type="text" value={Name} onChange={NameHandler} placeholder={Name}/>
+      <TextHolder type="text" 
+        value={JSON.parse(localStorage.getItem("user")).name}
+        onChange ={NameHandler}
+        placeholder={JSON.parse(localStorage.getItem("user")).name}/>
       <TextTitle>이메일</TextTitle>
       <TextHolder
         type="text"
-        value={Email}
-        onChange={EmailHandler}
-        placeholder={Email}
+        placeholder={JSON.parse(localStorage.getItem("user")).email}
       />
       <TextTitle>휴대폰 번호</TextTitle>
       <TextHolder
         type="text"
         value={PhoneNumber}
         onChange ={PhoneNumberHandler}
-        placeholder ={PhoneNumber}
+        placeholder ={JSON.parse(localStorage.getItem("user")).phoneNum}
       />
       <TextTitle>닉네임</TextTitle>
       <TextHolder 
         type="text" 
-        placeholder={NickName}
-        onChange = {PhoneNumberHandler}
-        value={NickName} />
+        placeholder={JSON.parse(localStorage.getItem("user")).nickname} />
       <PopupContainer>
         <RemoveAccountBtn onClick={()=>{handlePopup(true);}}>회원 탈퇴</RemoveAccountBtn> {popup && <AccountRemovePop onClose = {handlePopup}/>}
       </PopupContainer>
-      <ModifyBtn type="submit">수정하기</ModifyBtn>
+      <ModifyBtn type="submit" onClick={() =>{UpdateProfile();}}>수정하기</ModifyBtn>
       
     </WrapBox>
   );
