@@ -8,7 +8,6 @@ import Done from "./Done";
 
 import http from "../../common/http";
 
-
 const EditProposal = () => {
   const [data, setData] = useState(null);
 
@@ -58,7 +57,6 @@ const EditProposal = () => {
   useEffect(() => {
     console.log("변화", original);
   }, [original]);
-
   return (
     <div>
       <TopBar />
@@ -75,7 +73,7 @@ const EditProposal = () => {
             />
           }
         />
-        <Route path="/done" element={<Done />} />
+        <Route path="/done" element={<Done myOrderId={order_id} />} />
       </Routes>
     </div>
   );
