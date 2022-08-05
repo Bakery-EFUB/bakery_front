@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import { Link } from "react-router-dom";
+import http from "../../common/http";
 
 const PopupBox = styled.div`
    /* Rectangle 1549 */
@@ -100,6 +101,10 @@ const OkayBtn = styled.button`
 
 	color: white;
 `;
+const accountDelete = () =>{
+    http
+    .delete(`/members/account`)
+}
 const AccountRemovePop = (props)=>{
     const {onClose} = props;
     return(
