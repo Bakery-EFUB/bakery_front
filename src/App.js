@@ -4,7 +4,7 @@ import LoadingPage from "./pages/LoadingPage";
 import LoginHome from "./pages/Auth/LoginHome";
 import MainHome from "./pages/Main/MainHome";
 import ShopDetailPage from "./pages/ShopDetailPage";
-import AddSchedulePage from "./pages/AddSchedulePage";
+import AddSchedulePage from "./pages/PickUpSchedule/AddSchedulePage";
 import CreateProposal from "./pages/CreateProposal";
 
 import SearchPage from "./pages/ShopSearch/SearchPage";
@@ -16,7 +16,7 @@ import AllProposal from "./pages/AllProposal";
 import ShopMypageStart from "./pages/ShopMyPageStart";
 
 import ShopMyPageProgressive from "./pages/ShopMyPageProgressive";
-import PickupSchedulePage from "./pages/PickupSchedulePage";
+import PickupSchedulePage from "./pages/PickUpSchedule/PickupSchedulePage";
 import EditProposal from "./pages/EditProposal";
 
 import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
