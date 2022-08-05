@@ -12,11 +12,13 @@ import {
   RegisterBtn,
 } from "./styles";
 import http from "../../../common/http";
+import { useNavigate } from "react-router-dom";
 
 const token = JSON.parse(localStorage.getItem("token"));
 
 //ui 구현
 const ShopInformationRegister = () => {
+  const nav = useNavigate();
   const formData = new FormData();
   const [storeData, setStoreData] = useState(DEFAULT_STORE_DATA);
 
@@ -37,12 +39,6 @@ const ShopInformationRegister = () => {
     e.preventDefault();
     setMenuFile(e.tartget.value);
   };
-
-  // const nav = useNavigate();
-
-  // const mypage = () => {
-  //   nav("/");
-  // };
 
   //제출 -> 백엔드로 post
   const submitHandler = e => {
@@ -73,6 +69,7 @@ const ShopInformationRegister = () => {
         })
         .then(res => console.log("파일 포스트 성공", res))
         .catch(err => console.log("파일 포스트 실패", err));
+      nav("/caker/mypage");
     };
   };
 

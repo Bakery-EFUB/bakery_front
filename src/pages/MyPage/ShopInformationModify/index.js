@@ -8,6 +8,7 @@ import { DetailInfoCard } from "../../../components/DetailInfoCard";
 import DetailInfoItem from "../../../components/DetailInfoItem";
 import { SHOP_DATA, DEFAULT_STORE_DATA } from "./const";
 import http from "../../../common/http";
+import { useNavigate } from "react-router-dom";
 
 const WhiteModal = styled.div`
   margin: 70px 24.46px 90px 24.47px;
@@ -194,6 +195,7 @@ const token = JSON.parse(localStorage.getItem("token"));
 
 //ui 구현
 const ShopInformationModify = () => {
+  const nav = useNavigate();
   const formData = new FormData();
   const [storeData, setStoreData] = useState(DEFAULT_STORE_DATA);
   const [MainFile, setMainFile] = useState([]);
@@ -235,6 +237,8 @@ const ShopInformationModify = () => {
       })
       .then(res => console.log("파일 포스트 성공", res))
       .catch(err => console.log("파일 포스트 실패", err));
+
+    nav("/caker/mypage");
   };
 
   if (flip == true) {

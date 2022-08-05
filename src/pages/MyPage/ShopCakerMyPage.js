@@ -88,7 +88,7 @@ const CountManager = styled.div`
 const Button1 = styled.button`
   width: 380px;
   height: 60px;
-  margin-top: 10%;
+  margin-top: 70px;
   color: var(--white);
   background: var(--main-pink);
   border-radius: 6px;
@@ -158,9 +158,10 @@ const Article = styled.article`
   background: url(${props => props.image});
   background-repeat: no-repeat;
   background-size: cover;
+  margin-top: 7px;
+  box-shadow: 2px 2px 2px pink;
   width: 120px;
   height: 120px;
-  border: 1px solid pink;
   border-radius: 6px;
 `;
 
@@ -215,25 +216,30 @@ const ShopCakerMyPage = () => {
           <Button2>픽업 일정 관리</Button2>
         </Link>
         <CommitProposal>댓글 단 제안서</CommitProposal>
+
         <BottomProposal>
           {visible ||
             SixImg.map(order => {
               return (
-                <Article
-                  key={order.sheetId}
-                  title={order.locationDong}
-                  image={order.imageUrl}
-                ></Article>
+                <Link to={`/proposal/${order.id}`} key={order.id}>
+                  <Article
+                    key={order.sheetId}
+                    title={order.locationDong}
+                    image={order.imageUrl}
+                  ></Article>
+                </Link>
               );
             })}
           {visible &&
             Mydatas.map(order => {
               return (
-                <Article
-                  key={order.sheetId}
-                  title={order.locationDong}
-                  image={order.imageUrl}
-                ></Article>
+                <Link to={`/proposal/${order.id}`} key={order.id}>
+                  <Article
+                    key={order.sheetId}
+                    title={order.locationDong}
+                    image={order.imageUrl}
+                  ></Article>
+                </Link>
               );
             })}
         </BottomProposal>

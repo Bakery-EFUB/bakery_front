@@ -223,7 +223,8 @@ const Article = styled.article`
   background-repeat: no-repeat;
   background-size: cover;
   width: 120px;
+  margin-top: 7px;
+  box-shadow: 2px 2px 2px pink;
   height: 120px;
-  border: 1px solid pink;
   border-radius: 6px;
 `;
