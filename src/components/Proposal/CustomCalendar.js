@@ -123,6 +123,20 @@ const CustomCalendar = ({
     { id: 31, exist: false, reservation: "예약 정보" },
   ];
 
+  if (allDaysHavingSchedule) {
+    const dateHavingSchedule = allDaysHavingSchedule
+      .filter(
+        day => day["year"] === selectedYear && day["month"] === selectedMonth,
+      )
+      .map(day => day["date"]);
+    existArr = existArr.map(exist => {
+      return {
+        ...exist,
+        exist: dateHavingSchedule.includes(exist.id),
+      };
+    });
+  }
+
   const returnDay = () => {
     //선택된 달의 날짜들 반환 함수
     let dayArr = [];
@@ -218,7 +232,6 @@ const CustomCalendar = ({
         </div>
       </div>
       <div className="week">{returnWeek()}</div>
-
       <div className="date">{returnDay()}</div>
     </div>
   );
