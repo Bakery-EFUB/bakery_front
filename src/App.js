@@ -52,7 +52,6 @@ function App() {
         <Route path="/edit/*" element={<EditProposal />} />
         <Route path="/proposal/:id" element={<Proposal />} />
         <Route exact path="/about" element={<OurService />} />
-        <Route exact path="/caker/mypage" element={<ShopCakerMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
 
         {/* 마이페이지 */}

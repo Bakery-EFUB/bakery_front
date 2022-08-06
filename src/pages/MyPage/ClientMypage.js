@@ -11,13 +11,11 @@ const ShopMemberMyPage = () => {
   const [SixImg, setSixImg] = useState([]);
   const [visible, setVisible] = useState(false);
   const { nickname, imageUrl } = useAppSelector(state => state.user);
-  console.log(Mydatas);
   useEffect(() => {
     if (Mydatas.length > 6) {
       setSixImg(Mydatas.slice(0, 6));
     } else {
       setSixImg(Mydatas);
-      console.log(SixImg.length);
     }
   }, [Mydatas]);
 

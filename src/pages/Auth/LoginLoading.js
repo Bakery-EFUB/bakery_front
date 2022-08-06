@@ -15,8 +15,6 @@ const LoginLoading = () => {
   const token = new URLSearchParams(location.search).get("token");
   const firstLogin = new URLSearchParams(location.search).get("firstLogin");
   localStorage.setItem("token", JSON.stringify(token));
-  console.log(location.search);
-  console.log(firstLogin);
   useEffect(() => {
     AuthService.login(token)
       .then(res => {
