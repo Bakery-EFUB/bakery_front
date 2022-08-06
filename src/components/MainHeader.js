@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 
 const BackgroundImg = styled.div`
   background: url(${MainBackground});
-  width: 100%;
+  width: 384px;
   height: 216px;
   background-repeat: no-repeat;
   background-position: center center;
-  margin-top: 23px;
+  margin: 23px auto 0 auto;
   border-radius: 6px;
 `;
 
