@@ -12,7 +12,7 @@ import { useAppSelector } from "../../store";
 import { DelProposal, GetProposal } from "../../api/proposal";
 
 const Proposal = () => {
-  const { email } = useAppSelector(state => state.user);
+  const { email, role } = useAppSelector(state => state.user);
 
   // url에서 id 뽑기
   const navigate = useNavigate();
@@ -361,15 +361,18 @@ const Proposal = () => {
           );
         })}
       </CommentSection>
-
-      <Input onSubmit={onSubmit}>
-        <input
-          placeholder="댓글을 입력해주세요."
-          value={newComment}
-          onChange={e => setNewComment(e.target.value)}
-        />
-        <button type="submit">등록</button>
-      </Input>
+      {role === "ROLE_BAKER" || role === "ROLE_CLIENT" ? (
+        <Input onSubmit={onSubmit}>
+          <input
+            placeholder="댓글을 입력해주세요."
+            value={newComment}
+            onChange={e => setNewComment(e.target.value)}
+          />
+          <button type="submit">등록</button>
+        </Input>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

@@ -3,10 +3,9 @@ import styled from "styled-components";
 import BigCardDisplay from "../../components/Common/BigCardDisplay";
 import PageTitle from "../../components/Common/PageTitle";
 import TopBar from "../../components/Common/Sidebar/TopBar";
-import recommendShop from "../../_mock/recommendShopList.json";
-
 import { GetRecommendShop } from "../../api/home";
 import { Link } from "react-router-dom";
+
 const RecommendContainer = styled.div`
   margin: 0 5%;
 `;
@@ -15,8 +14,6 @@ const Recommend = () => {
   const [allShop, setAllShop] = useState();
 
   useEffect(() => {
-    //setAllShop(recommendShop);
-
     GetRecommendShop()
       .then(data => {
         setAllShop(data);

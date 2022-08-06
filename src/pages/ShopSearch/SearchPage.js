@@ -7,15 +7,6 @@ import SearchResult from "../../components/SearchResult/SearchResult";
 import TopBar from "../../components/Common/Sidebar/TopBar";
 import { GetStoreSearchResult } from "../../api/store";
 
-const SearchPageContainer = styled.div`
-  margin: 0 5%;
-`;
-
-const ResultText = styled.div`
-  color: var(--main-pink);
-  margin: 10% 0;
-`;
-
 const SearchPage = () => {
   const location = useLocation();
   const searchText = location.state.searchText;
@@ -52,5 +43,14 @@ const SearchPage = () => {
     </>
   );
 };
+
+const SearchPageContainer = styled.div`
+  margin: 0 5%;
+`;
+
+const ResultText = styled.div`
+  color: var(--main-pink);
+  margin: 10% 0;
+`;
 
 export default SearchPage;

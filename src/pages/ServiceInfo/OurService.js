@@ -6,6 +6,47 @@ import WeAreCakers from "../../images/WeAreCakers.svg";
 import ServiceTitle from "../../images/ServiceTitle.svg";
 import DescriptionText from "../../images/DescriptionText.svg";
 
+const BigPinkButton = ({ children }) => {
+  return <Button>{children}</Button>;
+};
+
+const OurService = () => {
+  return (
+    <div>
+      <TopBar />
+      <ContentBoxWithMargin>
+        <Container>
+          <BackGroundImg>
+            <StartText>특별한 하루 메이커,</StartText>
+            <StartLogo src={ServiceTitle} />
+            <Description1 src={DescriptionText} />
+            <TitleText1>A special day maker</TitleText1>
+            <DescriptionBox1>
+              <Description2>
+                <p> 케이커를 통해 특별한 하루를 만들어보세요.</p>
+                <p>케이커는 고객님들이 상상한 모든 케이크를</p>
+                <p> 구현하기 위해 늘 최선을 다합니다.</p>
+              </Description2>
+            </DescriptionBox1>
+            <TitleText2>For your sweet day</TitleText2>
+            <DescriptionBox2>
+              <Description3>
+                <p>나만의 케이크로 달콤한 하루를 선사하세요.</p>
+                <p>당신이 상상한 모든 케이크,</p>
+                <p>케이커에서 만나보세요!</p>
+              </Description3>
+            </DescriptionBox2>
+            <LastImg src={WeAreCakers} />
+          </BackGroundImg>
+        </Container>
+        <ButtonContainer>
+          <BigPinkButton>제안서 작성하기</BigPinkButton>
+        </ButtonContainer>
+      </ContentBoxWithMargin>
+    </div>
+  );
+};
+
 const ContentBoxWithMargin = styled.div`
   margin-left: 5%;
 `;
@@ -144,43 +185,4 @@ const Button = styled.button`
   text-transform: uppercase;
 `;
 
-const BigPinkButton = ({ children }) => {
-  return <Button>{children}</Button>;
-};
-const OurService = () => {
-  return (
-    <div>
-      <TopBar />
-      <ContentBoxWithMargin>
-        <Container>
-          <BackGroundImg>
-            <StartText>특별한 하루 메이커,</StartText>
-            <StartLogo src={ServiceTitle} />
-            <Description1 src={DescriptionText} />
-            <TitleText1>A special day maker</TitleText1>
-            <DescriptionBox1>
-              <Description2>
-                <p> 케이커를 통해 특별한 하루를 만들어보세요.</p>
-                <p>케이커는 고객님들이 상상한 모든 케이크를</p>
-                <p> 구현하기 위해 늘 최선을 다합니다.</p>
-              </Description2>
-            </DescriptionBox1>
-            <TitleText2>For your sweet day</TitleText2>
-            <DescriptionBox2>
-              <Description3>
-                <p>나만의 케이크로 달콤한 하루를 선사하세요.</p>
-                <p>당신이 상상한 모든 케이크,</p>
-                <p>케이커에서 만나보세요!</p>
-              </Description3>
-            </DescriptionBox2>
-            <LastImg src={WeAreCakers} />
-          </BackGroundImg>
-        </Container>
-        <ButtonContainer>
-          <BigPinkButton>제안서 작성하기</BigPinkButton>
-        </ButtonContainer>
-      </ContentBoxWithMargin>
-    </div>
-  );
-};
 export default OurService;
