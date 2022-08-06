@@ -5,6 +5,7 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
 import userReducer from "./features/userSlice";
+
 const reducers = combineReducers({
   user: userReducer,
 });

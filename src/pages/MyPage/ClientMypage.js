@@ -53,30 +53,28 @@ const ShopMemberMyPage = () => {
 
         <CommitProposal>내 제안서</CommitProposal>
         <BottomProposal>
-          {visible ||
-            SixImg.map(order => {
-              return (
-                <Link to={`/proposal/${order.sheetId}`} key={order.id}>
-                  <Article
-                    key={order.sheetId}
-                    title={order.locationDong}
-                    image={order.imageUrl}
-                  ></Article>
-                </Link>
-              );
-            })}
-          {visible &&
-            Mydatas.map(order => {
-              return (
-                <Link to={`/proposal/${order.sheetId}`} key={order.id}>
-                  <Article
-                    key={order.sheetId}
-                    title={order.locationDong}
-                    image={order.imageUrl}
-                  ></Article>
-                </Link>
-              );
-            })}
+          {SixImg.map(order => {
+            return (
+              <Link to={`/proposal/${order.sheetId}`} key={order.id}>
+                <Article
+                  key={order.sheetId}
+                  title={order.locationDong}
+                  image={order.imageUrl}
+                ></Article>
+              </Link>
+            );
+          })}
+          {Mydatas.map(order => {
+            return (
+              <Link to={`/proposal/${order.sheetId}`} key={order.id}>
+                <Article
+                  key={order.sheetId}
+                  title={order.locationDong}
+                  image={order.imageUrl}
+                ></Article>
+              </Link>
+            );
+          })}
         </BottomProposal>
         {visible == false ? (
           <MoreView onClick={() => setVisible(!visible)}>
