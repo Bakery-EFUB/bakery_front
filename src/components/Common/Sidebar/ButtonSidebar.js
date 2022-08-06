@@ -7,7 +7,6 @@ const SubmitButton = styled.button`
   border: 1px solid var(--main-pink);
   color: var(--main-pink);
   border-radius: 6px;
-  font-family: "AppleSDGothicNeo";
   margin: 10px 0;
   padding: 10px 0;
   width: 100%;

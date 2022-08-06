@@ -4,11 +4,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const BackgroundImg = styled.div`
-  background: url(${MainBackground});
-  width: 384px;
+  background: url(${MainBackground}) no-repeat center center;
+  width: 100%;
+  max-width: 384px;
   height: 216px;
-  background-repeat: no-repeat;
-  background-position: center center;
   margin: 23px auto 0 auto;
   border-radius: 6px;
 `;

@@ -25,18 +25,17 @@ import PickupSchedulePage from "./pages/PickUpSchedule/PickupSchedulePage";
 import ShopInformationRegister from "./pages/MyPage/ShopInformationRegister";
 import ShopInformationModify from "./pages/MyPage/ShopInformationModify";
 import LoginLoading from "./pages/Auth/LoginLoading";
-import { userRole } from "./utils/auth";
-import ClientRoute from "./route/ClientRoute";
-import TraineeRoute from "./route/TraineeRoute";
-import BakerRoute from "./route/BakerRoute";
 import AccountSetting from "./pages/AccountSetting/AccountSetting";
 import AccountRemove from "./pages/AccountSetting/AccountRemove";
 import ShopCakerMyPage from "./pages/MyPage/ShopCakerMyPage";
 
 import Kakao from "./pages/Auth/Kakao";
 import NoPermission from "./pages/Auth/NoPermission";
-
+import { useAppSelector } from "./store";
 function App() {
+  const { role } = useAppSelector(state => state.user);
+
+  console.log(role);
   return (
     <BrowserRouter>
       <Routes>

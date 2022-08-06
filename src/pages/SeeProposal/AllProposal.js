@@ -5,22 +5,19 @@ import NoProposal from "../../components/WholeProposals/NoProposal";
 import PageTitle from "../../components/Common/PageTitle";
 import styled from "styled-components";
 import ProposalBox from "../../components/WholeProposals/PropasalBox";
-import http from "../../common/http";
 import { GetOrder } from "../../api/home";
 import { Link } from "react-router-dom";
-const ProposalsDisplay = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const AllProposal = () => {
   const [allProposals, setAllProposals] = useState([]);
+  const [filter, setFilter] = useState({
+    gu: "서대문구",
+    dong: "동 전체",
+    type: "전체 케이크",
+  });
   useEffect(() => {
-    //setAllOrderInfo(orderList["sheetResponseDTOs"]);
-
     GetOrder()
       .then(data => {
-        console.log(data);
         setAllProposals(data["sheetResponseDTOs"]);
       })
       .catch(e => {
@@ -28,14 +25,28 @@ const AllProposal = () => {
       });
   }, []);
 
+  const getFilteredOrders = () => {
+    return allProposals
+      .filter(
+        proposal =>
+          filter.dong === "동 전체" || proposal.locationDong === filter.dong,
+      )
+      .filter(
+        proposal =>
+          filter.type === "전체 케이크" || proposal.type === filter.type,
+      );
+  };
+
+  const isThereProposal = getFilteredOrders().length !== 0;
+
   return (
     <div>
       <TopBar />
       <PageTitle title="전체 제안서 리스트" margin="10% 0%"></PageTitle>
-      <ChooseBox></ChooseBox>
+      <ChooseBox filter={filter} setFilter={setFilter}></ChooseBox>
       <ProposalsDisplay>
-        {allProposals ? (
-          Array.from(allProposals).map(orders => {
+        {isThereProposal ? (
+          Array.from(getFilteredOrders()).map(orders => {
             return (
               <Link to={`/proposal/${orders.sheetId}`} key={orders.sheetId}>
                 <ProposalBox
@@ -55,4 +66,8 @@ const AllProposal = () => {
     </div>
   );
 };
+const ProposalsDisplay = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 export default AllProposal;

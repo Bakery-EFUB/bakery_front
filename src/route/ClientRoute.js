@@ -1,9 +1,11 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { userRole } from "../utils/auth";
+import { useAppSelector } from "../store";
 
 const ClientRoute = () => {
-  return userRole === "ROLE_CLIENT" ? <Outlet /> : <Navigate to="/" />;
+  const { role } = useAppSelector(state => state.user);
+
+  return role === "ROLE_CLIENT" ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default ClientRoute;

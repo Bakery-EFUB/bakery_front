@@ -17,7 +17,7 @@ const OrderDisplay = ({ title }) => {
   useEffect(() => {
     GetOrder()
       .then(data => {
-        setAllOrderInfo(data["sheetResponseDTOs"]);
+        setAllOrderInfo(data.sheetResponseDTOs);
       })
       .catch(e => {
         console.log(e);

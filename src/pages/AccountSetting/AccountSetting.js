@@ -3,8 +3,110 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import AccountRemovePop from "../../components/AccountSetting/AccountRemovePop";
 import http from "../../common/http";
+import { useAppSelector } from "../../store";
 
 const token = JSON.parse(localStorage.getItem("token"));
+
+const AccountSetting = props => {
+  const { name, nickname, phoneNum, email } = useAppSelector(
+    state => state.user,
+  );
+  const [Profile, setProfile] = useState([]);
+
+  useEffect(() => {
+    ProfileModi();
+  }, [{ Profile }]);
+
+  const ProfileModi = () => {
+    http
+      .get(`/member/account/profile`)
+      .then(Profile => {
+        setProfile(Profile);
+        console.log("받아오기 성공", Profile.data.sheetResponseDTOs);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  const UpdateProfile = () => {
+    http.patch(
+      `/member/account/profile`,
+      {
+        name: Profile.Name,
+        phonenum: Profile.phoneNum,
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "X-AUTH-TOKEN": token,
+        },
+      },
+    );
+  };
+
+  useEffect(() => {
+    ProfileModi();
+  }, []);
+
+  const [Name, setName] = useState("");
+  const [PhoneNumber, setPhoneNumber] = useState("");
+
+  const {} = props;
+  const [popup, handlePopup] = useState(false);
+
+  const NameHandler = e => {
+    e.preventDefault();
+    setName(e.target.value);
+  };
+  const PhoneNumberHandler = e => {
+    e.preventDefault();
+    setPhoneNumber(e.target.value);
+  };
+
+  return (
+    <WrapBox>
+      <TopBar />
+      <AccountRegistering>계정 관리</AccountRegistering>
+      <TextTitle>이름</TextTitle>
+      <TextHolder
+        type="text"
+        value={Name}
+        onChange={NameHandler}
+        placeholder={name}
+      />
+      <TextTitle>이메일</TextTitle>
+      <TextHolder type="text" placeholder={email} />
+      <TextTitle>휴대폰 번호</TextTitle>
+      <TextHolder
+        type="text"
+        value={PhoneNumber}
+        onChange={PhoneNumberHandler}
+        placeholder={phoneNum}
+      />
+      <TextTitle>닉네임</TextTitle>
+      <TextHolder type="text" placeholder={nickname} />
+      <PopupContainer>
+        <RemoveAccountBtn
+          onClick={() => {
+            handlePopup(true);
+          }}
+        >
+          회원 탈퇴
+        </RemoveAccountBtn>{" "}
+        {popup && <AccountRemovePop onClose={handlePopup} />}
+      </PopupContainer>
+      <ModifyBtn
+        type="submit"
+        onClick={() => {
+          UpdateProfile();
+        }}
+      >
+        수정하기
+      </ModifyBtn>
+    </WrapBox>
+  );
+};
 
 const WrapBox = styled.div`
   width: 100%;
@@ -84,113 +186,5 @@ const RemoveAccountBtn = styled.button`
 const PopupContainer = styled.div`
   z-index: 1000;
 `;
-
-const AccountSetting = props => {
-  const [Profile, setProfile] = useState([]);
-
-  useEffect(() => {
-    ProfileModi();
-  }, [{ Profile }]);
-
-  const ProfileModi = () => {
-    http
-      .get(`/member/account/profile`)
-      .then(Profile => {
-        setProfile(Profile);
-        console.log("받아오기 성공", Profile.data.sheetResponseDTOs);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
-
-  const UpdateProfile = () => {
-    http.patch(
-      `/member/account/profile`,
-      {
-        name: Profile.Name,
-        phonenum: Profile.phoneNum,
-      },
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "X-AUTH-TOKEN": token,
-        },
-      },
-    );
-  };
-
-  useEffect(() => {
-    ProfileModi();
-  }, []);
-
-  console.log(JSON.parse(localStorage.getItem("user")));
-
-  const [Name, setName] = useState("");
-  const [Email, setEmail] = useState("");
-  const [PhoneNumber, setPhoneNumber] = useState("");
-  const [NickName, setNickName] = useState("");
-
-  const {} = props;
-  const [popup, handlePopup] = useState(false);
-
-  const NameHandler = e => {
-    e.preventDefault();
-    setName(e.target.value);
-  };
-  const PhoneNumberHandler = e => {
-    e.preventDefault();
-    setPhoneNumber(e.target.value);
-  };
-
-  return (
-    <WrapBox>
-      <TopBar />
-      <AccountRegistering>계정 관리</AccountRegistering>
-      <TextTitle>이름</TextTitle>
-      <TextHolder
-        type="text"
-        value={JSON.parse(localStorage.getItem("user")).name}
-        onChange={NameHandler}
-        placeholder={JSON.parse(localStorage.getItem("user")).name}
-      />
-      <TextTitle>이메일</TextTitle>
-      <TextHolder
-        type="text"
-        placeholder={JSON.parse(localStorage.getItem("user")).email}
-      />
-      <TextTitle>휴대폰 번호</TextTitle>
-      <TextHolder
-        type="text"
-        value={PhoneNumber}
-        onChange={PhoneNumberHandler}
-        placeholder={JSON.parse(localStorage.getItem("user")).phoneNum}
-      />
-      <TextTitle>닉네임</TextTitle>
-      <TextHolder
-        type="text"
-        placeholder={JSON.parse(localStorage.getItem("user")).nickname}
-      />
-      <PopupContainer>
-        <RemoveAccountBtn
-          onClick={() => {
-            handlePopup(true);
-          }}
-        >
-          회원 탈퇴
-        </RemoveAccountBtn>{" "}
-        {popup && <AccountRemovePop onClose={handlePopup} />}
-      </PopupContainer>
-      <ModifyBtn
-        type="submit"
-        onClick={() => {
-          UpdateProfile();
-        }}
-      >
-        수정하기
-      </ModifyBtn>
-    </WrapBox>
-  );
-};
 
 export default AccountSetting;

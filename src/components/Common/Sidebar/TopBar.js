@@ -10,7 +10,7 @@ import {
   SidebarDataClient,
   SidebarDataShop,
   SidebarDataGuest,
-} from "../Sidebar/SidebarData";
+} from "./SidebarData";
 import ButtonSidebar from "./ButtonSidebar";
 import "./Sidebar.css";
 import "../../../styles/common.scss";
@@ -38,7 +38,6 @@ const TopBar = () => {
   const dispatch = useAppDispatch();
   const Logout = () => {
     window.localStorage.removeItem("token");
-    window.localStorage.removeItem("user");
     localStorage.setItem("isLogin", JSON.stringify("false"));
     dispatch(initUser());
     console.log(nickname, imageUrl, role);
@@ -52,7 +51,9 @@ const TopBar = () => {
   return (
     <div>
       <TopBarPink>
-        <TopLogo></TopLogo>
+        <Link to="/">
+          <TopLogo></TopLogo>
+        </Link>
 
         <TopMenuBar onClick={showSidebar}></TopMenuBar>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
