@@ -16,12 +16,10 @@ const SubTitle = styled.div`
   color: var(--main-pink);
   font-size: 14px;
 `;
-const ClientImg = styled.div`
-  background: url(${({ image }) => image});
+const ClientImg = styled.img`
   width: 114.11px;
   height: 114.11px;
-  background-repeat: no-repeat;
-  background-position: center center;
+
   border-radius: 6px;
 `;
 const MockImg = styled.div`
@@ -36,7 +34,11 @@ const MockImg = styled.div`
 const Card = ({ title, subtitle, image }) => {
   return (
     <CardComponent>
-      {image ? <ClientImg image={image} /> : <MockImg Mock={Mock} />}
+      {image ? (
+        <ClientImg image={image} src={image} />
+      ) : (
+        <MockImg Mock={Mock} />
+      )}
 
       <Title>{title}</Title>
       <SubTitle>{subtitle}</SubTitle>
