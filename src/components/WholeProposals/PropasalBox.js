@@ -46,7 +46,7 @@ const Timeshow = styled.div`
 const Line = styled.img`
   margin: 1%;
 `;
-const displayCreatedAt = (createdAt) => {
+const displayCreatedAt = createdAt => {
   let startTime = new Date(createdAt);
   let nowTime = Date.now();
   if (parseInt(startTime - nowTime) > -60000) {
@@ -60,11 +60,11 @@ const displayCreatedAt = (createdAt) => {
   }
 };
 
-const ProposalBox = ({key, title, description, time, image}) => {
+const ProposalBox = ({ key, title, description, time, image }) => {
   return (
     <Container>
       <Oneproposal>
-          <CakeImg src = {image}></CakeImg>
+        <CakeImg src={image}></CakeImg>
         <Textbox>
           <Title>{title}</Title>
           <Description>{description}</Description>
