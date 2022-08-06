@@ -7,6 +7,7 @@ import styled from "styled-components";
 import ProposalBox from "../../components/WholeProposals/PropasalBox";
 import http from "../../common/http";
 import { GetOrder } from "../../api/home";
+import { Link } from "react-router-dom";
 const ProposalsDisplay = styled.div`
   display: flex;
   flex-direction: column;
@@ -27,20 +28,6 @@ const AllProposal = () => {
       });
   }, []);
 
-  /* const proposalApi = () => {
-    http
-    .get(`https://caker.shop/orders`)
-    .then(
-       data =>{
-        setAllProposals(data["sheetResponseDTOs"]);
-      })
-    .catch(e => {
-      console.log(e);
-    });
-  };
-  useEffect(() =>{
-    proposalApi();
-  },[]);*/
   return (
     <div>
       <TopBar />
@@ -50,14 +37,15 @@ const AllProposal = () => {
         {allProposals ? (
           Array.from(allProposals).map(orders => {
             return (
-              <ProposalBox
-                key={orders.sheetId}
-                title={orders.member.nickname}
-                description={orders.type}
-                time={orders.createdAt}
-                hashtag={orders.hashtag}
-                image={orders.imageUrl}
-              ></ProposalBox>
+              <Link to={`/proposal/${orders.sheetId}`} key={orders.sheetId}>
+                <ProposalBox
+                  title={orders.member.nickname}
+                  description={orders.type}
+                  time={orders.createdAt}
+                  hashtag={orders.hashtag}
+                  image={orders.imageUrl}
+                ></ProposalBox>
+              </Link>
             );
           })
         ) : (

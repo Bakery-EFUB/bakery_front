@@ -21,7 +21,6 @@ const OrderDisplay = ({ title }) => {
 
     GetOrder()
       .then(data => {
-        console.log(data);
         setAllOrderInfo(data["sheetResponseDTOs"]);
       })
       .catch(e => {
