@@ -5,7 +5,11 @@ import Mock from "../../images/Mock.svg";
 const Card = ({ title, subtitle, image }) => {
   return (
     <CardComponent>
-      {image ? <ClientImg image={image} /> : <MockImg Mock={Mock} />}
+      {image ? (
+        <ClientImg image={image} src={image} />
+      ) : (
+        <MockImg Mock={Mock} />
+      )}
       <Title>{title}</Title>
       <SubTitle>{subtitle}</SubTitle>
     </CardComponent>
@@ -25,9 +29,8 @@ const SubTitle = styled.div`
   color: var(--main-pink);
   font-size: 14px;
 `;
-const ClientImg = styled.div`
-  background: url(${({ image }) => image});
-  width: 150.08px;
+const ClientImg = styled.img`
+  width: 114.11px;
   height: 114.11px;
   background-repeat: no-repeat;
   background-position: center center;
