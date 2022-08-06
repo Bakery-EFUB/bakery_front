@@ -69,7 +69,7 @@ const CountManager = styled.div`
   position: absolute;
   width: 57px;
   height: 14px;
-  left: 210.69px;
+  right: 30px;
   top: 237.7px;
   color: gray;
   font-family: "Apple SD Gothic Neo";
@@ -166,7 +166,9 @@ const ShopMypageProgressive = () => {
       <UserPlace>Caker 가게 회원</UserPlace>
       <UserImg ImageUrl={ImageUrl}></UserImg>
       <PinkBox>
-        <CountManager>계정 관리 &gt;</CountManager>
+        <Link to="/client/modify">
+          <CountManager>계정 관리 &gt;</CountManager>
+        </Link>
         <CertifyBox>
           <Completion>가게 인증</Completion>
           <Progress>진행중</Progress>

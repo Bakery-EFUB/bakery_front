@@ -69,7 +69,7 @@ const ShopInformationRegister = () => {
         })
         .then(res => console.log("파일 포스트 성공", res))
         .catch(err => console.log("파일 포스트 실패", err));
-      nav("/caker/mypage");
+      nav("/shop/progressive");
     };
   };
 
