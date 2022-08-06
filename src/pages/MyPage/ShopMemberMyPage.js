@@ -47,7 +47,7 @@ const ShopMemberMyPage = () => {
       <UserPlace>Caker 일반 회원</UserPlace>
       <UserImg ImageUrl={userImage}></UserImg>
       <PinkBox>
-        <Link to="/create/*">
+        <Link to="/create/city">
           <Button>제안서 작성하기</Button>
         </Link>
 

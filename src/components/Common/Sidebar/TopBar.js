@@ -93,8 +93,9 @@ const TopBar = () => {
   const showSidebar = () => setSidebar(!sidebar);
   const [userStatus, setUserStatus] = useState();
   useEffect(() => {
-    if (userRole === "ROLE_CLIENT") setUserStatus(SidebarDataClient);
-    else if (userRole === "ROLE_TRAINEE" || userRole === "ROLE_BAKER")
+    console.log(role);
+    if (role === "ROLE_CLIENT") setUserStatus(SidebarDataClient);
+    else if (role === "ROLE_TRAINEE" || role === "ROLE_BAKER")
       setUserStatus(SidebarDataBaker);
     else setUserStatus(SidebarDataGuest);
   }, []);
