@@ -48,6 +48,11 @@ const EditProposal = () => {
       .catch(err => console.log("json 포스트 실패", err));
   };
 
+  // test 코드
+  useEffect(() => {
+    console.log("변화", original);
+  }, [original]);
+
   return (
     <div>
       <TopBar />
@@ -64,7 +69,7 @@ const EditProposal = () => {
             />
           }
         />
-        <Route path="/done" element={<Done />} />
+        <Route path="/done" element={<Done myOrderId={order_id} />} />
       </Routes>
     </div>
   );
