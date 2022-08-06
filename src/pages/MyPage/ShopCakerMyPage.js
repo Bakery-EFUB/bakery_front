@@ -74,7 +74,7 @@ const CountManager = styled.div`
   position: absolute;
   width: 57px;
   height: 14px;
-  left: 225.69px;
+  right: 30px;
   top: 237.7px;
   color: gray;
   font-family: "Apple SD Gothic Neo";
@@ -222,7 +222,6 @@ const ShopCakerMyPage = () => {
           {JSON.parse(localStorage.getItem("user")).nickname} 님
         </UserName>
         <Link to="/client/modify">
-          {" "}
           <CountManager>계정 관리 &gt;</CountManager>
         </Link>
       </div>

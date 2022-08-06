@@ -3,14 +3,14 @@ import styled from "styled-components";
 import PageTitle from "../../components/Common/PageTitle";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { userImage, userName } from "../../utils/auth";
 import http from "../../common/http";
+import { useAppSelector } from "../../store";
 
 const ShopMemberMyPage = () => {
   const [Mydatas, setMyData] = useState([]);
   const [SixImg, setSixImg] = useState([]);
   const [visible, setVisible] = useState(false);
-
+  const { nickname, imageUrl } = useAppSelector(state => state.user);
   useEffect(() => {
     if (Mydatas.length > 6) {
       setSixImg(Mydatas.slice(0, 6));
@@ -33,19 +33,17 @@ const ShopMemberMyPage = () => {
     getData();
   }, []);
 
-  console.log(JSON.parse(localStorage.getItem("user")));
-
   return (
     <WrapBox>
       <TopBar></TopBar>
       <PageTitle title="마이페이지" margin="70.06px" />
-      <UserName>{userName} 님</UserName>
+      <UserName>{nickname} 님</UserName>
       <Link to="/client/modify">
         <CountManager>계정 관리 &gt;</CountManager>
       </Link>
 
       <UserPlace>Caker 일반 회원</UserPlace>
-      <UserImg ImageUrl={userImage}></UserImg>
+      <UserImg ImageUrl={imageUrl}></UserImg>
       <PinkBox>
         <Link to="/create/city">
           <Button>제안서 작성하기</Button>
@@ -156,7 +154,7 @@ const CountManager = styled.div`
   position: absolute;
   width: 57px;
   height: 14px;
-  left: 225.69px;
+  right: 30px;
   top: 237.7px;
   color: gray;
   font-family: "Apple SD Gothic Neo";
