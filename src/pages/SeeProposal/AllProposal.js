@@ -15,7 +15,6 @@ const AllProposal = () => {
     dong: "동 전체",
     type: "전체 케이크",
   });
-  console.log(filter);
   useEffect(() => {
     GetOrder()
       .then(data => {
@@ -38,13 +37,15 @@ const AllProposal = () => {
       );
   };
 
+  const isThereProposal = getFilteredOrders().length !== 0;
+
   return (
     <div>
       <TopBar />
       <PageTitle title="전체 제안서 리스트" margin="10% 0%"></PageTitle>
       <ChooseBox filter={filter} setFilter={setFilter}></ChooseBox>
       <ProposalsDisplay>
-        {allProposals ? (
+        {isThereProposal ? (
           Array.from(getFilteredOrders()).map(orders => {
             return (
               <Link to={`/proposal/${orders.sheetId}`} key={orders.sheetId}>
