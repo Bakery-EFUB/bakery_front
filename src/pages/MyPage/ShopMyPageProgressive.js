@@ -4,6 +4,49 @@ import Readingimg from "../../images/Reading.svg";
 import PageTitle from "../../components/Common/PageTitle";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useAppSelector } from "../../store";
+
+const ShopMypageProgressive = () => {
+  const [Mydatas, setMyData] = useState([]);
+  const { nickname, imageUrl } = useAppSelector(state => state.user);
+  /* const getData = () => {
+    axios
+      .get("https://caker.shop/stores/myStore")
+      .then(Response => {
+        console.log("받아오기 성공", Response.data);
+        setMyData(Response.data);
+      })
+      .catch(Error => {
+        console.log(Error);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []); */
+
+  return (
+    <WrapBox>
+      <TopBar></TopBar>
+      <PageTitle title="마이페이지" margin="70.06px" />
+      <UserName>{nickname} 님</UserName>
+      <UserPlace>Caker 가게 회원</UserPlace>
+      <UserImg ImageUrl={imageUrl}></UserImg>
+      <PinkBox>
+        <Link to="/client/modify">
+          <CountManager>계정 관리 &gt;</CountManager>
+        </Link>
+        <CertifyBox>
+          <Completion>가게 인증</Completion>
+          <Progress>진행중</Progress>
+        </CertifyBox>
+        <Link to="/shop/register">
+          <Button>가게 정보 등록하기</Button>
+        </Link>
+        <Reading />
+      </PinkBox>
+    </WrapBox>
+  );
+};
 
 //전체 크기
 const WrapBox = styled.div`
@@ -137,49 +180,4 @@ const Reading = styled.div`
   height: 34px;
   line-height: 17px;
 `;
-
-const ShopMypageProgressive = () => {
-  const [Mydatas, setMyData] = useState([]);
-  const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
-  /* const getData = () => {
-    axios
-      .get("https://caker.shop/stores/myStore")
-      .then(Response => {
-        console.log("받아오기 성공", Response.data);
-        setMyData(Response.data);
-      })
-      .catch(Error => {
-        console.log(Error);
-      });
-  };
-  useEffect(() => {
-    getData();
-  }, []); */
-
-  return (
-    <WrapBox>
-      <TopBar></TopBar>
-      <PageTitle title="마이페이지" margin="70.06px" />
-      <UserName>
-        {JSON.parse(localStorage.getItem("user")).nickname} 님
-      </UserName>
-      <UserPlace>Caker 가게 회원</UserPlace>
-      <UserImg ImageUrl={ImageUrl}></UserImg>
-      <PinkBox>
-        <Link to="/client/modify">
-          <CountManager>계정 관리 &gt;</CountManager>
-        </Link>
-        <CertifyBox>
-          <Completion>가게 인증</Completion>
-          <Progress>진행중</Progress>
-        </CertifyBox>
-        <Link to="/shop/register">
-          <Button>가게 정보 등록하기</Button>
-        </Link>
-        <Reading />
-      </PinkBox>
-    </WrapBox>
-  );
-};
-
 export default ShopMypageProgressive;

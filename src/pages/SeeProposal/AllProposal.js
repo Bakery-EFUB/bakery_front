@@ -7,10 +7,6 @@ import styled from "styled-components";
 import ProposalBox from "../../components/WholeProposals/PropasalBox";
 import { GetOrder } from "../../api/home";
 import { Link } from "react-router-dom";
-const ProposalsDisplay = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const AllProposal = () => {
   const [allProposals, setAllProposals] = useState([]);
@@ -21,12 +17,9 @@ const AllProposal = () => {
   });
   console.log(filter);
   useEffect(() => {
-    //setAllOrderInfo(orderList["sheetResponseDTOs"]);
-
     GetOrder()
       .then(data => {
-        console.log(data);
-        setAllProposals(data.sheetResponseDTOs);
+        setAllProposals(data["sheetResponseDTOs"]);
       })
       .catch(e => {
         console.log(e);
@@ -72,4 +65,8 @@ const AllProposal = () => {
     </div>
   );
 };
+const ProposalsDisplay = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 export default AllProposal;

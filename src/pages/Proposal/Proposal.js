@@ -8,36 +8,23 @@ import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
 import PageTitle from "../../components/Common/PageTitle";
 import CommentToggle from "../../components/Proposal/CommentToggle";
 import http from "../../common/http";
+import { useAppSelector } from "../../store";
+import { DelProposal, GetProposal } from "../../api/proposal";
 
 const Proposal = () => {
-  const [fail, setFail] = useState(false);
+  const { email, role } = useAppSelector(state => state.user);
 
   // url에서 id 뽑기
   const navigate = useNavigate();
   const { id } = useParams();
   window.localStorage.setItem("order_id", id);
-
-  // 로그인 유무
-  const isLogin = JSON.parse(localStorage.getItem("isLogin"));
-  let me;
-  if (isLogin === "true") {
-    // 현재 유저 정보 뽑기
-    me = JSON.parse(localStorage.getItem("user")).email;
-  } else {
-    me = "none";
-  }
-  // 제안서 작성자 저장
-  const [writer, setWriter] = useState(null);
-
+  const [nickname, setNickname] = useState("");
+  const [writer, setWriter] = useState(null); // 제안서 작성자 저장
   const [commentId, setCommentId] = useState(null);
   const [recommentId, setRecommentId] = useState(null);
-  // 대댓글 선택 여부
-  const [reply, setReply] = useState(false);
-  // 대댓글에 대댓글 선택 여부
-  const [rereply, setReReply] = useState(false);
-
-  // 댓글 정보 여기에 저장
-  const [comments, setComments] = useState([]);
+  const [reply, setReply] = useState(false); // 대댓글 선택 여부
+  const [rereply, setReReply] = useState(false); // 대댓글에 대댓글 선택 여부
+  const [comments, setComments] = useState([]); // 댓글 정보 여기에 저장
 
   // 댓글 개수
   let commentsLength = comments.length;
@@ -67,27 +54,13 @@ const Proposal = () => {
 
   // 제안서 Delete
   const DeleteProposal = async () => {
-    const response = await http
-      .delete(`/orders/${id}`)
-      .then(function (response) {
-        console.log("제안서 삭제", response);
+    DelProposal(id)
+      .then(res => {
+        console.log("제안서 삭제", res);
         navigate("/client/mypage");
       })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  // 댓글/대댓글 Get api
-  const getComment = async () => {
-    const response = await http
-      .get(`/orders/${id}/comments`)
-      .then(response => {
-        console.log("댓글 => ", response.data.commentDTOs);
-        setComments(response.data.commentDTOs);
-      })
-      .catch(error => {
-        console.log("실패", error);
+      .catch(e => {
+        console.log(e);
       });
   };
 
@@ -178,7 +151,6 @@ const Proposal = () => {
   // 댓글에 대댓글
   const getCommentId = comment => {
     console.log("댓글 선택", comment.comment.commentId);
-
     if (
       commentId == comment.comment.commentId &&
       recommentId == re.recommentId
@@ -194,13 +166,10 @@ const Proposal = () => {
 
   // 제안서 get
   useEffect(() => {
-    http
-      .get(`/orders/${id}`)
-      .then(response => {
-        const data = response.data;
-        // 작성자
+    GetProposal(id)
+      .then(data => {
         setWriter(data.member.email);
-        console.log(data, "성공");
+        setNickname(data.member.nickname);
         setOption({
           date: data.createdAt.substr(0, 10),
           size: data.size,
@@ -232,7 +201,10 @@ const Proposal = () => {
   return (
     <div style={{ width: "100%" }}>
       <TopBar />
-      <PageTitle margin="56px auto 0 auto" title="내 제안서"></PageTitle>
+      <PageTitle
+        margin="56px auto 0 auto"
+        title={email === writer ? "내 제안서" : `${nickname} 님의 제안서`}
+      ></PageTitle>
       <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
         <ImageBox src={option.image} />
       </div>
@@ -274,7 +246,7 @@ const Proposal = () => {
           margin: "36px auto 0 auto",
         }}
       >
-        {me === writer ? (
+        {email === writer ? (
           <>
             <SmallPinkButton onClick={() => EditProposal()}>
               수정
@@ -308,7 +280,7 @@ const Proposal = () => {
                     <Nickname>{re.nickname}</Nickname>
                     <CommentTime>2022.05.10. 15:00</CommentTime>
                     <div style={{ display: "flex", marginLeft: "auto" }}>
-                      {me === re.writer.email ? (
+                      {email === re.writer.email ? (
                         <CommentToggle
                           onClick={() =>
                             DeleteReComment(
@@ -357,7 +329,7 @@ const Proposal = () => {
                   </CommentTime>
 
                   <div style={{ display: "flex", marginLeft: "auto" }}>
-                    {me === comment.comment.writer.email ? (
+                    {email === comment.comment.writer.email ? (
                       <CommentToggle
                         onClick={() => DeleteComment(comment.comment.commentId)}
                       >
@@ -389,15 +361,18 @@ const Proposal = () => {
           );
         })}
       </CommentSection>
-
-      <Input onSubmit={onSubmit}>
-        <input
-          placeholder="댓글을 입력해주세요."
-          value={newComment}
-          onChange={e => setNewComment(e.target.value)}
-        />
-        <button type="submit">등록</button>
-      </Input>
+      {role === "ROLE_BAKER" || role === "ROLE_CLIENT" ? (
+        <Input onSubmit={onSubmit}>
+          <input
+            placeholder="댓글을 입력해주세요."
+            value={newComment}
+            onChange={e => setNewComment(e.target.value)}
+          />
+          <button type="submit">등록</button>
+        </Input>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

@@ -1,7 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-//figma export문제로 다른 로고로 한시적 대체
 import LoadingLogo from "../images/LoadingLogo.svg";
+
+const LoadingPage = () => {
+  return (
+    <div>
+      <Container>
+        <Contents>
+          <SubText>특별한 하루 메이커</SubText>
+          <MiddleLogo></MiddleLogo>
+        </Contents>
+      </Container>
+    </div>
+  );
+};
 const Container = styled.div`
   text-align: center;
 `;
@@ -22,18 +34,4 @@ const MiddleLogo = styled.div`
   height: 45.98px;
   width: 181px;
 `;
-
-const LoadingPage = () => {
-  return (
-    <div>
-      <Container>
-        <Contents>
-          <SubText>특별한 하루 메이커</SubText>
-          <MiddleLogo></MiddleLogo>
-        </Contents>
-      </Container>
-    </div>
-  );
-};
-
 export default LoadingPage;
