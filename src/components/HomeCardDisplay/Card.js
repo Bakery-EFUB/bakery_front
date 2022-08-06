@@ -2,6 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import Mock from "../../images/Mock.svg";
 
+const Card = ({ title, subtitle, image }) => {
+  return (
+    <CardComponent>
+      {image ? <ClientImg image={image} /> : <MockImg Mock={Mock} />}
+      <Title>{title}</Title>
+      <SubTitle>{subtitle}</SubTitle>
+    </CardComponent>
+  );
+};
 const CardComponent = styled.div`
   margin-right: 3%;
 `;
@@ -32,16 +41,4 @@ const MockImg = styled.div`
   background-position: center center;
   border-radius: 6px;
 `;
-
-const Card = ({ title, subtitle, image }) => {
-  return (
-    <CardComponent>
-      {image ? <ClientImg image={image} /> : <MockImg Mock={Mock} />}
-
-      <Title>{title}</Title>
-      <SubTitle>{subtitle}</SubTitle>
-    </CardComponent>
-  );
-};
-
 export default Card;

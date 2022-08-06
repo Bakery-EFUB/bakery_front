@@ -27,7 +27,7 @@ const LoginLoading = () => {
       .finally(() => {
         // 오류나도 일단 넘어가게
         setTimeout(() => {
-          if (firstLogin === "true") {
+          if (firstLogin === "false") {
             nav("/loginhome");
           } else {
             nav("/");

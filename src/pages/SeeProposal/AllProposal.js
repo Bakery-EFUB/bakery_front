@@ -5,22 +5,14 @@ import NoProposal from "../../components/WholeProposals/NoProposal";
 import PageTitle from "../../components/Common/PageTitle";
 import styled from "styled-components";
 import ProposalBox from "../../components/WholeProposals/PropasalBox";
-import http from "../../common/http";
 import { GetOrder } from "../../api/home";
 import { Link } from "react-router-dom";
-const ProposalsDisplay = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const AllProposal = () => {
   const [allProposals, setAllProposals] = useState([]);
   useEffect(() => {
-    //setAllOrderInfo(orderList["sheetResponseDTOs"]);
-
     GetOrder()
       .then(data => {
-        console.log(data);
         setAllProposals(data["sheetResponseDTOs"]);
       })
       .catch(e => {
@@ -55,4 +47,8 @@ const AllProposal = () => {
     </div>
   );
 };
+const ProposalsDisplay = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 export default AllProposal;
