@@ -9,7 +9,7 @@ import AddSchedulePage from "./pages/PickUpSchedule/AddSchedulePage";
 import SearchPage from "./pages/ShopSearch/SearchPage";
 import Recommend from "./pages/ShopSearch/Recommend";
 import OurService from "./pages/ServiceInfo/OurService";
-import ShopMemberMyPage from "./pages/MyPage/ShopMemberMyPage";
+import ClientMypage from "./pages/MyPage/ClientMypage";
 
 // 제안서 관련
 import Proposal from "./pages/Proposal/Proposal";
@@ -37,7 +37,6 @@ import Kakao from "./pages/Auth/Kakao";
 import NoPermission from "./pages/Auth/NoPermission";
 
 function App() {
-  console.log(userRole);
   return (
     <BrowserRouter>
       <Routes>
@@ -53,11 +52,10 @@ function App() {
         <Route path="/edit/*" element={<EditProposal />} />
         <Route path="/proposal/:id" element={<Proposal />} />
         <Route exact path="/about" element={<OurService />} />
-        <Route exact path="/mypagecaker" element={<ShopCakerMyPage />} />
         <Route exact path="/allproposal" element={<AllProposal />} />
 
         {/* 마이페이지 */}
-        <Route exact path="/client/mypage" element={<ShopMemberMyPage />} />
+        <Route exact path="/client/mypage" element={<ClientMypage />} />
         <Route exact path="/caker/mypage" element={<ShopCakerMyPage />} />
         <Route exact path="/shop/mypage" element={<ShopMypageStart />} />
         <Route

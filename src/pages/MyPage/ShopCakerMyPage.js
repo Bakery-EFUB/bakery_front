@@ -74,7 +74,7 @@ const CountManager = styled.div`
   position: absolute;
   width: 57px;
   height: 14px;
-  left: 225.69px;
+  right: 30px;
   top: 237.7px;
   color: gray;
   font-family: "Apple SD Gothic Neo";
@@ -141,11 +141,12 @@ const BottomProposal = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  overflow: scroll;
 `;
 
 //더보기
 const MoreView = styled.div`
-  margin-top: 1px;
+  margin-top: 10px;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
@@ -170,6 +171,23 @@ const ShopCakerMyPage = () => {
   const [Mydatas, setMyData] = useState([]);
   const [SixImg, setSixImg] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [storeData, setStoreData] = useState([]);
+
+  const getStoreId = () => {
+    http
+      .get("/stores/myStore")
+      .then(Response => {
+        console.log("받아오기 성공", Response.data.id);
+        localStorage.setItem("storeId", Response.data.id);
+        setStoreData(Response);
+      })
+      .catch(Error => {
+        console.log("에러", Error);
+      });
+  };
+  useEffect(() => {
+    getStoreId();
+  }, []);
 
   useEffect(() => {
     if (Mydatas.length > 6) {
@@ -204,7 +222,6 @@ const ShopCakerMyPage = () => {
           {JSON.parse(localStorage.getItem("user")).nickname} 님
         </UserName>
         <Link to="/client/modify">
-          {" "}
           <CountManager>계정 관리 &gt;</CountManager>
         </Link>
       </div>

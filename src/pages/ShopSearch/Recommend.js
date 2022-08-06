@@ -33,7 +33,7 @@ const Recommend = () => {
         <PageTitle title="가게 추천" margin="60px 0 63px 0" />
         {allShop?.map(shop => {
           return (
-            <Link to="/shopdetail" key={shop.id}>
+            <Link to={`/shopdetail/${shop.id}`} key={shop.id}>
               <BigCardDisplay
                 MainText={shop.name}
                 SubText={shop.certifyFlag}

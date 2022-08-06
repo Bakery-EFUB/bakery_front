@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import TopBar from "../../components/Common/Sidebar/TopBar";
 import PickUp from "./PickUp";
@@ -10,9 +9,7 @@ import http from "../../common/http";
 
 const EditProposal = () => {
   const [data, setData] = useState(null);
-
   const [history, setHistory] = useState(0);
-
   const [original, setOriginal] = useState({
     cityId: null,
     city: null,
@@ -29,8 +26,6 @@ const EditProposal = () => {
     pickUp: null,
     file: null,
   });
-
-  const navigate = useNavigate();
 
   // order id 뽑기
   const order_id = window.localStorage.getItem("order_id");
@@ -57,6 +52,7 @@ const EditProposal = () => {
   useEffect(() => {
     console.log("변화", original);
   }, [original]);
+
   return (
     <div>
       <TopBar />

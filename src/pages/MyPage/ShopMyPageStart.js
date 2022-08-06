@@ -5,6 +5,7 @@ import PageTitle from "../../components/Common/PageTitle";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
+import { useAppSelector } from "../../store";
 //전체 크기
 const WrapBox = styled.div`
   width: 100%;
@@ -69,7 +70,7 @@ const CountManager = styled.div`
   position: absolute;
   width: 57px;
   height: 14px;
-  left: 210.69px;
+  right: 30px;
   top: 237.7px;
   color: gray;
   font-family: "Apple SD Gothic Neo";
@@ -139,7 +140,10 @@ const Reading = styled.div`
 
 const ShopMypageStart = () => {
   const [Mydatas, setMyData] = useState([]);
-  const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
+
+  const { nickname, imageUrl, role, isLogin } = useAppSelector(
+    state => state.user,
+  );
   /*
   const getData = () => {
     axios
@@ -160,18 +164,18 @@ const ShopMypageStart = () => {
     <WrapBox>
       <TopBar></TopBar>
       <PageTitle title="마이페이지" margin="70.06px" />
-      <UserName>
-        {JSON.parse(localStorage.getItem("user")).nickname} 님
-      </UserName>
+      <UserName>{nickname} 님</UserName>
       <UserPlace>Caker 가게 회원</UserPlace>
-      <UserImg ImageUrl={ImageUrl}></UserImg>
+      <UserImg ImageUrl={imageUrl}></UserImg>
       <PinkBox>
-        <CountManager>계정 관리 &gt;</CountManager>
+        <Link to="/client/modify">
+          <CountManager>계정 관리 &gt;</CountManager>
+        </Link>
         <CertifyBox>
           <Completion>가게 인증</Completion>
           <Progress>미완료</Progress>
         </CertifyBox>
-        <Link to="/shopregister">
+        <Link to="/shop/register">
           <Button>가게 정보 등록하기</Button>
         </Link>
         <Reading />

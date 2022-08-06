@@ -8,12 +8,108 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   SidebarDataBaker,
   SidebarDataClient,
+  SidebarDataShop,
   SidebarDataGuest,
 } from "../Sidebar/SidebarData";
 import ButtonSidebar from "./ButtonSidebar";
 import "./Sidebar.css";
 import "../../../styles/common.scss";
-import { isLogined, userImage, userName, userRole } from "../../../utils/auth";
+import { useAppDispatch, useAppSelector } from "../../../store";
+import { initUser } from "../../../store/features/userSlice";
+import { persistor } from "../../..";
+
+const TopBar = () => {
+  const { nickname, imageUrl, role, isLogin } = useAppSelector(
+    state => state.user,
+  );
+
+  const [sidebar, setSidebar] = useState(false);
+  const showSidebar = () => setSidebar(!sidebar);
+  const [userStatus, setUserStatus] = useState();
+  useEffect(() => {
+    console.log(role);
+    if (role === "ROLE_CLIENT") setUserStatus(SidebarDataClient);
+    else if (role === "ROLE_TRAINEE") setUserStatus(SidebarDataShop);
+    else if (role === "ROLE_BAKER") setUserStatus(SidebarDataBaker);
+    else setUserStatus(SidebarDataGuest);
+  }, []);
+
+  const nav = useNavigate();
+  const dispatch = useAppDispatch();
+  const Logout = () => {
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("user");
+    localStorage.setItem("isLogin", JSON.stringify("false"));
+    dispatch(initUser());
+    console.log(nickname, imageUrl, role);
+  };
+  const purge = async () => {
+    await persistor.purge();
+    nav("/");
+    location.reload();
+  };
+
+  return (
+    <div>
+      <TopBarPink>
+        <Link to="/">
+          <TopLogo></TopLogo>
+        </Link>
+        <TopMenuBar onClick={showSidebar}></TopMenuBar>
+        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+          <ul className="nav-menu-items"></ul>
+          <li className="navbar-toggle">
+            <CloseBtn onClick={showSidebar}></CloseBtn>
+          </li>
+          <Profile>
+            {isLogin ? (
+              <>
+                <LoginProfileImage src={imageUrl}></LoginProfileImage>
+                <LoginBox>
+                  <div
+                    style={{
+                      fontWeight: 800,
+                      fontSize: "20px",
+                      marginBottom: "2px",
+                    }}
+                  >
+                    {nickname} 님
+                  </div>
+                  <div>계정관리</div>
+                </LoginBox>
+              </>
+            ) : (
+              <>
+                <ProfileImg></ProfileImg>로그인해 주세요
+              </>
+            )}
+          </Profile>
+          <hr />
+          {userStatus?.map((item, index) => {
+            return (
+              <li key={index} className="nav-text">
+                <Link to={item.path}>{item.title}</Link>
+              </li>
+            );
+          })}
+          {isLogin ? (
+            <ButtonSidebar
+              onClick={async () => {
+                Logout();
+                setTimeout(() => purge(), 200);
+              }}
+              text="로그아웃"
+            ></ButtonSidebar>
+          ) : (
+            <Link to="/kakao">
+              <ButtonSidebar text="로그인"></ButtonSidebar>
+            </Link>
+          )}
+        </nav>
+      </TopBarPink>
+    </div>
+  );
+};
 
 const TopBarPink = styled.div`
   z-index: 5;
@@ -80,84 +176,5 @@ const CloseBtn = styled.div`
   right: 30px;
   margin-bottom: 10%;
 `;
-
-const TopBar = () => {
-  const [sidebar, setSidebar] = useState(false);
-  const showSidebar = () => setSidebar(!sidebar);
-  const [userStatus, setUserStatus] = useState();
-  useEffect(() => {
-    if (userRole === "ROLE_CLIENT") setUserStatus(SidebarDataClient);
-    else if (userRole === "ROLE_TRAINEE" || userRole === "ROLE_BAKER")
-      setUserStatus(SidebarDataBaker);
-    else setUserStatus(SidebarDataGuest);
-  }, []);
-
-  const nav = useNavigate();
-  const Logout = () => {
-    window.localStorage.removeItem("token");
-    window.localStorage.removeItem("user");
-    localStorage.setItem("isLogin", JSON.stringify("false"));
-    nav("/");
-    location.reload();
-  };
-
-  return (
-    <div>
-      <TopBarPink>
-        <Link to="/">
-          <TopLogo></TopLogo>
-        </Link>
-        <TopMenuBar onClick={showSidebar}></TopMenuBar>
-        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-          <ul className="nav-menu-items"></ul>
-          <li className="navbar-toggle">
-            <CloseBtn onClick={showSidebar}></CloseBtn>
-          </li>
-          <Profile>
-            {isLogined ? (
-              <>
-                <LoginProfileImage src={userImage}></LoginProfileImage>
-                <LoginBox>
-                  <div
-                    style={{
-                      fontWeight: 800,
-                      fontSize: "20px",
-                      marginBottom: "2px",
-                    }}
-                  >
-                    {userName} 님
-                  </div>
-                  <div>계정관리</div>
-                </LoginBox>
-              </>
-            ) : (
-              <>
-                <ProfileImg></ProfileImg>로그인해 주세요
-              </>
-            )}
-          </Profile>
-          <hr />
-          {userStatus?.map((item, index) => {
-            return (
-              <li key={index} className="nav-text">
-                <Link to={item.path}>{item.title}</Link>
-              </li>
-            );
-          })}
-          {isLogined ? (
-            <ButtonSidebar
-              onClick={() => Logout()}
-              text="로그아웃"
-            ></ButtonSidebar>
-          ) : (
-            <Link to="/kakao">
-              <ButtonSidebar text="로그인"></ButtonSidebar>
-            </Link>
-          )}
-        </nav>
-      </TopBarPink>
-    </div>
-  );
-};
 
 export default TopBar;
