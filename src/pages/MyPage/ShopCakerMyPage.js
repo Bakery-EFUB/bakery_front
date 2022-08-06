@@ -5,9 +5,109 @@ import PageTitle from "../../components/Common/PageTitle";
 
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import orderList from "../../_mock/orderImage.json";
 import http from "../../common/http";
-import axios from "axios";
+import { useAppSelector } from "../../store";
+
+const ShopCakerMyPage = () => {
+  const [Mydatas, setMyData] = useState([]);
+  const [SixImg, setSixImg] = useState([]);
+  const [visible, setVisible] = useState(false);
+  const { nickname, imageUrl } = useAppSelector(state => state.user);
+  const getStoreId = () => {
+    http
+      .get("/stores/myStore")
+      .then(Response => {
+        localStorage.setItem("storeId", Response.data.id);
+      })
+      .catch(Error => {
+        console.log("에러", Error);
+      });
+  };
+  useEffect(() => {
+    getStoreId();
+  }, []);
+
+  useEffect(() => {
+    if (Mydatas.length > 6) {
+      setSixImg(Mydatas.slice(0, 6));
+    }
+  }, [Mydatas]);
+
+  const getData = () => {
+    http
+      .get("orders/myPin")
+      .then(Response => {
+        console.log("받아오기 성공", Response.data.sheetResponseDTOs);
+        setMyData(Response.data.sheetResponseDTOs);
+      })
+      .catch(Error => {
+        console.log("에러", Error);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const Id = localStorage.getItem("storeId");
+  return (
+    <WrapBox>
+      <TopBar></TopBar>
+      <PageTitle title="마이페이지" margin="70.06px" />
+      <div>
+        <UserName>{nickname} 님</UserName>
+        <Link to="/client/modify">
+          <CountManager>계정 관리 &gt;</CountManager>
+        </Link>
+      </div>
+
+      <UserPlace>Caker 가게 회원</UserPlace>
+      <UserImg ImageUrl={imageUrl}></UserImg>
+      <PinkBox>
+        <Link to="/shop/modify">
+          <Button1>가게 정보 관리</Button1>
+        </Link>
+        <Link to="/shop/pickupschedule/:{Id}">
+          <Button2>픽업 일정 관리</Button2>
+        </Link>
+        <CommitProposal>댓글 단 제안서</CommitProposal>
+        <BottomProposal>
+          {visible ||
+            SixImg.map(order => {
+              return (
+                <Link to={`/proposal/${order.sheetId}`} key={order.id}>
+                  <Article
+                    key={order.sheetId}
+                    title={order.locationDong}
+                    image={order.imageUrl}
+                  ></Article>
+                </Link>
+              );
+            })}
+          {visible &&
+            Mydatas.map(order => {
+              return (
+                <Link to={`/proposal/${order.id}`} key={order.id}>
+                  <Article
+                    key={order.sheetId}
+                    title={order.locationDong}
+                    image={order.imageUrl}
+                  ></Article>
+                </Link>
+              );
+            })}
+        </BottomProposal>
+        {visible == false ? (
+          <MoreView onClick={() => setVisible(!visible)}>
+            더보기
+            <br />∨
+          </MoreView>
+        ) : (
+          <MoreView onClick={() => setVisible(!visible)}></MoreView>
+        )}
+      </PinkBox>
+    </WrapBox>
+  );
+};
 
 //전체 크기
 const WrapBox = styled.div`
@@ -166,113 +266,5 @@ const Article = styled.article`
   height: 120px;
   border-radius: 6px;
 `;
-
-const ShopCakerMyPage = () => {
-  const [Mydatas, setMyData] = useState([]);
-  const [SixImg, setSixImg] = useState([]);
-  const [visible, setVisible] = useState(false);
-  const [storeData, setStoreData] = useState([]);
-
-  const getStoreId = () => {
-    http
-      .get("/stores/myStore")
-      .then(Response => {
-        console.log("받아오기 성공", Response.data.id);
-        localStorage.setItem("storeId", Response.data.id);
-        setStoreData(Response);
-      })
-      .catch(Error => {
-        console.log("에러", Error);
-      });
-  };
-  useEffect(() => {
-    getStoreId();
-  }, []);
-
-  useEffect(() => {
-    if (Mydatas.length > 6) {
-      setSixImg(Mydatas.slice(0, 6));
-    }
-  }, [Mydatas]);
-
-  console.log(JSON.parse(localStorage.getItem("user")));
-  const ImageUrl = JSON.parse(localStorage.getItem("user")).imageUrl;
-  const getData = () => {
-    http
-      .get("orders/myPin")
-      .then(Response => {
-        console.log("받아오기 성공", Response.data.sheetResponseDTOs);
-        setMyData(Response.data.sheetResponseDTOs);
-      })
-      .catch(Error => {
-        console.log("에러", Error);
-      });
-  };
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const Id = localStorage.getItem("storeId");
-  return (
-    <WrapBox>
-      <TopBar></TopBar>
-      <PageTitle title="마이페이지" margin="70.06px" />
-      <div>
-        <UserName>
-          {JSON.parse(localStorage.getItem("user")).nickname} 님
-        </UserName>
-        <Link to="/client/modify">
-          <CountManager>계정 관리 &gt;</CountManager>
-        </Link>
-      </div>
-
-      <UserPlace>Caker 가게 회원</UserPlace>
-      <UserImg ImageUrl={ImageUrl}></UserImg>
-      <PinkBox>
-        <Link to="/shop/modify">
-          <Button1>가게 정보 관리</Button1>
-        </Link>
-        <Link to="/shop/pickupschedule/:{Id}">
-          <Button2>픽업 일정 관리</Button2>
-        </Link>
-        <CommitProposal>댓글 단 제안서</CommitProposal>
-        <BottomProposal>
-          {visible ||
-            SixImg.map(order => {
-              return (
-                <Link to={`/proposal/${order.sheetId}`} key={order.id}>
-                  <Article
-                    key={order.sheetId}
-                    title={order.locationDong}
-                    image={order.imageUrl}
-                  ></Article>
-                </Link>
-              );
-            })}
-          {visible &&
-            Mydatas.map(order => {
-              return (
-                <Link to={`/proposal/${order.id}`} key={order.id}>
-                  <Article
-                    key={order.sheetId}
-                    title={order.locationDong}
-                    image={order.imageUrl}
-                  ></Article>
-                </Link>
-              );
-            })}
-        </BottomProposal>
-        {visible == false ? (
-          <MoreView onClick={() => setVisible(!visible)}>
-            더보기
-            <br />∨
-          </MoreView>
-        ) : (
-          <MoreView onClick={() => setVisible(!visible)}></MoreView>
-        )}
-      </PinkBox>
-    </WrapBox>
-  );
-};
 
 export default ShopCakerMyPage;

@@ -18,7 +18,6 @@ const LoginLoading = () => {
   useEffect(() => {
     AuthService.login(token)
       .then(res => {
-        localStorage.setItem("user", JSON.stringify(res.data));
         localStorage.setItem("isLogin", JSON.stringify("true"));
         setUserInfo(res.data);
       })
@@ -36,8 +35,6 @@ const LoginLoading = () => {
         }, 1000);
       });
   }, []);
-
-  console.log("현재 유저", JSON.parse(localStorage.getItem("user")));
 
   return (
     <>

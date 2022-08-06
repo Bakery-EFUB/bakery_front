@@ -8,21 +8,20 @@ import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
 import PageTitle from "../../components/Common/PageTitle";
 import CommentToggle from "../../components/Proposal/CommentToggle";
 import http from "../../common/http";
+import { useAppSelector } from "../../store";
 
 const Proposal = () => {
-  const [fail, setFail] = useState(false);
+  const { email, isLogin } = useAppSelector(state => state.user);
 
   // url에서 id 뽑기
   const navigate = useNavigate();
   const { id } = useParams();
   window.localStorage.setItem("order_id", id);
 
-  // 로그인 유무
-  const isLogin = JSON.parse(localStorage.getItem("isLogin"));
   let me;
   if (isLogin === "true") {
     // 현재 유저 정보 뽑기
-    me = JSON.parse(localStorage.getItem("user")).email;
+    me = email;
   } else {
     me = "none";
   }
