@@ -215,7 +215,7 @@ const BottomProposal = styled.div`
   overflow: scroll;
   display: grid;
   overflow-x: hidden;
-  grid-template-columns: 30% 30% 30%;
+  grid-template-columns: 33% 33% 33%;
 `;
 
 //더보기
