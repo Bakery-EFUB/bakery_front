@@ -10,6 +10,12 @@ import { Link } from "react-router-dom";
 
 const AllProposal = () => {
   const [allProposals, setAllProposals] = useState([]);
+  const [filter, setFilter] = useState({
+    gu: "서대문구",
+    dong: "동 전체",
+    type: "전체 케이크",
+  });
+  console.log(filter);
   useEffect(() => {
     GetOrder()
       .then(data => {
@@ -20,14 +26,26 @@ const AllProposal = () => {
       });
   }, []);
 
+  const getFilteredOrders = () => {
+    return allProposals
+      .filter(
+        proposal =>
+          filter.dong === "동 전체" || proposal.locationDong === filter.dong,
+      )
+      .filter(
+        proposal =>
+          filter.type === "전체 케이크" || proposal.type === filter.type,
+      );
+  };
+
   return (
     <div>
       <TopBar />
       <PageTitle title="전체 제안서 리스트" margin="10% 0%"></PageTitle>
-      <ChooseBox></ChooseBox>
+      <ChooseBox filter={filter} setFilter={setFilter}></ChooseBox>
       <ProposalsDisplay>
         {allProposals ? (
-          Array.from(allProposals).map(orders => {
+          Array.from(getFilteredOrders()).map(orders => {
             return (
               <Link to={`/proposal/${orders.sheetId}`} key={orders.sheetId}>
                 <ProposalBox

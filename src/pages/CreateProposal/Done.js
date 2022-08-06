@@ -71,15 +71,13 @@ const Done = ({ myOrderId }) => {
 
       <BigText>제안서 작성하기 완료!</BigText>
       <SmallText>곧 있으면 사장님들이 연락을 드릴거에요</SmallText>
-      {/* 
-      <Link to="/orders/${myOrderId}" style={{ textDecoration: "none" }}> */}
+
       <BigPinkButton
         margin="68px 24px 0px 24px"
         onClick={() => nav(`/proposal/${myOrderId}`)}
       >
         내 제안서 보러가기
       </BigPinkButton>
-      {/* </Link> */}
 
       <Link to="/">
         <UnderScoreText>메인 홈으로 가기</UnderScoreText>

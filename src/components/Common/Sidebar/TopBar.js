@@ -54,6 +54,7 @@ const TopBar = () => {
         <Link to="/">
           <TopLogo></TopLogo>
         </Link>
+
         <TopMenuBar onClick={showSidebar}></TopMenuBar>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items"></ul>

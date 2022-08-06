@@ -25,12 +25,10 @@ const SubTitle = styled.div`
   color: var(--main-pink);
   font-size: 14px;
 `;
-const ClientImg = styled.div`
-  background: url(${({ image }) => image});
-  width: 150.08px;
+const ClientImg = styled.img`
+  width: 114.11px;
   height: 114.11px;
-  background-repeat: no-repeat;
-  background-position: center center;
+
   border-radius: 6px;
 `;
 const MockImg = styled.div`
@@ -41,4 +39,5 @@ const MockImg = styled.div`
   background-position: center center;
   border-radius: 6px;
 `;
+
 export default Card;
