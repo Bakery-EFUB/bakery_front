@@ -68,25 +68,21 @@ const ShopMemberMyPage = () => {
           {visible &&
             Mydatas.map(order => {
               return (
-                <Article
-                  key={order.sheetId}
-                  title={order.locationDong}
-                  image={order.imageUrl}
-                ></Article>
+                <Link to={`/proposal/${order.sheetId}`} key={order.id}>
+                  <Article
+                    key={order.sheetId}
+                    title={order.locationDong}
+                    image={order.imageUrl}
+                  ></Article>
+                </Link>
               );
             })}
         </BottomProposal>
-        {visible === false ? (
-          <>
-            {Mydatas.length > 6 ? (
-              <MoreView onClick={() => setVisible(!visible)}>
-                더보기
-                <br />∨
-              </MoreView>
-            ) : (
-              <></>
-            )}
-          </>
+        {visible == false ? (
+          <MoreView onClick={() => setVisible(!visible)}>
+            더보기
+            <br />∨
+          </MoreView>
         ) : (
           <MoreView onClick={() => setVisible(!visible)}></MoreView>
         )}
@@ -206,26 +202,24 @@ const CommitProposal = styled.div`
 //제안서 툴
 const BottomProposal = styled.div`
   margin-top: 19px;
-  width: 390px;
-  height: auto;
+  width: 380.14px;
+  height: 300px;
+  box-sizing: content-box;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   overflow: scroll;
-  display: grid;
-  overflow-x: hidden;
-  grid-template-columns: 33% 33% 33%;
 `;
 
 //더보기
 const MoreView = styled.div`
-  margin-top: 1px;
+  margin-top: 10px;
   font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
   line-height: 14px;
   text-align: center;
-  transform: translateY(50px);
 `;
 
 //제안서 사진 방법1
@@ -233,11 +227,9 @@ const Article = styled.article`
   background: url(${props => props.image});
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
-  width: 120px;
-  margin-top: 6%;
-  margin-bottom: 6%;
+  margin-top: 7px;
   box-shadow: 2px 2px 2px pink;
+  width: 120px;
   height: 120px;
   border-radius: 6px;
 `;
