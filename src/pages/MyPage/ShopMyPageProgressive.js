@@ -166,7 +166,9 @@ const ShopMypageProgressive = () => {
       <UserPlace>Caker 가게 회원</UserPlace>
       <UserImg ImageUrl={ImageUrl}></UserImg>
       <PinkBox>
-        <CountManager>계정 관리 &gt;</CountManager>
+        <Link to="/client/modify">
+          <CountManager>계정 관리 &gt;</CountManager>
+        </Link>
         <CertifyBox>
           <Completion>가게 인증</Completion>
           <Progress>진행중</Progress>

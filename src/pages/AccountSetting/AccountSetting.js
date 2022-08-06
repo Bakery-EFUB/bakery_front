@@ -1,8 +1,7 @@
 import TopBar from "../../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import AccountRemovePop from "../../components/AccountSetting/AccountRemovePop";
-import axios from "axios";
 import http from "../../common/http";
 
 const token = JSON.parse(localStorage.getItem("token"));
@@ -65,70 +64,69 @@ const ModifyBtn = styled.button`
   line-height: 19px;
 `;
 const RemoveAccountBtn = styled.button`
-    width: 90px;
-    height: 19px;
-    margin-left: 75%;
-    background-color: white;
-    margin-top: 7%;
-    border: none;
-    font-family: 'Apple SD Gothic Neo';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 19px;
-    text-align: right;
-    text-decoration-line: underline;
+  width: 90px;
+  height: 19px;
+  margin-left: 75%;
+  background-color: white;
+  margin-top: 7%;
+  border: none;
+  font-family: "Apple SD Gothic Neo";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: right;
+  text-decoration-line: underline;
 
-
-    color: var(--sub-darkgray);
+  color: var(--sub-darkgray);
 `;
 
 const PopupContainer = styled.div`
   z-index: 1000;
 `;
 
-
-const AccountSetting = (props) => {
+const AccountSetting = props => {
   const [Profile, setProfile] = useState([]);
 
-
-  useEffect(() =>{
+  useEffect(() => {
     ProfileModi();
-  },[{Profile}]);
-  
+  }, [{ Profile }]);
+
   const ProfileModi = () => {
     http
       .get(`/member/account/profile`)
-      .then(
-         Profile =>{
-         setProfile(Profile);
-         console.log("받아오기 성공", Profile.data.sheetResponseDTOs);
+      .then(Profile => {
+        setProfile(Profile);
+        console.log("받아오기 성공", Profile.data.sheetResponseDTOs);
       })
       .catch(e => {
-      console.log(e);
-    });
+        console.log(e);
+      });
   };
 
-  const UpdateProfile = () =>{
-    http
-      .patch(`/member/account/profile`,{
-        name : Profile.Name,
-        phonenum : Profile.phoneNum,
-      }, {
+  const UpdateProfile = () => {
+    http.patch(
+      `/member/account/profile`,
+      {
+        name: Profile.Name,
+        phonenum: Profile.phoneNum,
+      },
+      {
         headers: {
           "Content-Type": "multipart/form-data",
           "X-AUTH-TOKEN": token,
         },
-      })
+      },
+    );
   };
 
   useEffect(() => {
     ProfileModi();
-  },[]);
+  }, []);
 
   console.log(JSON.parse(localStorage.getItem("user")));
 
-  const [Name,setName] = useState("");
+  const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [NickName, setNickName] = useState("");
@@ -136,24 +134,26 @@ const AccountSetting = (props) => {
   const {} = props;
   const [popup, handlePopup] = useState(false);
 
-  const NameHandler = e =>{
+  const NameHandler = e => {
     e.preventDefault();
     setName(e.target.value);
   };
-  const PhoneNumberHandler = e =>{
+  const PhoneNumberHandler = e => {
     e.preventDefault();
     setPhoneNumber(e.target.value);
   };
 
   return (
     <WrapBox>
-      <TopBar/>
+      <TopBar />
       <AccountRegistering>계정 관리</AccountRegistering>
       <TextTitle>이름</TextTitle>
-      <TextHolder type="text" 
+      <TextHolder
+        type="text"
         value={JSON.parse(localStorage.getItem("user")).name}
-        onChange ={NameHandler}
-        placeholder={JSON.parse(localStorage.getItem("user")).name}/>
+        onChange={NameHandler}
+        placeholder={JSON.parse(localStorage.getItem("user")).name}
+      />
       <TextTitle>이메일</TextTitle>
       <TextHolder
         type="text"
@@ -163,18 +163,32 @@ const AccountSetting = (props) => {
       <TextHolder
         type="text"
         value={PhoneNumber}
-        onChange ={PhoneNumberHandler}
-        placeholder ={JSON.parse(localStorage.getItem("user")).phoneNum}
+        onChange={PhoneNumberHandler}
+        placeholder={JSON.parse(localStorage.getItem("user")).phoneNum}
       />
       <TextTitle>닉네임</TextTitle>
-      <TextHolder 
-        type="text" 
-        placeholder={JSON.parse(localStorage.getItem("user")).nickname} />
+      <TextHolder
+        type="text"
+        placeholder={JSON.parse(localStorage.getItem("user")).nickname}
+      />
       <PopupContainer>
-        <RemoveAccountBtn onClick={()=>{handlePopup(true);}}>회원 탈퇴</RemoveAccountBtn> {popup && <AccountRemovePop onClose = {handlePopup}/>}
+        <RemoveAccountBtn
+          onClick={() => {
+            handlePopup(true);
+          }}
+        >
+          회원 탈퇴
+        </RemoveAccountBtn>{" "}
+        {popup && <AccountRemovePop onClose={handlePopup} />}
       </PopupContainer>
-      <ModifyBtn type="submit" onClick={() =>{UpdateProfile();}}>수정하기</ModifyBtn>
-      
+      <ModifyBtn
+        type="submit"
+        onClick={() => {
+          UpdateProfile();
+        }}
+      >
+        수정하기
+      </ModifyBtn>
     </WrapBox>
   );
 };
