@@ -18,7 +18,7 @@ const SubTitle = styled.div`
 `;
 const ClientImg = styled.div`
   background: url(${({ image }) => image});
-  width: 150.08px;
+  width: 114.11px;
   height: 114.11px;
   background-repeat: no-repeat;
   background-position: center center;
