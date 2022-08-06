@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const BackgroundImg = styled.div`
   background: url(${MainBackground});
-  width: 384px;
+  width: 100%;
   height: 216px;
   background-repeat: no-repeat;
   background-position: center center;

@@ -10,7 +10,7 @@ import {
   SidebarDataClient,
   SidebarDataShop,
   SidebarDataGuest,
-} from "../Sidebar/SidebarData";
+} from "./SidebarData";
 import ButtonSidebar from "./ButtonSidebar";
 import "./Sidebar.css";
 import "../../../styles/common.scss";
