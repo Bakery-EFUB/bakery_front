@@ -13,9 +13,11 @@
 ## 🍰 기술 스택   
 <img src="https://github.com/Bakery-EFUB/Bakery-Back/blob/develop/BakeryArchitectureDiagram.png"/> 
 
+- deploy <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=Vercel&logoColor=white">
+
 - Package Manager <img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white">  
 
-- Frontend <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white">  
+- Frontend <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white">   <img src="https://img.shields.io/badge/styled_components-DB7093?style=flat-square&logo=styled-components&logoColor=white">  
 
 - Code Formmater <img src="https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=ESLint&logoColor=white"> <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=React&logoColor=white">
 
@@ -52,7 +54,7 @@
 ├─ 📂 route  ▶️ 사용자 권한 별 라우팅 제어
 ├─ 📂 services  ▶️ api 함수 정의
 ├─ 📂 styles  ▶️ 공통적으로 사용되는 스타일 값 관리
-├─ 📂 utils  ▶️ 자주 사용되는 함수
+├─ 📂 store  ▶️ 리덕스
 └─ 📂 _mock  ▶️ 샘플 데이터
 
 ```  
