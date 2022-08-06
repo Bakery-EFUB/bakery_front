@@ -7,7 +7,6 @@ import SmallPinkButton from "../../components/Proposal/SmallPinkButton";
 import SmallWhiteButton from "../../components/Proposal/SmallWhiteButton";
 import PageTitle from "../../components/Common/PageTitle";
 import CommentToggle from "../../components/Proposal/CommentToggle";
-
 import http from "../../common/http";
 
 const Proposal = () => {
@@ -72,7 +71,7 @@ const Proposal = () => {
       .delete(`/orders/${id}`)
       .then(function (response) {
         console.log("제안서 삭제", response);
-        navigate("/");
+        navigate("/client/mypage");
       })
       .catch(function (error) {
         console.log(error);

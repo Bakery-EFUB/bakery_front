@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "./Card";
 import { GetOrder } from "../../api/home";
-//axios 적용 전 임시
-import orderList from "../../_mock/orderList";
 import {
   CardDisplayContainer,
   Header,
@@ -17,8 +15,6 @@ const OrderDisplay = ({ title }) => {
   const [allOrderInfo, setAllOrderInfo] = useState([]);
 
   useEffect(() => {
-    //setAllOrderInfo(orderList["sheetResponseDTOs"]);
-
     GetOrder()
       .then(data => {
         setAllOrderInfo(data["sheetResponseDTOs"]);

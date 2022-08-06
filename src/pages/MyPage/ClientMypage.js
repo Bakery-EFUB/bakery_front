@@ -11,9 +11,13 @@ const ShopMemberMyPage = () => {
   const [SixImg, setSixImg] = useState([]);
   const [visible, setVisible] = useState(false);
   const { nickname, imageUrl } = useAppSelector(state => state.user);
+  console.log(Mydatas);
   useEffect(() => {
     if (Mydatas.length > 6) {
       setSixImg(Mydatas.slice(0, 6));
+    } else {
+      setSixImg(Mydatas);
+      console.log(SixImg.length);
     }
   }, [Mydatas]);
 
@@ -74,11 +78,17 @@ const ShopMemberMyPage = () => {
               );
             })}
         </BottomProposal>
-        {visible == false ? (
-          <MoreView onClick={() => setVisible(!visible)}>
-            더보기
-            <br />∨
-          </MoreView>
+        {visible === false ? (
+          <>
+            {Mydatas.length > 6 ? (
+              <MoreView onClick={() => setVisible(!visible)}>
+                더보기
+                <br />∨
+              </MoreView>
+            ) : (
+              <></>
+            )}
+          </>
         ) : (
           <MoreView onClick={() => setVisible(!visible)}></MoreView>
         )}
@@ -198,12 +208,14 @@ const CommitProposal = styled.div`
 //제안서 툴
 const BottomProposal = styled.div`
   margin-top: 19px;
-  width: 380.14px;
-  height: 300px;
-  display: flex;
+  width: 390px;
+  height: auto;
   flex-wrap: wrap;
   justify-content: space-between;
   overflow: scroll;
+  display: grid;
+  overflow-x: hidden;
+  grid-template-columns: 30% 30% 30%;
 `;
 
 //더보기
@@ -223,8 +235,10 @@ const Article = styled.article`
   background: url(${props => props.image});
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
   width: 120px;
-  margin-top: 7px;
+  margin-top: 6%;
+  margin-bottom: 6%;
   box-shadow: 2px 2px 2px pink;
   height: 120px;
   border-radius: 6px;
