@@ -428,9 +428,9 @@ const PinkRectangle = styled.div`
   box-sizing: border-box;
 
   margin: 25px 24px 0px 24px;
-  padding: 20px;
+  padding: 20px 20px 1px 20px;
 
-  height: 320px;
+  height: auto;
 
   background: var(--sub-pink);
   border-radius: 6px;
