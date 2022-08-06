@@ -38,7 +38,9 @@
 - react-icons: "^4.4.0",
 - react-router-dom : "^6.3.0",
 - react-scripts : "5.0.1",
--styled-components: "^5.3.5",  
+- styled-components: "^5.3.5",   
+- redux: "^4.2.0",   
+- @reduxjs/toolkit: "^1.8.3",   
 
 
 ## 🍰 프로젝트 구조
