@@ -58,14 +58,6 @@ const CustomCalendar = ({
     }
   }, [selectedMonth]);
 
-  const monthControl = useCallback(() => {
-    return <p>{selectedMonth}</p>;
-  }, [selectedMonth]);
-
-  const yearControl = useCallback(() => {
-    return <p>{selectedYear}</p>;
-  }, [selectedYear]);
-
   const returnWeek = useCallback(() => {
     //요일 반환 함수
     let weekArr = [];
@@ -122,6 +114,20 @@ const CustomCalendar = ({
     { id: 30, exist: false, reservation: "예약 정보" },
     { id: 31, exist: false, reservation: "예약 정보" },
   ];
+
+  if (allDaysHavingSchedule) {
+    const dateHavingSchedule = allDaysHavingSchedule
+      .filter(
+        day => day["year"] === selectedYear && day["month"] === selectedMonth,
+      )
+      .map(day => day["date"]);
+    existArr = existArr.map(exist => {
+      return {
+        ...exist,
+        exist: dateHavingSchedule.includes(exist.id),
+      };
+    });
+  }
 
   const returnDay = () => {
     //선택된 달의 날짜들 반환 함수
@@ -218,7 +224,6 @@ const CustomCalendar = ({
         </div>
       </div>
       <div className="week">{returnWeek()}</div>
-
       <div className="date">{returnDay()}</div>
     </div>
   );
