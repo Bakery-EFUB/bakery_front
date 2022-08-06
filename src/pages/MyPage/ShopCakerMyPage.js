@@ -64,7 +64,7 @@ const ShopCakerMyPage = () => {
         <Link to="/shop/modify">
           <Button1>가게 정보 관리</Button1>
         </Link>
-        <Link to="/shop/pickupschedule/:{Id}">
+        <Link to={`/shop/pickupschedule/${Id}`}>
           <Button2>픽업 일정 관리</Button2>
         </Link>
         <CommitProposal>댓글 단 제안서</CommitProposal>
@@ -94,7 +94,7 @@ const ShopCakerMyPage = () => {
               );
             })}
         </BottomProposal>
-        {visible == false ? (
+        {visible === false ? (
           <MoreView onClick={() => setVisible(!visible)}>
             더보기
             <br />∨
@@ -146,7 +146,6 @@ const UserName = styled.div`
   height: 24px;
   left: 139px;
   top: 230.7px;
-  font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -160,7 +159,6 @@ const UserPlace = styled.h1`
   height: 30.31px;
   left: 139px;
   top: 270.91px;
-  font-family: "ITC Avant Garde Gothic";
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
@@ -175,7 +173,6 @@ const CountManager = styled.div`
   right: 30px;
   top: 237.7px;
   color: gray;
-  font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
   font-size: 10px;
@@ -191,7 +188,6 @@ const Button1 = styled.button`
   background: var(--main-pink);
   border-radius: 6px;
   border-style: none;
-  font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -208,7 +204,6 @@ const Button2 = styled.button`
   background: var(--main-pink);
   border-radius: 6px;
   border-style: none;
-  font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -223,7 +218,6 @@ const CommitProposal = styled.div`
   height: 19px;
   margin-top: 44.31px;
   margin-right: 240px;
-  font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -245,7 +239,6 @@ const BottomProposal = styled.div`
 //더보기
 const MoreView = styled.div`
   margin-top: 10px;
-  font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
