@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   SidebarDataBaker,
   SidebarDataClient,
+  SidebarDataShop,
   SidebarDataGuest,
 } from "../Sidebar/SidebarData";
 import ButtonSidebar from "./ButtonSidebar";
@@ -28,8 +29,8 @@ const TopBar = () => {
   useEffect(() => {
     console.log(role);
     if (role === "ROLE_CLIENT") setUserStatus(SidebarDataClient);
-    else if (role === "ROLE_TRAINEE" || role === "ROLE_BAKER")
-      setUserStatus(SidebarDataBaker);
+    else if (role === "ROLE_TRAINEE") setUserStatus(SidebarDataShop);
+    else if (role === "ROLE_BAKER") setUserStatus(SidebarDataBaker);
     else setUserStatus(SidebarDataGuest);
   }, []);
 
