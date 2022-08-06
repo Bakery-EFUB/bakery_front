@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { GetRecommendShop } from "../../api/home";
 import { useEffect, useState } from "react";
-//axios 적용 전 임시
-import recommend from "../../_mock/recommendShopList";
 import Card from "./Card";
 import {
   CardDisplayContainer,
@@ -18,7 +16,6 @@ const ShopDisplay = ({ title }) => {
   const [allShopInfo, setAllShopInfo] = useState([]);
 
   useEffect(() => {
-    //setAllShopInfo(recommend);
     GetRecommendShop()
       .then(data => {
         setAllShopInfo(data);

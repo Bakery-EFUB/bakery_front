@@ -94,8 +94,6 @@ const CakeType = [
 ];
 const ChooseBox = ({ filter, setFilter }) => {
   const onChangeHandler = e => {
-    console.log(e.target.value);
-    console.log(e.target.id);
     setFilter({
       ...filter,
       [e.target.id]: e.target.value,
