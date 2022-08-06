@@ -52,7 +52,9 @@ const TopBar = () => {
   return (
     <div>
       <TopBarPink>
-        <TopLogo></TopLogo>
+        <Link to="/">
+          <TopLogo></TopLogo>
+        </Link>
 
         <TopMenuBar onClick={showSidebar}></TopMenuBar>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
