@@ -5,6 +5,9 @@ import TopBar from "../../components/Common/Sidebar/TopBar";
 import WeAreCakers from "../../images/WeAreCakers.svg";
 import ServiceTitle from "../../images/ServiceTitle.svg";
 import DescriptionText from "../../images/DescriptionText.svg";
+import BigPinkButton from "../../components/BigPinkButton";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../store";
 
 const Container = styled.div`
   width: 100%;
@@ -109,38 +112,9 @@ const LastImg = styled.img`
   height: 48px;
 `;
 
-const Button = styled.button`
-  display: flex;
-  justify-content: center;
-  width: 380px;
-  height: 60px;
-
-  margin: 10px auto 30px auto;
-  /* main pink */
-
-  background: var(--main-pink);
-
-  border: none;
-  border-radius: 6px;
-
-  box-shadow: 0px 4px 62px rgba(153, 171, 198, 0.18);
-
-  color: var(--sub-yellow);
-  font-family: "Apple SD Gothic Neo";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 60px;
-  /* identical to box height */
-
-  text-align: center;
-  text-transform: uppercase;
-`;
-
-const BigPinkButton = ({ children }) => {
-  return <Button>{children}</Button>;
-};
 const OurService = () => {
+  const nav = useNavigate();
+  const { role } = useAppSelector(state => state.user);
   return (
     <div>
       <TopBar />
@@ -169,9 +143,23 @@ const OurService = () => {
           <LastImg src={WeAreCakers} />
         </BackGroundImg>
       </Container>
-
-      <BigPinkButton>제안서 작성하기</BigPinkButton>
+      <BigPinkButton
+        margin="68px 24px"
+        onClick={() => {
+          role === "ROLE_CLIENT" ? nav(`/create/city`) : nav(`/`);
+        }}
+      >
+        제안서 작성하기
+      </BigPinkButton>
     </div>
   );
 };
 export default OurService;
+/*
+
+      <BigPinkButton>제안서 작성하기</BigPinkButton>
+const BigPinkButton = ({ children }) => {
+  return <Button>{children}</Button>;
+};
+
+*/

@@ -12,7 +12,7 @@ const HomeContainer = styled.div`
 
 const MainHome = () => {
   return (
-    <div>
+    <div style={{ marginBottom: "60px" }}>
       <TopBar></TopBar>
       <HomeContainer>
         <SearchBar text={"케이크, 가게 검색"} />
