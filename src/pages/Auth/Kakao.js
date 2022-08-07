@@ -26,9 +26,7 @@ const CenterImg = styled.div`
 const KakaoButton = styled.img`
   cursor: pointer;
   width: 90%;
-  height: 55px;
-  align-items: center;
-  display: block;
+  height: 58px;
   margin: 10% auto 15%;
 `;
 
