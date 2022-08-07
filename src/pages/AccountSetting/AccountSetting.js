@@ -3,19 +3,19 @@ import styled from "styled-components";
 import React, { useRef, useState } from "react";
 import AccountRemovePop from "../../components/AccountSetting/AccountRemovePop";
 import http from "../../common/http";
-import { useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { useNavigate } from "react-router-dom";
+import { setUser } from "../../store/features/userSlice";
 
 const token = JSON.parse(localStorage.getItem("token"));
 
 const AccountSetting = () => {
-  const { name, nickname, phoneNum, email } = useAppSelector(
-    state => state.user,
-  );
+  const user = useAppSelector(state => state.user);
   const [popup, handlePopup] = useState(false);
   const nav = useNavigate();
 
   const ref = useRef([]);
+  const dispatch = useAppDispatch();
 
   const UpdateProfile = () => {
     if (
@@ -38,6 +38,16 @@ const AccountSetting = () => {
             },
           },
         )
+        .then(() =>
+          dispatch(
+            setUser({
+              ...user,
+              nickname: ref.current[2].value,
+              name: ref.current[0].value,
+              phoneNum: ref.current[1].value,
+            }),
+          ),
+        )
         .catch(e => console.error(e))
         .finally(() => nav(-1));
     }
@@ -56,21 +66,21 @@ const AccountSetting = () => {
       <TextTitle>이름</TextTitle>
       <TextHolder
         type="text"
-        placeholder={name}
+        placeholder={user.name}
         ref={el => (ref.current[0] = el)}
       />
       <TextTitle>이메일</TextTitle>
-      <TextHolder type="text" value={email} disabled />
+      <TextHolder type="text" value={user.email} disabled />
       <TextTitle>휴대폰 번호</TextTitle>
       <TextHolder
         type="text"
-        placeholder={phoneNum}
+        placeholder={user.phoneNum}
         ref={el => (ref.current[1] = el)}
       />
       <TextTitle>닉네임</TextTitle>
       <TextHolder
         type="text"
-        placeholder={nickname}
+        placeholder={user.nickname}
         ref={el => (ref.current[2] = el)}
       />
       <PopupContainer>
