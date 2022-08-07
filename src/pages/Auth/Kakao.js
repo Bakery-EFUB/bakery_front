@@ -45,7 +45,7 @@ const Kakao = () => {
         <KakaoButton
           src={kakao}
           onClick={() => {
-            location.href = "https://caker.shop/oauth2/authorization/kakao";
+            location.href = "https://dev.caker.shop/oauth2/authorization/kakao";
           }}
         ></KakaoButton>
       </Container>

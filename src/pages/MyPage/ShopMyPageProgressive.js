@@ -11,7 +11,7 @@ const ShopMypageProgressive = () => {
   const { nickname, imageUrl } = useAppSelector(state => state.user);
   /* const getData = () => {
     axios
-      .get("https://caker.shop/stores/myStore")
+      .get("https://dev.caker.shop/stores/myStore")
       .then(Response => {
         console.log("받아오기 성공", Response.data);
         setMyData(Response.data);

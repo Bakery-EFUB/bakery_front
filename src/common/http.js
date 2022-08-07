@@ -6,11 +6,11 @@ console.log("토큰", token);
 
 export default token
   ? axios.create({
-      baseURL: "https://caker.shop/",
+      baseURL: "https://dev.caker.shop/",
       headers: {
         "X-AUTH-TOKEN": token,
       },
     })
   : axios.create({
-      baseURL: "https://caker.shop/",
+      baseURL: "https://dev.caker.shop/",
     });
