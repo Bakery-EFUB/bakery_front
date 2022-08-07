@@ -51,8 +51,12 @@ const SearchBar = ({ text }) => {
     });
   };
 
+  const handleKeyPress = e => {
+    if (e.key === "Enter") onClickSearch();
+  };
+
   return (
-    <SearchContainer>
+    <SearchContainer onKeyPress={handleKeyPress}>
       <Search onClick={onClickSearch}></Search>
       <SearchBarContainer placeholder={text} onChange={onChangeSearchText} />
     </SearchContainer>
