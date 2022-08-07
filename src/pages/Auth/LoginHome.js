@@ -7,33 +7,27 @@ import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
-  margin: 10%;
+  display: flex;
+  flex-direction: column;
 `;
 const Welcome = styled.div`
   color: var(--black);
+  margin: 20% 10% 0;
   font-size: 22px;
   font-weight: 800;
-  position: absolute;
-  left: 10%;
-  top: 12%;
 `;
 const CenterImg = styled.div`
   background: url(${LoginMainImg});
-  width: 358.91px;
   height: 381.06px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  width: 358.91px;
   background-repeat: no-repeat;
   background-position: center center;
+  margin: 8% auto 3%;
 `;
 
 const LoginButtons = styled.div`
-  position: absolute;
-  left: 10%;
-  bottom: 5%;
-  width: 100%;
+  margin-bottom: 8%;
+  text-align: center;
 `;
 
 const LoginHome = () => {
@@ -57,17 +51,22 @@ const LoginHome = () => {
         <br />
         CAKER에 오신 것을 환영합니다.
       </Welcome>
-      <CenterImg></CenterImg>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "8%",
+          marginBottom: "8%",
+        }}
+      >
+        <CenterImg></CenterImg>
+      </div>
       <LoginButtons>
-
         <Button onClick={() => BakerLogin()} text={"가게 회원 로그인"}></Button>
-
-
         <Button
           onClick={() => ClientLogin()}
           text={"일반 회원 로그인"}
         ></Button>
-
       </LoginButtons>
     </Container>
   );
