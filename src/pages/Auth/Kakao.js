@@ -4,31 +4,30 @@ import LoginMainImg from "../../images/LoginMainImg.svg";
 import kakao from "../../images/kakao.png";
 
 const Container = styled.div`
-  padding: 24px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 const Welcome = styled.div`
   color: var(--black);
+  margin: 20% 10% 0;
   font-size: 22px;
   font-weight: 800;
-  margin: 143px auto 0 0;
-  width: 307px;
 `;
 const CenterImg = styled.div`
   background: url(${LoginMainImg});
-  width: 358.91px;
   height: 381.06px;
-
-  margin: 56px auto 0 24px;
-
+  width: 358.91px;
   background-repeat: no-repeat;
   background-position: center center;
+  margin: 10% auto 4%;
 `;
 
 const KakaoButton = styled.img`
-  margin: 75px auto 0 0;
-
-  width: 380px;
-  height: 60px;
+  cursor: pointer;
+  width: 90%;
+  height: 58px;
+  margin: 10% auto 15%;
 `;
 
 const Kakao = () => {
