@@ -1,67 +1,52 @@
 import TopBar from "../../components/Common/Sidebar/TopBar";
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import AccountRemovePop from "../../components/AccountSetting/AccountRemovePop";
 import http from "../../common/http";
 import { useAppSelector } from "../../store";
+import { useNavigate } from "react-router-dom";
 
 const token = JSON.parse(localStorage.getItem("token"));
 
-const AccountSetting = props => {
+const AccountSetting = () => {
   const { name, nickname, phoneNum, email } = useAppSelector(
     state => state.user,
   );
-  const [Profile, setProfile] = useState([]);
+  const [popup, handlePopup] = useState(false);
+  const nav = useNavigate();
 
-  useEffect(() => {
-    ProfileModi();
-  }, [{ Profile }]);
-
-  const ProfileModi = () => {
-    http
-      .get(`/members/account/profile`)
-      .then(Profile => {
-        setProfile(Profile);
-        console.log("받아오기 성공", Profile.data.sheetResponseDTOs);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
+  const ref = useRef([]);
 
   const UpdateProfile = () => {
-    http.patch(
-      `/members/account/profile`,
-      {
-        name: Profile.Name,
-        phonenum: Profile.phoneNum,
-      },
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "X-AUTH-TOKEN": token,
-        },
-      },
-    );
-  };
-
-  useEffect(() => {
-    ProfileModi();
-  }, []);
-
-  const [Name, setName] = useState("");
-  const [PhoneNumber, setPhoneNumber] = useState("");
-
-  const {} = props;
-  const [popup, handlePopup] = useState(false);
-
-  const NameHandler = e => {
-    e.preventDefault();
-    setName(e.target.value);
-  };
-  const PhoneNumberHandler = e => {
-    e.preventDefault();
-    setPhoneNumber(e.target.value);
+    if (
+      ref.current[2].value.trim() &&
+      ref.current[0].value.trim() &&
+      ref.current[1].value.trim()
+    ) {
+      http
+        .patch(
+          `/members/account/profile`,
+          {
+            nickname: ref.current[2].value,
+            name: ref.current[0].value,
+            phoneNum: ref.current[1].value,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "X-AUTH-TOKEN": token,
+            },
+          },
+        )
+        .catch(e => console.error(e))
+        .finally(() => nav(-1));
+    }
+    for (let i = 0; i < 3; i++) {
+      if (!ref.current[i].value.trim()) {
+        ref.current[i].focus();
+        return;
+      }
+    }
   };
 
   return (
@@ -71,21 +56,23 @@ const AccountSetting = props => {
       <TextTitle>이름</TextTitle>
       <TextHolder
         type="text"
-        value={Name}
-        onChange={NameHandler}
         placeholder={name}
+        ref={el => (ref.current[0] = el)}
       />
       <TextTitle>이메일</TextTitle>
-      <TextHolder type="text" placeholder={email} />
+      <TextHolder type="text" value={email} disabled />
       <TextTitle>휴대폰 번호</TextTitle>
       <TextHolder
         type="text"
-        value={PhoneNumber}
-        onChange={PhoneNumberHandler}
         placeholder={phoneNum}
+        ref={el => (ref.current[1] = el)}
       />
       <TextTitle>닉네임</TextTitle>
-      <TextHolder type="text" placeholder={nickname} />
+      <TextHolder
+        type="text"
+        placeholder={nickname}
+        ref={el => (ref.current[2] = el)}
+      />
       <PopupContainer>
         <RemoveAccountBtn
           onClick={() => {
@@ -114,9 +101,11 @@ const WrapBox = styled.div`
 `;
 
 const TextHolder = styled.input`
+  box-sizing: border-box;
   width: 90%;
   height: 50px;
-  margin: 2% 0% 0% 5%;
+  margin: 2% 0 0 5%;
+  padding: 0 20px;
   left: 24px;
   top: 291.87px;
   background: var(--sub-lightgray);
@@ -128,8 +117,7 @@ const TextHolder = styled.input`
 const AccountRegistering = styled.div`
   width: 162px;
   height: 29px;
-  margin: 8% 0% 0% 5%;
-  font-family: "Apple SD Gothic Neo";
+  margin: 8% 0 0 5%;
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
@@ -140,8 +128,7 @@ const AccountRegistering = styled.div`
 const TextTitle = styled.div`
   width: 100px;
   height: 22px;
-  margin: 12% 0% 0% 5%;
-  font-family: "Apple SD Gothic Neo";
+  margin: 12% 0 0 5%;
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -152,14 +139,13 @@ const TextTitle = styled.div`
 `;
 
 const ModifyBtn = styled.button`
-  margin: 10% 0% 5% 5%;
+  margin: 10% 0 5% 5%;
   width: 90%;
   height: 60px;
   background: var(--main-pink);
   border-radius: 6px;
   border: 1px solid var(--main-pink);
   color: white;
-  font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -172,7 +158,6 @@ const RemoveAccountBtn = styled.button`
   background-color: white;
   margin-top: 7%;
   border: none;
-  font-family: "Apple SD Gothic Neo";
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
