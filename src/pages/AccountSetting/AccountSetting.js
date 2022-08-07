@@ -19,7 +19,7 @@ const AccountSetting = props => {
 
   const ProfileModi = () => {
     http
-      .get(`/member/account/profile`)
+      .get(`/members/account/profile`)
       .then(Profile => {
         setProfile(Profile);
         console.log("받아오기 성공", Profile.data.sheetResponseDTOs);
@@ -31,7 +31,7 @@ const AccountSetting = props => {
 
   const UpdateProfile = () => {
     http.patch(
-      `/member/account/profile`,
+      `/members/account/profile`,
       {
         name: Profile.Name,
         phonenum: Profile.phoneNum,
