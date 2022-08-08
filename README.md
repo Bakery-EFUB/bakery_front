@@ -47,20 +47,6 @@ npm start
 ```
 
 
-## 🍰 라이브러리
-- axios : "^0.27.2",
-- classnames : "^2.3.1",
-- moment: "^2.29.4",
-- react-dom: "^18.2.0",
--react-dropzone: "^14.2.2",
-- react-icons: "^4.4.0",
-- react-router-dom : "^6.3.0",
-- react-scripts : "5.0.1",
-- styled-components: "^5.3.5",   
-- redux: "^4.2.0",   
-- @reduxjs/toolkit: "^1.8.3",   
-
-
 ## 🍰 프로젝트 구조
 
 ### 설명
@@ -78,6 +64,20 @@ npm start
 └─ 📂 _mock  ▶️ 샘플 데이터
 
 ```  
+
+## 🍰 라이브러리
+- axios : "^0.27.2",
+- classnames : "^2.3.1",
+- moment: "^2.29.4",
+- react-dom: "^18.2.0",
+-react-dropzone: "^14.2.2",
+- react-icons: "^4.4.0",
+- react-router-dom : "^6.3.0",
+- react-scripts : "5.0.1",
+- styled-components: "^5.3.5",   
+- redux: "^4.2.0",   
+- @reduxjs/toolkit: "^1.8.3",   
+
 
 
 ## 🍰 와이어 프레임
