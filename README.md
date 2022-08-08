@@ -10,6 +10,10 @@
 ## 🍰 개요
 'CAKER'는 레터링 케이크 주문/판매 플랫폼으로, 레터링 케이크를 주문하고자 하는 구매자와 그에 맞는 서비스를 제공하는 판매자를 서로 연결해주어 기존의 불편함을 해소하고 원하는 케이크 가게를 손쉽게 찾게 해줍니다.  
 
+## 🍰 시연 영상
+
+[![Group 174](https://user-images.githubusercontent.com/79822913/183529708-7fad5f7f-d893-48f4-8de9-51662dbb4d54.png)](https://www.youtube.com/watch?v=uVdPvFL3hkw)
+
 ## 🍰 기술 스택   
 <img src="https://github.com/Bakery-EFUB/Bakery-Back/blob/develop/BakeryArchitectureDiagram.png"/> 
 
