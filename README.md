@@ -15,7 +15,6 @@
 [![Group 174](https://user-images.githubusercontent.com/79822913/183529708-7fad5f7f-d893-48f4-8de9-51662dbb4d54.png)](https://www.youtube.com/watch?v=uVdPvFL3hkw)
 
 ## 🍰 기술 스택   
-<img src="https://github.com/Bakery-EFUB/Bakery-Back/blob/develop/BakeryArchitectureDiagram.png"/> 
 
 - deploy <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=Vercel&logoColor=white">
 
@@ -27,9 +26,10 @@
 
 
 - ETC &nbsp; 
- <img src="https://img.shields.io/badge/Figma -F24E1E?style=flat-square&logo=Figma&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub -181717?style=flat-square&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub Action-256EE0?style=flat-square&logo=GitHub Action&logoColor=white"/></br>
+ <img src="https://img.shields.io/badge/Figma -F24E1E?style=flat-square&logo=Figma&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub -181717?style=flat-square&logo=GitHub&logoColor=white"/> 
 
  
+<img src="https://github.com/Bakery-EFUB/Bakery-Back/blob/develop/BakeryArchitectureDiagram.png"/> 
 
 
 
@@ -64,68 +64,3 @@
 └─ 📂 _mock  ▶️ 샘플 데이터
 
 ```  
-
-### 🍰 폴더
-```
-🍞 bakery_front
- ┣ 📂.git
- ┣ 📂public
- ┣ 📂src
- ┃ ┣ 📂components
- ┃ ┃ ┣ 📂AccountSetting
- ┃ ┃ ┣ 📂HomeCardDisplay
- ┃ ┃ ┣ 📂Proposal
- ┃ ┃ ┣ 📂SearchResult
- ┃ ┃ ┣ 📂Sidebar
- ┃ ┃ ┣ 📂WholeProposals
- ┃ ┃ ┣ 📜API.js
- ┃ ┃ ┣ 📜BigCardDisplay.js
- ┃ ┃ ┣ 📜BigPinkButton.js
- ┃ ┃ ┣ 📜Button.js
- ┃ ┃ ┣ 📜ButtonSidebar.js
- ┃ ┃ ┣ 📜CityButton.js
- ┃ ┃ ┣ 📜DetailInfoCard.js
- ┃ ┃ ┣ 📜DetailInfoItem.js
- ┃ ┃ ┣ 📜FileUpload.js
- ┃ ┃ ┣ 📜MainHeader.js
- ┃ ┃ ┣ 📜PageTitle.js
- ┃ ┃ ┣ 📜SearchBar.js
- ┃ ┃ ┣ 📜SmallGrayButton.js
- ┃ ┃ ┣ 📜SmallPinkButton.js
- ┃ ┃ ┣ 📜SmallWhiteButton.js
- ┃ ┃ ┗ 📜TopBar.js
- ┃ ┣ 📂images
- ┃ ┣ 📂pages
- ┃ ┃ ┣ 📂CreateProposal
- ┃ ┃ ┣ 📜AccountRemove.js
- ┃ ┃ ┣ 📜AccountSetting.js
- ┃ ┃ ┣ 📜AddSchedulePage.js
- ┃ ┃ ┣ 📜AllProposal.js
- ┃ ┃ ┣ 📜CreateProposal.js
- ┃ ┃ ┣ 📜LoadingPage.js
- ┃ ┃ ┣ 📜LoginHome.js
- ┃ ┃ ┣ 📜MainHome.js
- ┃ ┃ ┣ 📜OurService.js
- ┃ ┃ ┣ 📜PickupSchedulePage.js
- ┃ ┃ ┣ 📜PreviewModal.js
- ┃ ┃ ┣ 📜Proposal.js
- ┃ ┃ ┣ 📜Recommend.js
- ┃ ┃ ┣ 📜SearchPage.js
- ┃ ┃ ┣ 📜ShopDetailPage.js
- ┃ ┃ ┣ 📜ShopInformationModify.js
- ┃ ┃ ┣ 📜ShopInformationRegister.js
- ┃ ┃ ┣ 📜ShopMemberMyPage.js
- ┃ ┃ ┣ 📜ShopMyPageProgressive.js
- ┃ ┃ ┗ 📜ShopMyPageStart.js
- ┃ ┣ 📂styles
- ┃ ┣ 📜App.css
- ┃ ┣ 📜App.js
- ┃ ┣ 📜index.css
- ┃ ┗ 📜index.js
- ┣ 📜.eslintrc.json
- ┣ 📜.gitignore
- ┣ 📜.prettierrc.json
- ┣ 📜package-lock.json
- ┣ 📜package.json
- ┗ 📜README.md
- ```
