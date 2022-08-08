@@ -1,14 +1,22 @@
+## 🍰 개요
+#### 특별한 하루 메이커, CAKER
+'CAKER'는 레터링 케이크 주문/판매 플랫폼으로, 레터링 케이크를 주문하고자 하는 구매자와 그에 맞는 서비스를 제공하는 판매자를 서로 연결해주어 기존의 불편함을 해소하고 원하는 케이크 가게를 손쉽게 찾게 해줍니다.    <br/><br/>
+본 프로젝트는 이화여대 커리어 클럽 웹개발 동아리 EFUB의 여름 프로젝트인 🏖SWS(Summer Web Surf)의 일환으로 진행되었음을 밝힙니다.
+
+### 개발 일정
+(2022.03.15 ~ 2022.07.03)
+
+기획 및 디자인 : 2022.03.15 ~ 2022.07.03
+개발 : 2022.07.04 ~ 2022.08.06
 
 
-
-## 🍏 프론트엔드 팀원 소개
+### 프론트엔드 팀원 소개
 |김하은|정다윤|김지원|도소현|최지민|
 |:---:|:---:|:---:|:---:|:---:|
 |Frontend Lead|Frontend Lead|Frontend Intern|Frontend Intern|Frontend Intern|
 | [@harloxx](https://github.com/harloxx) |[@dy6578ekdbs](https://github.com/dy6578ekdbs) |[@JiwonKim08](https://github.com/JiwonKim08)|[@sohyundoh](https://github.com/sohyundoh) |[@zmin9](https://github.com/zmin9) |
 
-## 🍰 개요
-'CAKER'는 레터링 케이크 주문/판매 플랫폼으로, 레터링 케이크를 주문하고자 하는 구매자와 그에 맞는 서비스를 제공하는 판매자를 서로 연결해주어 기존의 불편함을 해소하고 원하는 케이크 가게를 손쉽게 찾게 해줍니다.  
+  
 
 ## 🍰 시연 영상 - 클릭 시 링크로 연결됩니다 
 
@@ -31,6 +39,12 @@
  
 <img src="https://github.com/Bakery-EFUB/Bakery-Back/blob/develop/BakeryArchitectureDiagram.png"/> 
 
+## 🍰 실행
+```
+git clone https://github.com/Bakery-EFUB/bakery_front
+npm install
+npm start
+```
 
 
 ## 🍰 라이브러리
@@ -64,3 +78,7 @@
 └─ 📂 _mock  ▶️ 샘플 데이터
 
 ```  
+
+
+## 🍰 와이어 프레임
+![image](https://user-images.githubusercontent.com/79822913/183531159-bbeb3cbf-e6ea-4b86-9e59-752fd49a0245.png)
