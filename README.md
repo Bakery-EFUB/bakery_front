@@ -37,9 +37,8 @@
  <img src="https://img.shields.io/badge/Figma -F24E1E?style=flat-square&logo=Figma&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub -181717?style=flat-square&logo=GitHub&logoColor=white"/> 
 
  
-<img src="https://github.com/Bakery-EFUB/Bakery-Back/blob/develop/BakeryArchitectureDiagram.png"/> 
+<img src="https://user-images.githubusercontent.com/99666136/183558149-24df66ed-fc23-49ee-9c66-7da3b412be9c.png"/> 
 
-<img src="https://github.com/Bakery-EFUB/bakery_front/files/9286518/Architect.Diagram.pptx" />
 
 
 
