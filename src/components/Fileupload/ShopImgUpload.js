@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import axios from "axios";
-import Button from "../Button";
 
 const ShopIntroduceName = styled.div`
   width: 200px;
@@ -78,7 +76,6 @@ const DeleteButton = styled.button`
 
 //ui 구현
 const ShopImgUpload = ({ setMainFile, MainFile }) => {
-  //객체 요소
   const onDelete = e => {
     e.preventDefault();
     setMainFile([]);
@@ -113,7 +110,7 @@ const ShopImgUpload = ({ setMainFile, MainFile }) => {
       <div style={thumbInner}>
         <img
           src={file.preview}
-          style={img} // createObjectURL 로 생성한 후 업로드 시, URL 메모리 공간을 revokeObjectURL 로 제거 해준다.
+          style={img}
           onLoad={() => {
             URL.revokeObjectURL(file.preview);
           }}
@@ -123,11 +120,9 @@ const ShopImgUpload = ({ setMainFile, MainFile }) => {
   ));
 
   useEffect(() => {
-    // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
     return () => MainFile.forEach(file => URL.revokeObjectURL(file.preview));
   }, []);
 
-  //form - action: /save페이지로 데이터 전송
   return (
     <form action="/save" method="post" encType="multipart/form-data">
       <ShopIntroduceName>가게 대표 사진</ShopIntroduceName>
