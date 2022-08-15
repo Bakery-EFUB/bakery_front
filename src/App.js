@@ -27,7 +27,7 @@ import ShopInformationModify from "./pages/MyPage/ShopInformationModify";
 import LoginLoading from "./pages/Auth/LoginLoading";
 import AccountSetting from "./pages/AccountSetting/AccountSetting";
 import AccountRemove from "./pages/AccountSetting/AccountRemove";
-import ShopCakerMyPage from "./pages/MyPage/ShopCakerMyPage";
+import ShopCakerMyPage from "./pages/MyPage/CakerMyPage";
 
 import Kakao from "./pages/Auth/Kakao";
 import NoPermission from "./pages/Auth/NoPermission";
