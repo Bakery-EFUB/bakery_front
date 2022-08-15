@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Button = ({onClick, text }) => {
+const Button = ({ onClick, text }) => {
   const SubmitButton = styled.button`
     cursor: pointer;
     background-color: var(--main-pink);
@@ -13,8 +13,6 @@ const Button = ({onClick, text }) => {
     height: 60px;
     font-size: 20px;
     border-style: none;
-    align-items: center;
-    justify-content: center;
     &:hover {
       background-color: var(--sub-lightgray);
     }

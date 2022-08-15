@@ -17,11 +17,12 @@ const BigCardDisplay = ({ MainText, SubText, image = BigCard }) => {
   const BigCardImg = styled.div`
     background: url(${image});
     width: auto;
-    height: 186px;
+    height: 200px;
     border-radius: 6px;
     margin: 4% 0;
     background-repeat: no-repeat;
     background-position: center center;
+    background-size: cover;
   `;
   return (
     <>

@@ -8,6 +8,7 @@ import { DetailInfoCard } from "../../../components/DetailInfoCard";
 import DetailInfoItem from "../../../components/DetailInfoItem";
 import { useNavigate, useParams } from "react-router-dom";
 import { GetMyStoreDetail, GetStoreDetail } from "../../../api/store";
+import { useAppSelector } from "../../../store";
 
 const PaddingBox = styled.div`
   padding: 0 24px 60px;
@@ -85,6 +86,7 @@ const CakeProductImage = styled.div`
 `;
 
 const ShopDetailPage = () => {
+  const { role } = useAppSelector(state => state.user);
   const { storeId } = useParams();
   localStorage.setItem("storeId", storeId);
   const [shopDetail, setShopDetail] = useState({});
@@ -95,10 +97,7 @@ const ShopDetailPage = () => {
         setShopDetail(res);
       })
       .catch(e => console.error(e));
-    if (
-      localStorage.getItem("token") !== null &&
-      JSON.parse(localStorage.user)?.role === "ROLE_BAKER"
-    )
+    if (localStorage.getItem("token") !== null && role === "ROLE_BAKER")
       GetMyStoreDetail().then(res => {
         setIsOwner(res.id === Number(storeId));
       });

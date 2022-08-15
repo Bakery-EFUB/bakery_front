@@ -75,7 +75,9 @@ const TopBar = () => {
                   >
                     {nickname} 님
                   </div>
-                  <div>계정관리</div>
+                  <Link to="/client/modify">
+                    <div>계정관리</div>
+                  </Link>
                 </LoginBox>
               </>
             ) : (

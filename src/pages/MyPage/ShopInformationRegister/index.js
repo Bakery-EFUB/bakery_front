@@ -61,7 +61,7 @@ const ShopInformationRegister = () => {
       formData.append("storeId", id);
       for (const keyValue of formData) console.log(keyValue);
       axios
-        .patch("https://caker.shop/stores/myStore/image", formData, {
+        .patch("https://dev.caker.shop/stores/myStore/image", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             "X-AUTH-TOKEN": token,

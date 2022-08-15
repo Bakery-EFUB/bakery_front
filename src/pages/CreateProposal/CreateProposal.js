@@ -63,7 +63,7 @@ const CreateProposal = () => {
     for (const keyValue of formData) console.log(keyValue);
 
     axios
-      .patch("https://caker.shop/orders", formData, {
+      .patch("https://dev.caker.shop/orders", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Accept: "multipart/form-data",
